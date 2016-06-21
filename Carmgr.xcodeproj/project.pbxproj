@@ -1,0 +1,788 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6F61C1379FDB08E5BE112202 /* libPods-Carmgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F25A80A03943501A53A01A /* libPods-Carmgr.a */; };
+		8477762B1D124BF100DE8213 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762A1D124BF100DE8213 /* main.m */; };
+		8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762D1D124BF100DE8213 /* AppDelegate.m */; };
+		847776311D124BF100DE8213 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776301D124BF100DE8213 /* ViewController.m */; };
+		847776341D124BF100DE8213 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847776321D124BF100DE8213 /* Main.storyboard */; };
+		847776361D124BF100DE8213 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847776351D124BF100DE8213 /* Assets.xcassets */; };
+		847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847776371D124BF100DE8213 /* LaunchScreen.storyboard */; };
+		847776441D124BF100DE8213 /* CarmgrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776431D124BF100DE8213 /* CarmgrTests.m */; };
+		8477764F1D124BF100DE8213 /* CarmgrUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477764E1D124BF100DE8213 /* CarmgrUITests.m */; };
+		8477765E1D1257FD00DE8213 /* class.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8477765D1D1257FD00DE8213 /* class.plist */; };
+		847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776651D1258AC00DE8213 /* YWHomeViewController.m */; };
+		847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776681D1258B800DE8213 /* YWStoreViewController.m */; };
+		8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766C1D1258D800DE8213 /* YWCallViewController.m */; };
+		847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766F1D1258E500DE8213 /* YWProgressViewController.m */; };
+		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
+		847776791D13CA7700DE8213 /* u10.png in Resources */ = {isa = PBXBuildFile; fileRef = 847776781D13CA7700DE8213 /* u10.png */; };
+		84F3C2951D17798800597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2941D17798800597BFD /* YWUserViewController.m */; };
+		84F3C2991D177ECD00597BFD /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2981D177ECD00597BFD /* CustomNavigationController.m */; };
+		84F3C2A11D17D6F300597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A01D17D6F300597BFD /* YWPublic.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		847776401D124BF100DE8213 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8477761E1D124BF100DE8213 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 847776251D124BF100DE8213;
+			remoteInfo = Carmgr;
+		};
+		8477764B1D124BF100DE8213 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8477761E1D124BF100DE8213 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 847776251D124BF100DE8213;
+			remoteInfo = Carmgr;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.debug.xcconfig"; sourceTree = "<group>"; };
+		847776261D124BF100DE8213 /* Carmgr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carmgr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8477762A1D124BF100DE8213 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8477762C1D124BF100DE8213 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8477762D1D124BF100DE8213 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8477762F1D124BF100DE8213 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		847776301D124BF100DE8213 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		847776331D124BF100DE8213 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		847776351D124BF100DE8213 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		847776381D124BF100DE8213 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8477763A1D124BF100DE8213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8477763F1D124BF100DE8213 /* CarmgrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarmgrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		847776431D124BF100DE8213 /* CarmgrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarmgrTests.m; sourceTree = "<group>"; };
+		847776451D124BF100DE8213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8477764A1D124BF100DE8213 /* CarmgrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarmgrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8477764E1D124BF100DE8213 /* CarmgrUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarmgrUITests.m; sourceTree = "<group>"; };
+		847776501D124BF100DE8213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8477765D1D1257FD00DE8213 /* class.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = class.plist; sourceTree = "<group>"; };
+		847776641D1258AC00DE8213 /* YWHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWHomeViewController.h; sourceTree = "<group>"; };
+		847776651D1258AC00DE8213 /* YWHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWHomeViewController.m; sourceTree = "<group>"; };
+		847776671D1258B800DE8213 /* YWStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWStoreViewController.h; sourceTree = "<group>"; };
+		847776681D1258B800DE8213 /* YWStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWStoreViewController.m; sourceTree = "<group>"; };
+		8477766B1D1258D800DE8213 /* YWCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWCallViewController.h; sourceTree = "<group>"; };
+		8477766C1D1258D800DE8213 /* YWCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWCallViewController.m; sourceTree = "<group>"; };
+		8477766E1D1258E500DE8213 /* YWProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWProgressViewController.h; sourceTree = "<group>"; };
+		8477766F1D1258E500DE8213 /* YWProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWProgressViewController.m; sourceTree = "<group>"; };
+		847776711D12591C00DE8213 /* YWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWTabBarController.h; sourceTree = "<group>"; };
+		847776721D12591C00DE8213 /* YWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTabBarController.m; sourceTree = "<group>"; };
+		847776781D13CA7700DE8213 /* u10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = u10.png; path = Carmgr/u10.png; sourceTree = "<group>"; };
+		84F3C2931D17798800597BFD /* YWUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWUserViewController.h; sourceTree = "<group>"; };
+		84F3C2941D17798800597BFD /* YWUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWUserViewController.m; sourceTree = "<group>"; };
+		84F3C2971D177ECD00597BFD /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
+		84F3C2981D177ECD00597BFD /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		84F3C29F1D17D6F300597BFD /* YWPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWPublic.h; sourceTree = "<group>"; };
+		84F3C2A01D17D6F300597BFD /* YWPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWPublic.m; sourceTree = "<group>"; };
+		A9F25A80A03943501A53A01A /* libPods-Carmgr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Carmgr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		847776231D124BF100DE8213 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F61C1379FDB08E5BE112202 /* libPods-Carmgr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8477763C1D124BF100DE8213 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		847776471D124BF100DE8213 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60C2276B839B0C3464011D12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9F25A80A03943501A53A01A /* libPods-Carmgr.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8477761D1D124BF100DE8213 = {
+			isa = PBXGroup;
+			children = (
+				847776281D124BF100DE8213 /* Carmgr */,
+				847776421D124BF100DE8213 /* CarmgrTests */,
+				8477764D1D124BF100DE8213 /* CarmgrUITests */,
+				847776271D124BF100DE8213 /* Products */,
+				C09CCBD69FE99B2CEC74661D /* Pods */,
+				60C2276B839B0C3464011D12 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		847776271D124BF100DE8213 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				847776261D124BF100DE8213 /* Carmgr.app */,
+				8477763F1D124BF100DE8213 /* CarmgrTests.xctest */,
+				8477764A1D124BF100DE8213 /* CarmgrUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		847776281D124BF100DE8213 /* Carmgr */ = {
+			isa = PBXGroup;
+			children = (
+				8477762C1D124BF100DE8213 /* AppDelegate.h */,
+				8477762D1D124BF100DE8213 /* AppDelegate.m */,
+				8477762F1D124BF100DE8213 /* ViewController.h */,
+				847776301D124BF100DE8213 /* ViewController.m */,
+				84F3C29B1D17CC8500597BFD /* Public */,
+				847776771D13C8C600DE8213 /* Images */,
+				84F3C2921D17795C00597BFD /* User */,
+				847776631D12586C00DE8213 /* Progress */,
+				847776621D12586300DE8213 /* Call */,
+				847776611D12585100DE8213 /* Store */,
+				847776601D12584700DE8213 /* Home */,
+				8477765F1D12582900DE8213 /* TabBarController */,
+				8477765C1D12579000DE8213 /* Others */,
+				847776291D124BF100DE8213 /* Supporting Files */,
+			);
+			path = Carmgr;
+			sourceTree = "<group>";
+		};
+		847776291D124BF100DE8213 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8477765D1D1257FD00DE8213 /* class.plist */,
+				8477762A1D124BF100DE8213 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		847776421D124BF100DE8213 /* CarmgrTests */ = {
+			isa = PBXGroup;
+			children = (
+				847776431D124BF100DE8213 /* CarmgrTests.m */,
+				847776451D124BF100DE8213 /* Info.plist */,
+			);
+			path = CarmgrTests;
+			sourceTree = "<group>";
+		};
+		8477764D1D124BF100DE8213 /* CarmgrUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8477764E1D124BF100DE8213 /* CarmgrUITests.m */,
+				847776501D124BF100DE8213 /* Info.plist */,
+			);
+			path = CarmgrUITests;
+			sourceTree = "<group>";
+		};
+		8477765C1D12579000DE8213 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				847776321D124BF100DE8213 /* Main.storyboard */,
+				847776351D124BF100DE8213 /* Assets.xcassets */,
+				847776371D124BF100DE8213 /* LaunchScreen.storyboard */,
+				8477763A1D124BF100DE8213 /* Info.plist */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
+		8477765F1D12582900DE8213 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2A41D17D79700597BFD /* viewControllers */,
+			);
+			name = TabBarController;
+			sourceTree = "<group>";
+		};
+		847776601D12584700DE8213 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2961D177E8200597BFD /* Controllers */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		847776611D12585100DE8213 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2A31D17D77A00597BFD /* viewControllers */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
+		847776621D12586300DE8213 /* Call */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2A51D17D7C800597BFD /* viewControllers */,
+			);
+			name = Call;
+			sourceTree = "<group>";
+		};
+		847776631D12586C00DE8213 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2A61D17D7DE00597BFD /* viewControllers */,
+				84F3C29A1D178F5300597BFD /* Model */,
+			);
+			name = Progress;
+			sourceTree = "<group>";
+		};
+		847776771D13C8C600DE8213 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				847776781D13CA7700DE8213 /* u10.png */,
+			);
+			name = Images;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		84F3C2921D17795C00597BFD /* User */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2A21D17D76600597BFD /* viewControllers */,
+			);
+			name = User;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		84F3C2961D177E8200597BFD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				847776641D1258AC00DE8213 /* YWHomeViewController.h */,
+				847776651D1258AC00DE8213 /* YWHomeViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		84F3C29A1D178F5300597BFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		84F3C29B1D17CC8500597BFD /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C29F1D17D6F300597BFD /* YWPublic.h */,
+				84F3C2A01D17D6F300597BFD /* YWPublic.m */,
+			);
+			name = Public;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		84F3C2A21D17D76600597BFD /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2931D17798800597BFD /* YWUserViewController.h */,
+				84F3C2941D17798800597BFD /* YWUserViewController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		84F3C2A31D17D77A00597BFD /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				847776671D1258B800DE8213 /* YWStoreViewController.h */,
+				847776681D1258B800DE8213 /* YWStoreViewController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		84F3C2A41D17D79700597BFD /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				847776711D12591C00DE8213 /* YWTabBarController.h */,
+				847776721D12591C00DE8213 /* YWTabBarController.m */,
+				84F3C2971D177ECD00597BFD /* CustomNavigationController.h */,
+				84F3C2981D177ECD00597BFD /* CustomNavigationController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		84F3C2A51D17D7C800597BFD /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8477766B1D1258D800DE8213 /* YWCallViewController.h */,
+				8477766C1D1258D800DE8213 /* YWCallViewController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		84F3C2A61D17D7DE00597BFD /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8477766E1D1258E500DE8213 /* YWProgressViewController.h */,
+				8477766F1D1258E500DE8213 /* YWProgressViewController.m */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		C09CCBD69FE99B2CEC74661D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */,
+				F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		847776251D124BF100DE8213 /* Carmgr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 847776531D124BF100DE8213 /* Build configuration list for PBXNativeTarget "Carmgr" */;
+			buildPhases = (
+				A9AAF8A31FB3B7E3C6D1635E /* 📦 Check Pods Manifest.lock */,
+				847776221D124BF100DE8213 /* Sources */,
+				847776231D124BF100DE8213 /* Frameworks */,
+				847776241D124BF100DE8213 /* Resources */,
+				661F53BAC21F250053A2D4A9 /* 📦 Embed Pods Frameworks */,
+				6D3CAD469AEE327504DC3EA1 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Carmgr;
+			productName = Carmgr;
+			productReference = 847776261D124BF100DE8213 /* Carmgr.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8477763E1D124BF100DE8213 /* CarmgrTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 847776561D124BF100DE8213 /* Build configuration list for PBXNativeTarget "CarmgrTests" */;
+			buildPhases = (
+				8477763B1D124BF100DE8213 /* Sources */,
+				8477763C1D124BF100DE8213 /* Frameworks */,
+				8477763D1D124BF100DE8213 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				847776411D124BF100DE8213 /* PBXTargetDependency */,
+			);
+			name = CarmgrTests;
+			productName = CarmgrTests;
+			productReference = 8477763F1D124BF100DE8213 /* CarmgrTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		847776491D124BF100DE8213 /* CarmgrUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 847776591D124BF100DE8213 /* Build configuration list for PBXNativeTarget "CarmgrUITests" */;
+			buildPhases = (
+				847776461D124BF100DE8213 /* Sources */,
+				847776471D124BF100DE8213 /* Frameworks */,
+				847776481D124BF100DE8213 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8477764C1D124BF100DE8213 /* PBXTargetDependency */,
+			);
+			name = CarmgrUITests;
+			productName = CarmgrUITests;
+			productReference = 8477764A1D124BF100DE8213 /* CarmgrUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8477761E1D124BF100DE8213 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = YiWuCheBao;
+				TargetAttributes = {
+					847776251D124BF100DE8213 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					8477763E1D124BF100DE8213 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 847776251D124BF100DE8213;
+					};
+					847776491D124BF100DE8213 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 847776251D124BF100DE8213;
+					};
+				};
+			};
+			buildConfigurationList = 847776211D124BF100DE8213 /* Build configuration list for PBXProject "Carmgr" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8477761D1D124BF100DE8213;
+			productRefGroup = 847776271D124BF100DE8213 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				847776251D124BF100DE8213 /* Carmgr */,
+				8477763E1D124BF100DE8213 /* CarmgrTests */,
+				847776491D124BF100DE8213 /* CarmgrUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		847776241D124BF100DE8213 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */,
+				847776361D124BF100DE8213 /* Assets.xcassets in Resources */,
+				847776791D13CA7700DE8213 /* u10.png in Resources */,
+				847776341D124BF100DE8213 /* Main.storyboard in Resources */,
+				8477765E1D1257FD00DE8213 /* class.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8477763D1D124BF100DE8213 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		847776481D124BF100DE8213 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		661F53BAC21F250053A2D4A9 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D3CAD469AEE327504DC3EA1 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9AAF8A31FB3B7E3C6D1635E /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		847776221D124BF100DE8213 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
+				847776311D124BF100DE8213 /* ViewController.m in Sources */,
+				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
+				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
+				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
+				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
+				84F3C2991D177ECD00597BFD /* CustomNavigationController.m in Sources */,
+				84F3C2A11D17D6F300597BFD /* YWPublic.m in Sources */,
+				8477762B1D124BF100DE8213 /* main.m in Sources */,
+				84F3C2951D17798800597BFD /* YWUserViewController.m in Sources */,
+				847776731D12591C00DE8213 /* YWTabBarController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8477763B1D124BF100DE8213 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				847776441D124BF100DE8213 /* CarmgrTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		847776461D124BF100DE8213 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8477764F1D124BF100DE8213 /* CarmgrUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		847776411D124BF100DE8213 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 847776251D124BF100DE8213 /* Carmgr */;
+			targetProxy = 847776401D124BF100DE8213 /* PBXContainerItemProxy */;
+		};
+		8477764C1D124BF100DE8213 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 847776251D124BF100DE8213 /* Carmgr */;
+			targetProxy = 8477764B1D124BF100DE8213 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		847776321D124BF100DE8213 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				847776331D124BF100DE8213 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		847776371D124BF100DE8213 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				847776381D124BF100DE8213 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		847776511D124BF100DE8213 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		847776521D124BF100DE8213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		847776541D124BF100DE8213 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Carmgr/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.Carmgr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		847776551D124BF100DE8213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Carmgr/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.Carmgr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		847776571D124BF100DE8213 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CarmgrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.CarmgrTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Carmgr.app/Carmgr";
+			};
+			name = Debug;
+		};
+		847776581D124BF100DE8213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CarmgrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.CarmgrTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Carmgr.app/Carmgr";
+			};
+			name = Release;
+		};
+		8477765A1D124BF100DE8213 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CarmgrUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.CarmgrUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Carmgr;
+			};
+			name = Debug;
+		};
+		8477765B1D124BF100DE8213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CarmgrUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.CarmgrUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Carmgr;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		847776211D124BF100DE8213 /* Build configuration list for PBXProject "Carmgr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				847776511D124BF100DE8213 /* Debug */,
+				847776521D124BF100DE8213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		847776531D124BF100DE8213 /* Build configuration list for PBXNativeTarget "Carmgr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				847776541D124BF100DE8213 /* Debug */,
+				847776551D124BF100DE8213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		847776561D124BF100DE8213 /* Build configuration list for PBXNativeTarget "CarmgrTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				847776571D124BF100DE8213 /* Debug */,
+				847776581D124BF100DE8213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		847776591D124BF100DE8213 /* Build configuration list for PBXNativeTarget "CarmgrUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8477765A1D124BF100DE8213 /* Debug */,
+				8477765B1D124BF100DE8213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8477761E1D124BF100DE8213 /* Project object */;
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>className</key>
+		<string>YWHomeViewController</string>
+		<key>title</key>
+		<string>首页</string>
+		<key>image</key>
+		<string>首页icon_u210</string>
+	</dict>
+	<dict>
+		<key>className</key>
+		<string>YWStoreViewController</string>
+		<key>title</key>
+		<string>商户</string>
+		<key>image</key>
+		<string>商户展示icon_u216-1</string>
+	</dict>
+	<dict>
+		<key>className</key>
+		<string>YWProgressViewController</string>
+		<key>title</key>
+		<string>进度</string>
+		<key>image</key>
+		<string>进度icon_u214</string>
+	</dict>
+	<dict>
+		<key>className</key>
+		<string>YWCallViewController</string>
+		<key>title</key>
+		<string>呼叫易宝</string>
+		<key>image</key>
+		<string>呼叫易宝icon_u216</string>
+	</dict>
+</array>
+</plist>
