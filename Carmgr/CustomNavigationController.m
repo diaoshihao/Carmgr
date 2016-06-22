@@ -14,9 +14,10 @@
 
 @implementation CustomNavigationController
 
+//重写该方法实现自定义导航栏颜色
 +(void)initialize {
     UINavigationBar *navigationBar = [UINavigationBar appearance];
-    navigationBar.barTintColor = [UIColor orangeColor];
+    navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];

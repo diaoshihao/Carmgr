@@ -8,26 +8,21 @@
 
 #import "YWUserViewController.h"
 
-@interface YWUserViewController ()
+@interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
+@property (nonatomic, strong) UIPanGestureRecognizer *leftSwipe;
 
 @end
 
 @implementation YWUserViewController
 
 #pragma mark - 右滑返回上一页
-#pragma makr 添加滑动手势
-- (void)leftSwipeForPopToRootVC {
-    self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeCallBack)];
-    self.leftSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:self.leftSwipe];
-}
-
-#pragma mark 滑动手势回调
-- (void)leftSwipeCallBack {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    self.navigationController.navigationBarHidden = NO;
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        
+        navigationController.interactivePopGestureRecognizer.enabled = YES;
+        
+    }
 }
 
 #pragma mark - 生命周期
@@ -36,14 +31,24 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self leftSwipeForPopToRootVC];
-    
-    
+    //实现滑动返回
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
     self.navigationController.navigationBarHidden = YES;
+    
+    self.navigationController.delegate = self;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    self.navigationController.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {

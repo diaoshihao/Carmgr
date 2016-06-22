@@ -23,9 +23,13 @@
 		847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766F1D1258E500DE8213 /* YWProgressViewController.m */; };
 		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
 		847776791D13CA7700DE8213 /* u10.png in Resources */ = {isa = PBXBuildFile; fileRef = 847776781D13CA7700DE8213 /* u10.png */; };
-		84F3C2951D17798800597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2941D17798800597BFD /* YWUserViewController.m */; };
 		84F3C2991D177ECD00597BFD /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2981D177ECD00597BFD /* CustomNavigationController.m */; };
-		84F3C2A11D17D6F300597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A01D17D6F300597BFD /* YWPublic.m */; };
+		84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A81D190A8600597BFD /* YWPublic.m */; };
+		84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AB1D190AA600597BFD /* YWUserViewController.m */; };
+		84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */; };
+		84F3C2B51D193AB300597BFD /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2B21D193AB300597BFD /* city.plist */; };
+		84F3C2B61D193AB300597BFD /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2B41D193AB300597BFD /* CityChooseViewController.m */; };
+		84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,12 +79,19 @@
 		847776711D12591C00DE8213 /* YWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWTabBarController.h; sourceTree = "<group>"; };
 		847776721D12591C00DE8213 /* YWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTabBarController.m; sourceTree = "<group>"; };
 		847776781D13CA7700DE8213 /* u10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = u10.png; path = Carmgr/u10.png; sourceTree = "<group>"; };
-		84F3C2931D17798800597BFD /* YWUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWUserViewController.h; sourceTree = "<group>"; };
-		84F3C2941D17798800597BFD /* YWUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWUserViewController.m; sourceTree = "<group>"; };
 		84F3C2971D177ECD00597BFD /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		84F3C2981D177ECD00597BFD /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
-		84F3C29F1D17D6F300597BFD /* YWPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWPublic.h; sourceTree = "<group>"; };
-		84F3C2A01D17D6F300597BFD /* YWPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWPublic.m; sourceTree = "<group>"; };
+		84F3C2A71D190A8600597BFD /* YWPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWPublic.h; path = Carmgr/YWPublic.h; sourceTree = "<group>"; };
+		84F3C2A81D190A8600597BFD /* YWPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWPublic.m; path = Carmgr/YWPublic.m; sourceTree = "<group>"; };
+		84F3C2AA1D190AA600597BFD /* YWUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWUserViewController.h; path = Carmgr/YWUserViewController.h; sourceTree = "<group>"; };
+		84F3C2AB1D190AA600597BFD /* YWUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWUserViewController.m; path = Carmgr/YWUserViewController.m; sourceTree = "<group>"; };
+		84F3C2AD1D1920C400597BFD /* ScanImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanImageViewController.h; path = Carmgr/ScanImageViewController.h; sourceTree = "<group>"; };
+		84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanImageViewController.m; path = Carmgr/ScanImageViewController.m; sourceTree = "<group>"; };
+		84F3C2B21D193AB300597BFD /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
+		84F3C2B31D193AB300597BFD /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseViewController.h; sourceTree = "<group>"; };
+		84F3C2B41D193AB300597BFD /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseViewController.m; sourceTree = "<group>"; };
+		84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationAttribute.h; sourceTree = "<group>"; };
+		84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationAttribute.m; sourceTree = "<group>"; };
 		A9F25A80A03943501A53A01A /* libPods-Carmgr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Carmgr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +133,7 @@
 		8477761D1D124BF100DE8213 = {
 			isa = PBXGroup;
 			children = (
+				84F3C2B01D193A8200597BFD /* 第三方 */,
 				847776281D124BF100DE8213 /* Carmgr */,
 				847776421D124BF100DE8213 /* CarmgrTests */,
 				8477764D1D124BF100DE8213 /* CarmgrUITests */,
@@ -278,8 +290,8 @@
 		84F3C29B1D17CC8500597BFD /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				84F3C29F1D17D6F300597BFD /* YWPublic.h */,
-				84F3C2A01D17D6F300597BFD /* YWPublic.m */,
+				84F3C2A71D190A8600597BFD /* YWPublic.h */,
+				84F3C2A81D190A8600597BFD /* YWPublic.m */,
 			);
 			name = Public;
 			path = ..;
@@ -288,8 +300,8 @@
 		84F3C2A21D17D76600597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				84F3C2931D17798800597BFD /* YWUserViewController.h */,
-				84F3C2941D17798800597BFD /* YWUserViewController.m */,
+				84F3C2AA1D190AA600597BFD /* YWUserViewController.h */,
+				84F3C2AB1D190AA600597BFD /* YWUserViewController.m */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -306,10 +318,8 @@
 		84F3C2A41D17D79700597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				847776711D12591C00DE8213 /* YWTabBarController.h */,
-				847776721D12591C00DE8213 /* YWTabBarController.m */,
-				84F3C2971D177ECD00597BFD /* CustomNavigationController.h */,
-				84F3C2981D177ECD00597BFD /* CustomNavigationController.m */,
+				84F3C2B81D193B5C00597BFD /* 自定义导航栏 */,
+				84F3C2B71D193B4C00597BFD /* 标签栏 */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -330,6 +340,54 @@
 				8477766F1D1258E500DE8213 /* YWProgressViewController.m */,
 			);
 			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		84F3C2B01D193A8200597BFD /* 第三方 */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2B91D193BBE00597BFD /* 二维码扫描 */,
+				84F3C2B11D193A9100597BFD /* 城市选择 */,
+			);
+			name = "第三方";
+			sourceTree = "<group>";
+		};
+		84F3C2B11D193A9100597BFD /* 城市选择 */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2B21D193AB300597BFD /* city.plist */,
+				84F3C2B31D193AB300597BFD /* CityChooseViewController.h */,
+				84F3C2B41D193AB300597BFD /* CityChooseViewController.m */,
+			);
+			name = "城市选择";
+			sourceTree = "<group>";
+		};
+		84F3C2B71D193B4C00597BFD /* 标签栏 */ = {
+			isa = PBXGroup;
+			children = (
+				847776711D12591C00DE8213 /* YWTabBarController.h */,
+				847776721D12591C00DE8213 /* YWTabBarController.m */,
+			);
+			name = "标签栏";
+			sourceTree = "<group>";
+		};
+		84F3C2B81D193B5C00597BFD /* 自定义导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2971D177ECD00597BFD /* CustomNavigationController.h */,
+				84F3C2981D177ECD00597BFD /* CustomNavigationController.m */,
+				84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */,
+				84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */,
+			);
+			name = "自定义导航栏";
+			sourceTree = "<group>";
+		};
+		84F3C2B91D193BBE00597BFD /* 二维码扫描 */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2AD1D1920C400597BFD /* ScanImageViewController.h */,
+				84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */,
+			);
+			name = "二维码扫描";
 			sourceTree = "<group>";
 		};
 		C09CCBD69FE99B2CEC74661D /* Pods */ = {
@@ -450,6 +508,7 @@
 				847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */,
 				847776361D124BF100DE8213 /* Assets.xcassets in Resources */,
 				847776791D13CA7700DE8213 /* u10.png in Resources */,
+				84F3C2B51D193AB300597BFD /* city.plist in Resources */,
 				847776341D124BF100DE8213 /* Main.storyboard in Resources */,
 				8477765E1D1257FD00DE8213 /* class.plist in Resources */,
 			);
@@ -524,16 +583,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
+				84F3C2B61D193AB300597BFD /* CityChooseViewController.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
 				847776311D124BF100DE8213 /* ViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
+				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
 				84F3C2991D177ECD00597BFD /* CustomNavigationController.m in Sources */,
-				84F3C2A11D17D6F300597BFD /* YWPublic.m in Sources */,
+				84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */,
+				84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */,
 				8477762B1D124BF100DE8213 /* main.m in Sources */,
-				84F3C2951D17798800597BFD /* YWUserViewController.m in Sources */,
 				847776731D12591C00DE8213 /* YWTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

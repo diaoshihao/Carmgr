@@ -25,9 +25,8 @@
 
 @interface YWPublic : NSObject
 
-+ (UIView *)createCustomNavigationBarWithFrame:(CGRect)frame
-                                         title:(NSString *)title
-                                     imageName:(NSString *)imageName;
++ (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString *)title imageName:(NSString *)imageName;
 
++ (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
 
 @end

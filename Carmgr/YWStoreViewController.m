@@ -7,6 +7,7 @@
 //
 
 #import "YWStoreViewController.h"
+#import "YWUserViewController.h"
 #import "YWPublic.h"
 
 @interface YWStoreViewController ()
@@ -15,22 +16,20 @@
 
 @implementation YWStoreViewController
 
-
+#pragma mark 跳转到个人中心(tabBar实例调用)
+- (void)pushToUser:(UIButton *)sender {
+    
+    [self.navigationController pushViewController:[[YWUserViewController alloc] init] animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIView *barView = [YWPublic createCustomNavigationBarWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 64) title:@"商家展示" imageName:@"u10"];
-    [self.view addSubview:barView];
-    
-    
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    self.navigationController.navigationBarHidden = YES;
+- (void)viewDidAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
