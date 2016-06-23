@@ -23,8 +23,8 @@
     // Do any additional setup after loading the view.
     
     NSArray *arrayTitle = @[@"首页",@"商家",@"进度",@"呼叫易宝"];
-    NSArray *arrayImage = @[@"首页灰",@"商家灰",@"进度灰",@"电话灰"];
-    NSArray *arraySelectImage = @[@"首页",@"商家",@"进度",@"电话"];
+    NSArray *arrayImage = @[@"首页",@"商家",@"进度",@"呼叫易宝"];
+    NSArray *arraySelectImage = @[@"首页橙",@"商家橙",@"进度橙",@"呼叫易宝橙"];
     NSArray *arrayClass = @[
                             @"YWHomeViewController",
                             @"YWStoreViewController",

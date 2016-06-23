@@ -12,11 +12,9 @@
 		8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762D1D124BF100DE8213 /* AppDelegate.m */; };
 		847776311D124BF100DE8213 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776301D124BF100DE8213 /* ViewController.m */; };
 		847776341D124BF100DE8213 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847776321D124BF100DE8213 /* Main.storyboard */; };
-		847776361D124BF100DE8213 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847776351D124BF100DE8213 /* Assets.xcassets */; };
 		847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847776371D124BF100DE8213 /* LaunchScreen.storyboard */; };
 		847776441D124BF100DE8213 /* CarmgrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776431D124BF100DE8213 /* CarmgrTests.m */; };
 		8477764F1D124BF100DE8213 /* CarmgrUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477764E1D124BF100DE8213 /* CarmgrUITests.m */; };
-		8477765E1D1257FD00DE8213 /* class.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8477765D1D1257FD00DE8213 /* class.plist */; };
 		847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776651D1258AC00DE8213 /* YWHomeViewController.m */; };
 		847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776681D1258B800DE8213 /* YWStoreViewController.m */; };
 		8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766C1D1258D800DE8213 /* YWCallViewController.m */; };
@@ -28,8 +26,10 @@
 		84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AB1D190AA600597BFD /* YWUserViewController.m */; };
 		84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */; };
 		84F3C2B51D193AB300597BFD /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2B21D193AB300597BFD /* city.plist */; };
-		84F3C2B61D193AB300597BFD /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2B41D193AB300597BFD /* CityChooseViewController.m */; };
 		84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */; };
+		84F3C2C91D1A86E800597BFD /* WJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */; };
+		84F3C2CF1D1A986E00597BFD /* CityChoose.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2CE1D1A986E00597BFD /* CityChoose.m */; };
+		84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2D11D1B719E00597BFD /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,6 @@
 		8477762F1D124BF100DE8213 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		847776301D124BF100DE8213 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		847776331D124BF100DE8213 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		847776351D124BF100DE8213 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		847776381D124BF100DE8213 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8477763A1D124BF100DE8213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8477763F1D124BF100DE8213 /* CarmgrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarmgrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +66,6 @@
 		8477764A1D124BF100DE8213 /* CarmgrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarmgrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8477764E1D124BF100DE8213 /* CarmgrUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarmgrUITests.m; sourceTree = "<group>"; };
 		847776501D124BF100DE8213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8477765D1D1257FD00DE8213 /* class.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = class.plist; sourceTree = "<group>"; };
 		847776641D1258AC00DE8213 /* YWHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWHomeViewController.h; sourceTree = "<group>"; };
 		847776651D1258AC00DE8213 /* YWHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWHomeViewController.m; sourceTree = "<group>"; };
 		847776671D1258B800DE8213 /* YWStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWStoreViewController.h; sourceTree = "<group>"; };
@@ -88,10 +86,13 @@
 		84F3C2AD1D1920C400597BFD /* ScanImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanImageViewController.h; path = Carmgr/ScanImageViewController.h; sourceTree = "<group>"; };
 		84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanImageViewController.m; path = Carmgr/ScanImageViewController.m; sourceTree = "<group>"; };
 		84F3C2B21D193AB300597BFD /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
-		84F3C2B31D193AB300597BFD /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseViewController.h; sourceTree = "<group>"; };
-		84F3C2B41D193AB300597BFD /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseViewController.m; sourceTree = "<group>"; };
 		84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationAttribute.h; sourceTree = "<group>"; };
 		84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationAttribute.m; sourceTree = "<group>"; };
+		84F3C2C71D1A86E800597BFD /* WJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJDropdownMenu.h; sourceTree = "<group>"; };
+		84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJDropdownMenu.m; sourceTree = "<group>"; };
+		84F3C2CD1D1A986E00597BFD /* CityChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChoose.h; sourceTree = "<group>"; };
+		84F3C2CE1D1A986E00597BFD /* CityChoose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChoose.m; sourceTree = "<group>"; };
+		84F3C2D11D1B719E00597BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9F25A80A03943501A53A01A /* libPods-Carmgr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Carmgr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +134,7 @@
 		8477761D1D124BF100DE8213 = {
 			isa = PBXGroup;
 			children = (
+				84F3C2D01D1B6ACB00597BFD /* 功能模块 */,
 				84F3C2B01D193A8200597BFD /* 第三方 */,
 				847776281D124BF100DE8213 /* Carmgr */,
 				847776421D124BF100DE8213 /* CarmgrTests */,
@@ -177,7 +179,6 @@
 		847776291D124BF100DE8213 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8477765D1D1257FD00DE8213 /* class.plist */,
 				8477762A1D124BF100DE8213 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -205,8 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				847776321D124BF100DE8213 /* Main.storyboard */,
-				847776351D124BF100DE8213 /* Assets.xcassets */,
 				847776371D124BF100DE8213 /* LaunchScreen.storyboard */,
+				84F3C2D11D1B719E00597BFD /* Assets.xcassets */,
 				8477763A1D124BF100DE8213 /* Info.plist */,
 			);
 			name = Others;
@@ -354,9 +355,11 @@
 		84F3C2B11D193A9100597BFD /* 城市选择 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2C71D1A86E800597BFD /* WJDropdownMenu.h */,
+				84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */,
 				84F3C2B21D193AB300597BFD /* city.plist */,
-				84F3C2B31D193AB300597BFD /* CityChooseViewController.h */,
-				84F3C2B41D193AB300597BFD /* CityChooseViewController.m */,
+				84F3C2CD1D1A986E00597BFD /* CityChoose.h */,
+				84F3C2CE1D1A986E00597BFD /* CityChoose.m */,
 			);
 			name = "城市选择";
 			sourceTree = "<group>";
@@ -388,6 +391,13 @@
 				84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */,
 			);
 			name = "二维码扫描";
+			sourceTree = "<group>";
+		};
+		84F3C2D01D1B6ACB00597BFD /* 功能模块 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "功能模块";
 			sourceTree = "<group>";
 		};
 		C09CCBD69FE99B2CEC74661D /* Pods */ = {
@@ -506,11 +516,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */,
-				847776361D124BF100DE8213 /* Assets.xcassets in Resources */,
 				847776791D13CA7700DE8213 /* u10.png in Resources */,
 				84F3C2B51D193AB300597BFD /* city.plist in Resources */,
 				847776341D124BF100DE8213 /* Main.storyboard in Resources */,
-				8477765E1D1257FD00DE8213 /* class.plist in Resources */,
+				84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,13 +593,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
-				84F3C2B61D193AB300597BFD /* CityChooseViewController.m in Sources */,
+				84F3C2CF1D1A986E00597BFD /* CityChoose.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
 				847776311D124BF100DE8213 /* ViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
+				84F3C2C91D1A86E800597BFD /* WJDropdownMenu.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
 				84F3C2991D177ECD00597BFD /* CustomNavigationController.m in Sources */,
 				84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */,

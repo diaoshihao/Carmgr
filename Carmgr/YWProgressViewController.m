@@ -8,17 +8,33 @@
 
 #import "YWProgressViewController.h"
 #import "YWUserViewController.h"
+#import "ScanImageViewController.h"
 
-@interface YWProgressViewController ()
+@interface YWProgressViewController () <ScanImageView>
 
 @end
 
 @implementation YWProgressViewController
 
+#pragma mark 跳转到扫描二维码
+- (void)pushToScanImageVC {
+    [self presentViewController:[[ScanImageViewController alloc] init] animated:YES completion:nil];
+}
+
+#pragma mark 扫描结果输出代理
+- (void)reportScanResult:(NSString *)result {
+    
+}
+
 #pragma mark 跳转到个人中心
 - (void)pushToUser:(UIButton *)sender {
     
     [self.navigationController pushViewController:[[YWUserViewController alloc] init] animated:YES];
+}
+
+#pragma mark 选择城市
+- (void)chooseCityAction {
+    NSLog(@"home");
 }
 
 - (void)viewDidLoad {
