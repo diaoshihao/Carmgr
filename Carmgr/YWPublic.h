@@ -29,6 +29,6 @@
 
 + (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
 
-
++ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName;
 
 @end

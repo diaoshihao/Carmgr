@@ -30,6 +30,15 @@
     return image;
 }
 
-
+/**
+ *  创建圆形图片
+ */
++ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName {
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+    imageView.image = [UIImage imageNamed:imageName];
+    imageView.layer.cornerRadius = imageView.frame.size.height / 2;
+    imageView.clipsToBounds = YES;
+    return imageView;
+}
 
 @end

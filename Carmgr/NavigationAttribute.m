@@ -51,7 +51,7 @@
     viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 0, 0) placeholder:@"输入商家、品类、商圈"];;
     
     //左item
-    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self chooseCityButtonWithTitle:@"乌鲁木齐" imageName:@"下拉" target:viewController]];
+    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self chooseCityButtonWithTitle:@"广州" imageName:@"下拉" target:viewController]];
     
     //右item
     viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self scanImageAndUserWithTitle:nil userImage:@"个人中心" scanImage:@"二维码" target:viewController]];
@@ -99,17 +99,24 @@
 
 #pragma mark 创建搜索栏
 - (UISearchBar *)createSearchBarWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
+    
+//    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:[[UITableViewController alloc] init]];
+////    searchController.searchBar.frame = CGRectMake(0, 0, 50, 40);
+//    searchController.searchBar.placeholder = placeholder;
+//    [searchController.searchBar setImage:[YWPublic imageNameWithOriginalRender:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    
     self.searchBar = [[UISearchBar alloc] initWithFrame:frame];
     self.searchBar.placeholder = placeholder;
     [self.searchBar setImage:[UIImage imageNamed:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     return self.searchBar;
+//    return searchController.searchBar;
 }
 
 - (void)chooseCityAction:(UIButton *)sender {
     NSLog(@"chooseCity");
 }
 
-//该方法只是为了防止报出警告，具体实现在其他视图控制器中
+//以下方法只是为了防止报出警告，具体实现在其他视图控制器中
 - (void)pushToUser:(UIButton *)sender {
     
 }

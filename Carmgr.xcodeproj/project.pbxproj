@@ -21,6 +21,8 @@
 		847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766F1D1258E500DE8213 /* YWProgressViewController.m */; };
 		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
 		847776791D13CA7700DE8213 /* u10.png in Resources */ = {isa = PBXBuildFile; fileRef = 847776781D13CA7700DE8213 /* u10.png */; };
+		8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D7271D1BE11E008850D8 /* YWLoginViewController.m */; };
+		8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */; };
 		84F3C2991D177ECD00597BFD /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2981D177ECD00597BFD /* CustomNavigationController.m */; };
 		84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A81D190A8600597BFD /* YWPublic.m */; };
 		84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AB1D190AA600597BFD /* YWUserViewController.m */; };
@@ -30,6 +32,7 @@
 		84F3C2C91D1A86E800597BFD /* WJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */; };
 		84F3C2CF1D1A986E00597BFD /* CityChoose.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2CE1D1A986E00597BFD /* CityChoose.m */; };
 		84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2D11D1B719E00597BFD /* Assets.xcassets */; };
+		84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,10 @@
 		847776711D12591C00DE8213 /* YWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWTabBarController.h; sourceTree = "<group>"; };
 		847776721D12591C00DE8213 /* YWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTabBarController.m; sourceTree = "<group>"; };
 		847776781D13CA7700DE8213 /* u10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = u10.png; path = Carmgr/u10.png; sourceTree = "<group>"; };
+		8487D7261D1BE11E008850D8 /* YWLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWLoginViewController.h; sourceTree = "<group>"; };
+		8487D7271D1BE11E008850D8 /* YWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWLoginViewController.m; sourceTree = "<group>"; };
+		8487D7291D1BE5BE008850D8 /* YWRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWRegistViewController.h; sourceTree = "<group>"; };
+		8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWRegistViewController.m; sourceTree = "<group>"; };
 		84F3C2971D177ECD00597BFD /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		84F3C2981D177ECD00597BFD /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
 		84F3C2A71D190A8600597BFD /* YWPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWPublic.h; path = Carmgr/YWPublic.h; sourceTree = "<group>"; };
@@ -93,6 +100,8 @@
 		84F3C2CD1D1A986E00597BFD /* CityChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChoose.h; sourceTree = "<group>"; };
 		84F3C2CE1D1A986E00597BFD /* CityChoose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChoose.m; sourceTree = "<group>"; };
 		84F3C2D11D1B719E00597BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84F3C2E51D1BC37800597BFD /* UserCenterFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterFunc.h; sourceTree = "<group>"; };
+		84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterFunc.m; sourceTree = "<group>"; };
 		A9F25A80A03943501A53A01A /* libPods-Carmgr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Carmgr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,11 +173,13 @@
 				847776301D124BF100DE8213 /* ViewController.m */,
 				84F3C29B1D17CC8500597BFD /* Public */,
 				847776771D13C8C600DE8213 /* Images */,
-				84F3C2921D17795C00597BFD /* User */,
-				847776631D12586C00DE8213 /* Progress */,
-				847776621D12586300DE8213 /* Call */,
-				847776611D12585100DE8213 /* Store */,
-				847776601D12584700DE8213 /* Home */,
+				84F3C2D31D1B93B300597BFD /* 登陆注册 */,
+				84F3C2921D17795C00597BFD /* 用户中心 */,
+				847776631D12586C00DE8213 /* 进度 */,
+				847776621D12586300DE8213 /* 呼叫易宝 */,
+				847776611D12585100DE8213 /* 商家 */,
+				847776601D12584700DE8213 /* 首页 */,
+				84F3C2B81D193B5C00597BFD /* 自定义导航栏 */,
 				8477765F1D12582900DE8213 /* TabBarController */,
 				8477765C1D12579000DE8213 /* Others */,
 				847776291D124BF100DE8213 /* Supporting Files */,
@@ -216,42 +227,51 @@
 		8477765F1D12582900DE8213 /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2DE1D1B945D00597BFD /* Model */,
+				84F3C2DD1D1B945200597BFD /* Views */,
 				84F3C2A41D17D79700597BFD /* viewControllers */,
 			);
 			name = TabBarController;
 			sourceTree = "<group>";
 		};
-		847776601D12584700DE8213 /* Home */ = {
+		847776601D12584700DE8213 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2DC1D1B943F00597BFD /* Model */,
+				84F3C2DB1D1B943A00597BFD /* Views */,
 				84F3C2961D177E8200597BFD /* Controllers */,
 			);
-			name = Home;
+			name = "首页";
 			sourceTree = "<group>";
 		};
-		847776611D12585100DE8213 /* Store */ = {
+		847776611D12585100DE8213 /* 商家 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2DA1D1B943100597BFD /* Model */,
+				84F3C2D91D1B942B00597BFD /* Views */,
 				84F3C2A31D17D77A00597BFD /* viewControllers */,
 			);
-			name = Store;
+			name = "商家";
 			sourceTree = "<group>";
 		};
-		847776621D12586300DE8213 /* Call */ = {
+		847776621D12586300DE8213 /* 呼叫易宝 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2D81D1B942500597BFD /* Model */,
+				84F3C2D71D1B941600597BFD /* Views */,
 				84F3C2A51D17D7C800597BFD /* viewControllers */,
 			);
-			name = Call;
+			name = "呼叫易宝";
 			sourceTree = "<group>";
 		};
-		847776631D12586C00DE8213 /* Progress */ = {
+		847776631D12586C00DE8213 /* 进度 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2D61D1B940300597BFD /* Views */,
 				84F3C2A61D17D7DE00597BFD /* viewControllers */,
 				84F3C29A1D178F5300597BFD /* Model */,
 			);
-			name = Progress;
+			name = "进度";
 			sourceTree = "<group>";
 		};
 		847776771D13C8C600DE8213 /* Images */ = {
@@ -263,12 +283,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		84F3C2921D17795C00597BFD /* User */ = {
+		84F3C2921D17795C00597BFD /* 用户中心 */ = {
 			isa = PBXGroup;
 			children = (
 				84F3C2A21D17D76600597BFD /* viewControllers */,
 			);
-			name = User;
+			name = "用户中心";
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -319,7 +339,6 @@
 		84F3C2A41D17D79700597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				84F3C2B81D193B5C00597BFD /* 自定义导航栏 */,
 				84F3C2B71D193B4C00597BFD /* 标签栏 */,
 			);
 			name = viewControllers;
@@ -396,8 +415,101 @@
 		84F3C2D01D1B6ACB00597BFD /* 功能模块 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C2E51D1BC37800597BFD /* UserCenterFunc.h */,
+				84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */,
 			);
 			name = "功能模块";
+			sourceTree = "<group>";
+		};
+		84F3C2D31D1B93B300597BFD /* 登陆注册 */ = {
+			isa = PBXGroup;
+			children = (
+				84F3C2D51D1B93D900597BFD /* 注册 */,
+				84F3C2D41D1B93D300597BFD /* 登陆 */,
+			);
+			name = "登陆注册";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		84F3C2D41D1B93D300597BFD /* 登陆 */ = {
+			isa = PBXGroup;
+			children = (
+				8487D7261D1BE11E008850D8 /* YWLoginViewController.h */,
+				8487D7271D1BE11E008850D8 /* YWLoginViewController.m */,
+			);
+			name = "登陆";
+			sourceTree = "<group>";
+		};
+		84F3C2D51D1B93D900597BFD /* 注册 */ = {
+			isa = PBXGroup;
+			children = (
+				8487D7291D1BE5BE008850D8 /* YWRegistViewController.h */,
+				8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */,
+			);
+			name = "注册";
+			sourceTree = "<group>";
+		};
+		84F3C2D61D1B940300597BFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84F3C2D71D1B941600597BFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84F3C2D81D1B942500597BFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		84F3C2D91D1B942B00597BFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84F3C2DA1D1B943100597BFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		84F3C2DB1D1B943A00597BFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84F3C2DC1D1B943F00597BFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		84F3C2DD1D1B945200597BFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84F3C2DE1D1B945D00597BFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		C09CCBD69FE99B2CEC74661D /* Pods */ = {
@@ -594,11 +706,14 @@
 			files = (
 				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
 				84F3C2CF1D1A986E00597BFD /* CityChoose.m in Sources */,
+				8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
 				847776311D124BF100DE8213 /* ViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
+				84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */,
+				8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				84F3C2C91D1A86E800597BFD /* WJDropdownMenu.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
