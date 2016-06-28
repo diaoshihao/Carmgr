@@ -47,7 +47,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     //初始化扫描界面
     [self setScanView];
     
@@ -198,7 +198,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     
     //取消button
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:DARKCOLOR_ALPHA];
+    cancelButton.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     cancelButton.frame =CGRectMake(0, 90, VIEW_WIDTH, 40);
     cancelButton.titleLabel.font =[UIFont systemFontOfSize:15.0];
     cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -211,7 +211,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     _lightButton.frame =CGRectMake(0, 40, VIEW_WIDTH, 40);
     [_lightButton setTitle:@"开启闪光灯" forState:UIControlStateNormal];
     [_lightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _lightButton.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:DARKCOLOR_ALPHA];
+    _lightButton.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     _lightButton.titleLabel.textAlignment=NSTextAlignmentCenter;
     _lightButton.titleLabel.font=[UIFont systemFontOfSize:15.0];
     [_lightButton addTarget:self action:@selector(openLight) forControlEvents:UIControlEventTouchUpInside];

@@ -15,8 +15,6 @@
 
 @implementation YWTabBarController
 
-
-
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +38,7 @@
     }
     
     self.viewControllers = controllers;
+
 }
 
 - (void)didReceiveMemoryWarning {

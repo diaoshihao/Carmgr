@@ -7,6 +7,7 @@
 //
 
 #import "YWCallViewController.h"
+#import "YWPublic.h"
 
 @interface YWCallViewController ()
 
@@ -15,11 +16,10 @@
 @implementation YWCallViewController
 
 - (void)callAlert {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"呼叫易宝" message:@"是否呼叫易宝" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"呼叫易宝" message:@"呼叫易宝可为您提供即时咨询" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *call = [UIAlertAction actionWithTitle:@"呼叫" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"18218456285"]];
-//        [self callAction];
+        [self callAction];
     }];
     [alertController addAction:cancel];
     [alertController addAction:call];
@@ -36,17 +36,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-        
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"18218456285"]];
     
+    UIButton *callButton = [YWPublic createButtonWithFrame:CGRectMake(100, 100, 100, 30) title:@"呼叫易宝" imageName:nil];
+    [callButton setBackgroundImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateNormal];
+    [callButton addTarget:self action:@selector(callAlert) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:callButton];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     self.navigationController.navigationBarHidden = YES;
-    
-    [self callAlert];
     
 }
 

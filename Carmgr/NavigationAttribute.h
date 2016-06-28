@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface NavigationAttribute : NSObject
+@interface NavigationAttribute : UIView
 
 - (UINavigationController *)createVCWithClass:(NSString *)className
                                         Title:(NSString *)title

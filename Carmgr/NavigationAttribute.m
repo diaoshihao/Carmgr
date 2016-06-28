@@ -7,10 +7,10 @@
 //
 
 #import "NavigationAttribute.h"
-#import "CustomNavigationController.h"
 #import "YWPublic.h"
+#import <Masonry.h>
 
-@interface  NavigationAttribute()
+@interface  NavigationAttribute() <UISearchBarDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 
@@ -31,7 +31,8 @@
                                   selectImage:(NSString *)selectImage {
     UIViewController *viewController = [[NSClassFromString(className) alloc] init];
     viewController.view.backgroundColor = [UIColor whiteColor];
-    CustomNavigationController *navigationVC = [[CustomNavigationController alloc] initWithRootViewController:viewController];
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navigationVC.navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     
     //设置导航栏title和item
     [self navigationAttribute:viewController];
@@ -69,21 +70,31 @@
     [scanButton addTarget:target action:@selector(pushToScanImageVC) forControlEvents:UIControlEventTouchUpInside];
     [rightView addSubview:scanButton];
     
+    [scanButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(rightView).with.offset(0);
+    }];
+    
     //个人中心按钮
     UIButton *userButton = [YWPublic createButtonWithFrame:CGRectMake(50, 10, 20, 20) title:title imageName:userImage];
     //添加事件
     [userButton addTarget:target action:@selector(pushToUser:) forControlEvents:UIControlEventTouchUpInside];
     [rightView addSubview:userButton];
     
+    [userButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(rightView).with.offset(0);
+    }];
+    
     return rightView;
 }
 
 #pragma mark 选择城市按钮
 - (UIView *)chooseCityButtonWithTitle:(NSString *)title imageName:(NSString *)imageName target:(UIViewController *)viewController{
-    UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
+    UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 90, 40)];
     
     //城市按钮
-    UIButton *button = [YWPublic createButtonWithFrame:CGRectMake(0, 10, 70, 20) title:title imageName:nil];
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectMake(0, 15, 70, 10) title:title imageName:nil];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     button.tag = 10;
     //添加事件
     [button addTarget:viewController action:@selector(chooseCityAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -98,22 +109,32 @@
 }
 
 #pragma mark 创建搜索栏
-- (UISearchBar *)createSearchBarWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
+- (UIView *)createSearchBarWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
     
-//    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:[[UITableViewController alloc] init]];
-////    searchController.searchBar.frame = CGRectMake(0, 0, 50, 40);
-//    searchController.searchBar.placeholder = placeholder;
-//    [searchController.searchBar setImage:[YWPublic imageNameWithOriginalRender:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+//    view.backgroundColor = [UIColor clearColor];
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:frame];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
     self.searchBar.placeholder = placeholder;
     [self.searchBar setImage:[UIImage imageNamed:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    [self.searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"搜索栏"] forState:UIControlStateNormal];
+    self.searchBar.delegate = self;
+//    [view addSubview:self.searchBar];
+//    return view;
     return self.searchBar;
-//    return searchController.searchBar;
 }
 
 - (void)chooseCityAction:(UIButton *)sender {
     NSLog(@"chooseCity");
+}
+
+#pragma mark - 搜索代理
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self endEditing:YES];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES];
 }
 
 //以下方法只是为了防止报出警告，具体实现在其他视图控制器中

@@ -51,7 +51,9 @@
 
 #pragma mark 跳转到登录界面
 - (void)pushToLoginVC {
-    [self.navigationController pushViewController:[[YWLoginViewController alloc] init] animated:YES];
+    UIViewController *loginVC = [[YWLoginViewController alloc] init];
+    UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:navigaVC animated:YES completion:nil];
 }
 
 #pragma mark - 创建视图

@@ -10,8 +10,20 @@
 
 @implementation YWPublic
 
+//POST
++ (void)afPOST:(NSString *)URLString parameters:(id)parameters success:(void (^)(NSURLSessionDataTask *, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError *))failure {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(task,responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task,error);
+    }];
+}
+
 //创建Button
-+ (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString *)title imageName:(NSString *)imageName {
++ (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString * _Nullable)title imageName:(NSString * _Nullable)imageName {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = frame;
     [button setTitle:title forState:UIControlStateNormal];
@@ -39,6 +51,17 @@
     imageView.layer.cornerRadius = imageView.frame.size.height / 2;
     imageView.clipsToBounds = YES;
     return imageView;
+}
+
++ (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure {
+    UITextField *textField = [[UITextField alloc] initWithFrame:frame];
+    textField.placeholder = placeholder;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    textField.secureTextEntry = isSecure;
+    textField.backgroundColor = [UIColor whiteColor];
+    textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    return textField;
 }
 
 @end

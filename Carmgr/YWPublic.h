@@ -22,13 +22,25 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AFNetworking.h>
+#import "Interface.h"
 
 @interface YWPublic : NSObject
 
-+ (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString *)title imageName:(NSString *)imageName;
+NS_ASSUME_NONNULL_BEGIN
++ (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString * _Nullable)title imageName:(NSString * _Nullable)imageName;
 
 + (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
 
 + (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName;
+
++ (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;
+
+
++ (void)afPOST:(NSString *)URLString
+    parameters:(nullable id)parameters
+       success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
+       failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure;
+NS_ASSUME_NONNULL_END
 
 @end

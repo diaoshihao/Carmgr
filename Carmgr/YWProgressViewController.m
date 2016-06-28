@@ -23,7 +23,7 @@
 
 #pragma mark 扫描结果输出代理
 - (void)reportScanResult:(NSString *)result {
-    
+    NSLog(@"%@",result);
 }
 
 #pragma mark 跳转到个人中心
