@@ -24,14 +24,17 @@
 		847776791D13CA7700DE8213 /* u10.png in Resources */ = {isa = PBXBuildFile; fileRef = 847776781D13CA7700DE8213 /* u10.png */; };
 		8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D7271D1BE11E008850D8 /* YWLoginViewController.m */; };
 		8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */; };
+		84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE1231D24B86F00D5FAD5 /* HomeView.m */; };
+		84BEE12A1D24EAD600D5FAD5 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE1291D24EAD600D5FAD5 /* HomeTableViewCell.m */; };
+		84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */; };
 		84F271951D20C86200498441 /* RegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271941D20C86200498441 /* RegistView.m */; };
 		84F271981D22159E00498441 /* Interface.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271971D22159E00498441 /* Interface.m */; };
+		84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F2719A1D225F0800498441 /* CityChooseViewController.m */; };
 		84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A81D190A8600597BFD /* YWPublic.m */; };
 		84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AB1D190AA600597BFD /* YWUserViewController.m */; };
 		84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */; };
 		84F3C2B51D193AB300597BFD /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2B21D193AB300597BFD /* city.plist */; };
 		84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */; };
-		84F3C2C91D1A86E800597BFD /* WJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */; };
 		84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2D11D1B719E00597BFD /* Assets.xcassets */; };
 		84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */; };
 /* End PBXBuildFile section */
@@ -87,10 +90,18 @@
 		8487D7271D1BE11E008850D8 /* YWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWLoginViewController.m; sourceTree = "<group>"; };
 		8487D7291D1BE5BE008850D8 /* YWRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWRegistViewController.h; sourceTree = "<group>"; };
 		8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWRegistViewController.m; sourceTree = "<group>"; };
+		84BEE1221D24B86F00D5FAD5 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
+		84BEE1231D24B86F00D5FAD5 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
+		84BEE1281D24EAD600D5FAD5 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		84BEE1291D24EAD600D5FAD5 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		84BEE12C1D24F34500D5FAD5 /* ServiceCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCollectionCell.h; sourceTree = "<group>"; };
+		84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCollectionCell.m; sourceTree = "<group>"; };
 		84F271931D20C86200498441 /* RegistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistView.h; sourceTree = "<group>"; };
 		84F271941D20C86200498441 /* RegistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistView.m; sourceTree = "<group>"; };
 		84F271961D22159E00498441 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		84F271971D22159E00498441 /* Interface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interface.m; sourceTree = "<group>"; };
+		84F271991D225F0800498441 /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseViewController.h; sourceTree = "<group>"; };
+		84F2719A1D225F0800498441 /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseViewController.m; sourceTree = "<group>"; };
 		84F3C2A71D190A8600597BFD /* YWPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWPublic.h; path = Carmgr/YWPublic.h; sourceTree = "<group>"; };
 		84F3C2A81D190A8600597BFD /* YWPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWPublic.m; path = Carmgr/YWPublic.m; sourceTree = "<group>"; };
 		84F3C2AA1D190AA600597BFD /* YWUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWUserViewController.h; path = Carmgr/YWUserViewController.h; sourceTree = "<group>"; };
@@ -100,8 +111,6 @@
 		84F3C2B21D193AB300597BFD /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationAttribute.h; sourceTree = "<group>"; };
 		84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationAttribute.m; sourceTree = "<group>"; };
-		84F3C2C71D1A86E800597BFD /* WJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJDropdownMenu.h; sourceTree = "<group>"; };
-		84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJDropdownMenu.m; sourceTree = "<group>"; };
 		84F3C2D11D1B719E00597BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84F3C2E51D1BC37800597BFD /* UserCenterFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterFunc.h; sourceTree = "<group>"; };
 		84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterFunc.m; sourceTree = "<group>"; };
@@ -291,9 +300,9 @@
 		847776631D12586C00DE8213 /* 进度 */ = {
 			isa = PBXGroup;
 			children = (
+				84F3C29A1D178F5300597BFD /* Model */,
 				84F3C2D61D1B940300597BFD /* Views */,
 				84F3C2A61D17D7DE00597BFD /* viewControllers */,
-				84F3C29A1D178F5300597BFD /* Model */,
 			);
 			name = "进度";
 			sourceTree = "<group>";
@@ -305,6 +314,15 @@
 			);
 			name = Images;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		84BEE12B1D24F28F00D5FAD5 /* 业务板块 */ = {
+			isa = PBXGroup;
+			children = (
+				84BEE12C1D24F34500D5FAD5 /* ServiceCollectionCell.h */,
+				84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */,
+			);
+			name = "业务板块";
 			sourceTree = "<group>";
 		};
 		84F3C2921D17795C00597BFD /* 用户中心 */ = {
@@ -402,8 +420,8 @@
 		84F3C2B11D193A9100597BFD /* 城市选择 */ = {
 			isa = PBXGroup;
 			children = (
-				84F3C2C71D1A86E800597BFD /* WJDropdownMenu.h */,
-				84F3C2C81D1A86E800597BFD /* WJDropdownMenu.m */,
+				84F271991D225F0800498441 /* CityChooseViewController.h */,
+				84F2719A1D225F0800498441 /* CityChooseViewController.m */,
 				84F3C2B21D193AB300597BFD /* city.plist */,
 			);
 			name = "城市选择";
@@ -490,6 +508,11 @@
 		84F3C2DB1D1B943A00597BFD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84BEE1221D24B86F00D5FAD5 /* HomeView.h */,
+				84BEE1231D24B86F00D5FAD5 /* HomeView.m */,
+				84BEE1281D24EAD600D5FAD5 /* HomeTableViewCell.h */,
+				84BEE1291D24EAD600D5FAD5 /* HomeTableViewCell.m */,
+				84BEE12B1D24F28F00D5FAD5 /* 业务板块 */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -712,7 +735,9 @@
 			files = (
 				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
 				8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */,
+				84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
+				84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */,
 				84F271951D20C86200498441 /* RegistView.m in Sources */,
 				847776311D124BF100DE8213 /* ViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
@@ -721,9 +746,10 @@
 				84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */,
 				8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
-				84F3C2C91D1A86E800597BFD /* WJDropdownMenu.m in Sources */,
 				840A99671D1D1F1D00C76E25 /* LoginView.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
+				84BEE12A1D24EAD600D5FAD5 /* HomeTableViewCell.m in Sources */,
+				84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */,
 				84F271981D22159E00498441 /* Interface.m in Sources */,
 				84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */,
 				84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */,

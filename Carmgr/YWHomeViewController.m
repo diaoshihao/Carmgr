@@ -9,23 +9,19 @@
 #import "YWHomeViewController.h"
 #import "YWUserViewController.h"
 #import "YWPublic.h"
-#import "ScanImageViewController.h"
-#import <SDCycleScrollView.h>
+#import "NavigationAttribute.h"
+#import "HomeTableViewCell.h"
+#import "HomeView.h"
 
-@interface YWHomeViewController () <SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface YWHomeViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) HomeView *home;
+
+@property (nonatomic, strong) NSMutableArray *heightArr;
 
 @end
 
 @implementation YWHomeViewController
-{
-    CGFloat width;          //轮播图宽度
-    CGFloat height;         //轮播图高度
-}
-
-#pragma mark 跳转到扫描二维码
-- (void)pushToScanImageVC {
-    [self presentViewController:[[ScanImageViewController alloc] init] animated:YES completion:nil];
-}
 
 #pragma mark 跳转到个人中心
 - (void)pushToUser:(UIButton *)sender {
@@ -35,30 +31,12 @@
 
 #pragma mark 选择城市
 - (void)chooseCityAction:(UIButton *)sender {
-    
-    NSLog(@"%lu",sender.tag);
-}
-
-#pragma mark 轮播图
-- (void)setCycleScrollView {
-    
-    
-    NSArray *imageNameGroup = @[@"u10",@"u10"];         //图片名数组
-    
-    /**
-     *  
-     */
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 64, width, height) delegate:self placeholderImage:[UIImage imageNamed:@"u10"]];
-    cycleScrollView.imageURLStringsGroup = imageNameGroup;
-    cycleScrollView.autoScrollTimeInterval = 3.5;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.view addSubview:cycleScrollView];
-    
-}
-
-#pragma mark 业务板块
-- (void)setCollectionView {
-    
+    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
+    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
+    }];
+    [self.navigationController pushViewController:cityChooseVC animated:YES];
 }
 
 #pragma mark - 生命周期
@@ -66,15 +44,27 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    width = self.view.bounds.size.width;
-    height = width / 2.5;
+    [self createTableView];
     
-    [self setCycleScrollView];
+}
+
+- (void)initHeights {
+    
+}
+
+- (void)createTableView {
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    [self.view addSubview:tableView];
     tableView.delegate = self;
     tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    
+    [tableView registerClass:[HomeTableViewCell class] forCellReuseIdentifier:[HomeTableViewCell reuseID]];
+    
+    self.home = [[HomeView alloc] init];
+    self.home.imageArr = @[@"圆角矩形1",@"圆角矩形2",@"圆角矩形3",@"圆角矩形4",@"圆角矩形5",@"圆角矩形6",@"圆角矩形7",@"圆角矩形1",@"圆角矩形2",@"圆角矩形3"];
+    self.home.titleArr = @[@"车险",@"上牌",@"车检",@"维修",@"驾考",@"保养",@"车贷",@"租车",@"二手",@"分类"];
+    tableView.tableHeaderView = [self.home createCycleScrollView:@[@"u10",@"u10"]];
     
 }
 
@@ -86,12 +76,27 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] init];
-    }
+    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[HomeTableViewCell reuseID]];
+    
+    [self.home createCollectionViewAtSuperView:cell];
+    
     return cell;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    NSLog(@"touch");
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
+    [cityButton setTitle:city forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -24,6 +24,7 @@
 #import <UIKit/UIKit.h>
 #import <AFNetworking.h>
 #import "Interface.h"
+#import "CityChooseViewController.h"
 
 @interface YWPublic : NSObject
 

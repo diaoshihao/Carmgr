@@ -11,20 +11,11 @@
 #import "ScanImageViewController.h"
 #import "YWPublic.h"
 
-#import "WJDropdownMenu.h"
-
-@interface YWStoreViewController () <WJMenuDelegate>
-
-@property (nonatomic,weak)WJDropdownMenu *menu;
+@interface YWStoreViewController ()
 
 @end
 
 @implementation YWStoreViewController
-
-#pragma mark 跳转到扫描二维码
-- (void)pushToScanImageVC {
-    [self presentViewController:[[ScanImageViewController alloc] init] animated:YES completion:nil];
-}
 
 #pragma mark 跳转到个人中心(tabBar实例调用)
 - (void)pushToUser:(UIButton *)sender {
@@ -33,34 +24,25 @@
 }
 
 #pragma mark 选择城市
-- (void)chooseCityAction {
-    NSLog(@"home");
+- (void)chooseCityAction:(UIButton *)sender {
+    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
+    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
+    }];
+    [self.navigationController pushViewController:cityChooseVC animated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    WJDropdownMenu *menu = [[WJDropdownMenu alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 40)];
-    menu.backgroundColor = [UIColor whiteColor];
-    menu.delegate = self;         //  设置代理
-    [self.view addSubview:menu];
-    self.menu = menu;
-    
-    [self createAllMenuData];
-    
+        
 }
 
-- (void)createAllMenuData{
-    NSArray *threeMenuTitleArray =  @[@"area"];
-    
-    NSArray *firstArrTwo = [NSArray arrayWithObjects:@"province1",@"province2", nil];
-    
-    NSArray *secondArrTwo = @[@[@"city1",@"city2"],@[@"B二级菜单21",@"B二级菜单22"]];
-    
-    NSArray *thirdArrTwo = @[@[@"B三级菜单11-1",@"B三级菜单11-2",@"B三级菜单11-3"],@[@"B三级菜单12-1",@"B三级菜单12-2"],@[@"B三级菜单21-1",@"B三级菜单21-2"],@[@"11111"]];
-    NSArray *secondMenu = [NSArray arrayWithObjects:firstArrTwo,secondArrTwo,thirdArrTwo, nil];
-    [self.menu createOneMenuTitleArray:threeMenuTitleArray FirstArray:secondMenu];
+- (void)viewWillAppear:(BOOL)animated {
+    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
+    [cityButton setTitle:city forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

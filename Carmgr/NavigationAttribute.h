@@ -11,6 +11,8 @@
 
 @interface NavigationAttribute : UIView
 
+@property (nonatomic, strong) UIButton *cityButton;
+
 - (UINavigationController *)createVCWithClass:(NSString *)className
                                         Title:(NSString *)title
                                         Image:(NSString *)imageName

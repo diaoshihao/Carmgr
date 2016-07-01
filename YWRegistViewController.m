@@ -63,8 +63,8 @@
 
 #pragma mark
 - (void)getVerifyCode {
-    if (!(self.phoneNum.text.length == 11)) {
-        self.mobile = self.phoneNum.text;
+    self.mobile = self.phoneNum.text;
+    if (!(self.mobile.length == 11)) {
         [self removeAllSubviews];
         [self createInputVerifyCodeView];
     } else {
@@ -72,15 +72,22 @@
     }
 }
 
+- (void)regetVerifyCode {
+    NSLog(@"重新获取验证码");
+}
+
 #pragma mark - 输入验证码
 - (void)createInputVerifyCodeView {
     UIView *view = [self.registView createSelectViewAtSuperView:self.view registStep:RegistStepInputVerifyCode];
+    
     UILabel *label = [self.registView createInfoLabelAtSuperView:self.view phoneNum:self.phoneNum.text broview:view];
     self.verifyCode = [self.registView createTextFieldAtSuperView:self.view broView:label placeholder:@"请输入短信中的验证码"];
     self.verifyCode.keyboardType = UIKeyboardTypeNumberPad;
     self.verifyCode.returnKeyType = UIReturnKeyNext;
     [self.registView createButtonAtSuperView:self.view Constraints:self.verifyCode title:@"提交验证码" target:self action:@selector(commitVerifyCode)];
     
+    //重新获取验证码
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.registView regetVerifyCode:self action:@selector(regetVerifyCode)]];
 }
 
 #pragma mark 
@@ -90,6 +97,8 @@
 }
 
 - (void)createSetSecureView {
+    self.navigationItem.rightBarButtonItem = nil;
+    
     UIView *view = [self.registView createSelectViewAtSuperView:self.view registStep:RegistStepSetSecure];
     self.passwdField = [self.registView createTextFieldAtSuperView:self.view broView:view placeholder:@"请输入密码（长度在6-32个字符之间）"];
     self.repeatPasswd = [self.registView createTextFieldAtSuperView:self.view broView:self.passwdField placeholder:@"请再次输入密码"];

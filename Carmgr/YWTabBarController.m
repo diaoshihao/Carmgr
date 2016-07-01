@@ -8,8 +8,9 @@
 
 #import "YWTabBarController.h"
 #import "NavigationAttribute.h"
+#import "ScanImageViewController.h"
 
-@interface YWTabBarController ()
+@interface YWTabBarController () <ScanImageView>
 
 @end
 
@@ -19,6 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self createViews];
+
+}
+
+- (void)createViews {
     
     NSArray *arrayTitle = @[@"首页",@"商家",@"进度",@"呼叫易宝"];
     NSArray *arrayImage = @[@"首页",@"商家",@"进度",@"呼叫易宝"];
@@ -38,7 +45,20 @@
     }
     
     self.viewControllers = controllers;
+}
 
+#pragma mark 跳转到扫描二维码
+- (void)pushToScanImageVC {
+    /**
+    ScanImageViewController *scanImageVC = [[ScanImageViewController alloc] init];
+    scanImageVC.delegate = self;
+    [self presentViewController:scanImageVC animated:YES completion:nil];
+     */
+}
+
+#pragma mark 扫描结果输出代理
+- (void)reportScanResult:(NSString *)result {
+    
 }
 
 - (void)didReceiveMemoryWarning {

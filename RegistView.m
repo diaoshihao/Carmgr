@@ -192,6 +192,41 @@
     
 }
 
+- (UIView *)regetVerifyCode:(UIViewController *)target action:(SEL)action {
+    UIFont *font = [UIFont systemFontOfSize:15];
+    
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
+    
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.backgroundColor = [UIColor grayColor];
+    imageView.image = [UIImage imageNamed:@"刷新"];
+    [customView addSubview:imageView];
+    
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"重新获取" imageName:nil];
+    [button setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
+    button.titleLabel.font = font;
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    [customView addSubview:button];
+    
+    CGSize size = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
+    
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(size.height);
+        make.height.mas_equalTo(size.height);
+        make.left.mas_equalTo(customView).with.offset(0);
+        make.centerY.mas_equalTo(customView);
+    }];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(imageView.mas_right).with.offset(10);
+        make.centerY.mas_equalTo(customView);
+    }];
+    
+    return customView;
+    
+}
+
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.

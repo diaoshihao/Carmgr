@@ -9,22 +9,13 @@
 #import "YWProgressViewController.h"
 #import "YWUserViewController.h"
 #import "ScanImageViewController.h"
+#import "YWPublic.h"
 
-@interface YWProgressViewController () <ScanImageView>
+@interface YWProgressViewController ()
 
 @end
 
 @implementation YWProgressViewController
-
-#pragma mark 跳转到扫描二维码
-- (void)pushToScanImageVC {
-    [self presentViewController:[[ScanImageViewController alloc] init] animated:YES completion:nil];
-}
-
-#pragma mark 扫描结果输出代理
-- (void)reportScanResult:(NSString *)result {
-    NSLog(@"%@",result);
-}
 
 #pragma mark 跳转到个人中心
 - (void)pushToUser:(UIButton *)sender {
@@ -33,13 +24,24 @@
 }
 
 #pragma mark 选择城市
-- (void)chooseCityAction {
-    NSLog(@"home");
+- (void)chooseCityAction:(UIButton *)sender {
+    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
+    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
+    }];
+    [self.navigationController pushViewController:cityChooseVC animated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
+    [cityButton setTitle:city forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

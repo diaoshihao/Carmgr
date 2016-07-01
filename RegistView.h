@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, RegistStep) {
 
 - (void)createAgreementViewAtSuperView:(UIView *)superView broview:(UIView *)broview;
 
+- (UIView *)regetVerifyCode:(UIViewController *)target action:(SEL)action;
+
 @end
