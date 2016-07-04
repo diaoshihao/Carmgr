@@ -22,10 +22,15 @@
 		847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766F1D1258E500DE8213 /* YWProgressViewController.m */; };
 		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
 		847776791D13CA7700DE8213 /* u10.png in Resources */ = {isa = PBXBuildFile; fileRef = 847776781D13CA7700DE8213 /* u10.png */; };
+		847D09CD1D2A0E8400EBFF37 /* StoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09CC1D2A0E8400EBFF37 /* StoreView.m */; };
 		8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D7271D1BE11E008850D8 /* YWLoginViewController.m */; };
 		8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */; };
+		84A929FA1D26184A001DD20F /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A929F91D26184A001DD20F /* 方案1.png */; };
+		84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A929FD1D2618E1001DD20F /* DevelopViewController.m */; };
+		84A92A011D264F17001DD20F /* ServiceCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A001D264F17001DD20F /* ServiceCollection.m */; };
+		84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A071D266C26001DD20F /* UsedCarCollectionCell.m */; };
+		84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A0B1D2681FF001DD20F /* HotTableViewCell.m */; };
 		84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE1231D24B86F00D5FAD5 /* HomeView.m */; };
-		84BEE12A1D24EAD600D5FAD5 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE1291D24EAD600D5FAD5 /* HomeTableViewCell.m */; };
 		84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */; };
 		84F271951D20C86200498441 /* RegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271941D20C86200498441 /* RegistView.m */; };
 		84F271981D22159E00498441 /* Interface.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271971D22159E00498441 /* Interface.m */; };
@@ -86,14 +91,23 @@
 		847776711D12591C00DE8213 /* YWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWTabBarController.h; sourceTree = "<group>"; };
 		847776721D12591C00DE8213 /* YWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTabBarController.m; sourceTree = "<group>"; };
 		847776781D13CA7700DE8213 /* u10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = u10.png; path = Carmgr/u10.png; sourceTree = "<group>"; };
+		847D09CB1D2A0E8400EBFF37 /* StoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreView.h; sourceTree = "<group>"; };
+		847D09CC1D2A0E8400EBFF37 /* StoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreView.m; sourceTree = "<group>"; };
 		8487D7261D1BE11E008850D8 /* YWLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWLoginViewController.h; sourceTree = "<group>"; };
 		8487D7271D1BE11E008850D8 /* YWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWLoginViewController.m; sourceTree = "<group>"; };
 		8487D7291D1BE5BE008850D8 /* YWRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWRegistViewController.h; sourceTree = "<group>"; };
 		8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWRegistViewController.m; sourceTree = "<group>"; };
+		84A929F91D26184A001DD20F /* 方案1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "方案1.png"; sourceTree = "<group>"; };
+		84A929FC1D2618E1001DD20F /* DevelopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevelopViewController.h; sourceTree = "<group>"; };
+		84A929FD1D2618E1001DD20F /* DevelopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevelopViewController.m; sourceTree = "<group>"; };
+		84A929FF1D264F17001DD20F /* ServiceCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCollection.h; sourceTree = "<group>"; };
+		84A92A001D264F17001DD20F /* ServiceCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCollection.m; sourceTree = "<group>"; };
+		84A92A061D266C26001DD20F /* UsedCarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedCarCollectionCell.h; sourceTree = "<group>"; };
+		84A92A071D266C26001DD20F /* UsedCarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedCarCollectionCell.m; sourceTree = "<group>"; };
+		84A92A0A1D2681FF001DD20F /* HotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTableViewCell.h; sourceTree = "<group>"; };
+		84A92A0B1D2681FF001DD20F /* HotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTableViewCell.m; sourceTree = "<group>"; };
 		84BEE1221D24B86F00D5FAD5 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		84BEE1231D24B86F00D5FAD5 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
-		84BEE1281D24EAD600D5FAD5 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
-		84BEE1291D24EAD600D5FAD5 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		84BEE12C1D24F34500D5FAD5 /* ServiceCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCollectionCell.h; sourceTree = "<group>"; };
 		84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCollectionCell.m; sourceTree = "<group>"; };
 		84F271931D20C86200498441 /* RegistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistView.h; sourceTree = "<group>"; };
@@ -178,6 +192,7 @@
 		8477761D1D124BF100DE8213 = {
 			isa = PBXGroup;
 			children = (
+				84A929FB1D2618A0001DD20F /* 待开发 */,
 				84F3C2B01D193A8200597BFD /* 第三方 */,
 				847776281D124BF100DE8213 /* Carmgr */,
 				847776421D124BF100DE8213 /* CarmgrTests */,
@@ -311,14 +326,44 @@
 			isa = PBXGroup;
 			children = (
 				847776781D13CA7700DE8213 /* u10.png */,
+				84A929F91D26184A001DD20F /* 方案1.png */,
 			);
 			name = Images;
 			path = ..;
 			sourceTree = "<group>";
 		};
+		84A929FB1D2618A0001DD20F /* 待开发 */ = {
+			isa = PBXGroup;
+			children = (
+				84A929FC1D2618E1001DD20F /* DevelopViewController.h */,
+				84A929FD1D2618E1001DD20F /* DevelopViewController.m */,
+			);
+			name = "待开发";
+			sourceTree = "<group>";
+		};
+		84A92A021D265F4A001DD20F /* 二手推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				84A92A061D266C26001DD20F /* UsedCarCollectionCell.h */,
+				84A92A071D266C26001DD20F /* UsedCarCollectionCell.m */,
+			);
+			name = "二手推荐";
+			sourceTree = "<group>";
+		};
+		84A92A091D268142001DD20F /* 热门推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				84A92A0A1D2681FF001DD20F /* HotTableViewCell.h */,
+				84A92A0B1D2681FF001DD20F /* HotTableViewCell.m */,
+			);
+			name = "热门推荐";
+			sourceTree = "<group>";
+		};
 		84BEE12B1D24F28F00D5FAD5 /* 业务板块 */ = {
 			isa = PBXGroup;
 			children = (
+				84A929FF1D264F17001DD20F /* ServiceCollection.h */,
+				84A92A001D264F17001DD20F /* ServiceCollection.m */,
 				84BEE12C1D24F34500D5FAD5 /* ServiceCollectionCell.h */,
 				84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */,
 			);
@@ -494,6 +539,8 @@
 		84F3C2D91D1B942B00597BFD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				847D09CB1D2A0E8400EBFF37 /* StoreView.h */,
+				847D09CC1D2A0E8400EBFF37 /* StoreView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -510,8 +557,8 @@
 			children = (
 				84BEE1221D24B86F00D5FAD5 /* HomeView.h */,
 				84BEE1231D24B86F00D5FAD5 /* HomeView.m */,
-				84BEE1281D24EAD600D5FAD5 /* HomeTableViewCell.h */,
-				84BEE1291D24EAD600D5FAD5 /* HomeTableViewCell.m */,
+				84A92A091D268142001DD20F /* 热门推荐 */,
+				84A92A021D265F4A001DD20F /* 二手推荐 */,
 				84BEE12B1D24F28F00D5FAD5 /* 业务板块 */,
 			);
 			name = Views;
@@ -656,6 +703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A929FA1D26184A001DD20F /* 方案1.png in Resources */,
 				847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */,
 				847776791D13CA7700DE8213 /* u10.png in Resources */,
 				84F3C2B51D193AB300597BFD /* city.plist in Resources */,
@@ -733,28 +781,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */,
 				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
 				8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */,
 				84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
 				84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */,
+				847D09CD1D2A0E8400EBFF37 /* StoreView.m in Sources */,
 				84F271951D20C86200498441 /* RegistView.m in Sources */,
 				847776311D124BF100DE8213 /* ViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
+				84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
+				84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */,
 				84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */,
 				8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				840A99671D1D1F1D00C76E25 /* LoginView.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
-				84BEE12A1D24EAD600D5FAD5 /* HomeTableViewCell.m in Sources */,
 				84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */,
 				84F271981D22159E00498441 /* Interface.m in Sources */,
 				84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */,
 				84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */,
 				8477762B1D124BF100DE8213 /* main.m in Sources */,
 				847776731D12591C00DE8213 /* YWTabBarController.m in Sources */,
+				84A92A011D264F17001DD20F /* ServiceCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

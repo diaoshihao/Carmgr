@@ -48,7 +48,7 @@
 - (void)navigationAttribute:(UIViewController *)viewController {
     
     //标题
-    viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 0, 0) placeholder:@"输入商家、品类、商圈"];
+    viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 0, 0) placeholder:@"输入想要的商品或服务"];
     
     //左item
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"city"]) {
@@ -129,29 +129,17 @@
 #pragma mark 创建搜索栏
 - (UISearchBar *)createSearchBarWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
     
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-//    view.backgroundColor = [UIColor clearColor];
-    
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
     searchBar.placeholder = placeholder;
     [searchBar setImage:[UIImage imageNamed:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"搜索栏"] forState:UIControlStateNormal];
     searchBar.delegate = self;
-//    [view addSubview:self.searchBar];
-//    return view;
     return searchBar;
 }
 
 
 #pragma mark - 搜索代理
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self endEditing:YES];
-}
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    
-    return YES;
-}
 
 //以下方法只是为了防止报出警告，具体实现在其他视图控制器中
 - (void)pushToUser:(UIButton *)sender {

@@ -34,10 +34,11 @@
     
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:self.titleLabel];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.imageView.mas_bottom).with.offset(0);
+        make.top.mas_equalTo(weakSelf.imageView.mas_bottom).with.offset(5);
         make.left.mas_equalTo(weakSelf).with.offset(0);
         make.right.mas_equalTo(weakSelf.mas_right).with.offset(0);
     }];

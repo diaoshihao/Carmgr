@@ -10,8 +10,11 @@
 #import "YWUserViewController.h"
 #import "ScanImageViewController.h"
 #import "YWPublic.h"
+#import "StoreView.h"
 
 @interface YWStoreViewController ()
+
+@property (nonatomic, strong) StoreView *storeView;
 
 @end
 
@@ -36,7 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-        
+    self.storeView = [[StoreView alloc] init];
+    [self.storeView createHeadSortViewAtSuperView:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
