@@ -42,7 +42,7 @@
     
 }
 
-//移除所有子视图
+//进入下一步前移除所有子视图
 - (void)removeAllSubviews {
     for (UIView *subview in self.view.subviews) {
         [subview removeFromSuperview];
@@ -61,15 +61,46 @@
     
 }
 
-#pragma mark
+#pragma mark 获取验证码
 - (void)getVerifyCode {
-    self.mobile = self.phoneNum.text;
-    if (!(self.mobile.length == 11)) {
+    BOOL correct = [RegularTools validateMobile:self.phoneNum.text];
+    if (correct) {
+        
+        //网络请求获取验证码   参数：username=%@&type=%@&version=1.0
+        //type == 0：注册；1：登录；2:找回密码
+        
+        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.phoneNum.text,0] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"网络请求成功%@",dataDict);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error:%@",error);
+        }];
+
+        
+        
+//        [YWPublic afPOST:kVERIFYCODE parameters:[NSString stringWithFormat:@"username=%@&type=%d&version=1.0",self.phoneNum.text,0] success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//            NSLog(@"%@",responseObject);
+//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            NSLog(@"error:%@",error);
+//        }];
+        
+        self.mobile = self.phoneNum.text;
         [self removeAllSubviews];
         [self createInputVerifyCodeView];
     } else {
-        NSLog(@"判断语句中添加手机号正则表达式");
+        UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"提示" message:@"请输入正确的手机号"];
+        [self presentViewController:alertVC animated:YES completion:^{
+            [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+        }];
     }
+}
+
+#pragma mark 定时器
+- (void)timerFireMethod:(NSTimer *)timer {
+    UIAlertController *alertVC = [timer userInfo];
+    [alertVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)regetVerifyCode {
@@ -96,6 +127,7 @@
     [self createSetSecureView];
 }
 
+#pragma mark 设置密码
 - (void)createSetSecureView {
     self.navigationItem.rightBarButtonItem = nil;
     
@@ -110,6 +142,7 @@
     self.repeatPasswd.delegate = self;
 }
 
+#pragma mark 注册
 - (void)regist {
     if (self.passwdField.text.length <= 32 && self.passwdField.text.length >= 6 && [self.passwdField.text isEqualToString:self.repeatPasswd.text]) {
         

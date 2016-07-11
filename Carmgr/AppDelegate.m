@@ -19,6 +19,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //程序将要退出时退出登录，设置[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    
+    //进入程序,不在登录状态
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    
     self.window.rootViewController = [[YWTabBarController alloc] init];
     return YES;
 }
@@ -43,6 +48,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
 }
 
 @end

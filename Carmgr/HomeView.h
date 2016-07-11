@@ -32,7 +32,7 @@
 
 - (UIView *)createUsedCarCollectionView;
 
-- (UIView *)createTableViewAtSuperView:(UIView *)superView broview:(UIView *)broview;
+- (UIView *)createTableViewAtSuperView:(UIView *)superView;
 
 - (void)createHeadViewWithTitle:(NSString *)title superView:(UIView *)superView;
 

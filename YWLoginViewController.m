@@ -64,10 +64,12 @@
 - (void)createTextField {
     //用户名
     self.userField = [self.loginView createTextFieldAtSuperView:self.view Constraints:nil isUserField:YES];
+    self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     self.userField.delegate = self;
     
     //密码
     self.passwdField = [self.loginView createTextFieldAtSuperView:self.view Constraints:self.userField isUserField:NO];
+    self.passwdField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     self.passwdField.delegate = self;
     
     //登录
@@ -107,14 +109,37 @@
 #pragma mark 登录
 - (void)login {
     [self.view endEditing:YES];
-    NSLog(@"登录中...");
-//  username=miki3&password=f3e0302358296a792186b27d75c1c74a&version=1.0
-    NSString *paramStr = [NSString stringWithFormat:@"username=%@&password=%@&version=1.0",self.userField.text,self.passwdField.text];
-    [YWPublic afPOST:kLOGIN parameters:paramStr success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
+    //密码加密
+    NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text/*[YWPublic encryptMD5String:self.passwdField.text]*/];
+    [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSLog(@"网络请求成功：%@",dataDict);
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            //登录成功保存数据
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
+            [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];
+            
+            UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"" message:@"登录成功"];
+            [self presentViewController:alertVC animated:YES completion:^{
+                [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+            }];
+        }
+        
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        NSLog(@"网络请求失败%@",error);
     }];
+}
+
+#pragma mark 定时器
+- (void)timerFireMethod:(NSTimer *)timer {
+    UIAlertController *alertVC = [timer userInfo];
+    [alertVC dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark 找回密码
@@ -138,13 +163,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

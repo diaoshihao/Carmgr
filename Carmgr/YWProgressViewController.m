@@ -10,8 +10,11 @@
 #import "YWUserViewController.h"
 #import "ScanImageViewController.h"
 #import "YWPublic.h"
+#import "ProgressView.h"
 
 @interface YWProgressViewController ()
+
+@property (nonatomic, strong) ProgressView *progressView;
 
 @end
 
@@ -36,6 +39,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
+    
+    self.progressView = [[ProgressView alloc] init];
+    self.progressView.actionTarget = self;
+    [self.progressView createTableView:self.view];
+
+}
+
+- (void)buttonClick:(UIButton *)sender {
+    
+    if (sender.isSelected) {
+        NSLog(@"selected");
+    } else {
+        for (NSInteger i = 0; i <= 6; i++) {
+            UIButton *button = (UIButton *)[self.view viewWithTag:1000+i];
+            button.selected = NO;
+        }
+        sender.selected = YES;
+    }
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

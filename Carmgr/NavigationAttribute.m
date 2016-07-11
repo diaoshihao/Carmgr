@@ -28,7 +28,6 @@
                                         Image:(NSString *)imageName
                                   selectImage:(NSString *)selectImage {
     UIViewController *viewController = [[NSClassFromString(className) alloc] init];
-    viewController.view.backgroundColor = [UIColor whiteColor];
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationVC.navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     navigationVC.navigationBar.tintColor = [UIColor whiteColor];
@@ -48,14 +47,14 @@
 - (void)navigationAttribute:(UIViewController *)viewController {
     
     //标题
-    viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 0, 0) placeholder:@"输入想要的商品或服务"];
+    viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 255, 44) placeholder:@"输入想要的商品或服务"];
     
     //左item
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"city"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"广州" forKey:@"city"];
     }
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
-    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self chooseCityButtonWithTitle:city imageName:@"下拉" target:viewController]];
+    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self chooseCityButtonWithTitle:city imageName:@"定位" target:viewController]];
     
     //右item
     viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self scanImageAndUserWithTitle:nil userImage:@"个人中心" scanImage:@"二维码" target:viewController]];
@@ -100,7 +99,7 @@
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:title imageName:nil];
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     button.titleLabel.font = [UIFont systemFontOfSize:15];
-    button.tag = 10;
+
     //添加事件
     [button addTarget:viewController action:@selector(chooseCityAction:) forControlEvents:UIControlEventTouchUpInside];
     [leftview addSubview:button];
@@ -129,10 +128,15 @@
 #pragma mark 创建搜索栏
 - (UISearchBar *)createSearchBarWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+//    UIView *searchView = [[UIView alloc] initWithFrame:frame];
+//    searchView.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
+    
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:frame];
     searchBar.placeholder = placeholder;
     [searchBar setImage:[UIImage imageNamed:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"搜索栏"] forState:UIControlStateNormal];
+    [searchBar setSearchFieldBackgroundImage:[YWPublic imageNameWithOriginalRender:@"搜索栏"] forState:UIControlStateNormal];
+    
     searchBar.delegate = self;
     return searchBar;
 }

@@ -10,6 +10,7 @@
 #import "YWPublic.h"
 #import "UserCenterFunc.h"
 #import "YWLoginViewController.h"
+#import "CarVerifyViewController.h"
 
 #define MAS_SHORTHAND
 // 只要添加了这个宏，equalTo就等价于mas_equalTo
@@ -51,29 +52,22 @@
 
 #pragma mark 跳转到登录界面
 - (void)pushToLoginVC {
-    UIViewController *loginVC = [[YWLoginViewController alloc] init];
-    UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    [self presentViewController:navigaVC animated:YES completion:nil];
+    
+    //如果没有登录
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        UIViewController *loginVC = [[YWLoginViewController alloc] init];
+        UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:navigaVC animated:YES completion:nil];
+    } else {
+        NSLog(@"已登录%@",[YWPublic encryptMD5String:@"123456123456"]);
+    }
+    
 }
 
-#pragma mark - 创建视图
-- (void)createAllViews {
-    self.createView = [[UserCenterFunc alloc] init];
-    
-    //背景
-    self.backView = [self.createView createBackgroundViewAtView:self.view height:height];
-    
-    //头像
-    self.userImageView = [self.createView createUserImageView:CGSizeMake(imageHeight, imageHeight) left:imageHeight/4 bottom:-imageHeight/4];
-    
-    //用户名
-    self.userName = [self.createView createUserNameButton:self title:@"登录/注册" imageView:nil left:imageHeight/4];
-    
-    //信息
-    self.messageButton = [self.createView createMessageImage:self image:@"信封" size:CGSizeMake(40, 40) top:imageHeight/4 right:-imageHeight/6];
-    
-    //设置
-    [self.createView createSettingImage:self image:@"设置" size:CGSizeMake(40, 40) right:-imageHeight/6];
+- (void)pushToAddCarInfo {
+    CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:CarVerifyVC];
+    [self presentViewController:navigationVC animated:YES completion:nil];
 }
 
 #pragma mark - 生命周期
@@ -81,15 +75,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    //宽高大小定义
-    width = self.view.bounds.size.width;
-    height = width / 2.5;
-    imageHeight = height / 2;
     
     //实现滑动返回
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     
-    [self createAllViews];
+    self.createView = [[UserCenterFunc alloc] init];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.createView createTableView:self.view];
         
 }
 
@@ -98,12 +91,19 @@
     
     self.navigationController.navigationBarHidden = YES;
     
+    //滑动返回
     self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    //登录成功改变用户名
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        [self.userName setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] forState:UIControlStateNormal];
+    }
     
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    //滑动返回
     [super viewDidDisappear:YES];
     self.navigationController.delegate = nil;
 }

@@ -1,17 +1,17 @@
 //
-//  UserCenterFunc.h
+//  ProgressView.h
 //  Carmgr
 //
-//  Created by admin on 16/6/23.
+//  Created by admin on 16/7/6.
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface UserCenterFunc : NSObject
+@interface ProgressView : UIView <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UIViewController *actionTarget;
+
 
 - (UITableView *)createTableView:(UIView *)superView;
 

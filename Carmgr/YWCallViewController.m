@@ -36,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
     
     UIButton *callButton = [YWPublic createButtonWithFrame:CGRectMake(100, 100, 100, 30) title:@"呼叫易宝" imageName:nil];
     [callButton setBackgroundImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateNormal];

@@ -11,10 +11,12 @@
 #import "ScanImageViewController.h"
 #import "YWPublic.h"
 #import "StoreView.h"
+#import <Masonry.h>
 
-@interface YWStoreViewController ()
+@interface YWStoreViewController () 
 
 @property (nonatomic, strong) StoreView *storeView;
+@property (nonatomic, strong) UIView *sortView;
 
 @end
 
@@ -39,8 +41,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
     self.storeView = [[StoreView alloc] init];
+    [self loadData];
     [self.storeView createHeadSortViewAtSuperView:self.view];
+    [self.storeView createTableView:self.view];
+}
+
+- (void)loadData {
+    self.storeView.dataArr = @[@"数据",@"数据",@"数据",@"数据",@"数据",@"数据"];
+//    [YWPublic afPOST:kREGISTER parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSLog(@"%@",responseObject);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"error:%@",error);
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

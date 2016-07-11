@@ -24,7 +24,7 @@
     __weak typeof(self) weakSelf = self;
     
     self.imageView = [[UIImageView alloc] init];
-    [self addSubview:self.imageView];
+    [self.contentView addSubview:self.imageView];
     
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf).with.offset(0);
@@ -35,7 +35,7 @@
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self addSubview:self.titleLabel];
+    [self.contentView addSubview:self.titleLabel];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.imageView.mas_bottom).with.offset(5);

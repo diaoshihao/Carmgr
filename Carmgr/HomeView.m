@@ -55,7 +55,7 @@
 
 #pragma mark - 活动
 - (UIView *)createActivetyView {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/2)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/3)];
     
     UIButton *leftBtn = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.actImageDict[@"leftImage"]];
     [backView addSubview:leftBtn];
@@ -210,7 +210,7 @@
     return backView;
 }
 
-- (UIView *)createTableViewAtSuperView:(UIView *)superView broview:(UIView *)broview {
+- (UIView *)createTableViewAtSuperView:(UIView *)superView {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.hotImageArr.count * 44 + 30)];
     
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 30)];
@@ -316,6 +316,12 @@
     HotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[HotTableViewCell getReuseID]];
     cell.hotImageView.image = [UIImage imageNamed:self.hotImageArr[indexPath.row]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DevelopViewController *developVC = [[DevelopViewController alloc] init];
+    [self.VC presentViewController:developVC animated:YES completion:nil];
 }
 
 

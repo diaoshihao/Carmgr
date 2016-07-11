@@ -25,10 +25,15 @@
 #import <AFNetworking.h>
 #import "Interface.h"
 #import "CityChooseViewController.h"
+#import "NSString+MD5.h"//MD5加密
+#import "RegularTools.h"//正则表达式
 
 @interface YWPublic : NSObject
 
 NS_ASSUME_NONNULL_BEGIN
+
++ (NSString *)encryptMD5String:(NSString *)string;
+
 + (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString * _Nullable)title imageName:(NSString * _Nullable)imageName;
 
 + (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
@@ -36,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName;
 
 + (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;
+
++ (UIAlertController *)showAlertViewAt:(UIViewController *)VC title:(NSString *)title message:(NSString *)message ;
 
 
 + (void)afPOST:(NSString *)URLString

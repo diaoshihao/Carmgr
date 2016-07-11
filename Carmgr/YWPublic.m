@@ -10,11 +10,19 @@
 
 @implementation YWPublic
 
+#pragma mark - MD5加密
++ (NSString *)encryptMD5String:(NSString *)string{
+    
+    return [string MD5Encryption];
+}
+
 //POST
 + (void)afPOST:(NSString *)URLString parameters:(id)parameters success:(void (^)(NSURLSessionDataTask *, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError *))failure {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/html"];
+    
     [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(task,responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -62,6 +70,11 @@
     textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
     textField.leftViewMode = UITextFieldViewModeAlways;
     return textField;
+}
+
++ (UIAlertController *)showAlertViewAt:(UIViewController *)VC title:(NSString *)title message:(nonnull NSString *)message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    return alertController;
 }
 
 @end
