@@ -155,7 +155,7 @@
     return label;
 }
 
-- (void)createAgreementViewAtSuperView:(UIView *)superView broview:(UIView *)broview {
+- (void)createAgreementViewAtSuperView:(UIView *)superView broview:(UIView *)broview target:(UIViewController *)target action:(SEL)selector {
     UIFont *font = [UIFont systemFontOfSize:15];
     
     UIImageView *imageView = [[UIImageView alloc] init];
@@ -182,6 +182,7 @@
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"《易车易宝平台用户协定》" imageName:nil];
     [button setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
     button.titleLabel.font = font;
+    [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [superView addSubview:button];
     
     [button mas_makeConstraints:^(MASConstraintMaker *make) {

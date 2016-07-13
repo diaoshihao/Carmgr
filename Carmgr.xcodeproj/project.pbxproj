@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6F61C1379FDB08E5BE112202 /* libPods-Carmgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F25A80A03943501A53A01A /* libPods-Carmgr.a */; };
-		840A99671D1D1F1D00C76E25 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A99661D1D1F1D00C76E25 /* LoginView.m */; };
-		840CF3A71D32462F00CEFFDB /* AddCarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 840CF3A61D32462F00CEFFDB /* AddCarCell.m */; };
-		840CF3B71D33440000CEFFDB /* CarVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840CF3B61D33440000CEFFDB /* CarVerifyViewController.m */; };
-		846C9EFE1D3349510006A02D /* AddCarInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C9EFD1D3349510006A02D /* AddCarInfoViewController.m */; };
-		846C9F011D334F150006A02D /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C9F001D334F150006A02D /* AddCarInfoCell.m */; };
-		846C9F041D3366420006A02D /* AddCarInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C9F031D3366420006A02D /* AddCarInfoView.m */; };
 		8477762B1D124BF100DE8213 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762A1D124BF100DE8213 /* main.m */; };
 		8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762D1D124BF100DE8213 /* AppDelegate.m */; };
 		847776311D124BF100DE8213 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776301D124BF100DE8213 /* ViewController.m */; };
@@ -30,20 +24,33 @@
 		847D09CD1D2A0E8400EBFF37 /* StoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09CC1D2A0E8400EBFF37 /* StoreView.m */; };
 		847D09D11D2A3E0B00EBFF37 /* StoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D01D2A3E0B00EBFF37 /* StoreTableViewCell.m */; };
 		847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D31D2B980E00EBFF37 /* NSString+MD5.m */; };
-		847D09D71D2B9DD900EBFF37 /* RegularTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D61D2B9DD900EBFF37 /* RegularTools.m */; };
 		847D09DE1D2D1C7300EBFF37 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09DD1D2D1C7300EBFF37 /* ProgressView.m */; };
 		847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */; };
 		847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E71D2FA82B00EBFF37 /* ProgressModel.m */; };
-		8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D7271D1BE11E008850D8 /* YWLoginViewController.m */; };
-		8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */; };
-		84A929FA1D26184A001DD20F /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A929F91D26184A001DD20F /* 方案1.png */; };
 		84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A929FD1D2618E1001DD20F /* DevelopViewController.m */; };
 		84A92A011D264F17001DD20F /* ServiceCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A001D264F17001DD20F /* ServiceCollection.m */; };
 		84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A071D266C26001DD20F /* UsedCarCollectionCell.m */; };
 		84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A0B1D2681FF001DD20F /* HotTableViewCell.m */; };
+		84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEED31D34EB7400227A15 /* 服务协议.txt */; };
+		84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEDA1D36051C00227A15 /* RegularTools.m */; };
+		84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEEDC1D36053D00227A15 /* 方案1.png */; };
+		84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEDF1D36056200227A15 /* FastLoginViewController.m */; };
+		84BAEEE31D36057700227A15 /* FindPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEE21D36057700227A15 /* FindPasswdViewController.m */; };
+		84BAEEE61D36058E00227A15 /* ResetPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEE51D36058E00227A15 /* ResetPasswdViewController.m */; };
+		84BAEEE91D3605B700227A15 /* YWRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEE81D3605B700227A15 /* YWRegistViewController.m */; };
+		84BAEEEC1D3605C800227A15 /* RegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEEB1D3605C800227A15 /* RegistView.m */; };
+		84BAEEEF1D3605DD00227A15 /* ServiceDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEEE1D3605DD00227A15 /* ServiceDelegateController.m */; };
+		84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEF11D36064B00227A15 /* YWLoginViewController.m */; };
+		84BAEEF51D36067300227A15 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEF41D36067300227A15 /* LoginView.m */; };
+		84BAEEF81D36069100227A15 /* UserCenterFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEF71D36069100227A15 /* UserCenterFunc.m */; };
+		84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */; };
+		84BAEF001D3606C000227A15 /* AddCarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEFD1D3606C000227A15 /* AddCarCell.m */; };
+		84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEFF1D3606C000227A15 /* AddCarInfoCell.m */; };
+		84BAEF041D3606DB00227A15 /* CarVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEF031D3606DB00227A15 /* CarVerifyViewController.m */; };
+		84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEF061D36070A00227A15 /* AddCarInfoViewController.m */; };
+		84BAEF0A1D36071A00227A15 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEF091D36071A00227A15 /* SettingViewController.m */; };
 		84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE1231D24B86F00D5FAD5 /* HomeView.m */; };
 		84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */; };
-		84F271951D20C86200498441 /* RegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271941D20C86200498441 /* RegistView.m */; };
 		84F271981D22159E00498441 /* Interface.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271971D22159E00498441 /* Interface.m */; };
 		84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F2719A1D225F0800498441 /* CityChooseViewController.m */; };
 		84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A81D190A8600597BFD /* YWPublic.m */; };
@@ -52,7 +59,6 @@
 		84F3C2B51D193AB300597BFD /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2B21D193AB300597BFD /* city.plist */; };
 		84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */; };
 		84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2D11D1B719E00597BFD /* Assets.xcassets */; };
-		84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,18 +80,6 @@
 
 /* Begin PBXFileReference section */
 		66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.debug.xcconfig"; sourceTree = "<group>"; };
-		840A99651D1D1F1D00C76E25 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		840A99661D1D1F1D00C76E25 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		840CF3A51D32462F00CEFFDB /* AddCarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarCell.h; sourceTree = "<group>"; };
-		840CF3A61D32462F00CEFFDB /* AddCarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarCell.m; sourceTree = "<group>"; };
-		840CF3B51D33440000CEFFDB /* CarVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarVerifyViewController.h; sourceTree = "<group>"; };
-		840CF3B61D33440000CEFFDB /* CarVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarVerifyViewController.m; sourceTree = "<group>"; };
-		846C9EFC1D3349510006A02D /* AddCarInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoViewController.h; sourceTree = "<group>"; };
-		846C9EFD1D3349510006A02D /* AddCarInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoViewController.m; sourceTree = "<group>"; };
-		846C9EFF1D334F150006A02D /* AddCarInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoCell.h; sourceTree = "<group>"; };
-		846C9F001D334F150006A02D /* AddCarInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoCell.m; sourceTree = "<group>"; };
-		846C9F021D3366420006A02D /* AddCarInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCarInfoView.h; sourceTree = "<group>"; };
-		846C9F031D3366420006A02D /* AddCarInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCarInfoView.m; sourceTree = "<group>"; };
 		847776261D124BF100DE8213 /* Carmgr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carmgr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8477762A1D124BF100DE8213 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8477762C1D124BF100DE8213 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -116,51 +110,74 @@
 		847D09CC1D2A0E8400EBFF37 /* StoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreView.m; sourceTree = "<group>"; };
 		847D09CF1D2A3E0B00EBFF37 /* StoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreTableViewCell.h; sourceTree = "<group>"; };
 		847D09D01D2A3E0B00EBFF37 /* StoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreTableViewCell.m; sourceTree = "<group>"; };
-		847D09D21D2B980E00EBFF37 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
-		847D09D31D2B980E00EBFF37 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		847D09D51D2B9DD900EBFF37 /* RegularTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegularTools.h; sourceTree = "<group>"; };
-		847D09D61D2B9DD900EBFF37 /* RegularTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegularTools.m; sourceTree = "<group>"; };
+		847D09D21D2B980E00EBFF37 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Carmgr/NSString+MD5.h"; sourceTree = "<group>"; };
+		847D09D31D2B980E00EBFF37 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Carmgr/NSString+MD5.m"; sourceTree = "<group>"; };
 		847D09DC1D2D1C7300EBFF37 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		847D09DD1D2D1C7300EBFF37 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		847D09E31D2F6F8C00EBFF37 /* ProgressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTableViewCell.h; sourceTree = "<group>"; };
 		847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTableViewCell.m; sourceTree = "<group>"; };
 		847D09E61D2FA82B00EBFF37 /* ProgressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressModel.h; sourceTree = "<group>"; };
 		847D09E71D2FA82B00EBFF37 /* ProgressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressModel.m; sourceTree = "<group>"; };
-		8487D7261D1BE11E008850D8 /* YWLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWLoginViewController.h; sourceTree = "<group>"; };
-		8487D7271D1BE11E008850D8 /* YWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWLoginViewController.m; sourceTree = "<group>"; };
-		8487D7291D1BE5BE008850D8 /* YWRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWRegistViewController.h; sourceTree = "<group>"; };
-		8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWRegistViewController.m; sourceTree = "<group>"; };
-		84A929F91D26184A001DD20F /* 方案1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "方案1.png"; sourceTree = "<group>"; };
-		84A929FC1D2618E1001DD20F /* DevelopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevelopViewController.h; sourceTree = "<group>"; };
-		84A929FD1D2618E1001DD20F /* DevelopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevelopViewController.m; sourceTree = "<group>"; };
+		84A929FC1D2618E1001DD20F /* DevelopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DevelopViewController.h; path = Carmgr/DevelopViewController.h; sourceTree = "<group>"; };
+		84A929FD1D2618E1001DD20F /* DevelopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DevelopViewController.m; path = Carmgr/DevelopViewController.m; sourceTree = "<group>"; };
 		84A929FF1D264F17001DD20F /* ServiceCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCollection.h; sourceTree = "<group>"; };
 		84A92A001D264F17001DD20F /* ServiceCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCollection.m; sourceTree = "<group>"; };
 		84A92A061D266C26001DD20F /* UsedCarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedCarCollectionCell.h; sourceTree = "<group>"; };
 		84A92A071D266C26001DD20F /* UsedCarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedCarCollectionCell.m; sourceTree = "<group>"; };
 		84A92A0A1D2681FF001DD20F /* HotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTableViewCell.h; sourceTree = "<group>"; };
 		84A92A0B1D2681FF001DD20F /* HotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTableViewCell.m; sourceTree = "<group>"; };
+		84BAEED31D34EB7400227A15 /* 服务协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "服务协议.txt"; sourceTree = "<group>"; };
+		84BAEED91D36051C00227A15 /* RegularTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularTools.h; path = Carmgr/RegularTools.h; sourceTree = "<group>"; };
+		84BAEEDA1D36051C00227A15 /* RegularTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularTools.m; path = Carmgr/RegularTools.m; sourceTree = "<group>"; };
+		84BAEEDC1D36053D00227A15 /* 方案1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "方案1.png"; path = "Carmgr/方案1.png"; sourceTree = "<group>"; };
+		84BAEEDE1D36056200227A15 /* FastLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FastLoginViewController.h; path = Carmgr/FastLoginViewController.h; sourceTree = "<group>"; };
+		84BAEEDF1D36056200227A15 /* FastLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FastLoginViewController.m; path = Carmgr/FastLoginViewController.m; sourceTree = "<group>"; };
+		84BAEEE11D36057700227A15 /* FindPasswdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindPasswdViewController.h; path = Carmgr/FindPasswdViewController.h; sourceTree = "<group>"; };
+		84BAEEE21D36057700227A15 /* FindPasswdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindPasswdViewController.m; path = Carmgr/FindPasswdViewController.m; sourceTree = "<group>"; };
+		84BAEEE41D36058E00227A15 /* ResetPasswdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResetPasswdViewController.h; path = Carmgr/ResetPasswdViewController.h; sourceTree = "<group>"; };
+		84BAEEE51D36058E00227A15 /* ResetPasswdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResetPasswdViewController.m; path = Carmgr/ResetPasswdViewController.m; sourceTree = "<group>"; };
+		84BAEEE71D3605B700227A15 /* YWRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWRegistViewController.h; path = Carmgr/YWRegistViewController.h; sourceTree = "<group>"; };
+		84BAEEE81D3605B700227A15 /* YWRegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWRegistViewController.m; path = Carmgr/YWRegistViewController.m; sourceTree = "<group>"; };
+		84BAEEEA1D3605C800227A15 /* RegistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegistView.h; path = Carmgr/RegistView.h; sourceTree = "<group>"; };
+		84BAEEEB1D3605C800227A15 /* RegistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegistView.m; path = Carmgr/RegistView.m; sourceTree = "<group>"; };
+		84BAEEED1D3605DD00227A15 /* ServiceDelegateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceDelegateController.h; path = Carmgr/ServiceDelegateController.h; sourceTree = "<group>"; };
+		84BAEEEE1D3605DD00227A15 /* ServiceDelegateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceDelegateController.m; path = Carmgr/ServiceDelegateController.m; sourceTree = "<group>"; };
+		84BAEEF01D36064B00227A15 /* YWLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWLoginViewController.h; path = Carmgr/YWLoginViewController.h; sourceTree = "<group>"; };
+		84BAEEF11D36064B00227A15 /* YWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWLoginViewController.m; path = Carmgr/YWLoginViewController.m; sourceTree = "<group>"; };
+		84BAEEF31D36067300227A15 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = Carmgr/LoginView.h; sourceTree = "<group>"; };
+		84BAEEF41D36067300227A15 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = Carmgr/LoginView.m; sourceTree = "<group>"; };
+		84BAEEF61D36069100227A15 /* UserCenterFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserCenterFunc.h; path = Carmgr/UserCenterFunc.h; sourceTree = "<group>"; };
+		84BAEEF71D36069100227A15 /* UserCenterFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserCenterFunc.m; path = Carmgr/UserCenterFunc.m; sourceTree = "<group>"; };
+		84BAEEF91D3606A800227A15 /* AddCarInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarInfoView.h; path = Carmgr/AddCarInfoView.h; sourceTree = "<group>"; };
+		84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCarInfoView.m; path = Carmgr/AddCarInfoView.m; sourceTree = "<group>"; };
+		84BAEEFC1D3606C000227A15 /* AddCarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarCell.h; path = Carmgr/AddCarCell.h; sourceTree = "<group>"; };
+		84BAEEFD1D3606C000227A15 /* AddCarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCarCell.m; path = Carmgr/AddCarCell.m; sourceTree = "<group>"; };
+		84BAEEFE1D3606C000227A15 /* AddCarInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarInfoCell.h; path = Carmgr/AddCarInfoCell.h; sourceTree = "<group>"; };
+		84BAEEFF1D3606C000227A15 /* AddCarInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCarInfoCell.m; path = Carmgr/AddCarInfoCell.m; sourceTree = "<group>"; };
+		84BAEF021D3606DB00227A15 /* CarVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarVerifyViewController.h; path = Carmgr/CarVerifyViewController.h; sourceTree = "<group>"; };
+		84BAEF031D3606DB00227A15 /* CarVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarVerifyViewController.m; path = Carmgr/CarVerifyViewController.m; sourceTree = "<group>"; };
+		84BAEF051D36070A00227A15 /* AddCarInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarInfoViewController.h; path = Carmgr/AddCarInfoViewController.h; sourceTree = "<group>"; };
+		84BAEF061D36070A00227A15 /* AddCarInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCarInfoViewController.m; path = Carmgr/AddCarInfoViewController.m; sourceTree = "<group>"; };
+		84BAEF081D36071A00227A15 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = Carmgr/SettingViewController.h; sourceTree = "<group>"; };
+		84BAEF091D36071A00227A15 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewController.m; path = Carmgr/SettingViewController.m; sourceTree = "<group>"; };
 		84BEE1221D24B86F00D5FAD5 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		84BEE1231D24B86F00D5FAD5 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
 		84BEE12C1D24F34500D5FAD5 /* ServiceCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCollectionCell.h; sourceTree = "<group>"; };
 		84BEE12D1D24F34500D5FAD5 /* ServiceCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCollectionCell.m; sourceTree = "<group>"; };
-		84F271931D20C86200498441 /* RegistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistView.h; sourceTree = "<group>"; };
-		84F271941D20C86200498441 /* RegistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistView.m; sourceTree = "<group>"; };
-		84F271961D22159E00498441 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
-		84F271971D22159E00498441 /* Interface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interface.m; sourceTree = "<group>"; };
-		84F271991D225F0800498441 /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseViewController.h; sourceTree = "<group>"; };
-		84F2719A1D225F0800498441 /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseViewController.m; sourceTree = "<group>"; };
+		84F271961D22159E00498441 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = Carmgr/Interface.h; sourceTree = "<group>"; };
+		84F271971D22159E00498441 /* Interface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interface.m; path = Carmgr/Interface.m; sourceTree = "<group>"; };
+		84F271991D225F0800498441 /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityChooseViewController.h; path = Carmgr/CityChooseViewController.h; sourceTree = "<group>"; };
+		84F2719A1D225F0800498441 /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityChooseViewController.m; path = Carmgr/CityChooseViewController.m; sourceTree = "<group>"; };
 		84F3C2A71D190A8600597BFD /* YWPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWPublic.h; path = Carmgr/YWPublic.h; sourceTree = "<group>"; };
 		84F3C2A81D190A8600597BFD /* YWPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWPublic.m; path = Carmgr/YWPublic.m; sourceTree = "<group>"; };
 		84F3C2AA1D190AA600597BFD /* YWUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWUserViewController.h; path = Carmgr/YWUserViewController.h; sourceTree = "<group>"; };
 		84F3C2AB1D190AA600597BFD /* YWUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWUserViewController.m; path = Carmgr/YWUserViewController.m; sourceTree = "<group>"; };
 		84F3C2AD1D1920C400597BFD /* ScanImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanImageViewController.h; path = Carmgr/ScanImageViewController.h; sourceTree = "<group>"; };
 		84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanImageViewController.m; path = Carmgr/ScanImageViewController.m; sourceTree = "<group>"; };
-		84F3C2B21D193AB300597BFD /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
+		84F3C2B21D193AB300597BFD /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = city.plist; path = Carmgr/city.plist; sourceTree = "<group>"; };
 		84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationAttribute.h; sourceTree = "<group>"; };
 		84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationAttribute.m; sourceTree = "<group>"; };
 		84F3C2D11D1B719E00597BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		84F3C2E51D1BC37800597BFD /* UserCenterFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterFunc.h; sourceTree = "<group>"; };
-		84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterFunc.m; sourceTree = "<group>"; };
 		A9F25A80A03943501A53A01A /* libPods-Carmgr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Carmgr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,10 +219,10 @@
 		840A99641D1D1A6700C76E25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84F3C2E51D1BC37800597BFD /* UserCenterFunc.h */,
-				84F3C2E61D1BC37800597BFD /* UserCenterFunc.m */,
-				846C9F021D3366420006A02D /* AddCarInfoView.h */,
-				846C9F031D3366420006A02D /* AddCarInfoView.m */,
+				84BAEEF61D36069100227A15 /* UserCenterFunc.h */,
+				84BAEEF71D36069100227A15 /* UserCenterFunc.m */,
+				84BAEEF91D3606A800227A15 /* AddCarInfoView.h */,
+				84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */,
 				840CF3A41D32460300CEFFDB /* AddCarCell */,
 			);
 			name = Views;
@@ -214,6 +231,10 @@
 		840A99681D1D317A00C76E25 /* 找回密码 */ = {
 			isa = PBXGroup;
 			children = (
+				84BAEEE11D36057700227A15 /* FindPasswdViewController.h */,
+				84BAEEE21D36057700227A15 /* FindPasswdViewController.m */,
+				84BAEEE41D36058E00227A15 /* ResetPasswdViewController.h */,
+				84BAEEE51D36058E00227A15 /* ResetPasswdViewController.m */,
 			);
 			name = "找回密码";
 			sourceTree = "<group>";
@@ -221,6 +242,8 @@
 		840A99691D1D318400C76E25 /* 手机快捷登录 */ = {
 			isa = PBXGroup;
 			children = (
+				84BAEEDE1D36056200227A15 /* FastLoginViewController.h */,
+				84BAEEDF1D36056200227A15 /* FastLoginViewController.m */,
 			);
 			name = "手机快捷登录";
 			sourceTree = "<group>";
@@ -228,10 +251,10 @@
 		840CF3A41D32460300CEFFDB /* AddCarCell */ = {
 			isa = PBXGroup;
 			children = (
-				840CF3A51D32462F00CEFFDB /* AddCarCell.h */,
-				840CF3A61D32462F00CEFFDB /* AddCarCell.m */,
-				846C9EFF1D334F150006A02D /* AddCarInfoCell.h */,
-				846C9F001D334F150006A02D /* AddCarInfoCell.m */,
+				84BAEEFC1D3606C000227A15 /* AddCarCell.h */,
+				84BAEEFD1D3606C000227A15 /* AddCarCell.m */,
+				84BAEEFE1D3606C000227A15 /* AddCarInfoCell.h */,
+				84BAEEFF1D3606C000227A15 /* AddCarInfoCell.m */,
 			);
 			name = AddCarCell;
 			sourceTree = "<group>";
@@ -239,10 +262,10 @@
 		840CF3A81D324C1800CEFFDB /* 添加车辆信息 */ = {
 			isa = PBXGroup;
 			children = (
-				840CF3B51D33440000CEFFDB /* CarVerifyViewController.h */,
-				840CF3B61D33440000CEFFDB /* CarVerifyViewController.m */,
-				846C9EFC1D3349510006A02D /* AddCarInfoViewController.h */,
-				846C9EFD1D3349510006A02D /* AddCarInfoViewController.m */,
+				84BAEF021D3606DB00227A15 /* CarVerifyViewController.h */,
+				84BAEF031D3606DB00227A15 /* CarVerifyViewController.m */,
+				84BAEF051D36070A00227A15 /* AddCarInfoViewController.h */,
+				84BAEF061D36070A00227A15 /* AddCarInfoViewController.m */,
 			);
 			name = "添加车辆信息";
 			sourceTree = "<group>";
@@ -296,6 +319,7 @@
 		847776291D124BF100DE8213 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84BAEED31D34EB7400227A15 /* 服务协议.txt */,
 				8477762A1D124BF100DE8213 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -384,7 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				847776781D13CA7700DE8213 /* u10.png */,
-				84A929F91D26184A001DD20F /* 方案1.png */,
+				84BAEEDC1D36053D00227A15 /* 方案1.png */,
 			);
 			name = Images;
 			path = ..;
@@ -436,6 +460,15 @@
 			name = "热门推荐";
 			sourceTree = "<group>";
 		};
+		84BAEED51D35F4A900227A15 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				84BAEF081D36071A00227A15 /* SettingViewController.h */,
+				84BAEF091D36071A00227A15 /* SettingViewController.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
 		84BEE12B1D24F28F00D5FAD5 /* 业务板块 */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,8 +517,8 @@
 				84F271971D22159E00498441 /* Interface.m */,
 				847D09D21D2B980E00EBFF37 /* NSString+MD5.h */,
 				847D09D31D2B980E00EBFF37 /* NSString+MD5.m */,
-				847D09D51D2B9DD900EBFF37 /* RegularTools.h */,
-				847D09D61D2B9DD900EBFF37 /* RegularTools.m */,
+				84BAEED91D36051C00227A15 /* RegularTools.h */,
+				84BAEEDA1D36051C00227A15 /* RegularTools.m */,
 			);
 			name = Public;
 			path = ..;
@@ -494,6 +527,7 @@
 		84F3C2A21D17D76600597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				84BAEED51D35F4A900227A15 /* 设置 */,
 				840CF3A81D324C1800CEFFDB /* 添加车辆信息 */,
 				84F3C2AA1D190AA600597BFD /* YWUserViewController.h */,
 				84F3C2AB1D190AA600597BFD /* YWUserViewController.m */,
@@ -581,10 +615,10 @@
 		84F3C2D41D1B93D300597BFD /* 登陆 */ = {
 			isa = PBXGroup;
 			children = (
-				8487D7261D1BE11E008850D8 /* YWLoginViewController.h */,
-				8487D7271D1BE11E008850D8 /* YWLoginViewController.m */,
-				840A99651D1D1F1D00C76E25 /* LoginView.h */,
-				840A99661D1D1F1D00C76E25 /* LoginView.m */,
+				84BAEEF01D36064B00227A15 /* YWLoginViewController.h */,
+				84BAEEF11D36064B00227A15 /* YWLoginViewController.m */,
+				84BAEEF31D36067300227A15 /* LoginView.h */,
+				84BAEEF41D36067300227A15 /* LoginView.m */,
 			);
 			name = "登陆";
 			sourceTree = "<group>";
@@ -592,10 +626,12 @@
 		84F3C2D51D1B93D900597BFD /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
-				8487D7291D1BE5BE008850D8 /* YWRegistViewController.h */,
-				8487D72A1D1BE5BE008850D8 /* YWRegistViewController.m */,
-				84F271931D20C86200498441 /* RegistView.h */,
-				84F271941D20C86200498441 /* RegistView.m */,
+				84BAEEE71D3605B700227A15 /* YWRegistViewController.h */,
+				84BAEEE81D3605B700227A15 /* YWRegistViewController.m */,
+				84BAEEEA1D3605C800227A15 /* RegistView.h */,
+				84BAEEEB1D3605C800227A15 /* RegistView.m */,
+				84BAEEED1D3605DD00227A15 /* ServiceDelegateController.h */,
+				84BAEEEE1D3605DD00227A15 /* ServiceDelegateController.m */,
 			);
 			name = "注册";
 			sourceTree = "<group>";
@@ -792,9 +828,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A929FA1D26184A001DD20F /* 方案1.png in Resources */,
 				847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */,
 				847776791D13CA7700DE8213 /* u10.png in Resources */,
+				84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */,
+				84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */,
 				84F3C2B51D193AB300597BFD /* city.plist in Resources */,
 				847776341D124BF100DE8213 /* Main.storyboard in Resources */,
 				84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */,
@@ -870,42 +907,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84BAEF001D3606C000227A15 /* AddCarCell.m in Sources */,
 				84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */,
+				84BAEF0A1D36071A00227A15 /* SettingViewController.m in Sources */,
 				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
-				846C9F011D334F150006A02D /* AddCarInfoCell.m in Sources */,
-				8487D72B1D1BE5BE008850D8 /* YWRegistViewController.m in Sources */,
+				84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */,
 				84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
 				84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */,
 				847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */,
+				84BAEEE91D3605B700227A15 /* YWRegistViewController.m in Sources */,
 				847D09CD1D2A0E8400EBFF37 /* StoreView.m in Sources */,
-				846C9EFE1D3349510006A02D /* AddCarInfoViewController.m in Sources */,
-				84F271951D20C86200498441 /* RegistView.m in Sources */,
 				847776311D124BF100DE8213 /* ViewController.m in Sources */,
-				846C9F041D3366420006A02D /* AddCarInfoView.m in Sources */,
+				84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
 				847D09DE1D2D1C7300EBFF37 /* ProgressView.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
 				84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */,
-				840CF3A71D32462F00CEFFDB /* AddCarCell.m in Sources */,
+				84BAEF041D3606DB00227A15 /* CarVerifyViewController.m in Sources */,
+				84BAEEEC1D3605C800227A15 /* RegistView.m in Sources */,
 				847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */,
-				84F3C2E71D1BC37800597BFD /* UserCenterFunc.m in Sources */,
-				8487D7281D1BE11E008850D8 /* YWLoginViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
-				840A99671D1D1F1D00C76E25 /* LoginView.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
+				84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */,
 				84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */,
 				847D09D11D2A3E0B00EBFF37 /* StoreTableViewCell.m in Sources */,
 				84F271981D22159E00498441 /* Interface.m in Sources */,
 				84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */,
-				840CF3B71D33440000CEFFDB /* CarVerifyViewController.m in Sources */,
 				84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */,
 				8477762B1D124BF100DE8213 /* main.m in Sources */,
+				84BAEEE31D36057700227A15 /* FindPasswdViewController.m in Sources */,
+				84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */,
+				84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */,
+				84BAEEF81D36069100227A15 /* UserCenterFunc.m in Sources */,
+				84BAEEEF1D3605DD00227A15 /* ServiceDelegateController.m in Sources */,
+				84BAEEF51D36067300227A15 /* LoginView.m in Sources */,
+				84BAEEE61D36058E00227A15 /* ResetPasswdViewController.m in Sources */,
 				847776731D12591C00DE8213 /* YWTabBarController.m in Sources */,
-				847D09D71D2B9DD900EBFF37 /* RegularTools.m in Sources */,
 				84A92A011D264F17001DD20F /* ServiceCollection.m in Sources */,
+				84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */,
 				847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

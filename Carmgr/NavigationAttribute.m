@@ -29,7 +29,6 @@
                                   selectImage:(NSString *)selectImage {
     UIViewController *viewController = [[NSClassFromString(className) alloc] init];
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navigationVC.navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     navigationVC.navigationBar.tintColor = [UIColor whiteColor];
     
     //设置导航栏title和item

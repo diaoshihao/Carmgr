@@ -15,7 +15,11 @@
 @property (nonatomic, strong) UILabel     *address;
 @property (nonatomic, strong) UILabel     *score;
 
-@property (nonatomic, strong) NSArray     *model;
+@property (nonatomic, strong) NSArray     *servieceArr;
+
+- (void)servieceLabel;
+
+- (void)starView;
 
 + (NSString *)getReuseID;
 

@@ -11,6 +11,8 @@
 #import "YWPublic.h"
 #import "YWRegistViewController.h"
 #import "LoginView.h"
+#import "FindPasswdViewController.h"
+#import "FastLoginViewController.h"
 
 @interface YWLoginViewController () <UITextFieldDelegate>
 
@@ -35,10 +37,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self createView];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    self.passwdField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
 }
 
 #pragma mark - 创建视图
@@ -64,12 +71,10 @@
 - (void)createTextField {
     //用户名
     self.userField = [self.loginView createTextFieldAtSuperView:self.view Constraints:nil isUserField:YES];
-    self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     self.userField.delegate = self;
     
     //密码
     self.passwdField = [self.loginView createTextFieldAtSuperView:self.view Constraints:self.userField isUserField:NO];
-    self.passwdField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     self.passwdField.delegate = self;
     
     //登录
@@ -80,6 +85,10 @@
     
     //手机快捷登录
     [self.loginView createButtonAtSuperView:self.view Constraints:loginBtn target:self action:@selector(loginByPhone) forPasswd:NO];
+    
+    //第三方登录
+    [self.loginView createThirdLoginAtSuperView:self.view target:self action:@selector(thirdLogin:)];
+    
 }
 
 #pragma mark - delegate
@@ -117,6 +126,7 @@
         
         NSLog(@"网络请求成功：%@",dataDict);
         if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            
             //登录成功保存数据
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
             [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];
@@ -135,6 +145,14 @@
     }];
 }
 
+- (void)thirdLogin:(UIButton *)sender {
+    if (sender.tag == 100) {
+        NSLog(@"QQ登录");
+    } else {
+        NSLog(@"微信登录");
+    }
+}
+
 #pragma mark 定时器
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
@@ -144,12 +162,14 @@
 
 #pragma mark 找回密码
 - (void)resetPassword {
-    NSLog(@"找回密码中...");
+    FindPasswdViewController *findPasswdVC = [[FindPasswdViewController alloc] init];
+    [self.navigationController pushViewController:findPasswdVC animated:YES];
 }
 
 #pragma mark 手机快捷登录
 - (void)loginByPhone {
-    NSLog(@"手机快捷登录中...");
+    FastLoginViewController *fastLoginVC = [[FastLoginViewController alloc] init];
+    [self.navigationController pushViewController:fastLoginVC animated:YES];
 }
 
 #pragma mark 收缩键盘

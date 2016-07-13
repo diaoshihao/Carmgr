@@ -68,6 +68,11 @@
     [self.navigationController pushViewController:cityChooseVC animated:YES];
 }
 
+//按钮点击跳转到相应界面
+- (void)buttonClick:(UIButton *)sender {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -212,6 +217,9 @@
 
 //及时更改城市名
 - (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
+    
+    //获取并设置当前城市名
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
     UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
     [cityButton setTitle:city forState:UIControlStateNormal];

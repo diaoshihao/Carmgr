@@ -23,7 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self customLeftItem];
     

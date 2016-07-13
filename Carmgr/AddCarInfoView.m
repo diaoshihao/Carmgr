@@ -9,8 +9,53 @@
 #import "AddCarInfoView.h"
 #import <Masonry.h>
 
+@interface AddCarInfoView () <UITextFieldDelegate>
+
+@end
+
 @implementation AddCarInfoView
 
+- (UILabel *)labelWithTitle:(NSString *)title {
+    UILabel *label = [[UILabel alloc] init];
+    label.text = title;
+    label.textColor = [UIColor grayColor];
+    label.font = [UIFont systemFontOfSize:15];
+    return label;
+}
+
+- (NSArray *)textFieldArray:(NSInteger)forSection {
+    NSArray *placeholder = @[@[@"请输入车牌号",@"请输入后4位发动机号",@"请输入后6位车架号"],@[@"请输入保险进保日期",@"请输入首次保养日期",@"请输入行驶公里数"]];
+    NSMutableArray *arrM = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < 3; i++) {
+        UITextField *textField = [self textFieldWithPlaceholder:placeholder[forSection-2][i]];
+        if (forSection == 2 && i == 0) {
+            UILabel *label = [self labelWithTitle:@"粤"];
+            label.frame = CGRectMake(0, 0, 30, 35);
+            label.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            
+            textField.leftView = label;
+        }
+        [arrM addObject:textField];
+    }
+    return arrM;
+    
+}
+
+- (UITextField *)textFieldWithPlaceholder:(NSString *)placeholder {
+    UITextField *textField = [[UITextField alloc] init];
+    textField.placeholder = placeholder;
+    textField.font = [UIFont systemFontOfSize:15];
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.delegate = self;
+    return textField;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.superView endEditing:YES];
+    return YES;
+}
+
+//查询按钮
 - (UIButton *)createLabelAndButton:(UIView *)broview {
     UILabel *tipsLabel = [[UILabel alloc] init];
     tipsLabel.text = @"我们将爱车信息进行保密，请您放心填写。";
@@ -46,20 +91,11 @@
 
 - (UISegmentedControl *)numberType {
     UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc] initWithItems:@[@"小型汽车",@"大型汽车"]];
-//    [segmentCtrl setTitle:@"小型汽车" forSegmentAtIndex:0];
-//    [segmentCtrl setTitle:@"大型汽车" forSegmentAtIndex:1];
+    segmentCtrl.tintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     [segmentCtrl setSelectedSegmentIndex:0];
     return segmentCtrl;
 }
 
-- (UIView *)labelWithTitle:(NSString *)title size:(CGSize)size {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    UILabel *label = [[UILabel alloc] init];
-    label.text = title;
-    [view addSubview:label];
-    
-    return view;
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

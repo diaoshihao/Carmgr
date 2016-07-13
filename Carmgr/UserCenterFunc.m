@@ -13,9 +13,7 @@
 
 @interface UserCenterFunc() <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UIView        *headView;
-@property (nonatomic, strong) UIImageView   *userImageView;
-@property (nonatomic, strong) UIButton      *userName;
+@property (nonatomic, strong) UIView        *backView;
 @property (nonatomic, strong) UIButton      *messageButton;
 @property (nonatomic, strong) UIButton      *settingButton;
 
@@ -128,37 +126,42 @@
 - (UIView *)createHeadView:(id)target {
     
     //背景
-    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    self.headView.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
+    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    self.backView.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     
     //头像
     self.userImageView = [YWPublic createCycleImageViewWithFrame:CGRectZero image:@"头像大"];
-    [self.headView addSubview:self.userImageView];
+    [self.backView addSubview:self.userImageView];
     
     //用户名
     self.userName = [YWPublic createButtonWithFrame:CGRectZero title:@"登录/注册" imageName:nil];
     [self.userName addTarget:target action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.headView addSubview:self.userName];
+    [self.backView addSubview:self.userName];
     
     //信息
     self.messageButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"信封"];
-    [self.headView addSubview:self.messageButton];
+    [self.backView addSubview:self.messageButton];
     
     //设置
     self.settingButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"设置"];
-    [self.headView addSubview:self.settingButton];
+    [self.settingButton addTarget:target action:@selector(pushToSettingPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.backView addSubview:self.settingButton];
     
     [self autoLayout];//自动布局
     
-    return self.headView;
+    return self.backView;
+}
+
+- (void)pushToSettingPage{
+    
 }
 
 - (void)autoLayout {
     
     [self.userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(imageHeight, imageHeight));
-        make.left.mas_equalTo(self.headView).with.offset(imageHeight/4);
-        make.bottom.mas_equalTo(self.headView).with.offset(-imageHeight/4);
+        make.left.mas_equalTo(self.backView).with.offset(imageHeight/4);
+        make.bottom.mas_equalTo(self.backView).with.offset(-imageHeight/4);
     }];
 
     [self.userName setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
@@ -170,8 +173,8 @@
     [self.messageButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.messageButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headView).with.offset(imageHeight/4);
-        make.right.mas_equalTo(self.headView).with.offset(-imageHeight/4);
+        make.top.mas_equalTo(self.backView).with.offset(imageHeight/4);
+        make.right.mas_equalTo(self.backView).with.offset(-imageHeight/4);
     }];
     
     [self.settingButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];

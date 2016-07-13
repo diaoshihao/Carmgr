@@ -22,5 +22,7 @@
 //找回密码、快捷登录
 - (void)createButtonAtSuperView:(UIView *)superView Constraints:(UIView *)broView target:(UIViewController *)target action:(SEL)selector forPasswd:(BOOL)forPasswd;
 
+//第三方登录
+- (void)createThirdLoginAtSuperView:(UIView *)superView target:(UIViewController *)target action:(SEL)selector;
 
 @end

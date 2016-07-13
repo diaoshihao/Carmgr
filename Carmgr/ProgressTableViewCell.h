@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel       *serviceLabel;
 @property (nonatomic, strong) UILabel       *numberLabel;
 @property (nonatomic, strong) UILabel       *timeLabel;
+@property (nonatomic, strong) UILabel       *stateLabel;
 
 - (void)autoLayout;
 

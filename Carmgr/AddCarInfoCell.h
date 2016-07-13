@@ -11,8 +11,10 @@
 @interface AddCarInfoCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel       *titleLabel;
-@property (nonatomic, strong) UIView        *backView;
+@property (nonatomic, strong) UIView        *cusView;
 @property (nonatomic, assign) NSIndexPath   *indexPath;
+
+- (void)customView;
 
 + (NSString *)getReuseID;
 

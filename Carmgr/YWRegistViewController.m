@@ -9,6 +9,7 @@
 #import "YWRegistViewController.h"
 #import "RegistView.h"
 #import "YWPublic.h"
+#import "ServiceDelegateController.h"
 
 @interface YWRegistViewController () <UITextFieldDelegate>
 
@@ -35,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.navigationItem.title = @"注册";
     
     [self createInputPhoneNumView];
@@ -57,8 +58,13 @@
     UIButton *button = [self.registView createButtonAtSuperView:self.view Constraints:self.phoneNum title:@"获取验证码" target:self action:@selector(getVerifyCode)];
     
     //同意平台协定
-    [self.registView createAgreementViewAtSuperView:self.view broview:button];
+    [self.registView createAgreementViewAtSuperView:self.view broview:button target:self action:@selector(serviceDelegate)];
     
+}
+
+- (void)serviceDelegate {
+    ServiceDelegateController *serviceDelegateVC = [[ServiceDelegateController alloc] init];
+    [self.navigationController pushViewController:serviceDelegateVC animated:YES];
 }
 
 #pragma mark 获取验证码

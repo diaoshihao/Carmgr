@@ -11,44 +11,17 @@
 #import "UserCenterFunc.h"
 #import "YWLoginViewController.h"
 #import "CarVerifyViewController.h"
-
-#define MAS_SHORTHAND
-// 只要添加了这个宏，equalTo就等价于mas_equalTo
-#define MAS_SHORTHAND_GLOBALS
-#import <Masonry.h>
+#import "SettingViewController.h"
 
 @interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UserCenterFunc    *createView;
-
-@property (nonatomic, strong) UIView            *backView;
-
-@property (nonatomic, strong) UIImageView       *userImageView;
-
-@property (nonatomic, strong) UIButton          *userName;
-@property (nonatomic, strong) UIButton          *messageButton;
-
-@property (nonatomic, assign) BOOL              isLogin;
 
 @property (nonatomic, strong) NSArray           *dataArray;
 
 @end
 
 @implementation YWUserViewController
-{
-    CGFloat width;      //屏幕宽
-    CGFloat height;     //背景高
-    CGFloat imageHeight;//头像长
-}
-
-#pragma mark - 右滑返回上一页
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        
-        navigationController.interactivePopGestureRecognizer.enabled = YES;
-        
-    }
-}
 
 #pragma mark 跳转到登录界面
 - (void)pushToLoginVC {
@@ -70,6 +43,11 @@
     [self presentViewController:navigationVC animated:YES completion:nil];
 }
 
+- (void)pushToSettingPage {
+    SettingViewController *settingVC = [[SettingViewController alloc] init];
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,6 +58,7 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     
     self.createView = [[UserCenterFunc alloc] init];
+    self.createView.actionTarget = self;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.createView createTableView:self.view];
@@ -97,9 +76,18 @@
     
     //登录成功改变用户名
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
-        [self.userName setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] forState:UIControlStateNormal];
+        [self.createView.userName setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] forState:UIControlStateNormal];
     }
     
+}
+
+#pragma mark - 右滑返回上一页
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        
+        navigationController.interactivePopGestureRecognizer.enabled = YES;
+        
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

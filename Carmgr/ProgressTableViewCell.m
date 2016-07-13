@@ -18,25 +18,36 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        //商店名
         self.storeName = [[UILabel alloc] init];
         self.storeName.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:self.storeName];
         
+        //服务名
         self.serviceLabel = [[UILabel alloc] init];
         self.serviceLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.serviceLabel];
         
+        //头像
         self.headImageView = [[UIImageView alloc] init];
         self.headImageView.backgroundColor = [UIColor orangeColor];
         [self.contentView addSubview:self.headImageView];
         
+        //订单号
         self.numberLabel = [[UILabel alloc] init];
         self.numberLabel.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:self.numberLabel];
         
+        //时间
         self.timeLabel = [[UILabel alloc] init];
         self.timeLabel.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:self.timeLabel];
+        
+        //服务状态
+        self.stateLabel = [[UILabel alloc] init];
+        self.stateLabel.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.stateLabel.font = [UIFont systemFontOfSize:13];
+        [self.contentView addSubview:self.stateLabel];
         
         [self autoLayout];
 
@@ -78,6 +89,13 @@
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.serviceLabel.mas_left).with.offset(0);
         make.bottom.mas_equalTo(self.headImageView.mas_bottom).with.offset(-3);
+    }];
+    
+    [self.stateLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [self.stateLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self.stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-20);
+        make.centerY.mas_equalTo(self.storeName);
     }];
     
 }

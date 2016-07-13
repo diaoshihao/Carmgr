@@ -53,15 +53,25 @@
     
 }
 
+//为以下提供创建button方法
+- (UIButton *)createActivetyBtn:(NSString *)imageName tag:(NSInteger)tag {
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:imageName];
+    button.tag = tag;
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
 #pragma mark - 活动
 - (UIView *)createActivetyView {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/3)];
     
-    UIButton *leftBtn = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.actImageDict[@"leftImage"]];
+    UIButton *leftBtn = [self createActivetyBtn:self.actImageDict[@"leftImage"] tag:100];
     [backView addSubview:leftBtn];
-    UIButton *topBtn = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.actImageDict[@"topImage"]];
+    
+    UIButton *topBtn = [self createActivetyBtn:self.actImageDict[@"topImage"] tag:200];
     [backView addSubview:topBtn];
-    UIButton *bottomBtn = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.actImageDict[@"bottomImage"]];
+    
+    UIButton *bottomBtn = [self createActivetyBtn:self.actImageDict[@"bottomImage"] tag:300];
     [backView addSubview:bottomBtn];
     
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -87,25 +97,39 @@
     return backView;
 }
 
+//为以下提供创建button方法
+- (UIButton *)createBtn:(NSString *)imageName tag:(NSInteger)tag {
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:imageName];
+    button.tag = tag;
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
 #pragma mark - 优惠
 - (UIView *)createSecondView {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/2)];
     
     //leftBtn
-    UIButton *left1 = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.secondImageDict[@"left1Image"]];
+    UIButton *left1 = [self createBtn:self.secondImageDict[@"left1Image"] tag:400];
     [backView addSubview:left1];
-    UIButton *left2 = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.secondImageDict[@"left2Image"]];
+    
+    UIButton *left2 = [self createBtn:self.secondImageDict[@"left2Image"] tag:500];
     [backView addSubview:left2];
-    UIButton *left3 = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.secondImageDict[@"left3Image"]];
+    
+    UIButton *left3 = [self createBtn:self.secondImageDict[@"left3Image"] tag:600];
     [backView addSubview:left3];
     
+    
     //rightBtn
-    UIButton *right1 = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.secondImageDict[@"right1Image"]];
+    UIButton *right1 = [self createBtn:self.secondImageDict[@"right1Image"] tag:700];
     [backView addSubview:right1];
-    UIButton *right2 = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.secondImageDict[@"right2Image"]];
+    
+    UIButton *right2 = [self createBtn:self.secondImageDict[@"right2Image"] tag:800];
     [backView addSubview:right2];
-    UIButton *right3 = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:self.secondImageDict[@"right3Image"]];
+    
+    UIButton *right3 = [self createBtn:self.secondImageDict[@"right3Image"] tag:900];
     [backView addSubview:right3];
+    
     
     CGFloat height = (backView.frame.size.height-4)/3;
     //left
@@ -143,6 +167,12 @@
     }];
     
     return backView;
+}
+
+//活动优惠按钮点击跳转到相应界面
+- (void)buttonClick:(UIButton *)sender {
+    DevelopViewController *developVC = [[DevelopViewController alloc] init];
+    [self.VC presentViewController:developVC animated:YES completion:nil];
 }
 
 #pragma mark - 业务板块

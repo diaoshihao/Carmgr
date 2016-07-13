@@ -112,6 +112,47 @@
     }
 }
 
+- (void)createThirdLoginAtSuperView:(UIView *)superView target:(UIViewController *)target action:(SEL)selector {
+    
+    UILabel *tipsLabel = [[UILabel alloc] init];
+    tipsLabel.text = @"使用第三方账号登录";
+    tipsLabel.textColor = [UIColor grayColor];
+    tipsLabel.font = [UIFont systemFontOfSize:15];
+    [superView addSubview:tipsLabel];
+    
+    UIButton *QQLogin = [[UIButton alloc] init];
+    [QQLogin setBackgroundImage:[UIImage imageNamed:@"QQ"] forState:UIControlStateNormal];
+    QQLogin.tag = 100;
+    [QQLogin addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:QQLogin];
+    
+    UIButton *wechatLogin = [[UIButton alloc] init];
+    [wechatLogin setBackgroundImage:[UIImage imageNamed:@"微信"] forState:UIControlStateNormal];
+    wechatLogin.tag = 200;
+    [wechatLogin addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:wechatLogin];
+    
+    [QQLogin mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-30);
+        make.right.mas_equalTo(superView.mas_centerX).with.offset(-5);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    
+    [wechatLogin mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-30);
+        make.left.mas_equalTo(superView.mas_centerX).with.offset(5);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    
+    [tipsLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [tipsLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(QQLogin.mas_top).with.offset(-15);
+        make.centerX.mas_equalTo(superView);
+    }];
+    
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

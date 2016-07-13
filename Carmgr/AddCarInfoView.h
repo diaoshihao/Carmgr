@@ -17,6 +17,10 @@
 
 - (UISegmentedControl *)numberType;
 
-- (UIView *)labelWithTitle:(NSString *)title size:(CGSize)size;
+- (UILabel *)labelWithTitle:(NSString *)title;
+
+- (NSArray *)textFieldArray:(NSInteger)forSection;
+
+- (UITextField *)textFieldWithPlaceholder:(NSString *)placeholder;
 
 @end

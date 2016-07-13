@@ -67,7 +67,7 @@
     //背景view
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height-1)];
     
-    allBtn = [self CustomButton:CGRectMake(0, 0, height/1.5, height-1) title:@"全部" imageName:@"全部橙" selectedImage:@"全部橙"];
+    allBtn = [self CustomButton:CGRectMake(0, 0, height/1.5, height-1) title:@"全部" imageName:@"全部" selectedImage:@"全部橙"];
     allBtn.tag = 1000;
     allBtn.selected = YES;
     [backView addSubview:allBtn];
@@ -84,8 +84,8 @@
     NSArray *firstImages = @[@"待付款",@"待使用",@"进行中"];
     NSArray *firstSelected = @[@"待付款橙",@"待使用橙",@"进行中橙"];
     NSArray *secondTitles = @[@"已完成",@"待评价",@"退款/售后"];
-    NSArray *secondImages = @[@"已完成",@"待评价",@"退款/售后"];
-    NSArray *secondSelected = @[@"已完成橙",@"待评价橙",@"退款/售后橙"];
+    NSArray *secondImages = @[@"已完成",@"待评价",@"售后"];
+    NSArray *secondSelected = @[@"已完成橙",@"待评价橙",@"售后橙"];
     
     //第一排
     isFirst = YES;
@@ -205,6 +205,7 @@
     cell.serviceLabel.text = [NSString stringWithFormat:@"易务车服务%ld",indexPath.section+1];
     cell.numberLabel.text = [NSString stringWithFormat:@"订单号：%ld",indexPath.section*10000];
     cell.timeLabel.text = [NSString stringWithFormat:@"2016.7.%ld",indexPath.section+7];
+    cell.stateLabel.text = [NSString stringWithFormat:@"  %@  ",@"待使用"];
     return cell;
 }
 

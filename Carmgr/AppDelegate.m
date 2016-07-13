@@ -19,9 +19,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    NSString *key = (NSString *)kCFBundleVersionKey;
+    
+    // 1.从Info.plist中取出版本号
+    NSString *version = [NSBundle mainBundle].infoDictionary[key];
+    
+    // 2.从沙盒中取出上次存储的版本号
+    NSString *saveVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    
+    if ([version isEqualToString:saveVersion]) { // 不是第一次使用这个版本
+        
+        
+    } else { // 版本号不一样：第一次使用新版本
+        // 将新版本号写入沙盒
+        [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        //移动网络下载图片打开
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MONET"];
+        
+        // 显示版本新特性界面
+        
+    }
+    
     //程序将要退出时退出登录，设置[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
     
-    //进入程序,不在登录状态
+    //进入程序,不在登录状态?????????登录请求！！！！！！
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
     
     self.window.rootViewController = [[YWTabBarController alloc] init];
@@ -48,6 +71,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    //添加退出登录方法
+    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
 }
 

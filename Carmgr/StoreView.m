@@ -235,8 +235,12 @@
         StoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[StoreTableViewCell getReuseID] forIndexPath:indexPath];
         cell.headImageView.image = [UIImage imageNamed:@"圆角矩形红色"];
         cell.storeName.text = @"牛B服务";
-        cell.score.text = [NSString stringWithFormat:@"%@分",@"4.5"];
+        cell.servieceArr = @[@"综",@"金",@"洗",@"修",@"牌"];
+        cell.score.text = [NSString stringWithFormat:@"%@分",@"3.5"];
         cell.address.text = self.dataArr[indexPath.row];
+        
+        [cell servieceLabel];
+        [cell starView];
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortcell" forIndexPath:indexPath];

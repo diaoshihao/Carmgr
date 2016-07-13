@@ -11,6 +11,9 @@
 
 @interface UserCenterFunc : NSObject
 
+@property (nonatomic, strong) UIImageView   *userImageView;
+@property (nonatomic, strong) UIButton      *userName;
+
 @property (nonatomic, strong) UIViewController *actionTarget;
 
 - (UITableView *)createTableView:(UIView *)superView;
