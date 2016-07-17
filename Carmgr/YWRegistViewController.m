@@ -80,21 +80,17 @@
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             NSLog(@"网络请求成功%@",dataDict);
+            
+            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                self.mobile = self.phoneNum.text;
+                [self removeAllSubviews];
+                [self createInputVerifyCodeView];
+            }
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error:%@",error);
         }];
-
         
-        
-//        [YWPublic afPOST:kVERIFYCODE parameters:[NSString stringWithFormat:@"username=%@&type=%d&version=1.0",self.phoneNum.text,0] success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//            NSLog(@"%@",responseObject);
-//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//            NSLog(@"error:%@",error);
-//        }];
-        
-        self.mobile = self.phoneNum.text;
-        [self removeAllSubviews];
-        [self createInputVerifyCodeView];
     } else {
         UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"提示" message:@"请输入正确的手机号"];
         [self presentViewController:alertVC animated:YES completion:^{
@@ -103,15 +99,17 @@
     }
 }
 
+//重新获取验证码
+- (void)regetVerifyCode {
+    [self getVerifyCode];
+}
+
 #pragma mark 定时器
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)regetVerifyCode {
-    NSLog(@"重新获取验证码");
-}
 
 #pragma mark - 输入验证码
 - (void)createInputVerifyCodeView {

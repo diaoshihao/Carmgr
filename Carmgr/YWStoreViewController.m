@@ -12,6 +12,7 @@
 #import "YWPublic.h"
 #import "StoreView.h"
 #import <Masonry.h>
+#import "StoreModel.h"
 
 @interface YWStoreViewController () 
 
@@ -43,18 +44,30 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.storeView = [[StoreView alloc] init];
-    [self loadData];
     [self.storeView createHeadSortViewAtSuperView:self.view];
     [self.storeView createTableView:self.view];
+    [self loadData];
 }
 
 - (void)loadData {
-    self.storeView.dataArr = @[@"数据",@"数据",@"数据",@"数据",@"数据",@"数据"];
-//    [YWPublic afPOST:kREGISTER parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"%@",responseObject);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"error:%@",error);
-//    }];
+    //参数
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kSTORE,username,filter,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        for (NSDictionary *dict in dataDict[@"merchants_list"]) {
+            StoreModel *model = [[StoreModel alloc] initWithDict:dict];
+            [self.storeView.dataArr addObject:model];
+        }
+        
+        [self.storeView.tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

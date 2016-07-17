@@ -23,9 +23,6 @@
     textView.editable = NO;
     [self.view addSubview:textView];
     
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"服务协议" ofType:@"txt"];
-//    NSURL *url = [NSURL fileURLWithPath:filePath];
-//    NSString *text = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"服务协议" ofType:@"txt"];
     NSString *text = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     textView.text = text;

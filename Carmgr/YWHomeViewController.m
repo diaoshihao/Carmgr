@@ -11,27 +11,42 @@
 #import "YWPublic.h"
 #import "NavigationAttribute.h"
 #import "HomeView.h"
+#import "HomeModel.h"
 
 @interface YWHomeViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) HomeView *home;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) HomeView          *home;
+@property (nonatomic, strong) UITableView       *tableView;
 
-@property (nonatomic, strong) NSMutableArray *viewsArr;
-@property (nonatomic, strong) NSMutableArray *cycleImageArr;//轮播图组
+@property (nonatomic, strong) NSMutableArray    *viewsArr;
+@property (nonatomic, strong) NSMutableArray    *sourceDataArr;//图片资源
 
-@property (nonatomic, strong) NSArray      *imageArr;
-@property (nonatomic, strong) NSArray      *titleArr;
+@property (nonatomic, strong) NSArray           *imageArr;
+@property (nonatomic, strong) NSArray           *titleArr;
+
+@property (nonatomic, strong) NSMutableArray    *cycleImageArr;//轮播图组
+
+@property (nonatomic, strong) NSDictionary      *dataDict;
 
 
 @end
 
 @implementation YWHomeViewController
+{
+    NSInteger postCount;//用于判断是否已接收所有资源数据
+}
+
+- (NSMutableArray *)sourceDataArr {
+    if (_sourceDataArr == nil) {
+        _sourceDataArr = [[NSMutableArray alloc] init];
+    }
+    return _sourceDataArr;
+}
 
 #pragma mark - 懒加载
 - (NSMutableArray *)viewsArr {
     if (_viewsArr == nil) {
-        [self loadData];
+        _viewsArr = [[NSMutableArray alloc] init];
     }
     return _viewsArr;
 }
@@ -44,7 +59,7 @@
 }
 
 - (void)loadData {
-    self.viewsArr = [[NSMutableArray alloc] init];
+    
     [self.viewsArr addObject:[self.home createServiceCollectionView]];
     [self.viewsArr addObject:[self.home createActivetyView]];
     [self.viewsArr addObject:[self.home createSecondView]];
@@ -76,77 +91,112 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    postCount = 5;
     
-//    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    self.home = [[HomeView alloc] init];
+    self.home.VC = self;
     
     [self homeViewAttribute];
     [self createTableView];
+    [self loadImage];
     
-//    [self getImageFromNet:@"15014150833" imageName:@"ZY_0001" token:token];
-//    [self getImageFromNet:@"15014150833" imageName:@"ZY_0002" token:token];
-//    [self getImageFromNet:@"15014150833" imageName:@"ZY_0003" token:token];
-//    [self getImageFromNet:@"15014150833" imageName:@"ZY_0004" token:token];
-//    [self getImageFromNet:@"15014150833" imageName:@"ZY_0005" token:token];
-//    
-//    [self getDataFromNet:@"15014150833" token:token];
     
+}
+
+#pragma mark 获取资源图片
+- (void)loadImage {
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    
+    NSArray *propertys = @[self.cycleImageArr,self.home.actLeftArr,self.home.actTopArr,self.home.actBottomArr,self.home.discountArr];
+    for (NSInteger i = 0; i < propertys.count; i++) {
+        
+        NSString *imageName = [NSString stringWithFormat:@"ZY_000%ld",(long)i+1];
+        [self getImageFromNet:@"15014150833" imageName:imageName token:token sourceArr:propertys[i]];
+    }
+    
+    [self getDataFromNet:@"15014150833" token:token];
+    //二手车
+//    [self getUsedCarImage:@"15014150833" token:token];
+
 }
 
 #pragma mark 数据
 - (void)homeViewAttribute {
-    self.home = [[HomeView alloc] init];
-    self.home.VC = self;
+    
     self.home.imageArr = @[@"车险",@"上牌",@"车检",@"维修",@"驾考",@"保养",@"车贷",@"租车",@"二手",@"分类"];
     self.home.titleArr = @[@"车险",@"上牌",@"车检",@"维修",@"驾考",@"保养",@"车贷",@"租车",@"二手",@"分类"];
-    self.home.usedCarImageArr = @[@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色"];
-    
-    self.home.actImageDict = @{@"leftImage":@"u10",@"topImage":@"u10",@"bottomImage":@"u10"};
-    self.home.secondImageDict = @{@"left1Image":@"u10",@"left2Image":@"u10",@"left3Image":@"u10",@"right1Image":@"u10",@"right2Image":@"u10",@"right3Image":@"u10"};
+    self.home.usedCarImageArr = [NSMutableArray arrayWithArray:@[@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色"]];
     
     self.home.hotImageArr = @[@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色"];
     
 }
 
-//数据请求
+//服务图标数据请求
 - (void)getDataFromNet:(NSString *)username token:(NSString *)token {
     [YWPublic afPOST:[NSString stringWithFormat:kSERVICES,username,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"%@",dataDict);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kCONFIG,username,@"yyyt",@"320x680",token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dataDict);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
 }
 
-//从网络获取图片数据
-- (NSArray *)getImageFromNet:(NSString *)username imageName:(NSString *)imageName token:(NSString *)token {
+//从网络获取资源图片数据请求
+- (void)getImageFromNet:(NSString *)username imageName:(NSString *)imageName token:(NSString *)token sourceArr:(NSMutableArray *)sourceArr {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     NSString *screen_size = [NSString stringWithFormat:@"%lfx%lf",width,height];
     
-    NSMutableArray *data = [[NSMutableArray alloc] init];
-    __block NSMutableArray *dataArr = data;
-    
     //请求资源
+    __block NSMutableArray *arrM = sourceArr;
     [YWPublic afPOST:[NSString stringWithFormat:kCONFIG,username,imageName,screen_size,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        [data addObject:dataDict[@"config_value_list"]];
         
-        NSString *imageUrl = dataDict[@"config_value_list"][0][@"config_value"];
-        NSLog(@"dict:%@",imageUrl);
+        for (NSDictionary *dict in dataDict[@"config_value_list"]) {
+            [arrM addObject:dict[@"config_value"]];
+        }
         
-//        NSURL *url = [NSURL URLWithString:imageUrl];
-        
-//        [self.cycleImageArr addObject:url];
-//        [self.tableView reloadData];
-//        [self createTableView]; //获取轮播图后再创建视图
-//        NSLog(@"%ld",self.cycleImageArr.count);
+        postCount--;
+        if (postCount == 0) {
+            [self loadData];
+            [self.tableView reloadData];
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"资源请求失败%@",error);
+        NSLog(@"图片资源请求失败%@",error);
     }];
-    NSLog(@"%@,%@",dataArr,data);
-    return dataArr;
+}
+
+//获取二手车数据
+- (void)getUsedCarImage:(NSString *)username token:(NSString *)token {
+    
+    __block NSMutableArray *arrM = self.home.usedCarImageArr;
+    [YWPublic afPOST:[NSString stringWithFormat:kSECONDHAND,username,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dataDict);
+        for (NSDictionary *dict in dataDict[@"car_list"]) {
+            [arrM addObject:dict[@"img_path"]];
+        }
+//        postCount--;
+//        if (postCount == 0) {
+//            [self loadData];
+//            [self.tableView reloadData];
+//        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"二手车图片资源请求失败%@",error);
+    }];
 }
 
 #pragma mark - tableView
@@ -210,7 +260,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    [cell addSubview:self.viewsArr[indexPath.section]];
+    [cell.contentView addSubview:self.viewsArr[indexPath.section]];
     
     return cell;
 }

@@ -31,7 +31,7 @@
 //重设用户名
 #define kRESETUSRNAME @"http://112.74.13.51:8080/carmgr/appresetusername"
 
-//====================================================================
+//=====================================================================
 //动态资源 参数：username=%@&config_key=%@&screen_size=%@&token=%@&version=1.0
 #define kCONFIG @"http://112.74.13.51:8080/carmgr/appgetconfig?username=%@&config_key=%@&screen_size=%@&token=%@&version=1.0"
 
@@ -42,7 +42,15 @@
 #define kRECOMMEND @"http://112.74.13.51:8080/carmgr/appgetrecommend"
 
 //热门二手 参数：username=%@&token=%@&version=1.0
-#define kSECONDHAND @"http://112.74.13.51:8080/carmgr/appgetsecondhandcar?username=%@&version=1.0"
+#define kSECONDHAND @"http://112.74.13.51:8080/carmgr/appgetsecondhandcar?username=%@&token=%@&version=1.0"
+
+//=====================================================================
+//商家 参数：username=%@&filter=%@&token=%@&version=1.0
+#define kSTORE @"http://112.74.13.51:8080/carmgr/appgetmerchantslist?username=%@&filter=%@&token=%@&version=1.0"
+
+//进度 参数：username=%@&filter=%@&token=%@&version=1.0
+#define kPROCESS @"http://112.74.13.51:8080/carmgr/appgetprocess?username=%@&filter=%@&token=%@&version=1.0"
+
 
 
 @end

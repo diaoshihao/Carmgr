@@ -38,7 +38,7 @@
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     leftButton.contentMode = UIViewContentModeLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"下拉橙"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(cancelAddCarInfo) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }

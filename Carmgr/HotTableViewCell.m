@@ -31,7 +31,7 @@
 }
 
 + (NSString *)getReuseID {
-    return @"tableviewcell";
+    return @"hottableviewcell";
 }
 
 - (void)awakeFromNib {

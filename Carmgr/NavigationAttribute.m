@@ -46,7 +46,7 @@
 - (void)navigationAttribute:(UIViewController *)viewController {
     
     //标题
-    viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 255, 44) placeholder:@"输入想要的商品或服务"];
+    viewController.navigationItem.titleView = [self createSearchBarWithFrame:CGRectMake(0, 0, 255, 44) placeholder:@"输入商品或服务"];
     
     //左item
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"city"]) {
@@ -98,6 +98,9 @@
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:title imageName:nil];
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     button.titleLabel.font = [UIFont systemFontOfSize:15];
+    
+    //v1.0暂时禁用
+    button.enabled = NO;
 
     //添加事件
     [button addTarget:viewController action:@selector(chooseCityAction:) forControlEvents:UIControlEventTouchUpInside];

@@ -17,8 +17,9 @@ typedef NS_ENUM(NSInteger, SortKey){
 
 @interface StoreView : UIView
 
-@property (nonatomic, strong) NSArray *sortArr;
-@property (nonatomic, strong) NSArray *dataArr;
+@property (nonatomic, strong) NSArray           *sortArr;
+@property (nonatomic, strong) NSMutableArray    *dataArr;
+@property (nonatomic, strong) UITableView       *tableView;
 
 @property (nonatomic, assign) SortKey sortkey;
 

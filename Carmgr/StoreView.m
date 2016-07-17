@@ -10,13 +10,13 @@
 #import <Masonry.h>
 #import "YWPublic.h"
 #import "StoreTableViewCell.h"
+#import "StoreModel.h"
 
 @interface StoreView() <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, assign) BOOL          selected;//是否选择排序
 @property (nonatomic, strong) UIButton      *lastButton;//选择排序状态下的上一次按钮
 
-@property (nonatomic, strong) UITableView   *tableView;
 @property (nonatomic, strong) UITableView   *sortTableView;
 
 @property (nonatomic, strong) UIView        *superView;
@@ -28,12 +28,19 @@
 
 @implementation StoreView
 
+- (NSMutableArray *)dataArr {
+    if (_dataArr == nil) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
+}
+
 - (NSArray *)allSortArr {
     if (_allSortArr == nil) {
         _allSortArr = @[
-                     @[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"],
-                     @[@"全城市",@"越秀区",@"天河区",@"番禺区",@"海珠区",@"白云区",@"荔湾区",@"黄浦区",@"增城区",@"花都区",@"南沙区",@"从化市",@"近郊"],
-                     @[@"默认排序",@"离我最近",@"评价最高",@"最新发布",@"人气最高",@"价格最低",@"价格最高"]];
+                        @[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"],
+                        @[@"全城市",@"越秀区",@"天河区",@"番禺区",@"海珠区",@"白云区",@"荔湾区",@"黄浦区",@"增城区",@"花都区",@"南沙区",@"从化市",@"近郊"],
+                        @[@"默认排序",@"离我最近",@"评价最高",@"最新发布",@"人气最高",@"价格最低",@"价格最高"]];
     }
     return _allSortArr;
 }
@@ -86,7 +93,8 @@
     
     //箭头图标
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imageView.image = [YWPublic imageNameWithOriginalRender:imageName];
+    imageView.image = [YWPublic imageNameWithOriginalRender:@"下拉黑"];
+    imageView.highlightedImage = [UIImage imageNamed:@"下拉橙"];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.tag = button.tag * 10;
     [backView addSubview:imageView];
@@ -101,14 +109,15 @@
 
 - (void)changeSortKey:(UIButton *)sender {
     
-    UIImageView *imageView = [self.superView viewWithTag:sender.tag * 10];
-    
     //还原按钮颜色
     for (NSInteger i = 1; i <= 3; i++) {
         UIButton *button = [self.superView viewWithTag:i * 100];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        imageView.image = [UIImage imageNamed:@"下拉黑"];
+        UIImageView *imageView = [self.superView viewWithTag:button.tag * 10];
+        imageView.highlighted = NO;
     }
+    
+    UIImageView *imageView = [self.superView viewWithTag:sender.tag * 10];
     
     //如果是正常页面,点击之后被选中状态,上一次按钮为nil，改变排序名self.sortkey
     if (self.sortkey == SortByNone) {
@@ -117,7 +126,7 @@
         self.sortkey = sender.tag / 100;
         
         [sender setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
-        imageView.image = [UIImage imageNamed:@"下拉橙"];
+        imageView.highlighted = YES;
         
         self.sortArr = self.allSortArr[sender.tag/100 - 1];
         [self createSortTableView:self.superView];
@@ -137,7 +146,7 @@
         self.sortkey = sender.tag / 100;
         
         [sender setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
-        imageView.image = [UIImage imageNamed:@"下拉橙"];
+        imageView.highlighted = YES;
         
         //切换按钮刷新选择数据
         self.sortArr = self.allSortArr[sender.tag/100 - 1];
@@ -146,7 +155,7 @@
     
     //上一次的按钮
     self.lastButton = sender;
-   
+    
 }
 
 
@@ -233,11 +242,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
         StoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[StoreTableViewCell getReuseID] forIndexPath:indexPath];
-        cell.headImageView.image = [UIImage imageNamed:@"圆角矩形红色"];
-        cell.storeName.text = @"牛B服务";
-        cell.servieceArr = @[@"综",@"金",@"洗",@"修",@"牌"];
-        cell.score.text = [NSString stringWithFormat:@"%@分",@"3.5"];
-        cell.address.text = self.dataArr[indexPath.row];
+        
+        StoreModel *model = self.dataArr[indexPath.row];
+        
+        if (model.img_path == nil) {
+            cell.headImageView.image = [UIImage imageNamed:@"u10"];
+        } else {
+            cell.headImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path] options:0 error:nil]];
+        }
+        
+        cell.storeName.text = model.merchant_name;
+        cell.servieceArr = [model.tags componentsSeparatedByString:@"|"];
+        cell.score.text = [NSString stringWithFormat:@"%@分",model.stars];
+        cell.address.text = model.address;
+        cell.mobile = model.mobile;
+        
+        [cell.button addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
         
         [cell servieceLabel];
         [cell starView];
@@ -247,6 +267,9 @@
         cell.textLabel.text = self.sortArr[indexPath.row];
         return cell;
     }
+}
+- (void)callAction {
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -258,6 +281,9 @@
         UIButton *button = [self.superView viewWithTag:i * 100];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
+        UIImageView *imageView = [self.superView viewWithTag:button.tag * 10];
+        imageView.highlighted = NO;
+        
         if (self.sortkey == i) {
             [button setTitle:self.sortArr[indexPath.row] forState:UIControlStateNormal];
         }
@@ -268,18 +294,19 @@
     
     if (tableView == self.tableView) {
         //网络数据请求
-        [self.tableView reloadData];//sort
+        
+        //跳转到详情页
     } else {
         
         //移除排序视图
         [self.lineView removeFromSuperview];
         [self.sortTableView removeFromSuperview];
         
+        //网络排序数据请求
+        
         //刷新正常视图数据
         [self.tableView reloadData];
     }
-    
-    
     
 }
 

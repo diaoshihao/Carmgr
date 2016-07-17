@@ -38,7 +38,7 @@
 }
 - (NSArray *)imageArr {
     if (_imageArr == nil) {
-        _imageArr = @[@[@""],@[@"圆角矩形绿色"],@[@"圆角矩形深蓝",@"圆角矩形红色"],@[@"圆角矩形紫色",@"圆角矩形黄色"]];
+        _imageArr = @[@[@""],@[@"绿色"],@[@"蓝色",@"红色"],@[@"紫色",@"黄色"]];
     }
     return _imageArr;
 }
@@ -56,7 +56,7 @@
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(superView);
+        make.bottom.mas_equalTo(-44);
     }];
     
     tableView.delegate = self;

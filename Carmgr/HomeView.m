@@ -27,6 +27,34 @@
     UICollectionView *serviceCollectionView;
 }
 
+- (NSMutableArray *)discountArr {
+    if (_discountArr == nil) {
+        _discountArr = [[NSMutableArray alloc] init];
+    }
+    return _discountArr;
+}
+
+- (NSMutableArray *)actLeftArr {
+    if (_actLeftArr == nil) {
+        _actLeftArr = [[NSMutableArray alloc] init];
+    }
+    return _actLeftArr;
+}
+
+- (NSMutableArray *)actTopArr {
+    if (_actTopArr == nil) {
+        _actTopArr = [[NSMutableArray alloc] init];
+    }
+    return _actTopArr;
+}
+
+- (NSMutableArray *)actBottomArr {
+    if (_actBottomArr == nil) {
+        _actBottomArr = [[NSMutableArray alloc] init];
+    }
+    return _actBottomArr;
+}
+
 - (CGFloat)width {
     if (_width == 0) {
         self.width = [UIScreen mainScreen].bounds.size.width;
@@ -47,16 +75,23 @@
     CGFloat height = width / 2.5;
         
     SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, width, height) delegate:nil placeholderImage:[UIImage imageNamed:@"u10"]];
+    
     cycleScrollView.imageURLStringsGroup = imageNameGroup;
     cycleScrollView.autoScrollTimeInterval = 3.5;
+    
     return cycleScrollView;
     
 }
 
 //为以下提供创建button方法
-- (UIButton *)createActivetyBtn:(NSString *)imageName tag:(NSInteger)tag {
-    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:imageName];
+- (UIButton *)createActivetyBtn:(NSString *)imageUrl tag:(NSInteger)tag {
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:nil];
     button.tag = tag;
+    if (imageUrl == nil) {
+        [button setImage:[UIImage imageNamed:@"u10"] forState:UIControlStateNormal];
+    } else {
+        [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
+    }
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
@@ -65,13 +100,13 @@
 - (UIView *)createActivetyView {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/3)];
     
-    UIButton *leftBtn = [self createActivetyBtn:self.actImageDict[@"leftImage"] tag:100];
+    UIButton *leftBtn = [self createActivetyBtn:self.actLeftArr[0] tag:100];
     [backView addSubview:leftBtn];
     
-    UIButton *topBtn = [self createActivetyBtn:self.actImageDict[@"topImage"] tag:200];
+    UIButton *topBtn = [self createActivetyBtn:self.actTopArr[0] tag:200];
     [backView addSubview:topBtn];
     
-    UIButton *bottomBtn = [self createActivetyBtn:self.actImageDict[@"bottomImage"] tag:300];
+    UIButton *bottomBtn = [self createActivetyBtn:self.actBottomArr[0] tag:300];
     [backView addSubview:bottomBtn];
     
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -98,9 +133,15 @@
 }
 
 //为以下提供创建button方法
-- (UIButton *)createBtn:(NSString *)imageName tag:(NSInteger)tag {
-    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:imageName];
+- (UIButton *)createBtn:(NSString *)imageUrl tag:(NSInteger)tag {
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:nil];
     button.tag = tag;
+    if (imageUrl == nil) {
+        [button setImage:[UIImage imageNamed:@"u10"] forState:UIControlStateNormal];
+    } else {
+        [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
+    }
+    
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
@@ -110,24 +151,24 @@
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/2)];
     
     //leftBtn
-    UIButton *left1 = [self createBtn:self.secondImageDict[@"left1Image"] tag:400];
+    UIButton *left1 = [self createBtn:self.discountArr[0] tag:400];
     [backView addSubview:left1];
     
-    UIButton *left2 = [self createBtn:self.secondImageDict[@"left2Image"] tag:500];
+    UIButton *left2 = [self createBtn:self.discountArr[1] tag:500];
     [backView addSubview:left2];
     
-    UIButton *left3 = [self createBtn:self.secondImageDict[@"left3Image"] tag:600];
+    UIButton *left3 = [self createBtn:self.discountArr[2] tag:600];
     [backView addSubview:left3];
     
     
     //rightBtn
-    UIButton *right1 = [self createBtn:self.secondImageDict[@"right1Image"] tag:700];
+    UIButton *right1 = [self createBtn:self.discountArr[3] tag:700];
     [backView addSubview:right1];
     
-    UIButton *right2 = [self createBtn:self.secondImageDict[@"right2Image"] tag:800];
+    UIButton *right2 = [self createBtn:self.discountArr[4] tag:800];
     [backView addSubview:right2];
     
-    UIButton *right3 = [self createBtn:self.secondImageDict[@"right3Image"] tag:900];
+    UIButton *right3 = [self createBtn:self.discountArr[5] tag:900];
     [backView addSubview:right3];
     
     

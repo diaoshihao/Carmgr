@@ -15,6 +15,11 @@
 @property (nonatomic, strong) UILabel     *address;
 @property (nonatomic, strong) UILabel     *score;
 
+@property (nonatomic, strong) UIButton    *button;
+
+@property (nonatomic, strong) NSString    *mobile;
+
+
 @property (nonatomic, strong) NSArray     *servieceArr;
 
 - (void)servieceLabel;

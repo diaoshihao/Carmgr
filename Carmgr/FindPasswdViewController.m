@@ -39,7 +39,22 @@
 
 - (void)getVerifyCode {
     [self.textField resignFirstResponder];
-    NSLog(@"获取验证码");
+    //网络请求获取验证码   参数：username=%@&type=%@&version=1.0
+    //type == 0：注册；1：登录；2:找回密码
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,2] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dataDict);
+//        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+//            [self verifyCode];//验证通过
+//        } else {
+//            NSLog(@"%@",dataDict[@"opt_info"]);
+//        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+    }];
 }
 
 - (void)customLeftItem {

@@ -10,7 +10,11 @@
 
 @interface ProgressView : UIView <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UIViewController *actionTarget;
+@property (nonatomic, strong) UIViewController  *actionTarget;
+
+@property (nonatomic, strong) UITableView       *tableView;
+
+@property (nonatomic, strong) NSMutableArray    *dataArr;
 
 
 - (UITableView *)createTableView:(UIView *)superView;

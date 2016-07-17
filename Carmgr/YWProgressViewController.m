@@ -45,9 +45,34 @@
     self.progressView = [[ProgressView alloc] init];
     self.progressView.actionTarget = self;
     [self.progressView createTableView:self.view];
+    [self loadData];
 
 }
 
+#pragma mark 加载网络数据
+- (void)loadData {
+    //参数
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kPROCESS,username,filter,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dataDict);
+//        for (NSDictionary *dict in dataDict[@"merchants_list"]) {
+//            StoreModel *model = [[StoreModel alloc] initWithDict:dict];
+//            [self.storeView.dataArr addObject:model];
+//        }
+        
+//        [self.progressView.tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+    }];
+
+}
+
+//进度点击action
 - (void)buttonClick:(UIButton *)sender {
     
     if (sender.isSelected) {

@@ -128,10 +128,10 @@
         if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
             
             //登录成功保存数据
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
-            [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
-            [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
+            [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];//用户名
+            [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];//密码
+            [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
             
             UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"" message:@"登录成功"];
             [self presentViewController:alertVC animated:YES completion:^{

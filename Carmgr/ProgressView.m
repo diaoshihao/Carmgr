@@ -24,27 +24,23 @@
     BOOL isFirst;
 }
 
-//- (void)createViewAtSuperView:(UIView *)superView {
-//    [superView addSubview:[self createHeadViewAtSuperView]];
-//}
-
 - (UITableView *)createTableView:(UIView *)superView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    [superView addSubview:tableView];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    [superView addSubview:self.tableView];
     
-    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.height.mas_equalTo(superView);
     }];
     
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
-    tableView.tableHeaderView = [self createHeadViewAtSuperView];
+    self.tableView.tableHeaderView = [self createHeadViewAtSuperView];
     
-    [tableView registerClass:[ProgressTableViewCell class] forCellReuseIdentifier:[ProgressTableViewCell getReuseID]];
+    [self.tableView registerClass:[ProgressTableViewCell class] forCellReuseIdentifier:[ProgressTableViewCell getReuseID]];
     
     
     //点击隐藏键盘(tableview满屏的情况下)
@@ -52,7 +48,7 @@
     tap.cancelsTouchesInView = NO;  //重要
     [superView addGestureRecognizer:tap];
     
-    return tableView;
+    return self.tableView;
 }
 - (void)hideSearchBar:(UITapGestureRecognizer *)tap {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
@@ -71,14 +67,6 @@
     allBtn.tag = 1000;
     allBtn.selected = YES;
     [backView addSubview:allBtn];
-    
-//    [allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(0);
-//        make.left.mas_equalTo(0);
-//        make.width.mas_equalTo(height/1.5);
-//        make.height.mas_equalTo(height-1);
-//        
-//    }];
     
     NSArray *firstTitles = @[@"待付款",@"待使用",@"进行中"];
     NSArray *firstImages = @[@"待付款",@"待使用",@"进行中"];
@@ -201,10 +189,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProgressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ProgressTableViewCell getReuseID] forIndexPath:indexPath];
-    cell.storeName.text = [NSString stringWithFormat:@"易务车商店%ld",indexPath.section+1];
-    cell.serviceLabel.text = [NSString stringWithFormat:@"易务车服务%ld",indexPath.section+1];
-    cell.numberLabel.text = [NSString stringWithFormat:@"订单号：%ld",indexPath.section*10000];
-    cell.timeLabel.text = [NSString stringWithFormat:@"2016.7.%ld",indexPath.section+7];
+    cell.storeName.text = [NSString stringWithFormat:@"易务车商店%ld",(long)indexPath.section+1];
+    cell.serviceLabel.text = [NSString stringWithFormat:@"易务车服务%ld",(long)indexPath.section+1];
+    cell.numberLabel.text = [NSString stringWithFormat:@"订单号：%ld",(long)indexPath.section*10000];
+    cell.timeLabel.text = [NSString stringWithFormat:@"2016.7.%ld",(long)indexPath.section+7];
     cell.stateLabel.text = [NSString stringWithFormat:@"  %@  ",@"待使用"];
     return cell;
 }

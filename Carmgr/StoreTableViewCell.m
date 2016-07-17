@@ -14,19 +14,22 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        UIFont *font = [UIFont systemFontOfSize:15];
+        UIFont *font = [UIFont systemFontOfSize:14];
         //头像
         self.headImageView = [[UIImageView alloc] init];
+//        self.headImageView.contentMode = UIViewContentModeCenter;
         [self.contentView addSubview:self.headImageView];
         
         //商店名
         self.storeName = [[UILabel alloc] init];
         self.storeName.font = font;
+        self.storeName.numberOfLines = 0;
         [self.contentView addSubview:self.storeName];
         
         //地址
         self.address = [[UILabel alloc] init];
         self.address.font = font;
+        self.address.numberOfLines = 0;
         [self.contentView addSubview:self.address];
         
         //分数
@@ -41,12 +44,12 @@
 }
 
 - (void)autoLayout {
-    
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.contentView);
+        make.left.mas_equalTo(0);
         make.top.mas_equalTo(10);
-        make.left.mas_equalTo(20);
         make.bottom.mas_equalTo(-10);
-        make.width.mas_equalTo(self.headImageView.mas_height);
+        make.height.mas_equalTo(self.headImageView.mas_width);
     }];
     
     [self.storeName setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
@@ -75,7 +78,7 @@
         UILabel *label = [[UILabel alloc] init];
         label.text = self.servieceArr[i];
         label.textColor = [UIColor whiteColor];
-        label.font = [UIFont systemFontOfSize:12];
+        label.font = [UIFont systemFontOfSize:10];
         [imageView addSubview:label];
         
         if ([label.text isEqualToString:@"综"]) {
@@ -94,9 +97,9 @@
             if (lastImageView == nil) {
                 make.left.mas_equalTo(self.storeName.mas_right).with.offset(15);
             } else {
-                make.left.mas_equalTo(lastImageView.mas_right).with.offset(10);
+                make.left.mas_equalTo(lastImageView.mas_right).with.offset(5);
             }
-            make.height.mas_equalTo(self.storeName.intrinsicContentSize.height);
+            make.height.mas_equalTo(label.intrinsicContentSize.height);
             make.width.mas_equalTo(imageView.mas_height);
             make.centerY.mas_equalTo(self.storeName);
         }];
@@ -168,18 +171,25 @@
     
     
     //联系商家按钮
-    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"联系商家" imageName:nil];
-    [button setBackgroundImage:[UIImage imageNamed:@"圆角矩形-1"] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:button];
+    self.button = [YWPublic createButtonWithFrame:CGRectZero title:@"联系商家" imageName:nil];
+    [self.button setBackgroundImage:[UIImage imageNamed:@"圆角矩形-1"] forState:UIControlStateNormal];
+    self.button.titleLabel.font = [UIFont systemFontOfSize:14];
     
-    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.button];
+    
+    [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-20);
         make.centerY.mas_equalTo(self.address);
         make.width.mas_equalTo(70);
         make.height.mas_equalTo(self.address);
     }];
     
+}
+
+- (void)callAction {
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.mobile]]];
+    [self addSubview:callWebview];
 }
 
 + (NSString *)getReuseID {

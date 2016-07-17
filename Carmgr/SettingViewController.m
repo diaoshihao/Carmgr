@@ -75,6 +75,7 @@
     cell.textLabel.text = self.dataArr[indexPath.section][indexPath.row];
     if (indexPath.section == 0 && indexPath.row == 0) {
         UISwitch *netSwitch = [[UISwitch alloc] init];
+        netSwitch.onTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
         
         netSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"MONET"];
         [netSwitch addTarget:self action:@selector(setSwitchOn:) forControlEvents:UIControlEventValueChanged];
