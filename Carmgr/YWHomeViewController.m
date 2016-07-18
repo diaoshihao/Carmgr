@@ -58,7 +58,7 @@
     return _cycleImageArr;
 }
 
-- (void)loadData {
+- (void)loadCellViews {
     
     [self.viewsArr addObject:[self.home createServiceCollectionView]];
     [self.viewsArr addObject:[self.home createActivetyView]];
@@ -91,33 +91,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    postCount = 5;
+    postCount = 5;//用于网络请求计数
     
     self.home = [[HomeView alloc] init];
     self.home.VC = self;
     
     [self homeViewAttribute];
     [self createTableView];
-    [self loadImage];
+    //    [self loadImage];
     
     
 }
 
 #pragma mark 获取资源图片
 - (void)loadImage {
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
     NSArray *propertys = @[self.cycleImageArr,self.home.actLeftArr,self.home.actTopArr,self.home.actBottomArr,self.home.discountArr];
+    
     for (NSInteger i = 0; i < propertys.count; i++) {
         
         NSString *imageName = [NSString stringWithFormat:@"ZY_000%ld",(long)i+1];
-        [self getImageFromNet:@"15014150833" imageName:imageName token:token sourceArr:propertys[i]];
+        [self getImageFromNet:userName imageName:imageName token:token sourceArr:propertys[i]];
     }
     
-    [self getDataFromNet:@"15014150833" token:token];
+    [self getDataFromNet:userName token:token];
     //二手车
-//    [self getUsedCarImage:@"15014150833" token:token];
-
+    //    [self getUsedCarImage:@"15014150833" token:token];
+    
 }
 
 #pragma mark 数据
@@ -140,14 +142,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
-    
-    [YWPublic afPOST:[NSString stringWithFormat:kCONFIG,username,@"yyyt",@"320x680",token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@",dataDict);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
 }
 
 //从网络获取资源图片数据请求
@@ -159,22 +153,49 @@
     //请求资源
     __block NSMutableArray *arrM = sourceArr;
     [YWPublic afPOST:[NSString stringWithFormat:kCONFIG,username,imageName,screen_size,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        postCount--;//计数-1
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        for (NSDictionary *dict in dataDict[@"config_value_list"]) {
-            [arrM addObject:dict[@"config_value"]];
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            [arrM removeAllObjects];
+            for (NSDictionary *dict in dataDict[@"config_value_list"]) {
+                [arrM addObject:dict[@"config_value"]];
+            }
+        } else {
+            if (postCount == 0) {
+                [self.tableView.mj_header endRefreshing];
+                postCount = 5;//重置计数
+                [self showAlertView];
+            }
+            return ;
         }
         
-        postCount--;
         if (postCount == 0) {
-            [self loadData];
+            [self.tableView.mj_header endRefreshing];
+            postCount = 5;//重置计数
+            [self.viewsArr removeAllObjects];//重置view个数
+            [self loadCellViews];
             [self.tableView reloadData];
         }
         
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.tableView.mj_header endRefreshing];
         NSLog(@"图片资源请求失败%@",error);
     }];
+}
+
+- (void)showAlertView {
+    [self.tableView.mj_header endRefreshing];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户状态已过期，请重新登录" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *login = [UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertVC addAction:cancel];
+    [alertVC addAction:login];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 //获取二手车数据
@@ -188,11 +209,11 @@
         for (NSDictionary *dict in dataDict[@"car_list"]) {
             [arrM addObject:dict[@"img_path"]];
         }
-//        postCount--;
-//        if (postCount == 0) {
-//            [self loadData];
-//            [self.tableView reloadData];
-//        }
+        //        postCount--;
+        //        if (postCount == 0) {
+        //            [self loadData];
+        //            [self.tableView reloadData];
+        //        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"二手车图片资源请求失败%@",error);
@@ -209,6 +230,12 @@
     self.tableView.allowsSelection = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    //添加下拉刷新控件
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadImage];
+    }];
+    [self.tableView.mj_header beginRefreshing];
     
     //点击隐藏键盘(tableview满屏的情况下)
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];
@@ -285,13 +312,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

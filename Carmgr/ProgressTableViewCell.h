@@ -18,6 +18,9 @@
 @property (nonatomic, strong) UILabel       *timeLabel;
 @property (nonatomic, strong) UILabel       *stateLabel;
 
+@property (nonatomic, strong) UIButton      *button1;
+@property (nonatomic, strong) UIButton      *button2;
+
 - (void)autoLayout;
 
 + (NSString *)getReuseID;

@@ -194,6 +194,8 @@
     cell.numberLabel.text = [NSString stringWithFormat:@"订单号：%ld",(long)indexPath.section*10000];
     cell.timeLabel.text = [NSString stringWithFormat:@"2016.7.%ld",(long)indexPath.section+7];
     cell.stateLabel.text = [NSString stringWithFormat:@"  %@  ",@"待使用"];
+    [cell.button1 setTitle:@"取消订单" forState:UIControlStateNormal];
+    [cell.button2 setTitle:@"催进度" forState:UIControlStateNormal];
     return cell;
 }
 

@@ -7,10 +7,11 @@
 //
 
 #import "BaseModel.h"
+#import "ImageModel.h"
 
 @interface HomeModel : NSObject
 
-@property (nonatomic, strong) NSArray *cycleImageArr;
+@property (nonatomic, strong) ImageModel *imageModel;
 
 - (instancetype)initWithDic:(NSDictionary*)dic;
 

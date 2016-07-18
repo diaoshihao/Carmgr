@@ -46,7 +46,10 @@
     self.storeView = [[StoreView alloc] init];
     [self.storeView createHeadSortViewAtSuperView:self.view];
     [self.storeView createTableView:self.view];
-    [self loadData];
+    
+    //添加下拉刷新
+    self.storeView.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    [self.storeView.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadData {
@@ -55,17 +58,38 @@
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+    //先从数据库中取出缓存数据
+    if ([[YWDataBase sharedDataBase] isExistsInStore]) {
+        self.storeView.dataArr = [[YWDataBase sharedDataBase] getAllDataFromStore];
+        [self.storeView.tableView reloadData];//刷新数据
+    }
+    
     [YWPublic afPOST:[NSString stringWithFormat:kSTORE,username,filter,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //停止刷新
+        [self.storeView.tableView.mj_header endRefreshing];
+        
+        //插入数据库前删除数据
+        [[YWDataBase sharedDataBase] deleteDatabase];
+        self.storeView.dataArr = nil;
+        
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
         for (NSDictionary *dict in dataDict[@"merchants_list"]) {
             StoreModel *model = [[StoreModel alloc] initWithDict:dict];
             [self.storeView.dataArr addObject:model];
+            
+            //插入数据库
+            [[YWDataBase sharedDataBase] insertStoreWithModel:model];
         }
         
-        [self.storeView.tableView reloadData];
+        [self.storeView.tableView reloadData];//刷新数据
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //请求数据失败
+        [self.storeView.tableView.mj_header endRefreshing];
+        
+        //关闭数据库
+        [[YWDataBase sharedDataBase] closeDataBase];
         NSLog(@"error:%@",error);
     }];
 }

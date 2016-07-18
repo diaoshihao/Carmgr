@@ -12,7 +12,7 @@
 
 - (instancetype)initWithDic:(NSDictionary*)dic {
     if (self = [super init]) {
-        self.cycleImageArr = dic[@"config_value_list"];
+        self.imageModel = dic[@"config_value_list"];
     }
     return self;
 }

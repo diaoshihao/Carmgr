@@ -27,19 +27,26 @@
 #import "CityChooseViewController.h"
 #import "NSString+MD5.h"//MD5加密
 #import "RegularTools.h"//正则表达式
+#import "YWDataBase.h"//数据库
+#import "MJRefresh.h"
 
 @interface YWPublic : NSObject
 
 NS_ASSUME_NONNULL_BEGIN
 
+//MD5加密
 + (NSString *)encryptMD5String:(NSString *)string;
 
+//button
 + (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString * _Nullable)title imageName:(NSString * _Nullable)imageName;
 
+//图片渲染模式
 + (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
 
+//创建圆形图片
 + (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName;
 
+//textfield
 + (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;
 
 + (UIAlertController *)showAlertViewAt:(UIViewController *)VC title:(NSString *)title message:(NSString *)message ;

@@ -64,7 +64,7 @@
     [button sizeToFit];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
     if ([button.titleLabel.text isEqualToString:@"全部"]) {
         button.tag = 100;
     } else if ([button.titleLabel.text isEqualToString:@"全城市"]) {
@@ -242,6 +242,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
         StoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[StoreTableViewCell getReuseID] forIndexPath:indexPath];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         StoreModel *model = self.dataArr[indexPath.row];
         
@@ -253,7 +254,7 @@
         
         cell.storeName.text = model.merchant_name;
         cell.servieceArr = [model.tags componentsSeparatedByString:@"|"];
-        cell.score.text = [NSString stringWithFormat:@"%@分",model.stars];
+        cell.score.text = [NSString stringWithFormat:@"%.1lf分",[model.stars floatValue]];
         cell.address.text = model.address;
         cell.mobile = model.mobile;
         
@@ -264,6 +265,7 @@
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortcell" forIndexPath:indexPath];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = self.sortArr[indexPath.row];
         return cell;
     }
@@ -303,6 +305,7 @@
         [self.sortTableView removeFromSuperview];
         
         //网络排序数据请求
+        
         
         //刷新正常视图数据
         [self.tableView reloadData];

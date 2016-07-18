@@ -49,6 +49,17 @@
         self.stateLabel.font = [UIFont systemFontOfSize:13];
         [self.contentView addSubview:self.stateLabel];
         
+        
+        self.button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.button1 setBackgroundImage:[UIImage imageNamed:@"圆角矩形-1"] forState:UIControlStateNormal];
+        self.button1.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:self.button1];
+        
+        self.button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.button2 setBackgroundImage:[UIImage imageNamed:@"圆角矩形-1"] forState:UIControlStateNormal];
+        self.button2.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:self.button2];
+        
         [self autoLayout];
 
     }
@@ -96,6 +107,20 @@
     [self.stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-20);
         make.centerY.mas_equalTo(self.storeName);
+    }];
+    
+    [self.button1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-20);
+        make.centerY.mas_equalTo(self.serviceLabel);
+        make.width.mas_equalTo(70);
+        make.height.mas_equalTo(self.storeName);
+    }];
+    
+    [self.button2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-20);
+        make.centerY.mas_equalTo(self.timeLabel);
+        make.width.mas_equalTo(70);
+        make.height.mas_equalTo(self.storeName);
     }];
     
 }
