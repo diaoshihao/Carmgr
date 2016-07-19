@@ -49,8 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 //textfield
 + (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;
 
-+ (UIAlertController *)showAlertViewAt:(UIViewController *)VC title:(NSString *)title message:(NSString *)message ;
++ (UIAlertController *)showReLoginAlertViewAt:(UIViewController *)VC;
 
++ (UIAlertController *)showFaileAlertViewAt:(UIViewController *)VC;
 
 + (void)afPOST:(NSString *)URLString
     parameters:(nullable id)parameters

@@ -242,7 +242,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
         StoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[StoreTableViewCell getReuseID] forIndexPath:indexPath];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         StoreModel *model = self.dataArr[indexPath.row];
         
@@ -265,7 +264,6 @@
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortcell" forIndexPath:indexPath];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = self.sortArr[indexPath.row];
         return cell;
     }
@@ -295,8 +293,20 @@
     self.selected = NO;
     
     if (tableView == self.tableView) {
-        //网络数据请求
         
+        ////////////////////////
+        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+        StoreModel *model = self.dataArr[indexPath.row];
+        NSString *merchant_name = [model.merchant_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        //网络数据请求
+        [YWPublic afPOST:[NSString stringWithFormat:kMERCHANT,username,merchant_name,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@",dataDict);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error:%@",error);
+        }];
+        ////////////////////////
         //跳转到详情页
     } else {
         

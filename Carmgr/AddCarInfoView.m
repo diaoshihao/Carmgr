@@ -30,10 +30,13 @@
         UITextField *textField = [self textFieldWithPlaceholder:placeholder[forSection-2][i]];
         if (forSection == 2 && i == 0) {
             UILabel *label = [self labelWithTitle:@"粤"];
-            label.frame = CGRectMake(0, 0, 30, 35);
+            label.textAlignment = NSTextAlignmentCenter;
+            CGSize size = label.intrinsicContentSize;
+            label.frame = CGRectMake(0, 0, size.width+10, size.height+10);
             label.backgroundColor = [UIColor groupTableViewBackgroundColor];
             
             textField.leftView = label;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         [arrM addObject:textField];
     }

@@ -119,7 +119,9 @@
 - (void)login {
     [self.view endEditing:YES];
     //密码加密
-    NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text/*[YWPublic encryptMD5String:self.passwdField.text]*/];
+    NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text];
+    /*[YWPublic encryptMD5String:self.passwdField.text]*/
+
     [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -133,7 +135,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];//密码
             [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
             
-            UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"" message:@"登录成功"];
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:@"登录成功" preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:alertVC animated:YES completion:^{
                 [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
             }];

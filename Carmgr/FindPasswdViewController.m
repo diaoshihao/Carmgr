@@ -34,6 +34,10 @@
 - (void)verifyCode {
     NSLog(@"验证通过");
     ResetPasswdViewController *resetPasswdVC = [[ResetPasswdViewController alloc] init];
+    resetPasswdVC.settingType = ForFindPassword;//用于找回密码
+    resetPasswdVC.username = self.textField.text;
+    resetPasswdVC.mobile = self.textField.text;
+    resetPasswdVC.verifycode = self.verifyCodeField.text;
     [self.navigationController pushViewController:resetPasswdVC animated:YES];
 }
 
@@ -127,7 +131,7 @@
     [self.textField addSubview:getVerifyCode];
     
     [getVerifyCode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-20);
+        make.right.mas_equalTo(-30);
         make.height.mas_equalTo(25);
         make.centerY.mas_equalTo(self.textField);
     }];

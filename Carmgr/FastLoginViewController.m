@@ -46,7 +46,7 @@
 - (void)verifyCode {
     NSLog(@"登录成功");
     
-    UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"" message:@"登录成功"];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"登录成功" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertVC animated:YES completion:^{
         [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
     }];

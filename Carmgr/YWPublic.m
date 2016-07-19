@@ -7,6 +7,7 @@
 //
 
 #import "YWPublic.h"
+#import "YWLoginViewController.h"
 
 @implementation YWPublic
 
@@ -72,9 +73,31 @@
     return textField;
 }
 
-+ (UIAlertController *)showAlertViewAt:(UIViewController *)VC title:(NSString *)title message:(nonnull NSString *)message {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    return alertController;
++ (UIAlertController *)showReLoginAlertViewAt:(UIViewController *)VC {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户不存在或已过期，请注册或登录后刷新页面" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [cancel setValue:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forKey:@"titleTextColor"];
+    
+    UIAlertAction *login = [UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
+        UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [VC presentViewController:navigaVC animated:YES completion:nil];
+    }];
+    [login setValue:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forKey:@"titleTextColor"];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:login];
+    [VC presentViewController:alertVC animated:YES completion:nil];
+    return alertVC;
+}
+
++ (UIAlertController *)showFaileAlertViewAt:(UIViewController *)VC {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"获取数据失败，请检查网络" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [action setValue:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forKey:@"titleTextColor"];
+    [alertVC addAction:action];
+    return alertVC;
 }
 
 @end

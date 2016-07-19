@@ -32,7 +32,7 @@
         UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
         [self presentViewController:navigaVC animated:YES completion:nil];
     } else {
-        NSLog(@"已登录%@",[YWPublic encryptMD5String:@"123456123456"]);
+        
     }
     
 }

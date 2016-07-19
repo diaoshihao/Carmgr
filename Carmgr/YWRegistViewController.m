@@ -92,7 +92,7 @@
         }];
         
     } else {
-        UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"提示" message:@"请输入正确的手机号"];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入正确的手机号" preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:alertVC animated:YES completion:^{
             [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
         }];
@@ -151,10 +151,8 @@
     if (self.passwdField.text.length <= 32 && self.passwdField.text.length >= 6 && [self.passwdField.text isEqualToString:self.repeatPasswd.text]) {
         
         //注册
-        NSString *param = [NSString stringWithFormat:@"username=%@&password=%@&mobile=%@",self.mobile,self.passwdField.text,self.mobile];
-        [YWPublic afPOST:kREGISTER parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [YWPublic afPOST:[NSString stringWithFormat:kREGISTER,self.mobile,self.passwdField.text,self.mobile,0] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSLog(@"%@",responseObject);
-            NSLog(@"%@ %@ %@",self.mobile,self.passwdField.text,self.mobile);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];

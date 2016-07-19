@@ -10,6 +10,7 @@
 #import "AddCarInfoCell.h"
 #import "AddCarInfoView.h"
 #import <Masonry.h>
+#import "YWPublic.h"
 
 @interface AddCarInfoViewController () <UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
@@ -20,19 +21,26 @@
 
 @property (nonatomic, strong) AddCarInfoView *infoView;
 
+@property (nonatomic, strong) UISegmentedControl *numberType;//号码类型
+@property (nonatomic, strong) UILabel *carType;//车型
+
+@property (nonatomic, strong) UILabel *cityLabel;//城市
+
+@property (nonatomic, strong) UITextField *vehicle_number;//车牌
+@property (nonatomic, strong) UITextField *engine_number;//发动机号
+@property (nonatomic, strong) UITextField *frame_number;//车架号
+
+@property (nonatomic, strong) UITextField *buy_insu_time;//保险日期
+@property (nonatomic, strong) UITextField *first_insu_time;//首次保养
+@property (nonatomic, strong) UITextField *travel_mileage;//行驶公里
+
+@property (nonatomic, strong) UITextField *comments;//备注
+
 @end
 
 @implementation AddCarInfoViewController
 
 - (void)loadData {
-    
-    self.viewsArr = @[
-                      @[[self.infoView numberType],[self.infoView labelWithTitle:@"请选择车辆(选填)"]],
-                      @[[self.infoView labelWithTitle:@"广州"]],
-                      [self.infoView textFieldArray:2],
-                      [self.infoView textFieldArray:3],
-                      @[[self.infoView textFieldWithPlaceholder:@"请输入爱车(选填)"]]
-                      ];
     
     self.titleArr = @[
                       @[@"号码类型",@"车        型"],
@@ -41,6 +49,33 @@
                       @[@"保险进保日期",@"首次保养日期",@"行驶公里数"],
                       @[@"备        注"]
                       ];
+    
+    self.numberType = [self.infoView numberType];
+    self.carType = [self.infoView labelWithTitle:@"请选择车辆(选填)"];
+    
+    self.cityLabel = [self.infoView labelWithTitle:@"广州"];
+    
+    NSArray *arr2 = [self.infoView textFieldArray:2];//数字标示是
+    NSArray *arr3 = [self.infoView textFieldArray:3];//否添加“粤”
+    
+    self.vehicle_number = arr2[0];
+    self.engine_number = arr2[1];
+    self.frame_number = arr2[2];
+    
+    self.buy_insu_time = arr3[0];
+    self.first_insu_time = arr3[1];
+    self.travel_mileage = arr3[2];
+    
+    self.comments = [self.infoView textFieldWithPlaceholder:@"请输入爱车(选填)"];
+    
+    self.viewsArr = @[
+                      @[self.numberType,self.carType],
+                      @[self.cityLabel],
+                      arr2,
+                      arr3,
+                      @[self.comments]
+                      ];
+    
     
 }
 
@@ -111,8 +146,32 @@
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
+//添加车辆
 - (void)checkCarInfo {
     [self.view endEditing:YES];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    
+    NSLog(@"%ld,%@,%@,%@,%@",self.numberType.selectedSegmentIndex,self.cityLabel.text,self.vehicle_number.text,self.engine_number.text,self.frame_number.text);
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kADDCAR,
+                      userName,
+                      self.numberType.selectedSegmentIndex,
+                      [self.cityLabel.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                      self.vehicle_number.text,
+                      self.engine_number.text,
+                      self.frame_number.text,
+                      token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"个人信息%@",dataDict);
+        NSLog(@"%@",dataDict[@"opt_info"]);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"个人信息%@",error);
+    }];
+
 }
 
 #pragma mark - tableview delegate

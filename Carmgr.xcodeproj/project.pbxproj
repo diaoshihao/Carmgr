@@ -76,6 +76,8 @@
 		84D9B5C01D3C8342002AC63F /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5AA1D3C8342002AC63F /* UIScrollView+MJExtension.m */; };
 		84D9B5C11D3C8342002AC63F /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5AC1D3C8342002AC63F /* UIScrollView+MJRefresh.m */; };
 		84D9B5C21D3C8342002AC63F /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5AE1D3C8342002AC63F /* UIView+MJExtension.m */; };
+		84D9B5C61D3E169E002AC63F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5C51D3E169E002AC63F /* UserInfoViewController.m */; };
+		84D9B5CB1D3E184A002AC63F /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5CA1D3E184A002AC63F /* UserInfoCell.m */; };
 		84F271981D22159E00498441 /* Interface.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F271971D22159E00498441 /* Interface.m */; };
 		84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F2719A1D225F0800498441 /* CityChooseViewController.m */; };
 		84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2A81D190A8600597BFD /* YWPublic.m */; };
@@ -239,6 +241,10 @@
 		84D9B5AC1D3C8342002AC63F /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		84D9B5AD1D3C8342002AC63F /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		84D9B5AE1D3C8342002AC63F /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		84D9B5C41D3E169E002AC63F /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = Carmgr/UserInfoViewController.h; sourceTree = "<group>"; };
+		84D9B5C51D3E169E002AC63F /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = Carmgr/UserInfoViewController.m; sourceTree = "<group>"; };
+		84D9B5C91D3E184A002AC63F /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoCell.h; path = Carmgr/UserInfoCell.h; sourceTree = "<group>"; };
+		84D9B5CA1D3E184A002AC63F /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoCell.m; path = Carmgr/UserInfoCell.m; sourceTree = "<group>"; };
 		84F271961D22159E00498441 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = Carmgr/Interface.h; sourceTree = "<group>"; };
 		84F271971D22159E00498441 /* Interface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interface.m; path = Carmgr/Interface.m; sourceTree = "<group>"; };
 		84F271991D225F0800498441 /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityChooseViewController.h; path = Carmgr/CityChooseViewController.h; sourceTree = "<group>"; };
@@ -298,6 +304,7 @@
 				84BAEEF71D36069100227A15 /* UserCenterFunc.m */,
 				84BAEEF91D3606A800227A15 /* AddCarInfoView.h */,
 				84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */,
+				84D9B5C81D3E1813002AC63F /* 个人资料cell */,
 				840CF3A41D32460300CEFFDB /* AddCarCell */,
 			);
 			name = Views;
@@ -308,8 +315,6 @@
 			children = (
 				84BAEEE11D36057700227A15 /* FindPasswdViewController.h */,
 				84BAEEE21D36057700227A15 /* FindPasswdViewController.m */,
-				84BAEEE41D36058E00227A15 /* ResetPasswdViewController.h */,
-				84BAEEE51D36058E00227A15 /* ResetPasswdViewController.m */,
 			);
 			name = "找回密码";
 			sourceTree = "<group>";
@@ -704,6 +709,24 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		84D9B5C31D3E1663002AC63F /* 个人资料 */ = {
+			isa = PBXGroup;
+			children = (
+				84D9B5C41D3E169E002AC63F /* UserInfoViewController.h */,
+				84D9B5C51D3E169E002AC63F /* UserInfoViewController.m */,
+			);
+			name = "个人资料";
+			sourceTree = "<group>";
+		};
+		84D9B5C81D3E1813002AC63F /* 个人资料cell */ = {
+			isa = PBXGroup;
+			children = (
+				84D9B5C91D3E184A002AC63F /* UserInfoCell.h */,
+				84D9B5CA1D3E184A002AC63F /* UserInfoCell.m */,
+			);
+			name = "个人资料cell";
+			sourceTree = "<group>";
+		};
 		84F3C2921D17795C00597BFD /* 用户中心 */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,10 +773,11 @@
 		84F3C2A21D17D76600597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				84BAEED51D35F4A900227A15 /* 设置 */,
-				840CF3A81D324C1800CEFFDB /* 添加车辆信息 */,
 				84F3C2AA1D190AA600597BFD /* YWUserViewController.h */,
 				84F3C2AB1D190AA600597BFD /* YWUserViewController.m */,
+				84D9B5C31D3E1663002AC63F /* 个人资料 */,
+				84BAEED51D35F4A900227A15 /* 设置 */,
+				840CF3A81D324C1800CEFFDB /* 添加车辆信息 */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -827,16 +851,18 @@
 		84F3C2D31D1B93B300597BFD /* 登陆注册 */ = {
 			isa = PBXGroup;
 			children = (
+				84BAEEE41D36058E00227A15 /* ResetPasswdViewController.h */,
+				84BAEEE51D36058E00227A15 /* ResetPasswdViewController.m */,
 				840A99691D1D318400C76E25 /* 手机快捷登录 */,
 				840A99681D1D317A00C76E25 /* 找回密码 */,
 				84F3C2D51D1B93D900597BFD /* 注册 */,
-				84F3C2D41D1B93D300597BFD /* 登陆 */,
+				84F3C2D41D1B93D300597BFD /* 登录 */,
 			);
 			name = "登陆注册";
 			path = ..;
 			sourceTree = "<group>";
 		};
-		84F3C2D41D1B93D300597BFD /* 登陆 */ = {
+		84F3C2D41D1B93D300597BFD /* 登录 */ = {
 			isa = PBXGroup;
 			children = (
 				84BAEEF01D36064B00227A15 /* YWLoginViewController.h */,
@@ -844,7 +870,7 @@
 				84BAEEF31D36067300227A15 /* LoginView.h */,
 				84BAEEF41D36067300227A15 /* LoginView.m */,
 			);
-			name = "登陆";
+			name = "登录";
 			sourceTree = "<group>";
 		};
 		84F3C2D51D1B93D900597BFD /* 注册 */ = {
@@ -1165,6 +1191,7 @@
 				847D09DE1D2D1C7300EBFF37 /* ProgressView.m in Sources */,
 				84D9B5B81D3C8342002AC63F /* MJRefreshBackNormalFooter.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
+				84D9B5CB1D3E184A002AC63F /* UserInfoCell.m in Sources */,
 				84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */,
 				84D9B5C01D3C8342002AC63F /* UIScrollView+MJExtension.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
@@ -1195,6 +1222,7 @@
 				84BAEEF51D36067300227A15 /* LoginView.m in Sources */,
 				84D9B5771D3B2401002AC63F /* YWDataBase.m in Sources */,
 				84D9B5BA1D3C8342002AC63F /* MJRefreshGifHeader.m in Sources */,
+				84D9B5C61D3E169E002AC63F /* UserInfoViewController.m in Sources */,
 				84BAEEE61D36058E00227A15 /* ResetPasswdViewController.m in Sources */,
 				847776731D12591C00DE8213 /* YWTabBarController.m in Sources */,
 				84D9B5B31D3C8342002AC63F /* MJRefreshHeader.m in Sources */,

@@ -33,12 +33,73 @@
 //重置密码
 - (void)beginCommit {
     [self.view endEditing:YES];
-    NSLog(@"确认提交");
-    UIAlertController *alertVC = [YWPublic showAlertViewAt:self title:@"" message:@"找回密码成功"];
+    
+    //确认两次输入一致
+    if (self.setNewPasswd.text != self.verifyPasswd.text) {
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"密码输入不一致，请重新输入" preferredStyle:UIAlertControllerStyleAlert];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.setNewPasswd becomeFirstResponder];
+        }]];
+        [self presentViewController:alertVC animated:YES completion:nil];
+        return;
+    }
+    
+    if (self.settingType == ForResetPassword) {
+        [self resetPassword];//重设密码
+    } else {
+        [self findPassword];//找回密码
+    }
+    
+    
+    
+}
+
+#pragma mark - 网络请求
+- (void)resetPassword {
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kRESETPASSWD,self.username,self.setNewPasswd,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dataDict);
+                if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                    [self showAlertView:@"修改密码成功"];
+        
+                } else {
+                    NSLog(@"%@",dataDict[@"opt_info"]);
+                }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+    }];
+}
+
+- (void)findPassword {
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    
+    [YWPublic afPOST:[NSString stringWithFormat:kFINDPASSWD,self.username,self.mobile,self.verifycode,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dataDict);
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            [self showAlertView:@"找回密码成功"];
+            
+        } else {
+            NSLog(@"%@",dataDict[@"opt_info"]);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error:%@",error);
+    }];
+}
+
+- (void)showAlertView:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertVC animated:YES completion:^{
         [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
     }];
 }
+
 #pragma mark 定时器
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];

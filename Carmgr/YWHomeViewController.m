@@ -12,6 +12,7 @@
 #import "NavigationAttribute.h"
 #import "HomeView.h"
 #import "HomeModel.h"
+#import "YWLoginViewController.h"
 
 @interface YWHomeViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -34,6 +35,7 @@
 @implementation YWHomeViewController
 {
     NSInteger postCount;//用于判断是否已接收所有资源数据
+    UIAlertController *faileAlertVC;
 }
 
 - (NSMutableArray *)sourceDataArr {
@@ -118,7 +120,7 @@
     
     [self getDataFromNet:userName token:token];
     //二手车
-    //    [self getUsedCarImage:@"15014150833" token:token];
+        [self getUsedCarImage:@"15014150833" token:token];
     
 }
 
@@ -146,6 +148,7 @@
 
 //从网络获取资源图片数据请求
 - (void)getImageFromNet:(NSString *)username imageName:(NSString *)imageName token:(NSString *)token sourceArr:(NSMutableArray *)sourceArr {
+    //获取屏幕参数
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     NSString *screen_size = [NSString stringWithFormat:@"%lfx%lf",width,height];
@@ -162,11 +165,11 @@
             for (NSDictionary *dict in dataDict[@"config_value_list"]) {
                 [arrM addObject:dict[@"config_value"]];
             }
-        } else {
+        } else {//token过期
             if (postCount == 0) {
                 [self.tableView.mj_header endRefreshing];
                 postCount = 5;//重置计数
-                [self showAlertView];
+                [YWPublic showReLoginAlertViewAt:self];//提示用户重新登录
             }
             return ;
         }
@@ -182,20 +185,11 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
-        NSLog(@"图片资源请求失败%@",error);
+        faileAlertVC = [YWPublic showFaileAlertViewAt:self];//提示用户检查网络
+        if (![faileAlertVC isBeingPresented]) {
+            [self presentViewController:faileAlertVC animated:YES completion:nil];
+        }
     }];
-}
-
-- (void)showAlertView {
-    [self.tableView.mj_header endRefreshing];
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户状态已过期，请重新登录" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *login = [UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertVC addAction:cancel];
-    [alertVC addAction:login];
-    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 //获取二手车数据
@@ -205,7 +199,7 @@
     [YWPublic afPOST:[NSString stringWithFormat:kSECONDHAND,username,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@",dataDict);
+        
         for (NSDictionary *dict in dataDict[@"car_list"]) {
             [arrM addObject:dict[@"img_path"]];
         }
@@ -286,8 +280,10 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
-    [cell.contentView addSubview:self.viewsArr[indexPath.section]];
+    for (UIView *view in cell.subviews) {
+        [view removeFromSuperview];
+    }
+    [cell addSubview:self.viewsArr[indexPath.section]];
     
     return cell;
 }
