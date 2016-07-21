@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
 #import "StoreModel.h"
+#import "ProgressModel.h"
 
 @interface YWDataBase : NSObject
 
@@ -21,15 +22,21 @@
 //关闭数据库
 - (void)closeDataBase;
 
+//判断是否存在数据
+- (BOOL)isExistsDataInTable:(NSString *)table_name;
+
 //清空数据库
-- (BOOL)deleteDatabase;
+- (BOOL)deleteDatabaseFromTable:(NSString *)table_name;
 
 
 - (BOOL)insertStoreWithModel:(StoreModel *)model;
 
-- (BOOL)isExistsInStore;
-
 - (NSMutableArray *)getAllDataFromStore;
+
+
+- (BOOL)insertProcessWithModel:(ProgressModel *)model;
+
+- (NSMutableArray *)getAllDataFromProcess;
 
 
 @end

@@ -10,11 +10,15 @@
 
 @interface ProgressModel : NSObject
 
-@property (nonatomic, strong) NSString *storeName;
-@property (nonatomic, strong) NSString *serviceName;
-@property (nonatomic, strong) NSString *numberString;
-@property (nonatomic, strong) NSString *timeString;
+@property (nonatomic, strong) NSString *img_path;
+@property (nonatomic, strong) NSString *merchant_account;
+@property (nonatomic, strong) NSString *merchant_name;
+@property (nonatomic, strong) NSString *order_id;
+@property (nonatomic, strong) NSString *order_state;
+@property (nonatomic, strong) NSString *order_time;
+@property (nonatomic, strong) NSString *order_type;
+@property (nonatomic, strong) NSString *service_name;
 
-- (void)initWithDictonary:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

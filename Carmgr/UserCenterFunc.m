@@ -122,6 +122,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"%@",self.titleArr[indexPath.section][indexPath.row]);
+    
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        [self.actionTarget performSelector:@selector(pushToUserInfo)];
+    }
+}
+
+- (void)pushToUserInfo {
+    
 }
 
 - (UIView *)createHeadView:(id)target {

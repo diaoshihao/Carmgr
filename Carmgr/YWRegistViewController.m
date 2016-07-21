@@ -62,10 +62,26 @@
     
 }
 
+//跳转到用户协议界面
 - (void)serviceDelegate {
     ServiceDelegateController *serviceDelegateVC = [[ServiceDelegateController alloc] init];
     [self.navigationController pushViewController:serviceDelegateVC animated:YES];
 }
+
+- (void)showAlertViewTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertVC animated:YES completion:^{
+        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+    }];
+    
+}
+
+#pragma mark 定时器
+- (void)timerFireMethod:(NSTimer *)timer {
+    UIAlertController *alertVC = [timer userInfo];
+    [alertVC dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark 获取验证码
 - (void)getVerifyCode {
@@ -79,8 +95,6 @@
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            NSLog(@"网络请求成功%@",dataDict);
-            
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
                 self.mobile = self.phoneNum.text;
                 [self removeAllSubviews];
@@ -88,14 +102,11 @@
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error:%@",error);
+            [self showAlertViewTitle:@"提示" message:@"网络错误"];
         }];
         
     } else {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入正确的手机号" preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alertVC animated:YES completion:^{
-            [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
-        }];
+        [self showAlertViewTitle:@"提示" message:@"请输入正确的手机号"];
     }
 }
 
@@ -103,13 +114,6 @@
 - (void)regetVerifyCode {
     [self getVerifyCode];
 }
-
-#pragma mark 定时器
-- (void)timerFireMethod:(NSTimer *)timer {
-    UIAlertController *alertVC = [timer userInfo];
-    [alertVC dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 #pragma mark - 输入验证码
 - (void)createInputVerifyCodeView {
@@ -125,7 +129,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.registView regetVerifyCode:self action:@selector(regetVerifyCode)]];
 }
 
-#pragma mark 
+#pragma mark 校验验证码
 - (void)commitVerifyCode {
     [self removeAllSubviews];
     [self createSetSecureView];
@@ -148,13 +152,32 @@
 
 #pragma mark 注册
 - (void)regist {
-    if (self.passwdField.text.length <= 32 && self.passwdField.text.length >= 6 && [self.passwdField.text isEqualToString:self.repeatPasswd.text]) {
+    
+    if (![self.passwdField.text isEqualToString:self.repeatPasswd.text]) {
+        [self showAlertViewTitle:@"提示" message:@"请输入相同的密码"];
+    } else if (self.passwdField.text.length > 32 || self.passwdField.text.length < 6) {
+        [self showAlertViewTitle:@"提示" message:@"密码位数不正确"];
+    } else {
         
         //注册
         [YWPublic afPOST:[NSString stringWithFormat:kREGISTER,self.mobile,self.passwdField.text,self.mobile,0] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"%@",responseObject);
+            
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"%@",dataDict);
+            
+            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                
+                [self showAlertViewTitle:nil message:@"注册成功"];
+                
+                //注册后返回登录界面
+                [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"mobile"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
+            [self showAlertViewTitle:@"提示" message:@"网络错误"];
         }];
     }
 }
@@ -179,13 +202,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

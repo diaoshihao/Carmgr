@@ -10,6 +10,12 @@
 
 @interface UserInfoCell : UITableViewCell
 
-@property (nonatomic, strong) UIView *customView;
+@property (nonatomic, strong) UILabel       *titleLabel;
+@property (nonatomic, strong) UILabel       *label;
+@property (nonatomic, strong) UIImageView   *headImageView;
+
+- (void)customViewAtRow:(NSInteger)row;
+
++ (NSString *)getReuseID;
 
 @end

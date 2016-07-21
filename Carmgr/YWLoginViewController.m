@@ -121,30 +121,32 @@
     //密码加密
     NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text];
     /*[YWPublic encryptMD5String:self.passwdField.text]*/
-
-    [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        NSLog(@"网络请求成功：%@",dataDict);
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+    
+    if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
+        [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
+    } else {
+        [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            //登录成功保存数据
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
-            [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];//用户名
-            [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];//密码
-            [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:@"登录成功" preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alertVC animated:YES completion:^{
-                [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
-            }];
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"网络请求失败%@",error);
-    }];
+            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                
+                //登录成功保存数据
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
+                [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];//用户名
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];//密码
+                [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
+                
+                [self showAlertViewTitle:nil message:@"登录成功"];
+            } else {
+                [self showAlertViewTitle:@"提示" message:@"用户名或密码错误"];
+            }
+            
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self showAlertViewTitle:@"提示" message:@"网络错误"];
+        }];
+    }
 }
 
 - (void)thirdLogin:(UIButton *)sender {
@@ -153,6 +155,14 @@
     } else {
         NSLog(@"微信登录");
     }
+}
+
+- (void)showAlertViewTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertVC animated:YES completion:^{
+        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+    }];
+    
 }
 
 #pragma mark 定时器

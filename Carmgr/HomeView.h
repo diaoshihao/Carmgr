@@ -15,11 +15,13 @@
 @property (nonatomic, strong) NSArray      *titleArr;//业务标题
 @property (nonatomic, strong) NSArray      *hotImageArr;//热门图片
 
+@property (nonatomic, strong) NSMutableArray    *serviceDataArr;//服务
+
 @property (nonatomic, strong) NSMutableArray    *actLeftArr;//活动左
 @property (nonatomic, strong) NSMutableArray    *actTopArr;//活动上
 @property (nonatomic, strong) NSMutableArray    *actBottomArr;//活动下
 @property (nonatomic, strong) NSMutableArray    *discountArr;//优惠
-@property (nonatomic, strong) NSMutableArray    *usedCarImageArr;//二手车图片
+@property (nonatomic, strong) NSMutableArray    *usedCarDataArr;//二手车图片
 
 @property (nonatomic, strong) UIViewController *VC;
 

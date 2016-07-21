@@ -23,6 +23,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <AFNetworking.h>
+#import <UIImageView+AFNetworking.h>
 #import "Interface.h"
 #import "CityChooseViewController.h"
 #import "NSString+MD5.h"//MD5加密

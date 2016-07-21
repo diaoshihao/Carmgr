@@ -30,18 +30,27 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+
+#if 0
+    [YWPublic afPOST:[NSString stringWithFormat:kSERVICES,userName,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"服务%@",dataDict);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"服务失败%@",error);
+    }];
+
     [YWPublic afPOST:[NSString stringWithFormat:kRESETUSRNAME,userName,@"newname",token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"个人信息%@",dataDict);
+        NSLog(@"修改用户名%@",dataDict);
         NSLog(@"%@",dataDict[@"opt_info"]);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"个人信息%@",error);
+        NSLog(@"修改用户名%@",error);
     }];
     
-#if 0
     [YWPublic afPOST:[NSString stringWithFormat:kPRIVATE,userName,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -52,14 +61,7 @@
         NSLog(@"个人信息%@",error);
     }];
     
-    [YWPublic afPOST:[NSString stringWithFormat:kSERVICES,userName,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"服务%@",dataDict);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"服务失败%@",error);
-    }];
+#endif
     
     [YWPublic afPOST:[NSString stringWithFormat:kSECONDHAND,userName,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -79,7 +81,7 @@
         NSLog(@"热门失败%@",error);
     }];
     
-    
+
     [YWPublic afPOST:[NSString stringWithFormat:kPROCESS,userName,filter,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -88,7 +90,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"进度失败%@",error);
     }];
-#endif
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

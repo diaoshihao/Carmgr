@@ -17,7 +17,6 @@
         UIFont *font = [UIFont systemFontOfSize:14];
         //头像
         self.headImageView = [[UIImageView alloc] init];
-//        self.headImageView.contentMode = UIViewContentModeCenter;
         [self.contentView addSubview:self.headImageView];
         
         //商店名

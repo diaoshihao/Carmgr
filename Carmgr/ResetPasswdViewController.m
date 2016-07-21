@@ -63,14 +63,14 @@
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"%@",dataDict);
                 if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                    [self showAlertView:@"修改密码成功"];
+                    [self showAlertViewTitle:nil messae:@"修改密码成功"];
         
                 } else {
-                    NSLog(@"%@",dataDict[@"opt_info"]);
+                    [self showAlertViewTitle:nil messae:@"修改密码失败"];
                 }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
     }];
 }
 
@@ -82,19 +82,23 @@
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"%@",dataDict);
         if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-            [self showAlertView:@"找回密码成功"];
             
+            [self showAlertViewTitle:nil messae:@"找回密码成功"];
+            
+            //设置密码成功后,清除保存的密码,返回登录界面
+            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"password"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         } else {
-            NSLog(@"%@",dataDict[@"opt_info"]);
+            [self showAlertViewTitle:nil messae:@"找回密码失败"];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
     }];
 }
 
-- (void)showAlertView:(NSString *)message {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+- (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertVC animated:YES completion:^{
         [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
     }];
@@ -104,10 +108,6 @@
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:nil];
-    
-    //设置密码成功后,清除保存的密码,返回登录界面
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"password"];    
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //导航条

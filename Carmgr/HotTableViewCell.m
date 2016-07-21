@@ -19,14 +19,13 @@
 }
 
 - (void)createViewAtSelf {
-    __weak typeof(self) weakSelf = self;
     self.hotImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.hotImageView];
     
     [self.hotImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
         make.left.mas_equalTo(15);
-        make.size.mas_equalTo(CGSizeMake(weakSelf.bounds.size.height - 20, weakSelf.bounds.size.height - 20));
+        make.size.mas_equalTo(CGSizeMake(self.bounds.size.height - 20, self.bounds.size.height - 20));
     }];
 }
 

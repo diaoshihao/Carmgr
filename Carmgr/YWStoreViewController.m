@@ -59,7 +59,7 @@
     NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     //先从数据库中取出缓存数据
-    if ([[YWDataBase sharedDataBase] isExistsInStore]) {
+    if ([[YWDataBase sharedDataBase] isExistsDataInTable:@"tb_store"]) {
         self.storeView.dataArr = [[YWDataBase sharedDataBase] getAllDataFromStore];
         [self.storeView.tableView reloadData];//刷新数据
     }
@@ -68,21 +68,27 @@
         //停止刷新
         [self.storeView.tableView.mj_header endRefreshing];
         
-        //插入数据库前删除数据
-        [[YWDataBase sharedDataBase] deleteDatabase];
-        self.storeView.dataArr = nil;
-        
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        for (NSDictionary *dict in dataDict[@"merchants_list"]) {
-            StoreModel *model = [[StoreModel alloc] initWithDict:dict];
-            [self.storeView.dataArr addObject:model];
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
             
-            //插入数据库
-            [[YWDataBase sharedDataBase] insertStoreWithModel:model];
+            //插入数据库前删除数据
+            [[YWDataBase sharedDataBase] deleteDatabaseFromTable:@"tb_store"];
+            [self.storeView.dataArr removeAllObjects];
+            
+            for (NSDictionary *dict in dataDict[@"merchants_list"]) {
+                
+                StoreModel *model = [[StoreModel alloc] initWithDict:dict];
+                [self.storeView.dataArr addObject:model];
+                
+                //插入数据库
+                [[YWDataBase sharedDataBase] insertStoreWithModel:model];
+            }
+            [self.storeView.tableView reloadData];//刷新数据
+            
+        } else {
+            [YWPublic showReLoginAlertViewAt:self];
         }
-        
-        [self.storeView.tableView reloadData];//刷新数据
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //请求数据失败
@@ -90,7 +96,8 @@
         
         //关闭数据库
         [[YWDataBase sharedDataBase] closeDataBase];
-        NSLog(@"error:%@",error);
+        
+        [YWPublic showFaileAlertViewAt:self];
     }];
 }
 

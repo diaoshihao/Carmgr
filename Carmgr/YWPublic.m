@@ -88,7 +88,7 @@
     
     [alertVC addAction:cancel];
     [alertVC addAction:login];
-    [VC presentViewController:alertVC animated:YES completion:nil];
+//    [VC presentViewController:alertVC animated:YES completion:nil];
     return alertVC;
 }
 

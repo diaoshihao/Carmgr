@@ -9,11 +9,15 @@
 #import "HomeView.h"
 #import <Masonry.h>
 #import "YWPublic.h"
-#import "ServiceCollectionCell.h"
+
 #import "DevelopViewController.h"
-#import "ServiceCollection.h"
+
+#import "ServiceCollectionCell.h"
 #import "UsedCarCollectionCell.h"
 #import "HotTableViewCell.h"
+
+#import "ServiceModel.h"
+#import "UsedCarModel.h"
 
 @interface HomeView() <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 
@@ -25,6 +29,20 @@
 {
     UICollectionView *usedCarCollectionView;
     UICollectionView *serviceCollectionView;
+}
+
+- (NSMutableArray *)serviceDataArr {
+    if (_serviceDataArr == nil) {
+        _serviceDataArr = [[NSMutableArray alloc] init];
+    }
+    return _serviceDataArr;
+}
+
+- (NSMutableArray *)usedCarDataArr {
+    if (_usedCarDataArr == nil) {
+        _usedCarDataArr = [[NSMutableArray alloc] init];
+    }
+    return _usedCarDataArr;
 }
 
 - (NSMutableArray *)discountArr {
@@ -354,21 +372,24 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (collectionView == usedCarCollectionView) {
-        return self.usedCarImageArr.count;
+        return self.usedCarDataArr.count;
     } else {
-        return self.imageArr.count;
+        return self.serviceDataArr.count;
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == usedCarCollectionView) {
         UsedCarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[UsedCarCollectionCell getReuseID] forIndexPath:indexPath];
-        cell.imageView.image = [UIImage imageNamed:self.usedCarImageArr[indexPath.item]];
+        UsedCarModel *model = self.usedCarDataArr[indexPath.item];
+        [cell.imageView setImageWithURL:[NSURL URLWithString:model.img_path]];
         return cell;
     } else {
         ServiceCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[ServiceCollectionCell getCellID] forIndexPath:indexPath];
-        cell.imageView.image = [UIImage imageNamed:self.imageArr[indexPath.item]];
-        cell.titleLabel.text = self.titleArr[indexPath.item];
+        
+        ServiceModel *model = self.serviceDataArr[indexPath.item];
+        [cell.imageView setImageWithURL:[NSURL URLWithString:model.icon_path]];
+        cell.titleLabel.text = model.service_name;
         return cell;
     }
 }

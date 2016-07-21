@@ -9,6 +9,8 @@
 #import "ProgressView.h"
 #import <Masonry.h>
 #import "ProgressTableViewCell.h"
+#import "ProgressModel.h"
+#import <UIImageView+AFNetworking.h>
 
 @interface ProgressView()
 
@@ -22,6 +24,13 @@
     UIButton *allBtn;
     
     BOOL isFirst;
+}
+
+- (NSMutableArray *)dataArr {
+    if (_dataArr == nil) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
 }
 
 - (UITableView *)createTableView:(UIView *)superView {
@@ -164,7 +173,7 @@
 #pragma mark - tableview delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 20;
+    return self.dataArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -189,10 +198,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProgressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ProgressTableViewCell getReuseID] forIndexPath:indexPath];
-    cell.storeName.text = [NSString stringWithFormat:@"易务车商店%ld",(long)indexPath.section+1];
-    cell.serviceLabel.text = [NSString stringWithFormat:@"易务车服务%ld",(long)indexPath.section+1];
-    cell.numberLabel.text = [NSString stringWithFormat:@"订单号：%ld",(long)indexPath.section*10000];
-    cell.timeLabel.text = [NSString stringWithFormat:@"2016.7.%ld",(long)indexPath.section+7];
+    
+    ProgressModel *model = self.dataArr[indexPath.section];
+    
+    [cell.headImageView setImageWithURL:[NSURL URLWithString:model.img_path]];
+    cell.storeName.text = model.merchant_name;
+    cell.serviceLabel.text = model.service_name;
+    cell.numberLabel.text = model.order_id;
+    cell.timeLabel.text = model.order_time;
     cell.stateLabel.text = [NSString stringWithFormat:@"  %@  ",@"待使用"];
     [cell.button1 setTitle:@"取消订单" forState:UIControlStateNormal];
     [cell.button2 setTitle:@"催进度" forState:UIControlStateNormal];

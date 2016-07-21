@@ -9,10 +9,9 @@
 #import "YWHomeViewController.h"
 #import "YWUserViewController.h"
 #import "YWPublic.h"
-#import "NavigationAttribute.h"
 #import "HomeView.h"
-#import "HomeModel.h"
 #import "YWLoginViewController.h"
+#import "NetworkingForData.h"
 
 @interface YWHomeViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -20,30 +19,12 @@
 @property (nonatomic, strong) UITableView       *tableView;
 
 @property (nonatomic, strong) NSMutableArray    *viewsArr;
-@property (nonatomic, strong) NSMutableArray    *sourceDataArr;//图片资源
-
-@property (nonatomic, strong) NSArray           *imageArr;
-@property (nonatomic, strong) NSArray           *titleArr;
 
 @property (nonatomic, strong) NSMutableArray    *cycleImageArr;//轮播图组
-
-@property (nonatomic, strong) NSDictionary      *dataDict;
-
 
 @end
 
 @implementation YWHomeViewController
-{
-    NSInteger postCount;//用于判断是否已接收所有资源数据
-    UIAlertController *faileAlertVC;
-}
-
-- (NSMutableArray *)sourceDataArr {
-    if (_sourceDataArr == nil) {
-        _sourceDataArr = [[NSMutableArray alloc] init];
-    }
-    return _sourceDataArr;
-}
 
 #pragma mark - 懒加载
 - (NSMutableArray *)viewsArr {
@@ -66,7 +47,7 @@
     [self.viewsArr addObject:[self.home createActivetyView]];
     [self.viewsArr addObject:[self.home createSecondView]];
     [self.viewsArr addObject:[self.home createUsedCarCollectionView]];
-    [self.viewsArr addObject:[self.home createTableViewAtSuperView:self.view]];
+//    [self.viewsArr addObject:[self.home createTableViewAtSuperView:self.view]];
 }
 
 #pragma mark 跳转到个人中心
@@ -85,134 +66,62 @@
     [self.navigationController pushViewController:cityChooseVC animated:YES];
 }
 
-//按钮点击跳转到相应界面
-- (void)buttonClick:(UIButton *)sender {
+#pragma mark 获取图片
+- (void)loadImage {
+    NetworkingForData *network = [[NetworkingForData alloc] init];
+    
+    //数据源
+    network.propertys = @[self.cycleImageArr,self.home.actLeftArr,self.home.actTopArr,self.home.actBottomArr,self.home.discountArr];
+    network.serviceDataArr = self.home.serviceDataArr;
+    network.usedCarDataArr = self.home.usedCarDataArr;
+    
+    network.outDate = NO;
+    network.outLine = NO;
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    [network getSource:group];//资源
+    [network getService:group];//服务
+    [network getUsedCar:group];//二手车
+//    [network getHotSource:group];//热门推荐
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if (network.outDate) {                  //token过期
+            [self.tableView.mj_header endRefreshing];
+            UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
+            [self presentViewController:alertVC animated:YES completion:nil];
+            
+        } else if (network.outLine) {           //网络错误
+            [self.tableView.mj_header endRefreshing];
+            UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
+            [self presentViewController:alertVC animated:YES completion:nil];
+            
+        } else {
+            [self.tableView.mj_header endRefreshing];
+            [self.viewsArr removeAllObjects];
+            [self loadCellViews];
+            [self.tableView reloadData];
+        }
+    });
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    postCount = 5;//用于网络请求计数
     
     self.home = [[HomeView alloc] init];
     self.home.VC = self;
     
-    [self homeViewAttribute];
     [self createTableView];
-    //    [self loadImage];
     
-    
-}
-
-#pragma mark 获取资源图片
-- (void)loadImage {
-    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    
-    NSArray *propertys = @[self.cycleImageArr,self.home.actLeftArr,self.home.actTopArr,self.home.actBottomArr,self.home.discountArr];
-    
-    for (NSInteger i = 0; i < propertys.count; i++) {
-        
-        NSString *imageName = [NSString stringWithFormat:@"ZY_000%ld",(long)i+1];
-        [self getImageFromNet:userName imageName:imageName token:token sourceArr:propertys[i]];
-    }
-    
-    [self getDataFromNet:userName token:token];
-    //二手车
-        [self getUsedCarImage:@"15014150833" token:token];
-    
-}
-
-#pragma mark 数据
-- (void)homeViewAttribute {
-    
-    self.home.imageArr = @[@"车险",@"上牌",@"车检",@"维修",@"驾考",@"保养",@"车贷",@"租车",@"二手",@"分类"];
-    self.home.titleArr = @[@"车险",@"上牌",@"车检",@"维修",@"驾考",@"保养",@"车贷",@"租车",@"二手",@"分类"];
-    self.home.usedCarImageArr = [NSMutableArray arrayWithArray:@[@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色"]];
-    
-    self.home.hotImageArr = @[@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色",@"圆角矩形红色"];
-    
-}
-
-//服务图标数据请求
-- (void)getDataFromNet:(NSString *)username token:(NSString *)token {
-    [YWPublic afPOST:[NSString stringWithFormat:kSERVICES,username,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@",dataDict);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+    //添加下拉刷新控件
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadImage];
     }];
+    [self.tableView.mj_header beginRefreshing];
 }
 
-//从网络获取资源图片数据请求
-- (void)getImageFromNet:(NSString *)username imageName:(NSString *)imageName token:(NSString *)token sourceArr:(NSMutableArray *)sourceArr {
-    //获取屏幕参数
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    NSString *screen_size = [NSString stringWithFormat:@"%lfx%lf",width,height];
-    
-    //请求资源
-    __block NSMutableArray *arrM = sourceArr;
-    [YWPublic afPOST:[NSString stringWithFormat:kCONFIG,username,imageName,screen_size,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        postCount--;//计数-1
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-            [arrM removeAllObjects];
-            for (NSDictionary *dict in dataDict[@"config_value_list"]) {
-                [arrM addObject:dict[@"config_value"]];
-            }
-        } else {//token过期
-            if (postCount == 0) {
-                [self.tableView.mj_header endRefreshing];
-                postCount = 5;//重置计数
-                [YWPublic showReLoginAlertViewAt:self];//提示用户重新登录
-            }
-            return ;
-        }
-        
-        if (postCount == 0) {
-            [self.tableView.mj_header endRefreshing];
-            postCount = 5;//重置计数
-            [self.viewsArr removeAllObjects];//重置view个数
-            [self loadCellViews];
-            [self.tableView reloadData];
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.tableView.mj_header endRefreshing];
-        faileAlertVC = [YWPublic showFaileAlertViewAt:self];//提示用户检查网络
-        if (![faileAlertVC isBeingPresented]) {
-            [self presentViewController:faileAlertVC animated:YES completion:nil];
-        }
-    }];
-}
-
-//获取二手车数据
-- (void)getUsedCarImage:(NSString *)username token:(NSString *)token {
-    
-    __block NSMutableArray *arrM = self.home.usedCarImageArr;
-    [YWPublic afPOST:[NSString stringWithFormat:kSECONDHAND,username,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        for (NSDictionary *dict in dataDict[@"car_list"]) {
-            [arrM addObject:dict[@"img_path"]];
-        }
-        //        postCount--;
-        //        if (postCount == 0) {
-        //            [self loadData];
-        //            [self.tableView reloadData];
-        //        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"二手车图片资源请求失败%@",error);
-    }];
-}
 
 #pragma mark - tableView
 - (void)createTableView {
@@ -224,12 +133,6 @@
     self.tableView.allowsSelection = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    //添加下拉刷新控件
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadImage];
-    }];
-    [self.tableView.mj_header beginRefreshing];
     
     //点击隐藏键盘(tableview满屏的情况下)
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];

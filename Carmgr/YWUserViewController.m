@@ -12,6 +12,7 @@
 #import "YWLoginViewController.h"
 #import "CarVerifyViewController.h"
 #import "SettingViewController.h"
+#import "UserInfoViewController.h"
 
 @interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
@@ -32,7 +33,7 @@
         UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
         [self presentViewController:navigaVC animated:YES completion:nil];
     } else {
-        
+        [self pushToUserInfo];
     }
     
 }
@@ -46,6 +47,11 @@
 - (void)pushToSettingPage {
     SettingViewController *settingVC = [[SettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
+}
+
+- (void)pushToUserInfo {
+    UserInfoViewController *userInfoVC = [[UserInfoViewController alloc] init];
+    [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
 #pragma mark - 生命周期

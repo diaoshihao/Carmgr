@@ -30,35 +30,17 @@
     //如果数据库打开成功 创建表
     //创建商家数据表
     NSString *storeSql = @"create table if not exists tb_store(tb_id integer primary key autoincrement,merchant_name text,img_path text,mobile text,address text,stars float,service_item text,tags text,total_rate text)";
-//    NSString *processSql = @"create table if not exists tb_process(tb_id integer primary key autoincrement,";
+    NSString *processSql = @"create table if not exists tb_process(tb_id integer primary key autoincrement,img_path text,merchant_account text,merchant_name text,order_id text,order_state text,order_time text,order_type text,service_name text)";
     
     BOOL isStore = [_database executeUpdate:storeSql];
+    BOOL isProcess = [_database executeUpdate:processSql];
     
-    if (isStore) {
+    if (isStore && isProcess) {
         NSLog(@"创建表成功！");
+    } else {
+        NSLog(@"创建表失败！");
     }
     
-#if 0
-    //创建搜索历史记录表
-    NSString *sql = @"create table if not exists tb_home(tb_id integer primary key autoincrement,seachText text)";
-    
-    //创建购物车表
-    NSString *sql2 = @"create table if not exists tb_car(carId integer primary key autoincrement,pdcId text,pdcSID text,img text,selected text,name text,price float,yprice float,allcnt text,qishu text,allneed text,leftneed text)";
-    //创建兴趣推荐表
-    NSString *sql3 = @"create table if not exists tb_intrest_car(carId integer primary key autoincrement,pdcID text,pdcSID text,img text,selected integer,name text,price float,yprice float,allcnt integer)";
-    //创建系统消息表
-    NSString *sql4 = @"create table if not exists tb_News(tb_id integer primary key autoincrement,  integer,newTitle text,newTime text,isScanfed integer)";
-    
-    BOOL is = [_database executeUpdate:sql];
-    BOOL is2 = [_database executeUpdate:sql2];
-    BOOL is3 = [_database executeUpdate:sql3];
-    BOOL is4 = [_database executeUpdate:sql4];
-    
-    if (is2 && is && is3 && is4) {
-        NSLog(@"创建表成功！");
-    }
-    
-#endif
     return self;
 }
 //获取数据库管理对象单例的方法
@@ -81,13 +63,21 @@
 }
 
 //清空数据库
-- (BOOL)deleteDatabase {
-    NSString *deleteStore = @"delete from tb_store";
+- (BOOL)deleteDatabaseFromTable:(NSString *)table_name {
+    NSString *deleteStore = [NSString stringWithFormat:@"delete from %@",table_name];
     BOOL storeDelete = [_database executeUpdate:deleteStore];
     if (storeDelete) {
         return YES;
     }
     return NO;
+}
+
+//判断是否存在数据
+- (BOOL)isExistsDataInTable:(NSString *)table_name {
+    NSString *queryStore = [NSString stringWithFormat:@"select * from %@",table_name];
+    FMResultSet *resultSet = [_database executeQuery:queryStore];
+    
+    return resultSet.next;
 }
 
 //关闭数据库
@@ -106,24 +96,9 @@
     BOOL storeInsert = [_database executeUpdate:insertStore,model.merchant_name,model.img_path,model.mobile,model.address,model.stars,model.service_item,model.tags,model.total_rate];
     
     if (storeInsert) {
-        NSLog(@"插入成功");
         return YES;
-    } else {
-        NSLog(@"插入失败:%@,%@,%@,%@,%@,%@,%@,%@",model.merchant_name,model.img_path,model.mobile,model.address,model.stars,model.service_item,model.tags,model.total_rate);
-        return NO;
     }
-    
-    
-}
-
-//判断是否存在数据
-- (BOOL)isExistsInStore {
-    NSString *queryStore = @"select * from tb_store";
-    FMResultSet *resultSet = [_database executeQuery:queryStore];
-    if (resultSet.next) {
-        NSLog(@"exists");
-    }
-    return resultSet.next;
+    return NO;
 }
 
 //获取所有数据
@@ -142,11 +117,43 @@
         model.service_item = [resultSet stringForColumn:@"service_item"];
         model.tags = [resultSet stringForColumn:@"tags"];
         model.total_rate = [resultSet stringForColumn:@"total_rate"];
-        NSLog(@"%@",model.merchant_name);
         [arrM addObject:model];
     }
     return arrM;
 }
 
+#pragma mark -- 进度process数据表
+//插入数据
+- (BOOL)insertProcessWithModel:(ProgressModel *)model {
+    NSString *insertProcess = @"insert into tb_process(img_path,merchant_account,merchant_name,order_id,order_state,order_time,order_type,service_name) values(?,?,?,?,?,?,?,?)";
+    
+    BOOL processInsert = [_database executeUpdate:insertProcess,model.img_path,model.merchant_account,model.merchant_name,model.order_id,model.order_state,model.order_time,model.order_type,model.service_name];
+    
+    if (processInsert) {
+        return YES;
+    }
+    return NO;
+}
+
+//获取所有数据
+- (NSMutableArray *)getAllDataFromProcess {
+    NSString *getProcess = @"select * from tb_process";
+    FMResultSet *resultSet = [_database executeQuery:getProcess];
+    
+    NSMutableArray *arrM = [[NSMutableArray alloc] init];
+    while (resultSet.next) {
+        ProgressModel *model = [[ProgressModel alloc] init];
+        model.img_path = [resultSet stringForColumn:@"img_path"];
+        model.merchant_account = [resultSet stringForColumn:@"merchant_account"];
+        model.merchant_name = [resultSet stringForColumn:@"merchant_name"];
+        model.order_id = [resultSet stringForColumn:@"order_id"];
+        model.order_state = [resultSet stringForColumn:@"order_state"];
+        model.order_time = [resultSet stringForColumn:@"order_time"];
+        model.order_type = [resultSet stringForColumn:@"order_type"];
+        model.service_name = [resultSet stringForColumn:@"service_name"];
+        [arrM addObject:model];
+    }
+    return arrM;
+}
 
 @end

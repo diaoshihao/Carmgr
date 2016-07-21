@@ -46,19 +46,37 @@
     //网络请求获取验证码   参数：username=%@&type=%@&version=1.0
     //type == 0：注册；1：登录；2:找回密码
     
-    [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,2] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@",dataDict);
-//        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-//            [self verifyCode];//验证通过
-//        } else {
-//            NSLog(@"%@",dataDict[@"opt_info"]);
-//        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@",error);
+    if (![RegularTools validateMobile:self.textField.text]) {//手机号验证
+        [self showAlertViewTitle:@"提示" message:@"请输入正确的手机号"];
+    } else {
+        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,2] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                [self verifyCode];//验证
+            } else {
+                [self showAlertViewTitle:@"提示" message:@"发送验证码失败"];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self showAlertViewTitle:@"提示" message:@"网络错误"];
+        }];
+    }
+}
+
+- (void)showAlertViewTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertVC animated:YES completion:^{
+        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
     }];
+    
+}
+
+#pragma mark 定时器
+- (void)timerFireMethod:(NSTimer *)timer {
+    UIAlertController *alertVC = [timer userInfo];
+    [alertVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)customLeftItem {

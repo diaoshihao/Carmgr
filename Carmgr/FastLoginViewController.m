@@ -10,6 +10,9 @@
 #import <Masonry.h>
 #import "YWPublic.h"
 
+@class YWLoginViewController;
+@class YWRegistViewController;
+
 @interface FastLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *textField;
@@ -44,8 +47,7 @@
 }
 
 - (void)verifyCode {
-    NSLog(@"登录成功");
-    
+#warning 添加网络请求注册和登录
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"登录成功" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertVC animated:YES completion:^{
         [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
@@ -68,7 +70,7 @@
 }
 
 - (void)createView {
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:16];
     
     self.textField = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:@"请输入手机号码" isSecure:NO];
     self.textField.returnKeyType = UIReturnKeyNext;
@@ -107,6 +109,19 @@
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
         make.height.mas_equalTo(35);
+    }];
+    
+    UILabel *tipsLabel = [[UILabel alloc] init];
+    tipsLabel.numberOfLines = 0;
+    tipsLabel.font = [UIFont systemFontOfSize:14];
+    tipsLabel.text = @"温馨提示：未注册易车易宝账号的手机号，登录时将自动注册易车易宝，代表您已同意《易车易宝用户协议》";
+    tipsLabel.textColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
+    [self.view addSubview:tipsLabel];
+    
+    [tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(button.mas_bottom).with.offset(20);
+        make.left.mas_equalTo(button.mas_left);
+        make.right.mas_equalTo(button.mas_right);
     }];
     
     UIButton *getVerifyCode = [YWPublic createButtonWithFrame:CGRectZero title:@"  发送验证码  " imageName:nil];
