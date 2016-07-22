@@ -74,11 +74,13 @@
                 }
             } else {//token过期
                 self.outDate = YES;
+                NSLog(@"%@",dataDict[@"opt_info"]);
             }
             
             dispatch_group_leave(sourcegroup);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
             self.outLine = YES;
             dispatch_group_leave(sourcegroup);
         }];

@@ -11,16 +11,16 @@
 @interface Interface : NSObject
 #define kCARMGR @"http://112.74.13.51:8080/carmgr/"
 
-//登录 参数：username=%@&password=%@&version=1.0
-#define kLOGIN @"http://112.74.13.51:8080/carmgr/applogin?username=%@&password=%@&version=1.0"
+//登录 参数：username=%@&password=%@&type=%d&verf_code=%@&uuid=%@&version=1.0
+#define kLOGIN @"http://112.74.13.51:8080/carmgr/applogin?username=%@&password=%@&type=%d&verf_code=%@&uuid=%@&version=1.0"
 
 //注册 参数：username=%@&password=%@&mobile=%@&terminal_os=%@&user_type=%@
 //user_type = 0：表示车主用户；1：表示商户
 #define kREGISTER @"http://112.74.13.51:8080/carmgr/appregister?username=%@&password=%@&mobile=%@&terminal_os=iOS&user_type=%d"
 
-//验证码 参数：username=%@&type=%@&version=1.0
+//发送验证码 参数：username=%@&type=%@&uuid=%@&version=1.0
 //type == 0：注册；1：登录；2:找回密码
-#define kVERIFYCODE @"http://112.74.13.51:8080/carmgr/appsendverfcode?username=%@&type=%d&version=1.0"
+#define kVERIFYCODE @"http://112.74.13.51:8080/carmgr/appsendverfcode?username=%@&type=%d&uuid=%@&version=1.0"
 //手机快捷登录 切换城市 扫一扫
 
 //找回密码 参数：username=%@&mobile=%@&verf_code=%@&token=%@&version=1.0

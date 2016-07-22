@@ -21,6 +21,8 @@
 + (void)afPOST:(NSString *)URLString parameters:(id)parameters success:(void (^)(NSURLSessionDataTask *, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError *))failure {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
+//    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject: @"text/html"];
     
@@ -88,7 +90,6 @@
     
     [alertVC addAction:cancel];
     [alertVC addAction:login];
-//    [VC presentViewController:alertVC animated:YES completion:nil];
     return alertVC;
 }
 

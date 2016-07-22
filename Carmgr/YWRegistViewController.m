@@ -88,10 +88,10 @@
     BOOL correct = [RegularTools validateMobile:self.phoneNum.text];
     if (correct) {
         
-        //网络请求获取验证码   参数：username=%@&type=%@&version=1.0
+        //网络请求获取验证码   参数：username=%@&type=%@&uuid=%@&version=1.0
         //type == 0：注册；1：登录；2:找回密码
-        
-        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.phoneNum.text,0] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.phoneNum.text,0,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
@@ -99,10 +99,14 @@
                 self.mobile = self.phoneNum.text;
                 [self removeAllSubviews];
                 [self createInputVerifyCodeView];
+                NSLog(@"%@",dataDict);
+            } else if ([dataDict[@"opt_info"] isEqualToString:@"user account is already exist"]) {
+                [self showAlertViewTitle:@"提示" message:@"用户已存在，请前往登录"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self showAlertViewTitle:@"提示" message:@"网络错误"];
+            NSLog(@"%@",error);
         }];
         
     } else {

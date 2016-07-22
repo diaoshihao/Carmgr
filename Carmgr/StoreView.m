@@ -52,7 +52,7 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width / 3;
     NSArray *titleArr = @[@"全部",@"全城市",@"默认排序"];
     for (NSInteger i = 0; i < 3; i++) {
-        [superView addSubview:[self createButtonAndImage:titleArr[i] image:@"下拉黑" frame:CGRectMake(i * width, 64, width, 44)]];
+        [superView addSubview:[self createButtonAndImage:titleArr[i] image:@"下拉黑" frame:CGRectMake(i * width, 0, width, 44)]];
     }
 }
 
@@ -163,7 +163,7 @@
 #pragma mark - Tableview
 - (void)createTableView:(UIView *)superView {
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 104, [UIScreen mainScreen].bounds.size.width, 1)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 44, [UIScreen mainScreen].bounds.size.width, 1)];
     view.backgroundColor = [UIColor colorWithRed:240/256.0 green:240/256.0 blue:244/256.0 alpha:1];
     [superView addSubview:view];
     

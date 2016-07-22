@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UITextField *userField;
 @property (nonatomic, strong) UITextField *passwdField;
 
+@property (nonatomic, strong) UIButton    *loginBtn;
+
 @property (nonatomic, strong) LoginView *loginView;
 
 @end
@@ -78,13 +80,13 @@
     self.passwdField.delegate = self;
     
     //登录
-    UIButton *loginBtn = [self.loginView createLoginButtonAtSuperView:self.view Constraints:self.passwdField target:self action:@selector(login)];
+    self.loginBtn = [self.loginView createLoginButtonAtSuperView:self.view Constraints:self.passwdField target:self action:@selector(login)];
     
     //找回密码
-    [self.loginView createButtonAtSuperView:self.view Constraints:loginBtn target:self action:@selector(resetPassword) forPasswd:YES];
+    [self.loginView createButtonAtSuperView:self.view Constraints:self.loginBtn target:self action:@selector(resetPassword) forPasswd:YES];
     
     //手机快捷登录
-    [self.loginView createButtonAtSuperView:self.view Constraints:loginBtn target:self action:@selector(loginByPhone) forPasswd:NO];
+    [self.loginView createButtonAtSuperView:self.view Constraints:self.loginBtn target:self action:@selector(loginByPhone) forPasswd:NO];
     
     //第三方登录
     [self.loginView createThirdLoginAtSuperView:self.view target:self action:@selector(thirdLogin:)];
@@ -118,8 +120,12 @@
 #pragma mark 登录
 - (void)login {
     [self.view endEditing:YES];
+    
+    self.loginBtn.enabled = NO;//防止用户多次点击
+    
     //密码加密
-    NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text];
+    //username=%@&password=%@&type=%@&verf_code=%@&uuid=%@&version=1.0
+    NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text,0,nil,nil];
     /*[YWPublic encryptMD5String:self.passwdField.text]*/
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
@@ -128,6 +134,9 @@
         [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"%@",dataDict[@"opt_info"]);
+            NSLog(@"%@",task.currentRequest);
             
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
                 
@@ -160,7 +169,7 @@
 - (void)showAlertViewTitle:(NSString *)title message:(NSString *)message {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertVC animated:YES completion:^{
-        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];        
     }];
     
 }
@@ -169,7 +178,10 @@
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (alertVC.title == nil) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    self.loginBtn.enabled = YES;
 }
 
 #pragma mark 找回密码

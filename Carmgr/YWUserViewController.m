@@ -75,6 +75,7 @@
     [super viewWillAppear:YES];
     
     self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.translucent = YES;//    Bar的模糊效果，默认为YES
     
     //滑动返回
     self.navigationController.delegate = self;

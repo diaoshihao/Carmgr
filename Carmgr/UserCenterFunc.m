@@ -121,7 +121,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"%@",self.titleArr[indexPath.section][indexPath.row]);
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        
+        return;
+    }
     
     if (indexPath.section == 2 && indexPath.row == 0) {
         [self.actionTarget performSelector:@selector(pushToUserInfo)];

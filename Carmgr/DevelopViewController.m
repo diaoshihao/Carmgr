@@ -23,15 +23,16 @@
     [self.view addSubview:imageView];
     
     //测试接口
-    [self testAPI];
+//    [self testAPI];
 }
 
 - (void)testAPI {
+#if 0
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
-#if 0
+
     [YWPublic afPOST:[NSString stringWithFormat:kSERVICES,userName,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -61,8 +62,6 @@
         NSLog(@"个人信息%@",error);
     }];
     
-#endif
-    
     [YWPublic afPOST:[NSString stringWithFormat:kSECONDHAND,userName,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -90,6 +89,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"进度失败%@",error);
     }];
+    
+#endif
 
 }
 

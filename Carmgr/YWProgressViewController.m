@@ -117,6 +117,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
+    self.navigationController.navigationBar.translucent = NO;//    Bar的模糊效果，默认为YES
     
     //获取并设置当前城市名
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];

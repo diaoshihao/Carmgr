@@ -36,7 +36,7 @@
     BOOL isProcess = [_database executeUpdate:processSql];
     
     if (isStore && isProcess) {
-        NSLog(@"创建表成功！");
+        
     } else {
         NSLog(@"创建表失败！");
     }

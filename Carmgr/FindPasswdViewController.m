@@ -46,17 +46,19 @@
     //网络请求获取验证码   参数：username=%@&type=%@&version=1.0
     //type == 0：注册；1：登录；2:找回密码
     
+    NSString *uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
     if (![RegularTools validateMobile:self.textField.text]) {//手机号验证
         [self showAlertViewTitle:@"提示" message:@"请输入正确的手机号"];
     } else {
-        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,2] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,2,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                [self verifyCode];//验证
+                [self showAlertViewTitle:@"提示" message:@"验证码已发送，请注意查收"];
             } else {
-                [self showAlertViewTitle:@"提示" message:@"发送验证码失败"];
+                [self showAlertViewTitle:@"提示" message:@"发送验证码失败,请检查手机号"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -97,7 +99,7 @@
     UIFont *font = [UIFont systemFontOfSize:15];
     
     self.textField = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:@"请输入手机号码" isSecure:NO];
-    self.textField.returnKeyType = UIReturnKeyNext;
+    self.textField.returnKeyType = UIReturnKeySend;
     self.textField.font = font;
     self.textField.delegate = self;
     [self.view addSubview:self.textField];
@@ -146,7 +148,7 @@
     getVerifyCode.clipsToBounds = YES;
     
     [getVerifyCode addTarget:self action:@selector(getVerifyCode) forControlEvents:UIControlEventTouchUpInside];
-    [self.textField addSubview:getVerifyCode];
+    [self.view addSubview:getVerifyCode];
     
     [getVerifyCode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-30);
@@ -160,7 +162,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     if (textField == self.textField) {
-        [self.verifyCodeField becomeFirstResponder];
+        [self getVerifyCode];
+    } else {
+        [self verifyCode];
     }
     return YES;
 }
