@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import <Masonry.h>
+#import "ServiceDelegateController.h"
 
 @interface SettingViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -28,7 +29,7 @@
 }
 
 - (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
@@ -104,11 +105,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 2 && indexPath.row == 1) {
+        ServiceDelegateController *delegateVC = [[ServiceDelegateController alloc] init];
+        [self.navigationController pushViewController:delegateVC animated:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    
 }
 
 - (void)didReceiveMemoryWarning {

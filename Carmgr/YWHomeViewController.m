@@ -193,8 +193,9 @@
 
 //及时更改城市名
 - (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
-    self.navigationController.navigationBar.translucent = NO;//    Bar的模糊效果，默认为YES
+    self.navigationController.navigationBarHidden = NO;
+    
+    self.navigationController.navigationBar.translucent = NO;
     
     //获取并设置当前城市名
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
@@ -203,7 +204,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -46,12 +46,16 @@
 
 - (void)pushToSettingPage {
     SettingViewController *settingVC = [[SettingViewController alloc] init];
-    [self.navigationController pushViewController:settingVC animated:YES];
+    UINavigationController *settingNVC = [[UINavigationController alloc] initWithRootViewController:settingVC];
+    settingNVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:settingNVC animated:YES completion:nil];
 }
 
 - (void)pushToUserInfo {
     UserInfoViewController *userInfoVC = [[UserInfoViewController alloc] init];
-    [self.navigationController pushViewController:userInfoVC animated:YES];
+    UINavigationController *userInfoNVC = [[UINavigationController alloc] initWithRootViewController:userInfoVC];
+    userInfoNVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:userInfoNVC animated:YES completion:nil];
 }
 
 #pragma mark - 生命周期

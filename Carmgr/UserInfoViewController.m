@@ -36,7 +36,7 @@
 }
 
 - (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

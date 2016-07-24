@@ -135,9 +135,6 @@
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            NSLog(@"%@",dataDict[@"opt_info"]);
-            NSLog(@"%@",task.currentRequest);
-            
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
                 
                 //登录成功保存数据

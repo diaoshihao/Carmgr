@@ -31,6 +31,14 @@
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationVC.navigationBar.tintColor = [UIColor whiteColor];
     
+    //删除底部黑线
+    UINavigationBar *navigationBar = navigationVC.navigationBar;
+    // bg.png为自己ps出来的想要的背景颜色。
+    [navigationBar setBackgroundImage:[UIImage imageNamed:@"导航栏背景"]
+                       forBarPosition:UIBarPositionAny
+                           barMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[UIImage new]];
+    
     //设置导航栏title和item
     [self navigationAttribute:viewController];
     
@@ -129,11 +137,6 @@
 
 #pragma mark 创建搜索栏
 - (UISearchBar *)createSearchBarWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
-    
-//    UIView *searchView = [[UIView alloc] initWithFrame:frame];
-//    searchView.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
-    
-    
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:frame];
     searchBar.placeholder = placeholder;
     [searchBar setImage:[UIImage imageNamed:@"搜索"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];

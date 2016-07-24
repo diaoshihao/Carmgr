@@ -104,6 +104,7 @@
             for (NSDictionary *dict in dataDict[@"services_list"]) {
                 ServiceModel *model = [[ServiceModel alloc] initWithDict:dict];
                 [self.serviceDataArr addObject:model];
+                NSLog(@"%@",dict[@"icon_path"]);
             }
         } else {//token过期
             self.outDate = YES;
