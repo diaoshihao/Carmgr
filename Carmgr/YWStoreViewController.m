@@ -43,7 +43,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     self.storeView = [[StoreView alloc] init];
     [self.storeView createHeadSortViewAtSuperView:self.view];
     [self.storeView createTableView:self.view];
@@ -103,8 +102,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.translucent = NO;
     
     //获取并设置当前城市名
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];

@@ -21,8 +21,6 @@
 - (void)loadData {
     self.titleArr = @[@"头像",@"昵称",@"性别",@"所在地"];
     
-    
-    
 }
 
 - (void)customLeftItem {
@@ -56,6 +54,9 @@
     tableView.dataSource = self;
     [self.view addSubview:tableView];
     
+    tableView.tableFooterView = [UIView new];
+    tableView.scrollEnabled = NO;
+    
     [tableView registerClass:[UserInfoCell class] forCellReuseIdentifier:[UserInfoCell getReuseID]];
     
 }
@@ -64,13 +65,20 @@
     return self.titleArr.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return 88;
+    }
+    return 44;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:[UserInfoCell getReuseID] forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.titleLabel.text = self.titleArr[indexPath.row];
     [cell customViewAtRow:indexPath.row];
     if (indexPath.row == 0) {
-        cell.headImageView.image = [UIImage imageNamed:@""];
+        cell.headImageView.image = self.headImage;
     } else {
         cell.label.text = self.dataArr[indexPath.row];
     }
@@ -84,7 +92,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 

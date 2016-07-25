@@ -19,8 +19,8 @@
 /////////////////////////////////////////////////////////////
 
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface YWStoreViewController : UIViewController
+@interface YWStoreViewController : BaseViewController
 
 @end

@@ -38,7 +38,7 @@
     [superView addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
+        make.top.mas_equalTo(64);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.height.mas_equalTo(superView);
@@ -51,16 +51,7 @@
     
     [self.tableView registerClass:[ProgressTableViewCell class] forCellReuseIdentifier:[ProgressTableViewCell getReuseID]];
     
-    
-    //点击隐藏键盘(tableview满屏的情况下)
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];
-    tap.cancelsTouchesInView = NO;  //重要
-    [superView addGestureRecognizer:tap];
-    
     return self.tableView;
-}
-- (void)hideSearchBar:(UITapGestureRecognizer *)tap {
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
 #pragma mark - headview

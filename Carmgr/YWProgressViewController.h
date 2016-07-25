@@ -18,8 +18,8 @@
 //
 /////////////////////////////////////////////////////////////
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface YWProgressViewController : UIViewController
+@interface YWProgressViewController : BaseViewController
 
 @end

@@ -10,4 +10,8 @@
 
 @interface UserInfoViewController : UIViewController
 
+@property (nonatomic, strong) UIImage *headImage;
+
+@property (nonatomic, strong) NSArray *labelArr;
+
 @end

@@ -49,20 +49,10 @@
 - (void)createHeadSortViewAtSuperView:(UIView *)superView {
     self.superView = superView;
     CGFloat width = [UIScreen mainScreen].bounds.size.width / 3;
-//
-//    UIView *backView = [[UIView alloc] init];
-//    [superView addSubview:backView];
-//    
-//    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(64);
-//        make.left.mas_equalTo(0);
-//        make.right.mas_equalTo(0);
-//        make.height.mas_equalTo(44);
-//    }];
     
     NSArray *titleArr = @[@"全部",@"全城市",@"默认排序"];
     for (NSInteger i = 0; i < 3; i++) {
-        [superView addSubview:[self createButtonAndImage:titleArr[i] image:@"下拉黑" frame:CGRectMake(i * width, 0, width, 44)]];
+        [superView addSubview:[self createButtonAndImage:titleArr[i] image:@"下拉黑" frame:CGRectMake(i * width, 64, width, 44)]];
     }
 }
 
@@ -171,7 +161,7 @@
 #pragma mark - Tableview
 - (void)createTableView:(UIView *)superView {
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 44, [UIScreen mainScreen].bounds.size.width, 1)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 104, [UIScreen mainScreen].bounds.size.width, 1)];
     view.backgroundColor = [UIColor colorWithRed:240/256.0 green:240/256.0 blue:244/256.0 alpha:1];
     [superView addSubview:view];
     
@@ -196,16 +186,11 @@
         make.bottom.mas_equalTo(-44);
     }];
     
-    //点击隐藏键盘(tableview满屏的情况下)
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];
-    tap.cancelsTouchesInView = NO;  //重要
-    [superView addGestureRecognizer:tap];
-    
 }
 
 - (void)createSortTableView:(UIView *)superView {
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 44, [UIScreen mainScreen].bounds.size.width, 1)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 104, [UIScreen mainScreen].bounds.size.width, 1)];
     view.backgroundColor = [UIColor colorWithRed:240/256.0 green:240/256.0 blue:244/256.0 alpha:1];
     self.lineView = view;
     [superView addSubview:view];
@@ -227,14 +212,6 @@
         make.bottom.mas_equalTo(-44);
     }];
     
-    //点击隐藏键盘(tableview满屏的情况下)
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];
-    tap.cancelsTouchesInView = NO;  //重要
-    [superView addGestureRecognizer:tap];
-    
-}
-- (void)hideSearchBar:(UITapGestureRecognizer *)tap {
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

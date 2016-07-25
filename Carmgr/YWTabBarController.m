@@ -7,10 +7,10 @@
 //
 
 #import "YWTabBarController.h"
-#import "NavigationAttribute.h"
 #import "ScanImageViewController.h"
+#import "YWPublic.h"
 
-@interface YWTabBarController () <ScanImageView>
+@interface YWTabBarController () 
 
 @end
 
@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
     
     [self createViews];
-
+    self.tabBar.translucent = NO;
 }
 
 - (void)createViews {
@@ -35,30 +35,24 @@
                             @"YWStoreViewController",
                             @"YWProgressViewController",
                             @"YWCallViewController"];
+    
     //存放视图控制器的数组
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
     
-    //创建视图控制器并添加到控制器数组
     for (NSInteger i = 0; i < 4; i++) {
-        NavigationAttribute *navAttribute = [[NavigationAttribute alloc] init];
-        [controllers addObject:[navAttribute createVCWithClass:arrayClass[i] Title:arrayTitle[i] Image:arrayImage[i] selectImage:arraySelectImage[i]]];
+        UIViewController *viewController = [[NSClassFromString(arrayClass[i]) alloc] init];
+        UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:viewController];
+        
+        //设置标签栏
+        navigationVC.tabBarItem.title = arrayTitle[i];
+        [navigationVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0]} forState:UIControlStateSelected];
+        [navigationVC.tabBarItem setImage:[YWPublic imageNameWithOriginalRender:arrayImage[i]]];
+        navigationVC.tabBarItem.selectedImage = [YWPublic imageNameWithOriginalRender:arraySelectImage[i]];
+        
+        [controllers addObject:navigationVC];
     }
     
     self.viewControllers = controllers;
-}
-
-#pragma mark 跳转到扫描二维码
-- (void)pushToScanImageVC {
-    /**
-    ScanImageViewController *scanImageVC = [[ScanImageViewController alloc] init];
-    scanImageVC.delegate = self;
-    [self presentViewController:scanImageVC animated:YES completion:nil];
-     */
-}
-
-#pragma mark 扫描结果输出代理
-- (void)reportScanResult:(NSString *)result {
-    
 }
 
 - (void)didReceiveMemoryWarning {

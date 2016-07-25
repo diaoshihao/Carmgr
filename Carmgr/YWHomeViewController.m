@@ -7,8 +7,6 @@
 //
 
 #import "YWHomeViewController.h"
-#import "YWUserViewController.h"
-#import "YWPublic.h"
 #import "HomeView.h"
 #import "YWLoginViewController.h"
 #import "NetworkingForData.h"
@@ -48,22 +46,6 @@
     [self.viewsArr addObject:[self.home createSecondView]];
     [self.viewsArr addObject:[self.home createUsedCarCollectionView]];
 //    [self.viewsArr addObject:[self.home createTableViewAtSuperView:self.view]];
-}
-
-#pragma mark 跳转到个人中心
-- (void)pushToUser:(UIButton *)sender {
-    
-    [self.navigationController pushViewController:[[YWUserViewController alloc] init] animated:YES];
-}
-
-#pragma mark 选择城市
-- (void)chooseCityAction:(UIButton *)sender {
-    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
-    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area) {
-        
-        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
-    }];
-    [self.navigationController pushViewController:cityChooseVC animated:YES];
 }
 
 #pragma mark 获取图片
@@ -109,6 +91,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = YES;
     
     self.home = [[HomeView alloc] init];
     self.home.VC = self;
@@ -126,7 +109,7 @@
 #pragma mark - tableView
 - (void)createTableView {
     
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-104) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -134,14 +117,6 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    //点击隐藏键盘(tableview满屏的情况下)
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];
-    tap.cancelsTouchesInView = NO;  //重要
-    [self.view addGestureRecognizer:tap];
-    
-}
-- (void)hideSearchBar:(UITapGestureRecognizer *)tap {
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
 #pragma mark - tableView delegate
@@ -189,21 +164,6 @@
     [cell addSubview:self.viewsArr[indexPath.section]];
     
     return cell;
-}
-
-//及时更改城市名
-- (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = NO;
-    
-    self.navigationController.navigationBar.translucent = NO;
-    
-    //获取并设置当前城市名
-    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
-    UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
-    [cityButton setTitle:city forState:UIControlStateNormal];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
 }
 
 - (void)didReceiveMemoryWarning {

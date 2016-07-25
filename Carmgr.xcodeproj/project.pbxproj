@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		6F61C1379FDB08E5BE112202 /* libPods-Carmgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F25A80A03943501A53A01A /* libPods-Carmgr.a */; };
 		840EFB2A1D377B0B0070B69A /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840EFB291D377B0B0070B69A /* StoreModel.m */; };
+		846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EB1D459DD3004E1BF1 /* ViewController.m */; };
+		846690F01D45C43E004E1BF1 /* PrivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EF1D45C43E004E1BF1 /* PrivateModel.m */; };
 		8477762B1D124BF100DE8213 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762A1D124BF100DE8213 /* main.m */; };
 		8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477762D1D124BF100DE8213 /* AppDelegate.m */; };
-		847776311D124BF100DE8213 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776301D124BF100DE8213 /* ViewController.m */; };
+		847776311D124BF100DE8213 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776301D124BF100DE8213 /* BaseViewController.m */; };
 		847776341D124BF100DE8213 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847776321D124BF100DE8213 /* Main.storyboard */; };
 		847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847776371D124BF100DE8213 /* LaunchScreen.storyboard */; };
 		847776441D124BF100DE8213 /* CarmgrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776431D124BF100DE8213 /* CarmgrTests.m */; };
@@ -84,7 +86,6 @@
 		84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AB1D190AA600597BFD /* YWUserViewController.m */; };
 		84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */; };
 		84F3C2B51D193AB300597BFD /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2B21D193AB300597BFD /* city.plist */; };
-		84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */; };
 		84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F3C2D11D1B719E00597BFD /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -109,12 +110,16 @@
 		66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.debug.xcconfig"; sourceTree = "<group>"; };
 		840EFB281D377B0B0070B69A /* StoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreModel.h; sourceTree = "<group>"; };
 		840EFB291D377B0B0070B69A /* StoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
+		846690EA1D459DD3004E1BF1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		846690EB1D459DD3004E1BF1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		846690EE1D45C43E004E1BF1 /* PrivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateModel.h; path = Carmgr/PrivateModel.h; sourceTree = "<group>"; };
+		846690EF1D45C43E004E1BF1 /* PrivateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrivateModel.m; path = Carmgr/PrivateModel.m; sourceTree = "<group>"; };
 		847776261D124BF100DE8213 /* Carmgr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carmgr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8477762A1D124BF100DE8213 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8477762C1D124BF100DE8213 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8477762D1D124BF100DE8213 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8477762F1D124BF100DE8213 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		847776301D124BF100DE8213 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8477762F1D124BF100DE8213 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Carmgr/BaseViewController.h; sourceTree = "<group>"; };
+		847776301D124BF100DE8213 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Carmgr/BaseViewController.m; sourceTree = "<group>"; };
 		847776331D124BF100DE8213 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		847776381D124BF100DE8213 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8477763A1D124BF100DE8213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,8 +261,6 @@
 		84F3C2AD1D1920C400597BFD /* ScanImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanImageViewController.h; path = Carmgr/ScanImageViewController.h; sourceTree = "<group>"; };
 		84F3C2AE1D1920C400597BFD /* ScanImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanImageViewController.m; path = Carmgr/ScanImageViewController.m; sourceTree = "<group>"; };
 		84F3C2B21D193AB300597BFD /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = city.plist; path = Carmgr/city.plist; sourceTree = "<group>"; };
-		84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationAttribute.h; sourceTree = "<group>"; };
-		84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationAttribute.m; sourceTree = "<group>"; };
 		84F3C2D11D1B719E00597BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9F25A80A03943501A53A01A /* libPods-Carmgr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Carmgr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E02099F02D190DAD4B5B12 /* Pods-Carmgr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.release.xcconfig"; sourceTree = "<group>"; };
@@ -359,6 +362,24 @@
 			name = "服务协议";
 			sourceTree = "<group>";
 		};
+		846690E91D44B53E004E1BF1 /* 视图控制器父类 */ = {
+			isa = PBXGroup;
+			children = (
+				8477762F1D124BF100DE8213 /* BaseViewController.h */,
+				847776301D124BF100DE8213 /* BaseViewController.m */,
+			);
+			name = "视图控制器父类";
+			sourceTree = "<group>";
+		};
+		846690ED1D45C412004E1BF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				846690EE1D45C43E004E1BF1 /* PrivateModel.h */,
+				846690EF1D45C43E004E1BF1 /* PrivateModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		8477761D1D124BF100DE8213 = {
 			isa = PBXGroup;
 			children = (
@@ -386,8 +407,8 @@
 			children = (
 				8477762C1D124BF100DE8213 /* AppDelegate.h */,
 				8477762D1D124BF100DE8213 /* AppDelegate.m */,
-				8477762F1D124BF100DE8213 /* ViewController.h */,
-				847776301D124BF100DE8213 /* ViewController.m */,
+				846690EA1D459DD3004E1BF1 /* ViewController.h */,
+				846690EB1D459DD3004E1BF1 /* ViewController.m */,
 				84A929FB1D2618A0001DD20F /* 待开发 */,
 				84F3C2B01D193A8200597BFD /* 第三方 */,
 				84F3C29B1D17CC8500597BFD /* Public */,
@@ -447,7 +468,6 @@
 			isa = PBXGroup;
 			children = (
 				84F3C2DE1D1B945D00597BFD /* Model */,
-				84F3C2DD1D1B945200597BFD /* Views */,
 				84F3C2A41D17D79700597BFD /* viewControllers */,
 			);
 			name = TabBarController;
@@ -738,6 +758,7 @@
 		84F3C2921D17795C00597BFD /* 用户中心 */ = {
 			isa = PBXGroup;
 			children = (
+				846690ED1D45C412004E1BF1 /* Model */,
 				840A99641D1D1A6700C76E25 /* Views */,
 				84F3C2A21D17D76600597BFD /* viewControllers */,
 			);
@@ -767,6 +788,7 @@
 			isa = PBXGroup;
 			children = (
 				84D9B5781D3B51C7002AC63F /* 公用函数 */,
+				846690E91D44B53E004E1BF1 /* 视图控制器父类 */,
 				84D9B5791D3B51EF002AC63F /* 接口函数 */,
 				84D9B57C1D3B5248002AC63F /* 数据库 */,
 				84D9B57B1D3B5216002AC63F /* 正则表达式 */,
@@ -957,15 +979,6 @@
 				84D9B5D41D4076E1002AC63F /* HotModel.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		84F3C2DD1D1B945200597BFD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				84F3C2BA1D193CE600597BFD /* NavigationAttribute.h */,
-				84F3C2BB1D193CE600597BFD /* NavigationAttribute.m */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		84F3C2DE1D1B945D00597BFD /* Model */ = {
@@ -1175,13 +1188,13 @@
 				84D9B5BF1D3C8342002AC63F /* NSBundle+MJRefresh.m in Sources */,
 				84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */,
 				84BAEF0A1D36071A00227A15 /* SettingViewController.m in Sources */,
-				84F3C2BC1D193CE600597BFD /* NavigationAttribute.m in Sources */,
 				84D9B5B91D3C8342002AC63F /* MJRefreshBackStateFooter.m in Sources */,
 				84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */,
 				84D9B5BB1D3C8342002AC63F /* MJRefreshNormalHeader.m in Sources */,
 				84D9B5C11D3C8342002AC63F /* UIScrollView+MJRefresh.m in Sources */,
 				84D9B5D21D4067C0002AC63F /* UsedCarModel.m in Sources */,
 				84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */,
+				846690F01D45C43E004E1BF1 /* PrivateModel.m in Sources */,
 				84D9B5BC1D3C8342002AC63F /* MJRefreshStateHeader.m in Sources */,
 				8477766D1D1258D800DE8213 /* YWCallViewController.m in Sources */,
 				84D9B5B71D3C8342002AC63F /* MJRefreshBackGifFooter.m in Sources */,
@@ -1191,7 +1204,7 @@
 				84BAEEE91D3605B700227A15 /* YWRegistViewController.m in Sources */,
 				847D09CD1D2A0E8400EBFF37 /* StoreView.m in Sources */,
 				84D9B5B11D3C8342002AC63F /* MJRefreshComponent.m in Sources */,
-				847776311D124BF100DE8213 /* ViewController.m in Sources */,
+				847776311D124BF100DE8213 /* BaseViewController.m in Sources */,
 				840EFB2A1D377B0B0070B69A /* StoreModel.m in Sources */,
 				84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
@@ -1237,6 +1250,7 @@
 				84D9B5B31D3C8342002AC63F /* MJRefreshHeader.m in Sources */,
 				84D9B5B41D3C8342002AC63F /* MJRefreshAutoGifFooter.m in Sources */,
 				84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */,
+				846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */,
 				84D9B5AF1D3C8342002AC63F /* MJRefreshAutoFooter.m in Sources */,
 				847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */,
 			);

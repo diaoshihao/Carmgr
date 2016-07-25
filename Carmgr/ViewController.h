@@ -2,7 +2,7 @@
 //  ViewController.h
 //  Carmgr
 //
-//  Created by admin on 16/6/16.
+//  Created by admin on 16/7/25.
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
@@ -10,6 +10,4 @@
 
 @interface ViewController : UIViewController
 
-
 @end
-

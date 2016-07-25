@@ -18,8 +18,8 @@
 //
 /////////////////////////////////////////////////////////////
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface YWHomeViewController : UIViewController
+@interface YWHomeViewController : BaseViewController
 
 @end

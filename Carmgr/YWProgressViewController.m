@@ -42,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = YES;
     
     self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
     
@@ -116,9 +117,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.translucent = NO;
-    
+
     //获取并设置当前城市名
     NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
     UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];

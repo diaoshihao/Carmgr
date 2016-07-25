@@ -107,7 +107,6 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:normalID];
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = self.titleArr[indexPath.section][indexPath.row];
         cell.imageView.image = [UIImage imageNamed:self.imageArr[indexPath.section][indexPath.row]];
         return cell;

@@ -58,7 +58,7 @@
  */
 + (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.image = [UIImage imageNamed:imageName];
+    [imageView setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"headimg_path"]] placeholderImage:[UIImage imageNamed:imageName]];
     imageView.layer.cornerRadius = imageView.frame.size.height / 2;
     imageView.clipsToBounds = YES;
     return imageView;
