@@ -53,7 +53,7 @@
     self.numberType = [self.infoView numberType];
     self.carType = [self.infoView labelWithTitle:@"请选择车辆(选填)"];
     
-    self.cityLabel = [self.infoView labelWithTitle:@"广州"];
+    self.cityLabel = [self.infoView labelWithTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"city"]];
     
     NSArray *arr2 = [self.infoView textFieldArray:2];//数字标示是
     NSArray *arr3 = [self.infoView textFieldArray:3];//否添加“粤”
@@ -113,7 +113,7 @@
 }
 
 - (void)backToLastPage {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createTableView {

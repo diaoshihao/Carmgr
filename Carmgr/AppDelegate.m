@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "YWTabBarController.h"
+#import "GuideViewController.h"
 
 @interface AppDelegate ()
 
@@ -28,7 +29,10 @@
     NSString *saveVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     
     if ([version isEqualToString:saveVersion]) { // 不是第一次使用这个版本
-        
+        //是否第一次使用
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
+        self.window.rootViewController = [[YWTabBarController alloc] init];
+        //进入程序,自动登录！！！！！
         
     } else { // 版本号不一样：第一次使用新版本
         // 将新版本号写入沙盒
@@ -38,16 +42,16 @@
         //移动网络下载图片打开
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MONET"];
         
+        //是否第一次使用
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFirstLaunch"];
+        
         // 显示版本新特性界面
+        GuideViewController *guideVC = [[GuideViewController alloc] init];
+        self.window.rootViewController = guideVC;
         
     }
     
-    //程序将要退出时退出登录，设置[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
     
-    //进入程序,不在登录状态?????????登录请求！！！！！！
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-    
-    self.window.rootViewController = [[YWTabBarController alloc] init];
     return YES;
 }
 
@@ -74,7 +78,7 @@
     
     //添加退出登录方法
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
 }
 
 @end

@@ -12,14 +12,17 @@
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
     if (self = [super init]) {
-        self.merchant_name = dict[@"merchant_name"];
         self.img_path = dict[@"img_path"];
-        self.address = dict[@"address"];
-        self.mobile = dict[@"mobile"];
-        self.service_item = dict[@"service_item"];
+        self.merchant_name = dict[@"merchant_name"];
         self.stars = dict[@"stars"];
-        self.tags = dict[@"tags"];
-        self.total_rate = dict[@"total_rate"];
+        self.service_item = dict[@"service_item"];
+        self.mobile = dict[@"mobile"];
+        self.merchant_introduce = dict[@"merchant_introduce"];
+        self.province = dict[@"province"];
+        self.city = dict[@"city"];
+        self.area = dict[@"area"];
+        self.road = dict[@"road"];
+        self.distance = dict[@"distance"];
     }
     return self;
 }

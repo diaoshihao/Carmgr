@@ -10,19 +10,14 @@
 
 @interface StoreTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView *headImageView;
-@property (nonatomic, strong) UILabel     *storeName;
-@property (nonatomic, strong) UILabel     *address;
-@property (nonatomic, strong) UILabel     *score;
+@property (nonatomic, strong) UIImageView   *headImageView;
+@property (nonatomic, strong) UILabel       *storeName;
+@property (nonatomic, strong) UILabel       *introduce;
+@property (nonatomic, strong) UILabel       *area;
+@property (nonatomic, strong) UILabel       *road;
+@property (nonatomic, strong) UILabel       *distance;
 
-@property (nonatomic, strong) UIButton    *button;
-
-@property (nonatomic, strong) NSString    *mobile;
-
-
-@property (nonatomic, strong) NSArray     *servieceArr;
-
-- (void)servieceLabel;
+@property (nonatomic, strong) NSString      *stars;
 
 - (void)starView;
 

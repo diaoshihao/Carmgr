@@ -25,8 +25,6 @@
         self.order_touse_size = dict[@"order_touse_size"];
         self.order_process_size = dict[@"order_process_size"];
         self.order_completed_size = dict[@"order_completed_size"];
-        self.opt_state = dict[@"opt_state"];
-        self.opt_info = dict[@"opt_info"];
     }
     return self;
 }

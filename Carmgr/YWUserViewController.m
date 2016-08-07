@@ -13,6 +13,8 @@
 #import "CarVerifyViewController.h"
 #import "SettingViewController.h"
 #import "UserInfoViewController.h"
+#import "PrivateModel.h"
+#import <UIImageView+WebCache.h>
 
 @interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
@@ -40,23 +42,21 @@
 
 - (void)pushToAddCarInfo {
     CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
-    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:CarVerifyVC];
-    [self presentViewController:navigationVC animated:YES completion:nil];
+    CarVerifyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:CarVerifyVC animated:YES];
 }
 
 - (void)pushToSettingPage {
     SettingViewController *settingVC = [[SettingViewController alloc] init];
-    UINavigationController *settingNVC = [[UINavigationController alloc] initWithRootViewController:settingVC];
-    settingNVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:settingNVC animated:YES completion:nil];
+    settingVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 - (void)pushToUserInfo {
     UserInfoViewController *userInfoVC = [[UserInfoViewController alloc] init];
     userInfoVC.headImage = self.createView.userImageView.image;
-    UINavigationController *userInfoNVC = [[UINavigationController alloc] initWithRootViewController:userInfoVC];
-    userInfoNVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:userInfoNVC animated:YES completion:nil];
+    userInfoVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
 #pragma mark - 生命周期
@@ -79,14 +79,20 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
+    self.navigationController.navigationBarHidden = YES;
+    
     //滑动返回
     self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     //登录成功改变用户名
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
-        [self.createView.userName setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] forState:UIControlStateNormal];
-    }
+//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
+//        [self.createView.userName setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] forState:UIControlStateNormal];
+//        [self.createView.userImageView sd_setImageWithURL:[NSURL URLWithString:privateModel.avatar] placeholderImage:[UIImage imageNamed:@"头像大"]];
+//    } else {
+//        [self.createView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
+//        self.createView.userImageView.image = [UIImage imageNamed:@"头像大"];
+//    }
     
 }
 

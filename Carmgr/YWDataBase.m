@@ -29,13 +29,16 @@
     }
     //如果数据库打开成功 创建表
     //创建商家数据表
-    NSString *storeSql = @"create table if not exists tb_store(tb_id integer primary key autoincrement,merchant_name text,img_path text,mobile text,address text,stars float,service_item text,tags text,total_rate text)";
+    NSString *storeSql = @"create table if not exists tb_store(tb_id integer primary key autoincrement,img_path text,merchant_name text,stars text,service_item text,mobile text,merchant_introduce text,province text,city text,area text,road text,distance text)";
     NSString *processSql = @"create table if not exists tb_process(tb_id integer primary key autoincrement,img_path text,merchant_account text,merchant_name text,order_id text,order_state text,order_time text,order_type text,service_name text)";
+    
+    NSString *privateSql = @"create table if not exists tb_private(tb_id  integer primary key autoincrement,username text,avatar text,score text,sex text,city text,money text,order_total_size text,order_topay_size text,order_touse_size text,order_process_size text,order_completed_size text)";
     
     BOOL isStore = [_database executeUpdate:storeSql];
     BOOL isProcess = [_database executeUpdate:processSql];
+    BOOL isPrivate = [_database executeUpdate:privateSql];
     
-    if (isStore && isProcess) {
+    if (isStore && isProcess && isPrivate) {
         
     } else {
         NSLog(@"创建表失败！");
@@ -91,9 +94,9 @@
 #pragma mark -- 商家Store数据表
 //插入数据
 - (BOOL)insertStoreWithModel:(StoreModel *)model {
-    NSString *insertStore = @"insert into tb_store(merchant_name,img_path,mobile,address,stars,service_item,tags,total_rate) values(?,?,?,?,?,?,?,?)";
+    NSString *insertStore = @"insert into tb_store(img_path,merchant_name,stars,service_item,mobile,merchant_introduce,province,city,area,road,distance) values(?,?,?,?,?,?,?,?,?,?,?)";
     
-    BOOL storeInsert = [_database executeUpdate:insertStore,model.merchant_name,model.img_path,model.mobile,model.address,model.stars,model.service_item,model.tags,model.total_rate];
+    BOOL storeInsert = [_database executeUpdate:insertStore,model.img_path,model.merchant_name,model.stars,model.service_item,model.mobile,model.merchant_introduce,model.province,model.city,model.area,model.road,model.distance];
     
     if (storeInsert) {
         return YES;
@@ -109,14 +112,19 @@
     NSMutableArray *arrM = [[NSMutableArray alloc] init];
     while (resultSet.next) {
         StoreModel *model = [[StoreModel alloc] init];
-        model.merchant_name = [resultSet stringForColumn:@"merchant_name"];
+        
         model.img_path = [resultSet stringForColumn:@"img_path"];
-        model.mobile = [resultSet stringForColumn:@"mobile"];
-        model.address = [resultSet stringForColumn:@"address"];
+        model.merchant_name = [resultSet stringForColumn:@"merchant_name"];
         model.stars = [resultSet stringForColumn:@"stars"];
         model.service_item = [resultSet stringForColumn:@"service_item"];
-        model.tags = [resultSet stringForColumn:@"tags"];
-        model.total_rate = [resultSet stringForColumn:@"total_rate"];
+        model.mobile = [resultSet stringForColumn:@"mobile"];
+        model.merchant_introduce = [resultSet stringForColumn:@"merchant_introduce"];
+        model.province = [resultSet stringForColumn:@"province"];
+        model.city = [resultSet stringForColumn:@"city"];
+        model.area = [resultSet stringForColumn:@"area"];
+        model.road = [resultSet stringForColumn:@"road"];
+        model.distance = [resultSet stringForColumn:@"distance"];
+        
         [arrM addObject:model];
     }
     return arrM;
@@ -151,6 +159,45 @@
         model.order_time = [resultSet stringForColumn:@"order_time"];
         model.order_type = [resultSet stringForColumn:@"order_type"];
         model.service_name = [resultSet stringForColumn:@"service_name"];
+        [arrM addObject:model];
+    }
+    return arrM;
+}
+
+#pragma mark -- 个人资料Private数据表
+//插入数据
+- (BOOL)insertPrivateWithModel:(PrivateModel *)model {
+    NSString *insertPrivate = @"insert into tb_private(username,avatar,score,sex,city,money,order_total_size,order_topay_size,order_touse_size,order_process_size,order_completed_size) values(?,?,?,?,?,?,?,?,?,?,?)";
+    
+    BOOL privateInsert = [_database executeUpdate:insertPrivate,model.username,model.avatar,model.score,model.sex,model.city,model.money,model.order_total_size,model.order_topay_size,model.order_touse_size,model.order_process_size,model.order_completed_size];
+    
+    if (privateInsert) {
+        return YES;
+    }
+    return NO;
+}
+
+//获取所有数据
+- (NSMutableArray *)getAllDataFromPrivate {
+    NSString *getPrivate = @"select * from tb_private";
+    FMResultSet *resultSet = [_database executeQuery:getPrivate];
+    
+    NSMutableArray *arrM = [[NSMutableArray alloc] init];
+    while (resultSet.next) {
+        PrivateModel *model = [[PrivateModel alloc] init];
+        
+        model.username = [resultSet stringForColumn:@"username"];
+        model.avatar = [resultSet stringForColumn:@"avatar"];
+        model.score = [resultSet stringForColumn:@"score"];
+        model.sex = [resultSet stringForColumn:@"sex"];
+        model.city = [resultSet stringForColumn:@"city"];
+        model.money = [resultSet stringForColumn:@"money"];
+        model.order_total_size = [resultSet stringForColumn:@"order_total_size"];
+        model.order_topay_size = [resultSet stringForColumn:@"order_topay_size"];
+        model.order_touse_size = [resultSet stringForColumn:@"order_touse_size"];
+        model.order_process_size = [resultSet stringForColumn:@"order_process_size"];
+        model.order_completed_size = [resultSet stringForColumn:@"order_completed_size"];
+        
         [arrM addObject:model];
     }
     return arrM;

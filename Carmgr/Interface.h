@@ -21,13 +21,12 @@
 //发送验证码 参数：username=%@&type=%@&uuid=%@&version=1.0
 //type == 0：注册；1：登录；2:找回密码
 #define kVERIFYCODE @"http://112.74.13.51:8080/carmgr/appsendverfcode?username=%@&type=%d&uuid=%@&version=1.0"
-//手机快捷登录 切换城市 扫一扫
 
-//找回密码 参数：username=%@&mobile=%@&verf_code=%@&token=%@&version=1.0
-#define kFINDPASSWD @"http://112.74.13.51:8080/carmgr/appfindpassword?username=%@&mobile=%@&verf_code=%@&token=%@&version=1.0"
+//校验验证码 参数：username=%@&mobile=%@&verf_code=%@&type=%d&uuid=%@&version=1.0
+#define kCHECKVERFCODE @"http://112.74.13.51:8080/carmgr/appcheckverfcode?username=%@&mobile=%@&verf_code=%@&type=%d&uuid=%@&version=1.0"
 
-//重设密码 参数：username=%@&new_password=%@&token=%@&version=1.0
-#define kRESETPASSWD @"http://112.74.13.51:8080/carmgr/appresetpassword?username=%@&new_password=%@&token=%@&version=1.0"
+//设置密码 参数：username=%@&new_password=%@&uuid=%@&verf_code=%@&type=%d&version=1.0
+#define kRESETPASSWD @"http://112.74.13.51:8080/carmgr/appresetpassword?username=%@&new_password=%@&uuid=%@&verf_code=%@&type=%d&version=1.0"
 
 //重设用户名 参数：username=%@&new_username=%@&token=%@&version=1.0
 #define kRESETUSRNAME @"http://112.74.13.51:8080/carmgr/appresetusername?username=%@&new_username=%@&token=%@&version=1.0"
@@ -46,8 +45,8 @@
 #define kSECONDHAND @"http://112.74.13.51:8080/carmgr/appgetsecondhandcar?username=%@&token=%@&version=1.0"
 
 //=====================================================================
-//商家 参数：username=%@&filter=%@&token=%@&version=1.0
-#define kSTORE @"http://112.74.13.51:8080/carmgr/appgetmerchantslist?username=%@&filter=%@&token=%@&version=1.0"
+//商家 参数：username=%@&city_filter=%@&service_filter=%@&token=%@&version=1.0
+#define kSTORE @"http://112.74.13.51:8080/carmgr/appgetmerchantslist?username=%@&city_filter=%@&service_filter=%@&token=%@&version=1.0"
 
 //进度 参数：username=%@&filter=%@&token=%@&version=1.0
 #define kPROCESS @"http://112.74.13.51:8080/carmgr/appgetprocess?username=%@&filter=%@&token=%@&version=1.0"
@@ -63,6 +62,14 @@
 //=====================================================================
 //商户信息 参数：username=%@&merchant_name=%@&token=%@&version=1.0
 #define kMERCHANT @"http://112.74.13.51:8080/carmgr/appgetmerchantsservice?username=%@&merchant_name=%@&token=%@&version=1.0"
+
+
+//=====================================================================
+//用户评价 参数：username=%@&advise_text=%@&token=%@&version=1.0
+#define kADVISE @"http://112.74.13.51:8080/carmgr/appadvise?username=%@&advise_text=%@&token=%@&version=1.0"
+
+//用户操作行为 参数：username=%@&click_area_id=%@&detail=%@&token=%@&version=1.0
+#define kOPERATION @"http://112.74.13.51:8080/carmgr/apploguseroperation?username=%@&click_area_id=%@&detail=%@&token=%@&version=1.0"
 
 
 @end

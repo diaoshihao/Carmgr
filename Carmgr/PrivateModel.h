@@ -21,9 +21,7 @@
 @property (nonatomic, strong) NSString *order_touse_size;
 @property (nonatomic, strong) NSString *order_process_size;
 @property (nonatomic, strong) NSString *order_completed_size;
-@property (nonatomic, strong) NSString *opt_state;
-@property (nonatomic, strong) NSString *opt_info;
 
-
+- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

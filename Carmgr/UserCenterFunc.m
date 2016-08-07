@@ -10,6 +10,7 @@
 #import "YWPublic.h"
 #import <Masonry.h>
 #import "AddCarCell.h"
+#import "PrivateModel.h"
 
 @interface UserCenterFunc() <UITableViewDelegate,UITableViewDataSource>
 
@@ -19,6 +20,8 @@
 
 @property (nonatomic, strong) NSArray       *titleArr;
 @property (nonatomic, strong) NSArray       *imageArr;
+
+@property (nonatomic, strong) PrivateModel  *privateModel;
 
 @end
 
@@ -38,16 +41,19 @@
 }
 - (NSArray *)imageArr {
     if (_imageArr == nil) {
-        _imageArr = @[@[@""],@[@"绿色"],@[@"蓝色",@"红色"],@[@"紫色",@"黄色"]];
+        _imageArr = @[@[@""],@[@"红色"],@[@"紫色",@"深蓝"],@[@"蓝色",@"绿色"]];
     }
     return _imageArr;
 }
 
+- (PrivateModel *)privateModel {
+    if (_privateModel == nil) {
+        _privateModel = [[[YWDataBase sharedDataBase] getAllDataFromPrivate] firstObject];
+    }
+    return _privateModel;
+}
+
 - (UITableView *)createTableView:(UIView *)superView {
-    
-    width = [UIScreen mainScreen].bounds.size.width;
-    height = width / 2.5;
-    imageHeight = height / 2;
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [superView addSubview:tableView];
@@ -56,7 +62,7 @@
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-44);
+        make.bottom.mas_equalTo(0);
     }];
     
     tableView.delegate = self;
@@ -108,6 +114,8 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:normalID];
         }
         cell.textLabel.text = self.titleArr[indexPath.section][indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
         cell.imageView.image = [UIImage imageNamed:self.imageArr[indexPath.section][indexPath.row]];
         return cell;
     }
@@ -120,7 +128,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == NO) {
         
         return;
     }
@@ -136,22 +144,28 @@
 
 - (UIView *)createHeadView:(id)target {
     
+    width = [UIScreen mainScreen].bounds.size.width;
+    height = width / 2.5;
+    imageHeight = height / 2;
+    
     //背景
     self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     self.backView.backgroundColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     
     //头像
-    self.userImageView = [YWPublic createCycleImageViewWithFrame:CGRectZero image:@"头像大"];
+    self.userImageView = [YWPublic createCycleImageViewWithFrame:CGRectZero image:self.privateModel.avatar placeholder:@"头像"];
     [self.backView addSubview:self.userImageView];
     
     //用户名
-    self.userName = [YWPublic createButtonWithFrame:CGRectZero title:@"登录/注册" imageName:nil];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    self.userName = [YWPublic createButtonWithFrame:CGRectZero title:username imageName:nil];
+    self.userName.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.userName addTarget:target action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];
     [self.backView addSubview:self.userName];
     
-    //信息
-    self.messageButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"信封"];
-    [self.backView addSubview:self.messageButton];
+//    //信息
+//    self.messageButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"信封"];
+//    [self.backView addSubview:self.messageButton];
     
     //设置
     self.settingButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"设置"];
@@ -181,18 +195,18 @@
         make.centerY.mas_equalTo(self.userImageView);
     }];
     
-    [self.messageButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.messageButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-    [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.backView).with.offset(imageHeight/4);
-        make.right.mas_equalTo(self.backView).with.offset(-imageHeight/4);
-    }];
+//    [self.messageButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+//    [self.messageButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+//    [self.messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.backView).with.offset(imageHeight/4);
+//        make.right.mas_equalTo(self.backView).with.offset(-imageHeight/4);
+//    }];
     
     [self.settingButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.settingButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.messageButton.mas_left).with.offset(-imageHeight/4);
-        make.centerY.mas_equalTo(self.messageButton);
+        make.top.mas_equalTo(31.5);
+        make.right.mas_equalTo(self.backView).with.offset(-20);
     }];
 }
 

@@ -57,7 +57,7 @@
 
 //根据步骤改变颜色的view
 - (UIView *)creatViewWithTitle:(NSString *)title selected:(BOOL)selected {
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:14];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ([UIScreen mainScreen].bounds.size.width)/3, 35)];
     view.backgroundColor = [UIColor whiteColor];
@@ -70,15 +70,15 @@
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(labelSize);
-        make.left.mas_equalTo(view).with.offset(15);
-        make.centerY.mas_equalTo(view);
+        make.center.mas_equalTo(view);
     }];
     
     UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeCenter;
     [view addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(label);
-        make.left.mas_equalTo(label.mas_right).with.offset(1);
+        make.right.mas_equalTo(0);
         make.centerY.mas_equalTo(view);
     }];
     
@@ -86,14 +86,17 @@
         label.textColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
         imageView.image = [UIImage imageNamed:@"前进"];
     } else {
-        imageView.image = [UIImage imageNamed:@"前进1"];
+        imageView.image = [UIImage imageNamed:@"前进黑"];
+    }
+    if ([label.text isEqualToString:@"设置密码"]) {
+        [imageView removeFromSuperview];
     }
     return view;
 }
 
 //输入框
 - (UITextField *)createTextFieldAtSuperView:(UIView *)superView broView:(UIView *)broView placeholder:(NSString *)placeholder {
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:14];
     
     UITextField *textField = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:placeholder isSecure:NO];
     textField.font = font;
@@ -103,7 +106,7 @@
         make.top.mas_equalTo(broView.mas_bottom).with.offset(10);
         make.left.mas_equalTo(superView).with.offset(0);
         make.right.mas_equalTo(superView).with.offset(0);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
     return textField;
@@ -123,13 +126,13 @@
         make.top.mas_equalTo(broView.mas_bottom).with.offset(10);
         make.left.mas_equalTo(superView).with.offset(15);
         make.right.mas_equalTo(superView).with.offset(-15);
-        make.height.mas_equalTo(broView.mas_height);
+        make.height.mas_equalTo(44);
     }];
     return button;
 }
 
 - (UILabel *)createInfoLabelAtSuperView:(UIView *)superView phoneNum:(NSString *)phoneNum broview:(UIView *)broview {
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:14];
     
     UIView *view = [[UIView alloc] init];
     [superView addSubview:view];
@@ -156,7 +159,7 @@
 }
 
 - (void)createAgreementViewAtSuperView:(UIView *)superView broview:(UIView *)broview target:(UIViewController *)target action:(SEL)selector {
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:12];
     
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed:@"成功"];
@@ -198,29 +201,13 @@
     
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
     
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.backgroundColor = [UIColor grayColor];
-    imageView.image = [UIImage imageNamed:@"刷新"];
-    [customView addSubview:imageView];
-    
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"重新获取" imageName:nil];
     [button setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
     button.titleLabel.font = font;
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [customView addSubview:button];
     
-    CGSize size = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
-    
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(size.height);
-        make.height.mas_equalTo(size.height);
-        make.left.mas_equalTo(customView).with.offset(0);
-        make.centerY.mas_equalTo(customView);
-    }];
-    
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(imageView.mas_right).with.offset(10);
         make.centerY.mas_equalTo(customView);
     }];
     

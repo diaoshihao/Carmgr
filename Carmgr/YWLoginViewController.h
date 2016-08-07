@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BaseViewController.h"
 
 @interface YWLoginViewController : UIViewController
+
+@property (nonatomic) BOOL isFromHome;
+
+@property (nonatomic, strong) BaseViewController *fromVC;
 
 @end

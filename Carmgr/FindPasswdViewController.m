@@ -19,6 +19,12 @@
 @end
 
 @implementation FindPasswdViewController
+{
+    NSString *uuid;//只在getverfcode中获取，保证每个验证码对应一个uuid
+    UIButton *getVerifyCode;
+    NSInteger timeout;
+    NSTimer *downTimer;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,32 +37,62 @@
     
 }
 
+#pragma mark 校验验证码
 - (void)verifyCode {
-    NSLog(@"验证通过");
+    if (self.verifyCodeField.text.length == 0 || self.textField.text.length == 0) {
+        [self showAlertViewTitle:@"提示" message:@"手机号或验证码不能为空"];
+        return;
+    }
+
+    //type == 0：注册；1：登录；2:找回密码
+    NSString *urlStr = [NSString stringWithFormat:kCHECKVERFCODE,self.textField.text,self.textField.text,self.verifyCodeField.text,2,uuid];
+    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            
+            [self pushToResetView];
+            
+        } else {
+            [self showAlertViewTitle:@"提示" message:@"验证码错误，请重新输入"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self showAlertViewTitle:@"提示" message:@"网络错误"];
+        NSLog(@"%@",error);
+    }];
+
+}
+
+//验证码通过后到设置密码界面
+- (void)pushToResetView {
     ResetPasswdViewController *resetPasswdVC = [[ResetPasswdViewController alloc] init];
-    resetPasswdVC.settingType = ForFindPassword;//用于找回密码
     resetPasswdVC.username = self.textField.text;
     resetPasswdVC.mobile = self.textField.text;
     resetPasswdVC.verifycode = self.verifyCodeField.text;
+    resetPasswdVC.uuid = uuid;
     [self.navigationController pushViewController:resetPasswdVC animated:YES];
 }
 
 - (void)getVerifyCode {
     [self.textField resignFirstResponder];
-    //网络请求获取验证码   参数：username=%@&type=%@&version=1.0
-    //type == 0：注册；1：登录；2:找回密码
     
-    NSString *uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    uuid = [[NSUUID UUID] UUIDString];
     
     if (![RegularTools validateMobile:self.textField.text]) {//手机号验证
         [self showAlertViewTitle:@"提示" message:@"请输入正确的手机号"];
     } else {
-        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,2,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //type == 0：注册；1：登录；2:找回密码
+        NSString *urlStr = [NSString stringWithFormat:kVERIFYCODE,self.textField.text,2,uuid];
+        
+        [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
                 [self showAlertViewTitle:@"提示" message:@"验证码已发送，请注意查收"];
+                [self startTimer];
             } else {
                 [self showAlertViewTitle:@"提示" message:@"发送验证码失败,请检查手机号"];
             }
@@ -64,6 +100,25 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self showAlertViewTitle:@"提示" message:@"网络错误"];
         }];
+    }
+}
+
+- (void)startTimer {
+    timeout = 60;
+    getVerifyCode.enabled = NO;
+    downTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeButtonState) userInfo:nil repeats:YES];
+}
+
+- (void)changeButtonState {
+    timeout--;
+    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",timeout] forState:UIControlStateDisabled];
+    [getVerifyCode setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    getVerifyCode.layer.borderColor = [UIColor grayColor].CGColor;
+    if (timeout == 0) {
+        getVerifyCode.enabled = YES;
+        [getVerifyCode setTitle:@"  发送验证码  " forState:UIControlStateNormal];
+        getVerifyCode.layer.borderColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0].CGColor;
+        [downTimer invalidate];
     }
 }
 
@@ -85,7 +140,7 @@
     self.navigationItem.title = @"找回密码";
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentMode = UIViewContentModeLeft;
+    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
@@ -96,9 +151,10 @@
 }
 
 - (void)createView {
-    UIFont *font = [UIFont systemFontOfSize:15];
+    UIFont *font = [UIFont systemFontOfSize:14];
     
     self.textField = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:@"请输入手机号码" isSecure:NO];
+    self.textField.clearButtonMode = UITextFieldViewModeNever;
     self.textField.returnKeyType = UIReturnKeySend;
     self.textField.font = font;
     self.textField.delegate = self;
@@ -108,11 +164,12 @@
         make.top.mas_equalTo(74);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
     self.verifyCodeField = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:@"请输入短信验证码" isSecure:NO];
     self.verifyCodeField.returnKeyType = UIReturnKeyDone;
+    self.verifyCodeField.keyboardType = UIKeyboardTypeNumberPad;
     self.verifyCodeField.font = font;
     self.verifyCodeField.delegate = self;
     [self.view addSubview:self.verifyCodeField];
@@ -121,11 +178,11 @@
         make.top.mas_equalTo(self.textField.mas_bottom).with.offset(1);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"验证" imageName:nil];
-    button.titleLabel.font = font;
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     [button setBackgroundImage:[UIImage imageNamed:@"圆角矩形-1"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(verifyCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
@@ -134,10 +191,10 @@
         make.top.mas_equalTo(self.verifyCodeField.mas_bottom).with.offset(10);
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
-    UIButton *getVerifyCode = [YWPublic createButtonWithFrame:CGRectZero title:@"  发送验证码  " imageName:nil];
+    getVerifyCode = [YWPublic createButtonWithFrame:CGRectZero title:@"  发送验证码  " imageName:nil];
     getVerifyCode.titleLabel.font = font;
     
     //设置颜色
@@ -151,8 +208,8 @@
     [self.view addSubview:getVerifyCode];
     
     [getVerifyCode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-30);
-        make.height.mas_equalTo(25);
+        make.right.mas_equalTo(button.mas_right);
+        make.height.mas_equalTo(30);
         make.centerY.mas_equalTo(self.textField);
     }];
 

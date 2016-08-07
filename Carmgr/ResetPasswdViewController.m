@@ -41,60 +41,32 @@
             [self.setNewPasswd becomeFirstResponder];
         }]];
         [self presentViewController:alertVC animated:YES completion:nil];
-        return;
-    }
-    
-    if (self.settingType == ForResetPassword) {
-        [self resetPassword];//重设密码
     } else {
-        [self findPassword];//找回密码
+        [self resetPassword];//重设密码
     }
-    
-    
     
 }
 
 #pragma mark - 网络请求
 - (void)resetPassword {
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    
-    [YWPublic afPOST:[NSString stringWithFormat:kRESETPASSWD,self.username,self.setNewPasswd,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@",dataDict);
-                if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                    [self showAlertViewTitle:nil messae:@"修改密码成功"];
-        
-                } else {
-                    [self showAlertViewTitle:nil messae:@"修改密码失败"];
-                }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
-    }];
-}
-
-- (void)findPassword {
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    
-    [YWPublic afPOST:[NSString stringWithFormat:kFINDPASSWD,self.username,self.mobile,self.verifycode,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@",dataDict);
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+    if (self.setNewPasswd.text.length < 6) {
+        [self showAlertViewTitle:@"提示" messae:@"密码不能少于6位数"];
+    } else {
+        [YWPublic afPOST:[[NSString stringWithFormat:kRESETPASSWD,self.username,self.setNewPasswd.text,self.uuid,self.verifycode,2] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            [self showAlertViewTitle:nil messae:@"找回密码成功"];
+            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            //设置密码成功后,清除保存的密码,返回登录界面
-            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"password"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        } else {
-            [self showAlertViewTitle:nil messae:@"找回密码失败"];
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
-    }];
+            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                [self showAlertViewTitle:nil messae:@"修改密码成功"];
+                
+            } else {
+                [self showAlertViewTitle:@"提示" messae:@"修改密码失败"];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self showAlertViewTitle:@"提示" messae:@"网络错误"];
+        }];
+    }
 }
 
 - (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
@@ -108,6 +80,9 @@
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:nil];
+    if (alertVC.title == nil) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 //导航条
@@ -138,7 +113,7 @@
         make.top.mas_equalTo(74);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
     self.verifyPasswd = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:@"确认新密码" isSecure:NO];
@@ -151,7 +126,7 @@
         make.top.mas_equalTo(self.setNewPasswd.mas_bottom).with.offset(1);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"确认提交" imageName:nil];
@@ -164,7 +139,7 @@
         make.top.mas_equalTo(self.verifyPasswd.mas_bottom).with.offset(10);
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     
     

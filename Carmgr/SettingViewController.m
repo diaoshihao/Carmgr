@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import <Masonry.h>
 #import "ServiceDelegateController.h"
+#import "YWLoginViewController.h"
 
 @interface SettingViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -22,14 +23,14 @@
     self.navigationItem.title = @"设置";
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentMode = UIViewContentModeLeft;
+    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }
 
 - (void)backToLastPage {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -38,7 +39,7 @@
     
     [self customLeftItem];
     
-    self.dataArr = @[@[@"移动网络下载图片",@"清理缓存"],@[@"关于我们",@"招商信息",@"给个好评"],@[@"使用帮助",@"用户协议"]];
+    self.dataArr = @[@[@"移动网络下载图片",@"清理缓存"],@[@"关于我们",@"招商信息",@"给个好评"],@[@"使用帮助",@"用户协议"],@[@"退出登录"]];
     
     [self createTableView];
     
@@ -53,6 +54,7 @@
     tableView.dataSource = self;
     
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"settingcell"];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,6 +76,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingcell" forIndexPath:indexPath];
     cell.textLabel.text = self.dataArr[indexPath.section][indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
     if (indexPath.section == 0 && indexPath.row == 0) {
         UISwitch *netSwitch = [[UISwitch alloc] init];
         netSwitch.onTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
@@ -88,8 +92,14 @@
             make.centerY.mas_equalTo(cell.contentView);
         }];
     }
+    
     if (indexPath.section != 0) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    if (indexPath.section == 3) {//退出登录cell
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     return cell;
 }
@@ -97,9 +107,9 @@
 - (void)setSwitchOn:(UISwitch *)sender {
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"MONET"];
     if (sender.on) {
-        
+        NSLog(@"on");
     } else {
-        
+        NSLog(@"off");
     }
 }
 
@@ -110,6 +120,21 @@
         ServiceDelegateController *delegateVC = [[ServiceDelegateController alloc] init];
         [self.navigationController pushViewController:delegateVC animated:nil];
     }
+    
+    if (indexPath.section == 3) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+        [self logout];
+    }
+}
+
+- (void)logout {
+    //退出登录删除token，取消登录状态
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"token"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    
+    UIViewController *loginVC = [[YWLoginViewController alloc] init];
+    UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:navigaVC animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

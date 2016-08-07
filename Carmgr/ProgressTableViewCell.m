@@ -78,7 +78,7 @@
         make.top.mas_equalTo(self.storeName.mas_bottom).with.offset(3);
         make.left.mas_equalTo(self.storeName.mas_left).with.offset(0);
         make.bottom.mas_equalTo(self.contentView).with.offset(-10);
-        make.width.mas_equalTo(self.headImageView.mas_height);
+        make.width.mas_equalTo(self.headImageView.mas_height).multipliedBy(93.0/85);
     }];
     
     [self.serviceLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];

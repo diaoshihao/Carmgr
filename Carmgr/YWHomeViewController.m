@@ -68,24 +68,26 @@
 //    [network getHotSource:group];//热门推荐
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.tableView.mj_header endRefreshing];
+        
         if (network.outDate) {                  //token过期
-            [self.tableView.mj_header endRefreshing];
+            [YWPublic pushToLogin:self];
+            
+            /*
             UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
             [self presentViewController:alertVC animated:YES completion:nil];
+             */
             
         } else if (network.outLine) {           //网络错误
-            [self.tableView.mj_header endRefreshing];
             UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
             [self presentViewController:alertVC animated:YES completion:nil];
             
         } else {
-            [self.tableView.mj_header endRefreshing];
             [self.viewsArr removeAllObjects];
             [self loadCellViews];
             [self.tableView reloadData];
         }
     });
-    
 }
 
 - (void)viewDidLoad {
@@ -102,16 +104,21 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadImage];
     }];
-    [self.tableView.mj_header beginRefreshing];
+    [self refresh];
 }
 
+//实现父类的方法
+- (void)refresh {
+    [self.tableView.mj_header beginRefreshing];
+}
 
 #pragma mark - tableView
 - (void)createTableView {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-104) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-103) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     self.tableView.allowsSelection = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -127,9 +134,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return [self.home createCycleScrollView:self.cycleImageArr];
-    } else {
-        return nil;
     }
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    view.layer.shadowOffset = CGSizeMake(50, 10);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -143,7 +153,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return [UIScreen mainScreen].bounds.size.width/2.5;
+        return [UIScreen mainScreen].bounds.size.width * 300 / 720;
     } else {
         return 0.1;
     }

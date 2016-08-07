@@ -40,6 +40,8 @@
         self.label = [[UILabel alloc] init];
         [self.contentView addSubview:self.label];
         
+        [self.label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+        self.label.textAlignment = NSTextAlignmentRight;
         [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(0);
             make.center.mas_equalTo(self.contentView);

@@ -29,7 +29,7 @@
 #import "NSString+MD5.h"//MD5加密
 #import "RegularTools.h"//正则表达式
 #import "YWDataBase.h"//数据库
-#import "MJRefresh.h"
+#import "MJRefreshNormalHeader.h"
 
 @interface YWPublic : NSObject
 
@@ -38,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 //MD5加密
 + (NSString *)encryptMD5String:(NSString *)string;
 
+//用户点击次数收集
++ (void)userOperationInClickAreaID:(NSString *)click_area_id detial:(NSString * _Nullable)detail;
+
 //button
 + (UIButton *)createButtonWithFrame:(CGRect)frame title:(NSString * _Nullable)title imageName:(NSString * _Nullable)imageName;
 
@@ -45,10 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
 
 //创建圆形图片
-+ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)imageName;
++ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)img_path placeholder:(NSString *)placeholder;
 
 //textfield
 + (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;
+
+//push登录
++ (void)pushToLogin:(UIViewController *)VC;
 
 + (UIAlertController *)showReLoginAlertViewAt:(UIViewController *)VC;
 

@@ -10,6 +10,7 @@
 #import "RegistView.h"
 #import "YWPublic.h"
 #import "ServiceDelegateController.h"
+#import <Masonry.h>
 
 @interface YWRegistViewController () <UITextFieldDelegate>
 
@@ -25,6 +26,12 @@
 @end
 
 @implementation YWRegistViewController
+{
+    NSString *uuid;
+    UIButton *getVerifyCode;
+    NSInteger timeout;
+    NSTimer *downTimer;
+}
 
 - (RegistView *)registView {
     if (_registView == nil) {
@@ -38,7 +45,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.navigationItem.title = @"注册";
-    
+        
     [self createInputPhoneNumView];
     
 }
@@ -80,6 +87,9 @@
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:nil];
+    if (alertVC.title == nil) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 
@@ -90,7 +100,7 @@
         
         //网络请求获取验证码   参数：username=%@&type=%@&uuid=%@&version=1.0
         //type == 0：注册；1：登录；2:找回密码
-        NSString *uuid = [[NSUUID UUID] UUIDString];
+        uuid = [[NSUUID UUID] UUIDString];
         [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.phoneNum.text,0,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -99,9 +109,11 @@
                 self.mobile = self.phoneNum.text;
                 [self removeAllSubviews];
                 [self createInputVerifyCodeView];
-                NSLog(@"%@",dataDict);
+                if (getVerifyCode != nil) {
+                    [self startTimer];
+                }
             } else if ([dataDict[@"opt_info"] isEqualToString:@"user account is already exist"]) {
-                [self showAlertViewTitle:@"提示" message:@"用户已存在，请前往登录"];
+                [self showAlertViewTitle:@"提示" message:@"用户已存在，请返回登录"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -130,13 +142,72 @@
     [self.registView createButtonAtSuperView:self.view Constraints:self.verifyCode title:@"提交验证码" target:self action:@selector(commitVerifyCode)];
     
     //重新获取验证码
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.registView regetVerifyCode:self action:@selector(regetVerifyCode)]];
+    getVerifyCode = [YWPublic createButtonWithFrame:CGRectZero title:@"  重新获取验证码  " imageName:nil];
+    getVerifyCode.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    //设置颜色
+    [getVerifyCode setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
+    getVerifyCode.layer.borderColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0].CGColor;
+    getVerifyCode.layer.borderWidth = 1.0;
+    getVerifyCode.layer.cornerRadius = 6;
+    getVerifyCode.clipsToBounds = YES;
+    
+    [getVerifyCode addTarget:self action:@selector(getVerifyCode) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:getVerifyCode];
+    
+    [getVerifyCode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-20);
+        make.height.mas_equalTo(30);
+        make.centerY.mas_equalTo(self.verifyCode);
+    }];
+}
+
+- (void)startTimer {
+    timeout = 60;
+    getVerifyCode.enabled = NO;
+    downTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changeButtonState) userInfo:nil repeats:YES];
+}
+
+- (void)changeButtonState {
+    timeout--;
+    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",timeout] forState:UIControlStateDisabled];
+    [getVerifyCode setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    getVerifyCode.layer.borderColor = [UIColor grayColor].CGColor;
+    if (timeout == 0) {
+        getVerifyCode.enabled = YES;
+        [getVerifyCode setTitle:@"  重新获取验证码  " forState:UIControlStateNormal];
+        getVerifyCode.layer.borderColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0].CGColor;
+        [downTimer invalidate];
+    }
 }
 
 #pragma mark 校验验证码
 - (void)commitVerifyCode {
-    [self removeAllSubviews];
-    [self createSetSecureView];
+    
+    if (self.verifyCode.text.length != 4) {
+        [self showAlertViewTitle:@"提示" message:@"请输入正确的4位验证码"];
+        return;
+    }
+    //username=%@&mobile=%@&verf_code=%@&type=%d&uuid=%@&version=1.0
+    //type == 0：注册；1：登录；2:找回密码
+    [YWPublic afPOST:[[NSString stringWithFormat:kCHECKVERFCODE,self.phoneNum.text,self.phoneNum.text,self.verifyCode.text,0,uuid] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            self.mobile = self.phoneNum.text;
+            [self removeAllSubviews];
+            [self createSetSecureView];
+            
+        } else {
+            [self showAlertViewTitle:@"提示" message:@"验证码错误，请重新输入"];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self showAlertViewTitle:@"提示" message:@"网络错误"];
+        NSLog(@"%@",error);
+    }];
+    
 }
 
 #pragma mark 设置密码
@@ -164,20 +235,21 @@
     } else {
         
         //注册
-        [YWPublic afPOST:[NSString stringWithFormat:kREGISTER,self.mobile,self.passwdField.text,self.mobile,0] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *urlStr = [NSString stringWithFormat:kREGISTER,self.mobile,self.passwdField.text,self.mobile,0];
+        [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            NSLog(@"%@",dataDict);
-            
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                
-                [self showAlertViewTitle:nil message:@"注册成功"];
                 
                 //注册后返回登录界面
                 [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"mobile"];
                 [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+                [self showAlertViewTitle:nil message:@"注册成功"];
+                
+            } else {
+                [self showAlertViewTitle:@"提示" message:@"注册失败"];
             }
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

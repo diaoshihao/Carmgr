@@ -28,12 +28,14 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"点击添加车辆";
-    titleLabel.font = [UIFont systemFontOfSize:13];
+    titleLabel.font = [UIFont systemFontOfSize:12];
+    titleLabel.textColor = [UIColor colorWithRed:102/256.0 green:102/256.0 blue:102/256.0 alpha:1];
     [self.contentView addSubview:titleLabel];
     
     UILabel *tipsLabel = [[UILabel alloc] init];
     tipsLabel.text = @"添加后能时刻把握爱车信息哦！";
-    tipsLabel.font = [UIFont systemFontOfSize:15];
+    tipsLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
     [self.contentView addSubview:tipsLabel];
     
     [self.button setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];

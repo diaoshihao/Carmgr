@@ -10,6 +10,7 @@
 #import <FMDB.h>
 #import "StoreModel.h"
 #import "ProgressModel.h"
+#import "PrivateModel.h"
 
 @interface YWDataBase : NSObject
 
@@ -29,14 +30,22 @@
 - (BOOL)deleteDatabaseFromTable:(NSString *)table_name;
 
 
+//商家
 - (BOOL)insertStoreWithModel:(StoreModel *)model;
 
 - (NSMutableArray *)getAllDataFromStore;
 
 
+//进度
 - (BOOL)insertProcessWithModel:(ProgressModel *)model;
 
 - (NSMutableArray *)getAllDataFromProcess;
+
+
+//个人资料
+- (BOOL)insertPrivateWithModel:(PrivateModel *)model;
+
+- (NSMutableArray *)getAllDataFromPrivate;
 
 
 @end

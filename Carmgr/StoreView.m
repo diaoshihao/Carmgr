@@ -11,13 +11,12 @@
 #import "YWPublic.h"
 #import "StoreTableViewCell.h"
 #import "StoreModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface StoreView() <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, assign) BOOL          selected;//是否选择排序
 @property (nonatomic, strong) UIButton      *lastButton;//选择排序状态下的上一次按钮
-
-@property (nonatomic, strong) UITableView   *sortTableView;
 
 @property (nonatomic, strong) UIView        *superView;
 @property (nonatomic, strong) UIView        *lineView;
@@ -36,12 +35,16 @@
 }
 
 - (NSArray *)allSortArr {
-    if (_allSortArr == nil) {
-        _allSortArr = @[
-                        @[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"],
-                        @[@"全城市",@"越秀区",@"天河区",@"番禺区",@"海珠区",@"白云区",@"荔湾区",@"黄浦区",@"增城区",@"花都区",@"南沙区",@"从化市",@"近郊"],
-                        @[@"默认排序",@"离我最近",@"评价最高",@"最新发布",@"人气最高",@"价格最低",@"价格最高"]];
+    NSArray *areaList = [[NSArray alloc] init];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isChangeCity"] == YES) {
+        areaList = [[NSUserDefaults standardUserDefaults] objectForKey:@"areaList"];
+    } else {
+        areaList = @[@"全城市",@"越秀区",@"天河区",@"番禺区",@"海珠区",@"白云区",@"荔湾区",@"黄浦区",@"增城区",@"花都区",@"南沙区",@"从化市",@"近郊"];
     }
+    _allSortArr = @[
+                    @[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"],
+                    areaList,
+                    @[@"默认排序",@"离我最近",@"评价最高",@"最新发布",@"人气最高",@"价格最低",@"价格最高"]];
     return _allSortArr;
 }
 
@@ -55,16 +58,74 @@
         [superView addSubview:[self createButtonAndImage:titleArr[i] image:@"下拉黑" frame:CGRectMake(i * width, 64, width, 44)]];
     }
 }
+#if 0
+#pragma mark button
+- (UIButton *)CustomButton:(CGRect)frame title:(NSString *)title imageName:(NSString *)imageName selectedImage:(NSString *)selectedImage {
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:45/256.0 green:45/256.0 blue:45/256.0 alpha:1] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
+    
+    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:selectedImage] forState:UIControlStateSelected];
+    
+    //添加事件
+    [button addTarget:self action:@selector(changeSortKey:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //设置偏移量
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    
+    //title初始x值为imageView的宽度
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -button.imageView.intrinsicContentSize.width, 0, -button.imageView.intrinsicContentSize.width)];
+    
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, (button.titleLabel.intrinsicContentSize.width + 5), 0, -(button.titleLabel.intrinsicContentSize.width + button.imageView.intrinsicContentSize.width + 5))];
+    
+    return button;
+    
+}
 
-- (UIView *)createButtonAndImage:(NSString *)title image:(NSString *)imageName frame:(CGRect)frame{
+- (UIView *)createButtonAndImage:(NSString *)title image:(NSString *)imageName frame:(CGRect)frame {
     UIView *backView = [[UIView alloc] initWithFrame:frame];
     
-    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:title imageName:nil];
+    UIButton *button = [self CustomButton:frame title:title imageName:@"下拉黑" selectedImage:@"下拉橙"];
+    if ([button.titleLabel.text isEqualToString:@"全部"]) {
+        button.tag = 100;
+        button.backgroundColor = [UIColor orangeColor];
+    } else if ([button.titleLabel.text isEqualToString:@"全城市"]) {
+        button.tag = 200;
+        button.backgroundColor = [UIColor whiteColor];
+    } else if ([button.titleLabel.text isEqualToString:@"默认排序"]) {
+        button.tag = 300;
+        button.backgroundColor = [UIColor yellowColor];
+    } else {
+        
+    }
+    [backView addSubview:button];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(backView);
+    }];
+    
+    return backView;
+}
+#endif
+
+- (UIView *)createButtonAndImage:(NSString *)title image:(NSString *)imageName frame:(CGRect)frame {
+    UIView *backView = [[UIView alloc] initWithFrame:frame];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:title forState:UIControlStateNormal];
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [button sizeToFit];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button setTitleColor:[UIColor colorWithRed:45/256.0 green:45/256.0 blue:45/256.0 alpha:1] forState:UIControlStateNormal];
     if ([button.titleLabel.text isEqualToString:@"全部"]) {
         button.tag = 100;
     } else if ([button.titleLabel.text isEqualToString:@"全城市"]) {
@@ -79,15 +140,8 @@
     [button addTarget:self action:@selector(changeSortKey:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:button];
     
-    CGSize size = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (button.tag != 300) {
-            make.size.mas_equalTo(CGSizeMake(size.width*1.5, size.height));
-        } else {
-            make.size.mas_equalTo(size);
-        }
-        make.centerY.mas_equalTo(backView);
-        make.centerX.mas_equalTo(backView);
+        make.center.mas_equalTo(backView);
     }];
     
     
@@ -107,12 +161,13 @@
     return backView;
 }
 
+
 - (void)changeSortKey:(UIButton *)sender {
     
     //还原按钮颜色
     for (NSInteger i = 1; i <= 3; i++) {
         UIButton *button = [self.superView viewWithTag:i * 100];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:45/256.0 green:45/256.0 blue:45/256.0 alpha:1] forState:UIControlStateNormal];
         UIImageView *imageView = [self.superView viewWithTag:button.tag * 10];
         imageView.highlighted = NO;
     }
@@ -172,18 +227,17 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.tableView.rowHeight = [UIScreen mainScreen].bounds.size.height/7;
+    self.tableView.rowHeight = 105;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.tableView registerClass:[StoreTableViewCell class] forCellReuseIdentifier:[StoreTableViewCell getReuseID]];
     
     [superView addSubview:self.tableView];
-    self.tableView.showsVerticalScrollIndicator = NO;
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(view.mas_bottom).with.offset(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-44);
+        make.bottom.mas_equalTo(0);
     }];
     
 }
@@ -209,7 +263,7 @@
         make.top.mas_equalTo(view.mas_bottom).with.offset(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(-44);
+        make.bottom.mas_equalTo(0);
     }];
     
 }
@@ -222,34 +276,28 @@
     }
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
         StoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[StoreTableViewCell getReuseID] forIndexPath:indexPath];
         
         StoreModel *model = self.dataArr[indexPath.row];
         
-        if (model.img_path == nil) {
-            cell.headImageView.image = [UIImage imageNamed:@"u10"];
-        } else {
-            cell.headImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path] options:0 error:nil]];
-        }
+        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.img_path]];
         
         cell.storeName.text = model.merchant_name;
-        cell.servieceArr = [model.tags componentsSeparatedByString:@"|"];
-        cell.score.text = [NSString stringWithFormat:@"%.1lf分",[model.stars floatValue]];
-        cell.address.text = model.address;
-        cell.mobile = model.mobile;
+        cell.introduce.text = model.merchant_introduce;
+        cell.stars = model.stars;
+        cell.area.text = model.area;
+        cell.road.text = model.road;
+        cell.distance.text = model.distance;
         
-        [cell.button addTarget:self action:@selector(callAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell servieceLabel];
         [cell starView];
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortcell" forIndexPath:indexPath];
         cell.textLabel.text = self.sortArr[indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
         return cell;
     }
 }
@@ -264,7 +312,7 @@
     //改变选中颜色
     for (NSInteger i = 1; i <= 3; i++) {
         UIButton *button = [self.superView viewWithTag:i * 100];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:45/256.0 green:45/256.0 blue:45/256.0 alpha:1] forState:UIControlStateNormal];
         
         UIImageView *imageView = [self.superView viewWithTag:button.tag * 10];
         imageView.highlighted = NO;
@@ -299,11 +347,9 @@
         [self.lineView removeFromSuperview];
         [self.sortTableView removeFromSuperview];
         
-        //网络排序数据请求
-        
-        
-        //刷新正常视图数据
-        [self.tableView reloadData];
+        //排序数据请求
+        self.service_filter = self.sortArr[indexPath.row];
+        [self.VC refresh];//刷新
     }
     
 }
@@ -311,11 +357,11 @@
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

@@ -17,46 +17,40 @@
 @interface YWStoreViewController () 
 
 @property (nonatomic, strong) StoreView *storeView;
-@property (nonatomic, strong) UIView *sortView;
 
 @end
 
 @implementation YWStoreViewController
-
-#pragma mark 跳转到个人中心(tabBar实例调用)
-- (void)pushToUser:(UIButton *)sender {
-    
-    [self.navigationController pushViewController:[[YWUserViewController alloc] init] animated:YES];
-}
-
-#pragma mark 选择城市
-- (void)chooseCityAction:(UIButton *)sender {
-    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
-    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area) {
-        
-        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
-    }];
-    [self.navigationController pushViewController:cityChooseVC animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.storeView = [[StoreView alloc] init];
+    self.storeView.VC = self;
     [self.storeView createHeadSortViewAtSuperView:self.view];
     [self.storeView createTableView:self.view];
     
     //添加下拉刷新
     self.storeView.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    [self refresh];
+}
+
+//实现父类的方法，为本类提供刷新数据方法
+- (void)refresh {
     [self.storeView.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadData {
     //参数
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *city_filter = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    if (self.storeView.service_filter == nil) {
+        self.storeView.service_filter = @"全部";
+    }
+    NSString *service_filter = self.storeView.service_filter;
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
     
     //先从数据库中取出缓存数据
     if ([[YWDataBase sharedDataBase] isExistsDataInTable:@"tb_store"]) {
@@ -64,12 +58,13 @@
         [self.storeView.tableView reloadData];//刷新数据
     }
     
-    [YWPublic afPOST:[NSString stringWithFormat:kSTORE,username,filter,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *urlStr = [[NSString stringWithFormat:kSTORE,username,city_filter,service_filter,token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //停止刷新
         [self.storeView.tableView.mj_header endRefreshing];
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
+                
         if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
             
             //插入数据库前删除数据
@@ -81,35 +76,42 @@
                 StoreModel *model = [[StoreModel alloc] initWithDict:dict];
                 [self.storeView.dataArr addObject:model];
                 
+                
                 //插入数据库
                 [[YWDataBase sharedDataBase] insertStoreWithModel:model];
             }
             [self.storeView.tableView reloadData];//刷新数据
             
         } else {
-            [YWPublic showReLoginAlertViewAt:self];
+            [YWPublic pushToLogin:self];
+            /*
+            UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
+            [self presentViewController:alertVC animated:YES completion:nil];
+             */
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //请求数据失败
         [self.storeView.tableView.mj_header endRefreshing];
         
-        //关闭数据库
-        [[YWDataBase sharedDataBase] closeDataBase];
-        
-        [YWPublic showFaileAlertViewAt:self];
+        UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
+        [self presentViewController:alertVC animated:YES completion:nil];
     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    //获取并设置当前城市名
-    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
-    UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
-    [cityButton setTitle:city forState:UIControlStateNormal];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    if (self.storeView.sortTableView != nil) {
+        [self.storeView.sortTableView removeFromSuperview];
+        self.storeView.sortkey = SortByNone;
+        //还原按钮颜色
+        for (NSInteger i = 1; i <= 3; i++) {
+            UIButton *button = [self.view viewWithTag:i * 100];
+            [button setTitleColor:[UIColor colorWithRed:45/256.0 green:45/256.0 blue:45/256.0 alpha:1] forState:UIControlStateNormal];
+            UIImageView *imageView = [self.view viewWithTag:button.tag * 10];
+            imageView.highlighted = NO;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

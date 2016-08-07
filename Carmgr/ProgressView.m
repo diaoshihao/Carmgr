@@ -41,7 +41,7 @@
         make.top.mas_equalTo(64);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(superView);
+        make.bottom.mas_equalTo(0);
     }];
     
     self.tableView.delegate = self;
@@ -133,9 +133,9 @@
     button.backgroundColor = [UIColor whiteColor];
     button.frame = frame;
     
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
     
     [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];

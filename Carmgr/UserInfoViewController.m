@@ -8,33 +8,42 @@
 
 #import "UserInfoViewController.h"
 #import "UserInfoCell.h"
+#import "PrivateModel.h"
+#import "YWDataBase.h"
 
 @interface UserInfoViewController () <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *dataArr;
+@property (nonatomic, strong) PrivateModel *privateModel;
 @property (nonatomic, strong) NSArray *titleArr;
 
 @end
 
 @implementation UserInfoViewController
 
+- (PrivateModel *)privateModel {
+    if (_privateModel == nil) {
+        _privateModel = [[[YWDataBase sharedDataBase] getAllDataFromPrivate] firstObject];
+    }
+    return _privateModel;
+}
+
 - (void)loadData {
     self.titleArr = @[@"头像",@"昵称",@"性别",@"所在地"];
-    
+//    self.privateModel = [[[YWDataBase sharedDataBase] getAllDataFromPrivate] firstObject];
 }
 
 - (void)customLeftItem {
     self.navigationItem.title = @"个人资料";
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentMode = UIViewContentModeLeft;
+    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }
 
 - (void)backToLastPage {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -75,13 +84,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:[UserInfoCell getReuseID] forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.titleLabel.text = self.titleArr[indexPath.row];
     [cell customViewAtRow:indexPath.row];
+    
+    cell.titleLabel.text = self.titleArr[indexPath.row];
     if (indexPath.row == 0) {
         cell.headImageView.image = self.headImage;
-    } else {
-        cell.label.text = self.dataArr[indexPath.row];
-    }
+    } else if (indexPath.row == 1) {
+        cell.label.text = self.privateModel.username;
+    } else if (indexPath.row == 2) {
+        if (self.privateModel.sex != nil) {
+            cell.label.text = self.privateModel.sex;
+        } else {
+            cell.label.text = @"男";
+        }
+    } else if (indexPath.row == 3) {
+        if (self.privateModel.city != nil) {
+            cell.label.text = self.privateModel.city;
+        } else {
+            cell.label.text = @"广州";
+        }
+    } else;
     
     return cell;
 }

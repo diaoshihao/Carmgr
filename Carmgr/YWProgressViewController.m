@@ -23,22 +23,6 @@
 
 @implementation YWProgressViewController
 
-#pragma mark 跳转到个人中心
-- (void)pushToUser:(UIButton *)sender {
-    
-    [self.navigationController pushViewController:[[YWUserViewController alloc] init] animated:YES];
-}
-
-#pragma mark 选择城市
-- (void)chooseCityAction:(UIButton *)sender {
-    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
-    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area) {
-        
-        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
-    }];
-    [self.navigationController pushViewController:cityChooseVC animated:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -52,6 +36,11 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadData];
     }];
+    [self refresh];
+}
+
+//实现父类的方法，为本类提供刷新数据方法
+- (void)refresh {
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -68,7 +57,8 @@
         [self.tableView reloadData];
     }
     
-    [YWPublic afPOST:[NSString stringWithFormat:kPROCESS,username,filter,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *urlStr = [NSString stringWithFormat:kPROCESS,username,filter,token];
+    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
         
@@ -88,16 +78,31 @@
                 [[YWDataBase sharedDataBase] insertProcessWithModel:model];
             }
             [self.progressView.tableView reloadData];
+            if (self.progressView.dataArr.count == 0) {//订单数为0
+                [self showAlertView];
+            }
             
         } else {
-            [YWPublic showReLoginAlertViewAt:self];
+            [YWPublic pushToLogin:self];
+            /*
+            UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
+            [self presentViewController:alertVC animated:YES completion:nil];
+            */
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
-        [YWPublic showFaileAlertViewAt:self];
+        UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
+        [self presentViewController:alertVC animated:YES completion:nil];
     }];
 
+}
+
+- (void)showAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"暂未能获取到您的订单信息" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alertVC addAction:sure];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 //进度点击action
@@ -112,19 +117,6 @@
         }
         sender.selected = YES;
     }
-    
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-
-    //获取并设置当前城市名
-    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
-    UIButton *cityButton = [self.navigationItem.leftBarButtonItem.customView.subviews firstObject];
-    [cityButton setTitle:city forState:UIControlStateNormal];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 typedef NS_ENUM(NSInteger, SortKey){
     SortByNone = 0, //不排序
@@ -17,11 +18,15 @@ typedef NS_ENUM(NSInteger, SortKey){
 
 @interface StoreView : UIView
 
-@property (nonatomic, strong) NSArray           *sortArr;
-@property (nonatomic, strong) NSMutableArray    *dataArr;
+@property (nonatomic, strong) NSArray           *sortArr;//当前排序名数据
+@property (nonatomic, strong) NSMutableArray    *dataArr;//主页面数据
 @property (nonatomic, strong) UITableView       *tableView;
+@property (nonatomic, strong) UITableView       *sortTableView;
 
 @property (nonatomic, assign) SortKey sortkey;
+
+@property (nonatomic, strong) BaseViewController *VC;
+@property (nonatomic, strong) NSString *service_filter;//当前服务分类
 
 //排序View
 - (void)createHeadSortViewAtSuperView:(UIView *)superView;

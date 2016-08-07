@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^CityBlock)(NSString *province, NSString *area); //定义一个代码块
+typedef void(^CityBlock)(NSString *province, NSString *area, NSArray *areaList); //定义一个代码块
 @interface CityChooseViewController : UIViewController
 @property (copy, nonatomic) CityBlock cityInfo; //选择的城市信息
 - (void)returnCityInfo:(CityBlock)block; //赋值的时候回调

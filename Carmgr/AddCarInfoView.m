@@ -83,7 +83,7 @@
         make.bottom.mas_equalTo(tipsLabel.mas_top).with.offset(-10);
         make.left.mas_equalTo(20);
         make.right.mas_equalTo(-20);
-        make.height.mas_equalTo(35);
+        make.height.mas_equalTo(44);
     }];
     return button;
 }

@@ -11,6 +11,7 @@
 #import "YWPublic.h"
 
 #import "DevelopViewController.h"
+#import "ServiceViewController.h"
 
 #import "ServiceCollectionCell.h"
 #import "UsedCarCollectionCell.h"
@@ -19,7 +20,7 @@
 #import "ServiceModel.h"
 #import "UsedCarModel.h"
 
-@interface HomeView() <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
+@interface HomeView() <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 
 @property(nonatomic, assign) CGFloat width;
 
@@ -90,24 +91,32 @@
 #pragma mark - 轮播图
 - (SDCycleScrollView *)createCycleScrollView:(NSArray *)imageNameGroup {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = width / 2.5;
+    CGFloat height = width * 300 / 720;
         
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, width, height) delegate:nil placeholderImage:[UIImage imageNamed:@"u10"]];
+    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, width, height) delegate:self placeholderImage:[UIImage imageNamed:@"u10"]];
     
     cycleScrollView.imageURLStringsGroup = imageNameGroup;
     cycleScrollView.autoScrollTimeInterval = 3.5;
+    if (imageNameGroup.count == 1) {
+        cycleScrollView.autoScroll = NO;
+    } else {
+        cycleScrollView.autoScroll = YES;
+    }
     
     return cycleScrollView;
     
+}
+
+#pragma mark - cycleImageDelegate
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    [YWPublic userOperationInClickAreaID:@"1000_1" detial:@"轮播图"];
 }
 
 //为以下提供创建button方法
 - (UIButton *)createActivetyBtn:(NSString *)imageUrl tag:(NSInteger)tag {
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:nil];
     button.tag = tag;
-    if (imageUrl == nil) {
-        [button setImage:[UIImage imageNamed:@"u10"] forState:UIControlStateNormal];
-    } else {
+    if (imageUrl != nil) {
         [button setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]] forState:UIControlStateNormal];
     }
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -116,7 +125,16 @@
 
 #pragma mark - 活动
 - (UIView *)createActivetyView {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/3)];
+    
+    CGFloat width = self.width/2-1;
+    CGFloat height = width*26/36;
+    
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, height)];
+    backView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    if (self.actLeftArr.count == 0 || self.actTopArr.count == 0 || self.actBottomArr.count == 0) {
+        return backView;
+    }
     
     UIButton *leftBtn = [self createActivetyBtn:self.actLeftArr[0] tag:100];
     [backView addSubview:leftBtn];
@@ -131,20 +149,21 @@
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(self.width/2-1);
+        make.width.mas_equalTo(self.width/2);
     }];
     
     [topBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.width.mas_equalTo(leftBtn.mas_width);
-        make.height.mas_equalTo(backView.frame.size.height/2-1);
+        make.width.mas_equalTo(width);
+        make.height.mas_equalTo(height/2-1);
     }];
     
     [bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-        make.size.mas_equalTo(topBtn);
+        make.width.mas_equalTo(width);
+        make.height.mas_equalTo(height/2);
     }];
     
     return backView;
@@ -166,7 +185,15 @@
 
 #pragma mark - 优惠
 - (UIView *)createSecondView {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.width/2)];
+    
+    CGFloat bvHeight = ((self.width/2-1)*26/36-2)/2;
+    
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 3*bvHeight+4)];
+    backView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    if (self.discountArr.count == 0) {
+        return backView;
+    }
     
     //leftBtn
     UIButton *left1 = [self createBtn:self.discountArr[0] tag:400];
@@ -190,22 +217,22 @@
     [backView addSubview:right3];
     
     
-    CGFloat height = (backView.frame.size.height-4)/3;
+    CGFloat height = (backView.frame.size.height-2)/3;
     //left
     [left1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(self.width/2-1, height));
+        make.size.mas_equalTo(CGSizeMake(self.width/2, height));
     }];
     [left2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(left1.mas_bottom).with.offset(2);
+        make.top.mas_equalTo(left1.mas_bottom).with.offset(1);
         make.left.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(self.width/2-1, height));
+        make.size.mas_equalTo(CGSizeMake(self.width/2, height));
     }];
     [left3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(0);
         make.left.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(self.width/2-1, height));
+        make.size.mas_equalTo(CGSizeMake(self.width/2, height));
     }];
     
     //right
@@ -215,7 +242,7 @@
         make.size.mas_equalTo(CGSizeMake(self.width/2-1, height));
     }];
     [right2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(right1.mas_bottom).with.offset(2);
+        make.top.mas_equalTo(right1.mas_bottom).with.offset(1);
         make.right.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(self.width/2-1, height));
     }];
@@ -236,17 +263,17 @@
 
 #pragma mark - 业务板块
 - (UIView *)createServiceCollectionView {
-    CGFloat width = (self.width - 30*4 - 20*2) / 5;
+    CGFloat width = (self.width - 27.5*4 - 20*2) / 5;
     
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 2 * width + 100)];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
     layout.itemSize = CGSizeMake(width, width+20);
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     serviceCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     serviceCollectionView.backgroundColor = [UIColor whiteColor];
+    serviceCollectionView.scrollEnabled = NO;
     
     serviceCollectionView.delegate = self;
     serviceCollectionView.dataSource = self;
@@ -267,17 +294,18 @@
 #pragma mark 二手车推荐
 - (UIView *)createUsedCarCollectionView {
     CGFloat width = self.width / 4;
-    CGFloat height = width * 3 / 4;
+    CGFloat height = width * 124 / 170;
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, height + 60)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, height+51)];
     
     UICollectionViewFlowLayout *myLayout = [[UICollectionViewFlowLayout alloc] init];
-    myLayout.sectionInset = UIEdgeInsetsMake(5, 15, 20, 10);
+    myLayout.sectionInset = UIEdgeInsetsMake(0, 20, 10, 20);
     myLayout.itemSize = CGSizeMake(width, height);
     myLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     usedCarCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:myLayout];
     usedCarCollectionView.backgroundColor = [UIColor whiteColor];
+    usedCarCollectionView.showsHorizontalScrollIndicator = NO;
     
     usedCarCollectionView.delegate = self;
     usedCarCollectionView.dataSource = self;
@@ -285,12 +313,12 @@
     [usedCarCollectionView registerClass:[UsedCarCollectionCell class] forCellWithReuseIdentifier:[UsedCarCollectionCell getReuseID]];
     [backView addSubview:usedCarCollectionView];
     
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 30)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
     [backView addSubview:headView];
     [self createHeadViewWithTitle:@"热门二手车" superView:headView];
     
     [usedCarCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(backView.mas_top).with.offset(30);
+        make.top.mas_equalTo(headView.mas_bottom).with.offset(0);
         make.left.mas_equalTo(backView.mas_left).with.offset(0);
         make.right.mas_equalTo(backView.mas_right).with.offset(0);
         make.bottom.mas_equalTo(backView.mas_bottom).with.offset(0);
@@ -326,35 +354,36 @@
     
     UILabel *label = [[UILabel alloc] init];
     label.text = title;
-    label.font = [UIFont systemFontOfSize:15];
+    label.font = [UIFont systemFontOfSize:14];
+    label.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
     [superView addSubview:label];
     
     UIButton *button = [[UIButton alloc] init];
     [button setTitle:@"查看更多" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button setTitleColor:[UIColor colorWithRed:102/256.0 green:102/256.0 blue:102/256.0 alpha:1] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:12];
     [superView addSubview:button];
     
     UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.image = [UIImage imageNamed:@"前进1"];
+    imageView.image = [UIImage imageNamed:@"前进黑"];
+    imageView.contentMode = UIViewContentModeCenter;
     [superView addSubview:imageView];
 
-    CGSize labelSize = [label.text sizeWithAttributes:@{NSFontAttributeName:label.font}];
+    [label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.size.mas_equalTo(labelSize);
+        make.left.mas_equalTo(20);
         make.centerY.mas_equalTo(superView);
     }];
     
     CGSize buttonSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(superView.mas_right).with.offset(-15);
-        make.size.mas_equalTo(CGSizeMake(buttonSize.height-5, buttonSize.height-5));
+        make.right.mas_equalTo(superView.mas_right).with.offset(-20);
         make.centerY.mas_equalTo(superView);
     }];
     
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(imageView.mas_left).with.offset(-3);
+        make.right.mas_equalTo(imageView.mas_left).with.offset(-5);
         make.size.mas_equalTo(buttonSize);
         make.centerY.mas_equalTo(superView);
     }];
@@ -364,10 +393,17 @@
 #pragma mark - CollectionView delegate
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     if (collectionView == usedCarCollectionView) {
-        return 15;
-    } else {
-        return 30; //固定间距30
+        return 10;
     }
+    return 20; //固定间距30
+    
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    if (collectionView == usedCarCollectionView) {
+        return 20;
+    }
+    return 27.5; //固定间距30
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -382,21 +418,31 @@
     if (collectionView == usedCarCollectionView) {
         UsedCarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[UsedCarCollectionCell getReuseID] forIndexPath:indexPath];
         UsedCarModel *model = self.usedCarDataArr[indexPath.item];
-        [cell.imageView setImageWithURL:[NSURL URLWithString:model.img_path]];
+        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path]]];
         return cell;
     } else {
         ServiceCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[ServiceCollectionCell getCellID] forIndexPath:indexPath];
         
         ServiceModel *model = self.serviceDataArr[indexPath.item];
-        [cell.imageView setImageWithURL:[NSURL URLWithString:model.icon_path]];
+        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.icon_path]]];
         cell.titleLabel.text = model.service_name;
         return cell;
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    DevelopViewController *developVC = [[DevelopViewController alloc] init];
-    [self.VC presentViewController:developVC animated:YES completion:nil];
+    if (collectionView == serviceCollectionView) {
+        ServiceModel *model = self.serviceDataArr[indexPath.item];
+        NSString *click_area_id = [NSString stringWithFormat:@"1000_%ld",indexPath.item+10];
+        [YWPublic userOperationInClickAreaID:click_area_id detial:model.service_name];
+        ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+        serviceVC.service_filter = model.service_name;
+        [self.VC.navigationController pushViewController:serviceVC animated:YES];
+    } else {
+        [YWPublic userOperationInClickAreaID:@"1000_40" detial:@"二手车"];
+        DevelopViewController *developVC = [[DevelopViewController alloc] init];
+        [self.VC presentViewController:developVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - tableView delegate
