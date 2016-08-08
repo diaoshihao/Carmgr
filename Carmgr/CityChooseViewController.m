@@ -36,14 +36,9 @@
 - (void)test {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"address" ofType:@"plist"];
     NSArray *address = [NSDictionary dictionaryWithContentsOfFile:plistPath][@"address"];
+    NSInteger i = 0;
     for (NSDictionary *province in address) {
-        NSLog(@"%@",province[@"state"]);
-        for (NSDictionary *city in province[@"citys"]) {
-            NSLog(@"%@",city[@"name"]);
-            for (NSString *area in city[@"sub"]) {
-                NSLog(@"%@",area);
-            }
-        }
+        NSLog(@"%ld%@",i++,province[@"name"]);
     }
     
 }
@@ -174,6 +169,7 @@
             }
         }else {
             _areaList = _cityList[_selIndex][@"citys"][indexPath.row][@"sub"];
+            [[NSUserDefaults standardUserDefaults] setObject:_cityList[_selIndex][@"name"] forKey:@"province"];//省份简称
             _sureBtn.hidden = false;
         }
     }

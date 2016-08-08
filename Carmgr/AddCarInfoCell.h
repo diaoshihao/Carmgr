@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIView        *cusView;
 @property (nonatomic, assign) NSIndexPath   *indexPath;
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+
 - (void)customView;
 
 + (NSString *)getReuseID;

@@ -7,6 +7,8 @@
 		<dict>
 			<key>state</key>
 			<string>北京</string>
+			<key>name</key>
+			<string>京</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -42,6 +44,8 @@
 		<dict>
 			<key>state</key>
 			<string>天津</string>
+			<key>name</key>
+			<string>津</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -77,6 +81,8 @@
 		<dict>
 			<key>state</key>
 			<string>河北</string>
+			<key>name</key>
+			<string>冀</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -366,6 +372,8 @@
 		<dict>
 			<key>state</key>
 			<string>山西</string>
+			<key>name</key>
+			<string>晋</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -602,6 +610,8 @@
 		<dict>
 			<key>state</key>
 			<string>内蒙古</string>
+			<key>name</key>
+			<string>蒙</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -830,6 +840,8 @@
 		<dict>
 			<key>state</key>
 			<string>辽宁</string>
+			<key>name</key>
+			<string>辽</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1077,6 +1089,8 @@
 		<dict>
 			<key>state</key>
 			<string>吉林</string>
+			<key>name</key>
+			<string>吉</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1234,6 +1248,8 @@
 		<dict>
 			<key>state</key>
 			<string>黑龙江</string>
+			<key>name</key>
+			<string>黑</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1501,6 +1517,8 @@
 		<dict>
 			<key>state</key>
 			<string>上海</string>
+			<key>name</key>
+			<string>沪</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1537,6 +1555,8 @@
 		<dict>
 			<key>state</key>
 			<string>江苏</string>
+			<key>name</key>
+			<string>苏</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1780,6 +1800,8 @@
 		<dict>
 			<key>state</key>
 			<string>浙江</string>
+			<key>name</key>
+			<string>浙</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1987,6 +2009,8 @@
 		<dict>
 			<key>state</key>
 			<string>安徽</string>
+			<key>name</key>
+			<string>皖</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2269,6 +2293,8 @@
 		<dict>
 			<key>state</key>
 			<string>福建</string>
+			<key>name</key>
+			<string>闽</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2451,6 +2477,8 @@
 		<dict>
 			<key>state</key>
 			<string>江西</string>
+			<key>name</key>
+			<string>赣</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2667,6 +2695,8 @@
 		<dict>
 			<key>state</key>
 			<string>山东</string>
+			<key>name</key>
+			<string>鲁</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2984,6 +3014,8 @@
 		<dict>
 			<key>state</key>
 			<string>河南</string>
+			<key>name</key>
+			<string>豫</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3321,6 +3353,8 @@
 		<dict>
 			<key>state</key>
 			<string>湖北</string>
+			<key>name</key>
+			<string>鄂</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3570,6 +3604,8 @@
 		<dict>
 			<key>state</key>
 			<string>湖南</string>
+			<key>name</key>
+			<string>湘</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3839,6 +3875,8 @@
 		<dict>
 			<key>state</key>
 			<string>广东</string>
+			<key>name</key>
+			<string>粤</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3846,16 +3884,16 @@
 					<string>广州</string>
 					<key>sub</key>
 					<array>
-						<string>东山区</string>
 						<string>荔湾区</string>
 						<string>越秀区</string>
 						<string>海珠区</string>
 						<string>天河区</string>
-						<string>芳村区</string>
-						<string>白云区</string>
-						<string>黄埔区</string>
 						<string>番禺区</string>
+						<string>白云区</string>
+						<string>萝岗区</string>
+						<string>黄埔区</string>
 						<string>花都区</string>
+						<string>南沙区</string>
 						<string>增城市</string>
 						<string>从化市</string>
 						<string>其他区</string>
@@ -4177,6 +4215,8 @@
 		<dict>
 			<key>state</key>
 			<string>广西</string>
+			<key>name</key>
+			<string>桂</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4433,6 +4473,8 @@
 		<dict>
 			<key>state</key>
 			<string>海南</string>
+			<key>name</key>
+			<string>琼</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4483,6 +4525,8 @@
 		<dict>
 			<key>state</key>
 			<string>重庆</string>
+			<key>name</key>
+			<string>渝</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4540,6 +4584,8 @@
 		<dict>
 			<key>state</key>
 			<string>四川</string>
+			<key>name</key>
+			<string>川</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4938,6 +4984,8 @@
 		<dict>
 			<key>state</key>
 			<string>贵州</string>
+			<key>name</key>
+			<string>黔</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5123,6 +5171,8 @@
 		<dict>
 			<key>state</key>
 			<string>云南</string>
+			<key>name</key>
+			<string>滇</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5321,7 +5371,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>文山壮族苗族自治州</string>
+					<string>文山</string>
 					<key>sub</key>
 					<array>
 						<string>文山县</string>
@@ -5419,6 +5469,8 @@
 		<dict>
 			<key>state</key>
 			<string>西藏</string>
+			<key>name</key>
+			<string>藏</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5569,6 +5621,8 @@
 		<dict>
 			<key>state</key>
 			<string>陕西</string>
+			<key>name</key>
+			<string>陕</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5783,6 +5837,8 @@
 		<dict>
 			<key>state</key>
 			<string>甘肃</string>
+			<key>name</key>
+			<string>甘</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6016,6 +6072,8 @@
 		<dict>
 			<key>state</key>
 			<string>青海</string>
+			<key>name</key>
+			<string>青</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6112,7 +6170,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>玉树藏族自治州</string>
+					<string>玉树</string>
 					<key>sub</key>
 					<array>
 						<string>玉树县</string>
@@ -6146,6 +6204,8 @@
 		<dict>
 			<key>state</key>
 			<string>宁夏</string>
+			<key>name</key>
+			<string>宁</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6224,6 +6284,8 @@
 		<dict>
 			<key>state</key>
 			<string>新疆</string>
+			<key>name</key>
+			<string>新</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6506,6 +6568,8 @@
 		<dict>
 			<key>state</key>
 			<string>香港</string>
+			<key>name</key>
+			<string>港</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6523,6 +6587,8 @@
 		<dict>
 			<key>state</key>
 			<string>澳门</string>
+			<key>name</key>
+			<string>澳</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6540,6 +6606,8 @@
 		<dict>
 			<key>state</key>
 			<string>台湾</string>
+			<key>name</key>
+			<string>台</string>
 			<key>citys</key>
 			<array>
 				<dict>

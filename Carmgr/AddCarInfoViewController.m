@@ -106,7 +106,7 @@
     self.navigationItem.title = @"添加车辆";
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentMode = UIViewContentModeLeft;
+    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
@@ -153,25 +153,35 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
-    NSLog(@"%ld,%@,%@,%@,%@",self.numberType.selectedSegmentIndex,self.cityLabel.text,self.vehicle_number.text,self.engine_number.text,self.frame_number.text);
+    NSString *urlStr = [[NSString stringWithFormat:kADDCAR,userName,self.numberType.selectedSegmentIndex,self.cityLabel.text,self.vehicle_number.text,self.engine_number.text,self.frame_number.text,self.buy_insu_time.text,self.first_insu_time.text,self.travel_mileage.text,self.comments.text,token]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [YWPublic afPOST:[NSString stringWithFormat:kADDCAR,
-                      userName,
-                      self.numberType.selectedSegmentIndex,
-                      [self.cityLabel.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                      self.vehicle_number.text,
-                      self.engine_number.text,
-                      self.frame_number.text,
-                      token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"个人信息%@",dataDict);
-        NSLog(@"%@",dataDict[@"opt_info"]);
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+            [self showAlertViewTitle:nil messae:@"添加车辆成功"];
+        } else {
+            [self showAlertViewTitle:@"提示" messae:@"添加车辆失败"];
+        }
+        NSLog(@"%@",dataDict);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"个人信息%@",error);
+        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
     }];
 
+}
+
+- (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertVC animated:YES completion:^{
+        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+    }];
+}
+
+#pragma mark 定时器
+- (void)timerFireMethod:(NSTimer *)timer {
+    UIAlertController *alertVC = [timer userInfo];
+    [alertVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - tableview delegate
@@ -191,7 +201,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AddCarInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:[AddCarInfoCell getReuseID] forIndexPath:indexPath];
+//    AddCarInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:[AddCarInfoCell getReuseID] forIndexPath:indexPath];
+    AddCarInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[AddCarInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[AddCarInfoCell getReuseID]];
+    }
     if ((indexPath.section == 0 && indexPath.row == 1) || (indexPath.section == 1) || (indexPath.section == 4)) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;

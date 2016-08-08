@@ -29,7 +29,6 @@
 
 - (void)loadData {
     self.titleArr = @[@"头像",@"昵称",@"性别",@"所在地"];
-//    self.privateModel = [[[YWDataBase sharedDataBase] getAllDataFromPrivate] firstObject];
 }
 
 - (void)customLeftItem {

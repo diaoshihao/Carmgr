@@ -16,7 +16,6 @@
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:self.titleLabel];
-        
         [self.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(20);
@@ -29,26 +28,13 @@
 
 - (void)customView {
     
-    UIView *backView = [[UIView alloc] init];
-    [self.contentView addSubview:backView];
-
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.cusView];
+    [self.cusView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel.mas_right).with.offset(20);
         make.right.mas_equalTo(-20);
-        make.height.mas_equalTo(self);
+        make.centerY.mas_equalTo(self.contentView);
     }];
-    
-    
-    [backView addSubview:self.cusView];
-    [self.cusView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
-        make.centerY.mas_equalTo(backView);
-    }];
-    
 }
-
-
 
 + (NSString *)getReuseID {
     return @"addcarinfocell";

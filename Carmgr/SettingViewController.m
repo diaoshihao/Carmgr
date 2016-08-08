@@ -33,6 +33,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertVC animated:YES completion:^{
+        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
+    }];
+}
+
+#pragma mark 定时器
+- (void)timerFireMethod:(NSTimer *)timer {
+    UIAlertController *alertVC = [timer userInfo];
+    [alertVC dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -79,10 +92,11 @@
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
     if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UISwitch *netSwitch = [[UISwitch alloc] init];
         netSwitch.onTintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
         
-        netSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"MONET"];
+        netSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"MONET"];//是否在移动网络下载图片
         [netSwitch addTarget:self action:@selector(setSwitchOn:) forControlEvents:UIControlEventValueChanged];
         
         [cell.contentView addSubview:netSwitch];
@@ -115,6 +129,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0 && indexPath.row == 1) {//清理缓存
+        NSArray *tableArr = @[@"tb_store",@"tb_process"];
+        BOOL result = NO;
+        for (NSString *tb_name in tableArr) {
+            result = [[YWDataBase sharedDataBase] deleteDatabaseFromTable:tb_name];
+            if (result == NO) {
+                break;
+            }
+        }
+        if (result == NO) {
+            [self showAlertViewTitle:nil messae:@"清理缓存失败"];
+        } else {
+            [self showAlertViewTitle:nil messae:@"清理缓存成功"];
+        }
+    }
     
     if (indexPath.section == 2 && indexPath.row == 1) {
         ServiceDelegateController *delegateVC = [[ServiceDelegateController alloc] init];

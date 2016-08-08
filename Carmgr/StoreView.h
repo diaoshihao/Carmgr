@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-typedef NS_ENUM(NSInteger, SortKey){
+typedef NS_ENUM(NSInteger, SortKey) {
     SortByNone = 0, //不排序
-    SortByAll = 1,  //全部
-    SortByCity,     //全城市
+    SortByService = 1,  //全部
+    SortByArea,     //全城市
     SortByDefault   //默认排序
 };
 

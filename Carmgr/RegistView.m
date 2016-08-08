@@ -162,13 +162,13 @@
     UIFont *font = [UIFont systemFontOfSize:12];
     
     UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeCenter;
     imageView.image = [UIImage imageNamed:@"成功"];
     [superView addSubview:imageView];
     
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(broview.mas_bottom).with.offset(10);
         make.left.mas_equalTo(superView).with.offset(15);
-        make.height.mas_equalTo(15);
     }];
     
     UILabel *label = [[UILabel alloc] init];
@@ -178,8 +178,8 @@
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(broview.mas_bottom).with.offset(10);
-        make.left.mas_equalTo(imageView.mas_right).with.offset(10);
-        make.height.mas_equalTo(15);
+        make.left.mas_equalTo(imageView.mas_right).with.offset(5);
+        make.centerY.mas_equalTo(imageView);
     }];
     
     UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"《易车易宝平台用户协定》" imageName:nil];
@@ -191,7 +191,7 @@
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(broview.mas_bottom).with.offset(10);
         make.left.mas_equalTo(label.mas_right).with.offset(0);
-        make.height.mas_equalTo(15);
+        make.centerY.mas_equalTo(label);
     }];
     
 }

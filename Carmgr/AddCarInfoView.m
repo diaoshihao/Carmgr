@@ -29,7 +29,11 @@
     for (NSInteger i = 0; i < 3; i++) {
         UITextField *textField = [self textFieldWithPlaceholder:placeholder[forSection-2][i]];
         if (forSection == 2 && i == 0) {
-            UILabel *label = [self labelWithTitle:@"粤"];
+            NSString *province = @"粤";
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"province"] != nil) {
+                province = [[NSUserDefaults standardUserDefaults] objectForKey:@"province"];
+            }
+            UILabel *label = [self labelWithTitle:province];
             label.textAlignment = NSTextAlignmentCenter;
             CGSize size = label.intrinsicContentSize;
             label.frame = CGRectMake(0, 0, size.width+10, size.height+10);
@@ -93,7 +97,7 @@
 }
 
 - (UISegmentedControl *)numberType {
-    UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc] initWithItems:@[@"小型汽车",@"大型汽车"]];
+    UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc] initWithItems:@[@"小型车",@"中型车",@"大型车"]];
     segmentCtrl.tintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     [segmentCtrl setSelectedSegmentIndex:0];
     return segmentCtrl;

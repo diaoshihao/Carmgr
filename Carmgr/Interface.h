@@ -56,8 +56,8 @@
 //个人信息 参数：username=%@&token=%@&version=1.0
 #define kPRIVATE @"http://112.74.13.51:8080/carmgr/appgetprivate?username=%@&token=%@&version=1.0"
 
-//增加车辆 参数：username=%@&car_type=%@&city=%@&vehicle_number=%@&engine_number=%@&frame_number=%@&token=%@&version=1.0
-#define kADDCAR @"http://112.74.13.51:8080/carmgr/appaddcarinfo?username=%@&car_type=%ld&city=%@&vehicle_number=%@&engine_number=%@&frame_number=%@&token=%@&version=1.0"
+//增加车辆 参数：username=%@&car_type=%@&city=%@&vehicle_number=%@&engine_number=%@&frame_number=%@&buy_insu_time=%@&first_mantain_time=%@&travel_mileage=%@&comments=%@&token=%@&version=1.0
+#define kADDCAR @"http://112.74.13.51:8080/carmgr/appaddcarinfo?username=%@&car_type=%ld&city=%@&vehicle_number=%@&engine_number=%@&frame_number=%@&buy_insu_time=%@&first_mantain_time=%@&travel_mileage=%@&comments=%@&token=%@&version=1.0"
 
 //=====================================================================
 //商户信息 参数：username=%@&merchant_name=%@&token=%@&version=1.0

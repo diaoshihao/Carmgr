@@ -11,7 +11,7 @@
 #import <Masonry.h>
 #import "CallView.h"
 
-@interface YWCallViewController () <UITextFieldDelegate>
+@interface YWCallViewController () <UITextFieldDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) CallView *callView;
 
@@ -124,6 +124,9 @@
     [self.scrollView addSubview:adviseLab];
     
     self.adviseField = [[UITextView alloc] init];
+    self.adviseField.delegate = self;
+    self.adviseField.text = @"在此输入";
+    self.adviseField.textColor = [UIColor lightGrayColor];
     self.adviseField.tintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     self.adviseField.layer.cornerRadius = 6;
     self.adviseField.layer.masksToBounds = YES;
@@ -179,7 +182,7 @@
         make.top.mas_equalTo(adviseLab.mas_bottom).with.offset(-10);
         make.left.mas_equalTo(adviseLab.mas_left);
         make.right.mas_equalTo(adviseLab.mas_right);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(width * 200 / 750);
     }];
     
     [commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -228,6 +231,20 @@
     [textField resignFirstResponder];
     [self service];
     return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    textView.textColor = [UIColor blackColor];
+    if ([textView.text isEqualToString:@"在此输入"]) {
+        textView.text = @"";
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text.length == 0) {
+        textView.text = @"在此输入";
+        textView.textColor = [UIColor lightGrayColor];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

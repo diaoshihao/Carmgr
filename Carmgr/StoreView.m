@@ -34,12 +34,14 @@
     return _dataArr;
 }
 
-- (NSArray *)allSortArr {
-    NSArray *areaList = [[NSArray alloc] init];
+- (NSArray *)allSortArr {//不进行空值判断，因为数据可能发生变化需要及时得到
+    NSMutableArray *areaList = [[NSMutableArray alloc] init];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isChangeCity"] == YES) {
-        areaList = [[NSUserDefaults standardUserDefaults] objectForKey:@"areaList"];
+        areaList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"areaList"]];
+        [areaList insertObject:@"全城市" atIndex:0];
+        
     } else {
-        areaList = @[@"全城市",@"越秀区",@"天河区",@"番禺区",@"海珠区",@"白云区",@"荔湾区",@"黄浦区",@"增城区",@"花都区",@"南沙区",@"从化市",@"近郊"];
+        areaList = [NSMutableArray arrayWithArray:@[@"全城市",@"荔湾区",@"越秀区",@"海珠区",@"天河区",@"番禺区",@"白云区",@"萝岗区",@"黄浦区",@"花都区",@"南沙区",@"增城市",@"从化市",@"其他区"]];
     }
     _allSortArr = @[
                     @[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"],
@@ -322,9 +324,6 @@
         }
     }
     
-    self.sortkey = SortByNone;
-    self.selected = NO;
-    
     if (tableView == self.tableView) {
         
         ////////////////////////
@@ -348,9 +347,21 @@
         [self.sortTableView removeFromSuperview];
         
         //排序数据请求
-        self.service_filter = self.sortArr[indexPath.row];
-        [self.VC refresh];//刷新
+        switch (self.sortkey) {
+            case SortByService:
+                self.service_filter = self.sortArr[indexPath.row];
+                [self.VC refresh];//刷新
+                break;
+                
+            default:
+                break;
+        }
+        //v1.0无地区等排序，暂时只有服务排序
+//        [self.VC refresh];//刷新
     }
+    
+    self.sortkey = SortByNone;
+    self.selected = NO;
     
 }
 
