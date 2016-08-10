@@ -9,8 +9,9 @@
 #import "StoreView.h"
 #import <Masonry.h>
 #import "YWPublic.h"
+#import "DetailModel.h"
 #import "StoreTableViewCell.h"
-#import "StoreModel.h"
+#import "StoreDetailViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface StoreView() <UITableViewDelegate,UITableViewDataSource>
@@ -326,20 +327,12 @@
     
     if (tableView == self.tableView) {
         
-        ////////////////////////
-        NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+        StoreDetailViewController *storeDetailVC = [[StoreDetailViewController alloc] init];
         StoreModel *model = self.dataArr[indexPath.row];
-        NSString *merchant_name = [model.merchant_name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        //网络数据请求
-        [YWPublic afPOST:[NSString stringWithFormat:kMERCHANT,username,merchant_name,token] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"%@",dataDict);
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error:%@",error);
-        }];
-        ////////////////////////
+        storeDetailVC.storeModel = model;
+
         //跳转到详情页
+        [self.VC.navigationController pushViewController:storeDetailVC animated:YES];
     } else {
         
         //移除排序视图

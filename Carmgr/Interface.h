@@ -61,7 +61,7 @@
 
 //=====================================================================
 //商户信息 参数：username=%@&merchant_name=%@&token=%@&version=1.0
-#define kMERCHANT @"http://112.74.13.51:8080/carmgr/appgetmerchantsservice?username=%@&merchant_name=%@&token=%@&version=1.0"
+#define kMERCHANT @"http://112.74.13.51:8080/carmgr/appgetmerchants?username=%@&merchant_name=%@&token=%@&version=1.0"
 
 
 //=====================================================================
