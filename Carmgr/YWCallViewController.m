@@ -17,8 +17,10 @@
 
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UITextView *adviseField;
+@property (nonatomic, strong) UIButton *commitBtn;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
 
 @end
 
@@ -60,11 +62,26 @@
     
     self.callView = [[CallView alloc] init];
     
-    self.scrollView = [self.callView scrollView];
+    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.scrollView];
+    
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
+    }];
+    
+    self.contentView = [[UIView alloc] init];
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.contentView];
     
     
     [self initView];
+    
+    //注册键盘出现的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
 }
 
@@ -73,35 +90,35 @@
     width = [UIScreen mainScreen].bounds.size.width;
     background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width*45/64)];
     background.image = [UIImage imageNamed:@"呼叫背景"];
-    [self.scrollView addSubview:background];
+    [self.contentView addSubview:background];
     
     self.textField = [self.callView textField:@"请输入您想办理的业务 如：上牌"];
     self.textField.delegate = self;
-    [self.scrollView addSubview:self.textField];
+    [self.contentView addSubview:self.textField];
     
     UIButton *button = [self.callView button:@"服务预约" target:self action:@selector(service)];
-    [self.scrollView addSubview:button];
+    [self.contentView addSubview:button];
     
     UIButton *callBtn = [self.callView button:@"全国咨询电话 400-111-9665" target:self action:@selector(callAction:)];
-    [self.scrollView addSubview:callBtn];
+    [self.contentView addSubview:callBtn];
     
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:14];
     label.text = @"业务流程";
     label.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
     [label sizeToFit];
-    [self.scrollView addSubview:label];
+    [self.contentView addSubview:label];
     
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed:@"业务流程"];
-    [self.scrollView addSubview:imageView];
+    [self.contentView addSubview:imageView];
     
     NSArray *title = @[@"预约服务",@"客服办理",@"完成业务",@"售后跟进"];
     CGFloat labelWidth = width/4;
     UILabel *lastLabel = nil;
     for (NSInteger i = 0; i < 4; i++) {
         UILabel *label = [self.callView label:title[i]];
-        [self.scrollView addSubview:label];
+        [self.contentView addSubview:label];
         
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(imageView.mas_bottom).with.offset(10);
@@ -121,7 +138,7 @@
     adviseLab.textColor = [UIColor whiteColor];
     adviseLab.layer.cornerRadius = 6;
     adviseLab.clipsToBounds = YES;
-    [self.scrollView addSubview:adviseLab];
+    [self.contentView addSubview:adviseLab];
     
     self.adviseField = [[UITextView alloc] init];
     self.adviseField.delegate = self;
@@ -132,10 +149,10 @@
     self.adviseField.layer.masksToBounds = YES;
     self.adviseField.layer.borderWidth = 2;
     self.adviseField.layer.borderColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0].CGColor;
-    [self.scrollView addSubview:self.adviseField];
+    [self.contentView addSubview:self.adviseField];
     
-    UIButton *commitBtn = [self.callView button:@"点击提交" target:self action:@selector(commit)];
-    [self.scrollView addSubview:commitBtn];
+    self.commitBtn = [self.callView button:@"点击提交" target:self action:@selector(commit)];
+    [self.contentView addSubview:self.commitBtn];
     
     
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -185,11 +202,17 @@
         make.height.mas_equalTo(width * 200 / 750);
     }];
     
-    [commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.adviseField.mas_bottom).with.offset(30);
         make.width.mas_equalTo(width*260/750);
         make.height.mas_equalTo(44);
         make.centerX.mas_equalTo(self.view);
+    }];
+    
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.scrollView);
+        make.width.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.commitBtn.mas_bottom).with.offset(30);
     }];
     
 }
@@ -245,6 +268,52 @@
         textView.text = @"在此输入";
         textView.textColor = [UIColor lightGrayColor];
     }
+}
+
+#pragma mark - 键盘的弹出
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    // 获取键盘基本信息（动画时长与键盘高度）
+    NSDictionary *userInfo = [aNotification userInfo];
+    CGRect rect = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = CGRectGetHeight(rect);
+    CGFloat keyboardDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 修改下边距约束
+    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.mas_equalTo(self.commitBtn.mas_bottom).with.offset(keyboardHeight);
+        
+    }];
+    
+    // 更新约束
+    [UIView animateWithDuration:keyboardDuration animations:^{
+        CGPoint offset = self.scrollView.contentOffset;
+        offset.y += keyboardHeight;
+        self.scrollView.contentOffset = offset;
+        [self.view layoutIfNeeded];
+        
+    }];
+    
+}
+
+#pragma mark -  键盘的隐藏
+-(void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    // 获取键盘基本信息（动画时长与键盘高度）
+    NSDictionary *userInfo = [aNotification userInfo];
+    CGFloat keyboardDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 修改下边距约束
+    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.mas_equalTo(self.commitBtn.mas_bottom).with.offset(30);;
+    }];
+    
+    // 更新约束
+    [UIView animateWithDuration:keyboardDuration animations:^{
+        
+        [self.view layoutIfNeeded];
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -32,4 +32,6 @@
 - (UITableView *)createTableView;
 
 - (UITableView *)createRateTableView;
+
+- (UIView *)contactView;
 @end

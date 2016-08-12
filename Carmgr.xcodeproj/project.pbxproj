@@ -1525,7 +1525,7 @@
 				INFOPLIST_FILE = Carmgr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.Carmgr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwuchebao.carmgr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1541,7 +1541,7 @@
 				INFOPLIST_FILE = Carmgr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.Carmgr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwuchebao.carmgr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

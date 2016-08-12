@@ -25,14 +25,14 @@
         
         //时间
         self.time = [[UILabel alloc] init];
-        self.time.font = [UIFont systemFontOfSize:12];
+        self.time.font = [UIFont systemFontOfSize:11];
         self.time.textColor = [UIColor colorWithRed:102/256.0 green:102/256.0 blue:102/256.0 alpha:1];
         [self.contentView addSubview:self.time];
         
         //内容
         self.text = [[UILabel alloc] init];
         self.text.numberOfLines = 5;
-        self.text.font = [UIFont systemFontOfSize:11];
+        self.text.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:self.text];
         
         [self autoLayout];
@@ -43,20 +43,18 @@
 
 - (void)autoLayout {
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
+        make.top.mas_equalTo(16);
         make.left.mas_equalTo(20);
-        make.bottom.mas_equalTo(self.time.mas_bottom);
         make.width.mas_equalTo(self.headImageView.mas_height);
     }];
     
     [self.user setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.user mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(20);
-        make.left.mas_equalTo(self.headImageView.mas_right).with.offset(10);
+        make.top.mas_equalTo(16);
+        make.left.mas_equalTo(self.headImageView.mas_right).with.offset(18);
     }];
     
     [self.text mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headImageView.mas_bottom).with.offset(20);
         make.left.and.right.mas_equalTo(self.contentView);
     }];
     
@@ -77,7 +75,7 @@
         [self.contentView addSubview:starImage];
         
         [starImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.time);
+            make.top.mas_equalTo(self.user.mas_bottom).with.offset(8);
             if (i == 0) {
                 make.left.mas_equalTo(self.user.mas_left);
             } else {
@@ -97,14 +95,23 @@
         [halfStarImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(lastImage.mas_right).with.offset(6);
             make.centerY.mas_equalTo(lastImage);
-            make.size.mas_equalTo(lastImage);
         }];
+        
+        lastImage = halfStarImage;
     }
     
     [self.time setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.user.mas_bottom).with.offset(10);
         make.left.mas_equalTo(lastImage.mas_right).with.offset(10);
+        make.centerY.mas_equalTo(lastImage);
+    }];
+    
+    [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(lastImage.mas_bottom).with.offset(6);
+    }];
+    
+    [self.text mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.headImageView.mas_bottom).with.offset(16);
     }];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -115,9 +122,13 @@
     NSMutableAttributedString *attribueString = [[NSMutableAttributedString alloc] initWithString:self.text.text attributes:@{NSParagraphStyleAttributeName:paragraphStyle}];
     self.text.attributedText = attribueString;
     
-//    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.mas_equalTo(self.text.mas_bottom);
-//    }];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+        make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width);
+        make.bottom.mas_equalTo(self.text.mas_bottom).with.offset(5);
+    }];
+    
+    [self layoutIfNeeded];
 }
 
 + (NSString *)getReuseID {

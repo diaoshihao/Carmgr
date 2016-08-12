@@ -22,7 +22,9 @@
 
 @interface HomeView() <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 
-@property(nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat width;
+
+@property (nonatomic, strong) NSArray *service_filters;
 
 @end
 
@@ -30,6 +32,13 @@
 {
     UICollectionView *usedCarCollectionView;
     UICollectionView *serviceCollectionView;
+}
+
+- (NSArray *)service_filters {
+    if (_service_filters == nil) {
+        _service_filters = @[@"保养",@"维修",@"加油",@"二手",@"代驾",@"保养",@"车险",@"保养",@"保养"];
+    }
+    return _service_filters;
 }
 
 - (NSMutableArray *)serviceDataArr {
@@ -257,8 +266,13 @@
 
 //活动优惠按钮点击跳转到相应界面
 - (void)buttonClick:(UIButton *)sender {
-    DevelopViewController *developVC = [[DevelopViewController alloc] init];
-    [self.VC presentViewController:developVC animated:YES completion:nil];
+//    DevelopViewController *developVC = [[DevelopViewController alloc] init];
+//    [self.VC presentViewController:developVC animated:YES completion:nil];
+    
+    ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+    serviceVC.service_filter = self.service_filters[sender.tag/100-1];
+    [self.VC.navigationController pushViewController:serviceVC animated:YES];
+    
 }
 
 #pragma mark - 业务板块

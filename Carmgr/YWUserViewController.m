@@ -85,23 +85,12 @@
     self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-    //登录成功改变用户名
-//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
-//        [self.createView.userName setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] forState:UIControlStateNormal];
-//        [self.createView.userImageView sd_setImageWithURL:[NSURL URLWithString:privateModel.avatar] placeholderImage:[UIImage imageNamed:@"头像大"]];
-//    } else {
-//        [self.createView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
-//        self.createView.userImageView.image = [UIImage imageNamed:@"头像大"];
-//    }
-    
 }
 
 #pragma mark - 右滑返回上一页
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        
         navigationController.interactivePopGestureRecognizer.enabled = YES;
-        
     }
 }
 

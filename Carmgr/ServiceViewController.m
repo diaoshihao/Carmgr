@@ -11,6 +11,7 @@
 #import "StoreModel.h"
 #import <UIImageView+WebCache.h>
 #import "YWPublic.h"
+#import "StoreDetailViewController.h"
 
 @interface ServiceViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -57,6 +58,10 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)createTableView {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49) style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -97,6 +102,20 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    StoreDetailViewController *storeDetailVC = [[StoreDetailViewController alloc] init];
+    
+    StoreModel *model = self.dataArray[indexPath.row];
+    storeDetailVC.storeModel = model;
+    
+    //跳转到详情页
+    storeDetailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:storeDetailVC animated:YES];
+    
+}
+
 - (void)loadData {
     //参数
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -121,6 +140,9 @@
                 [self.dataArray addObject:model];
             }
             [self.tableView reloadData];//刷新数据
+            if (self.dataArray.count == 0) {
+                [self showAlertView];
+            }
             
         } else {
             [YWPublic pushToLogin:self];
@@ -137,6 +159,13 @@
         UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
         [self presentViewController:alertVC animated:YES completion:nil];
     }];
+}
+
+- (void)showAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"暂无相关数据" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alertVC addAction:sure];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

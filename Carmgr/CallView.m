@@ -14,7 +14,6 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, width, height-107)];
-    scrollView.contentSize = CGSizeMake(width, 175 * width / 75);
     scrollView.showsVerticalScrollIndicator = NO;
     return scrollView;
 }

@@ -23,6 +23,7 @@
     
     [self createViews];
     self.tabBar.translucent = NO;
+    
 }
 
 //改变tabbar高度

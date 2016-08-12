@@ -328,10 +328,12 @@
     if (tableView == self.tableView) {
         
         StoreDetailViewController *storeDetailVC = [[StoreDetailViewController alloc] init];
+        
         StoreModel *model = self.dataArr[indexPath.row];
         storeDetailVC.storeModel = model;
 
         //跳转到详情页
+        storeDetailVC.hidesBottomBarWhenPushed = YES;
         [self.VC.navigationController pushViewController:storeDetailVC animated:YES];
     } else {
         
