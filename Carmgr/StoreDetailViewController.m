@@ -281,12 +281,14 @@
     [moreRate addSubview:separator];
     
     self.rateTableView.tableFooterView = moreRate;
+    [self.rateTableView reloadData];
     
     [self.rateTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(moreService.mas_bottom).with.offset(10);
         make.left.and.right.mas_equalTo(self.contentView);
-        make.height.mas_equalTo([self getRateTableViewHeight]+30);
+        make.height.mas_equalTo([self getRateTableViewHeight]);
     }];
+    [self.rateTableView layoutIfNeeded];
 
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.scrollView);
@@ -298,13 +300,11 @@
 }
 
 - (CGFloat)getRateTableViewHeight {
-    [self.rateTableView layoutIfNeeded];
     return self.rateTableView.contentSize.height;
 }
 
 - (void)dataLoadFaile {
     //contact merchant
-    
     
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.scrollView);
@@ -335,6 +335,7 @@
                 make.height.mas_equalTo(3 * 105 - 1);
             }];
         }
+        [self.tableView layoutIfNeeded];
     } else if (sender.tag == 300) {
         if (self.openArr.count <= 3) {
             return;
@@ -344,15 +345,16 @@
             self.detailView.rate_list = self.openArr;
             [self.rateTableView reloadData];
             [self.rateTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo([self getRateTableViewHeight]+30);
+                make.height.mas_equalTo([self getRateTableViewHeight]);
             }];
         } else {
             self.detailView.rate_list = self.closeArr;
             [self.rateTableView reloadData];
             [self.rateTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo([self getRateTableViewHeight]+30);
+                make.height.mas_equalTo([self getRateTableViewHeight]);
             }];
         }
+        [self.rateTableView layoutIfNeeded];
     }
 }
 

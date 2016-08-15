@@ -389,13 +389,17 @@
         
         RateModel *model = self.rate_list[indexPath.row];
         
-        cell.headImageView.image = [UIImage imageNamed:@"评论头像"];
+        self.contentHeight = [cell loadCellDataWithModel:model];
         
-        cell.user.text = model.rate_user;
-        cell.time.text = [model.rate_time componentsSeparatedByString:@" "].firstObject;
-        cell.text.text = model.rate_text;
+//        cell.headImageView.image = [UIImage imageNamed:@"评论头像"];
+//        
+//        cell.user.text = model.rate_user;
+//        cell.time.text = [model.rate_time componentsSeparatedByString:@" "].firstObject;
+//        cell.text.text = @"更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格";
+//        //model.rate_text;
+//        
+//        [cell starViewWithStars:model.rate_stars];
         
-        [cell starViewWithStars:model.rate_stars];
         return cell;
     }
 }

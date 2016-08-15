@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface RateModel : NSObject
 
 @property (nonatomic, strong) NSString *rate_user;
@@ -16,5 +17,6 @@
 @property (nonatomic, strong) NSString *rate_text;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
+
 
 @end

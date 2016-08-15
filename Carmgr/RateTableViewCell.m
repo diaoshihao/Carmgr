@@ -123,12 +123,23 @@
     self.text.attributedText = attribueString;
     
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-        make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width);
+        make.top.mas_equalTo(self);
+        make.left.and.right.mas_equalTo(self);
         make.bottom.mas_equalTo(self.text.mas_bottom).with.offset(5);
     }];
     
-    [self layoutIfNeeded];
+}
+
+- (CGFloat)loadCellDataWithModel:(RateModel *)model {
+    self.headImageView.image = [UIImage imageNamed:@"评论头像"];
+    
+    self.user.text = model.rate_user;
+    self.time.text = [model.rate_time componentsSeparatedByString:@" "].firstObject;
+    self.text.text = model.rate_text;
+    
+    [self starViewWithStars:model.rate_stars];
+    
+    return [self systemLayoutSizeFittingSize:self.intrinsicContentSize].height;
 }
 
 + (NSString *)getReuseID {

@@ -16,8 +16,9 @@
     if (self) {
         //注意self.frame 和 self.bounds，是个大坑!
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        self.layer.masksToBounds = YES;
-        self.layer.cornerRadius = 2;
+        self.imageView.layer.shouldRasterize = YES;
+        self.imageView.layer.masksToBounds = YES;
+        self.imageView.layer.cornerRadius = 2;
         [self addSubview:self.imageView];
     }
     return self;

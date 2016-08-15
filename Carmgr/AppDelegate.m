@@ -15,10 +15,14 @@
 @end
 
 @implementation AppDelegate
-
+{
+    UITextView *textView;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    textView = [[UITextView alloc] init];//先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
     
     NSString *key = (NSString *)kCFBundleVersionKey;
     

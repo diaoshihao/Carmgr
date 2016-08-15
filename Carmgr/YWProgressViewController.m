@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
     
@@ -37,6 +38,7 @@
         [self loadData];
     }];
     [self refresh];
+    
 }
 
 //实现父类的方法，为本类提供刷新数据方法

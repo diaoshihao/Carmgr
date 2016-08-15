@@ -147,7 +147,7 @@
     
     if (indexPath.section == 2 && indexPath.row == 1) {
         ServiceDelegateController *delegateVC = [[ServiceDelegateController alloc] init];
-        [self.navigationController pushViewController:delegateVC animated:nil];
+        [self.navigationController pushViewController:delegateVC animated:YES];
     }
     
     if (indexPath.section == 3) {

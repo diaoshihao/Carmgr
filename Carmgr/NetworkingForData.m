@@ -57,6 +57,7 @@
     }
     
     dispatch_group_t sourcegroup = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_queue_create("yiwuchebao.carmgr.gcd", DISPATCH_QUEUE_CONCURRENT);
     
     for (NSString *urlStr in urlStrArr) {
         dispatch_group_enter(sourcegroup);
@@ -83,7 +84,7 @@
             dispatch_group_leave(sourcegroup);
         }];
     }
-    dispatch_group_notify(sourcegroup, dispatch_get_main_queue(), ^{
+    dispatch_group_notify(sourcegroup, queue, ^{
         dispatch_group_leave(group);
     });
     

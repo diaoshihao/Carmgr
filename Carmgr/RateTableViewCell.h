@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RateModel.h"
 
 @interface RateTableViewCell : UITableViewCell
 
@@ -18,5 +19,7 @@
 - (void)starViewWithStars:(NSString *)stars;
 
 + (NSString *)getReuseID;
+
+- (CGFloat)loadCellDataWithModel:(RateModel *)model;
 
 @end

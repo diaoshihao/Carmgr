@@ -172,10 +172,6 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (void)commitButtonClick:(UIButton *)sender {
-    
-}
-
 - (void)nextStepButtonClick {
     AddCarInfoViewController *addCarInfoVC = [[AddCarInfoViewController alloc] init];
     [self.navigationController pushViewController:addCarInfoVC animated:YES];

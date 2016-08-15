@@ -74,8 +74,8 @@
             [YWPublic pushToLogin:self];
             
             /*
-            UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
-            [self presentViewController:alertVC animated:YES completion:nil];
+             UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
+             [self presentViewController:alertVC animated:YES completion:nil];
              */
             
         } else if (network.outLine) {           //网络错误

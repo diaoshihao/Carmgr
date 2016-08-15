@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray    *services_list;
 @property (nonatomic, strong) NSMutableArray    *rate_list;
 
+@property (nonatomic, assign) CGFloat           contentHeight;//RateTbl
+
 - (SDCycleScrollView *)createCycleScrollView:(id)delegate imageGroup:(NSArray *)imageNameGroup;
 
 - (UIView *)headViewWithTitle:(NSString *)title stars:(NSString *)stars;
