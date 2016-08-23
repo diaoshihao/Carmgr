@@ -170,7 +170,7 @@
 
 - (void)changeButtonState {
     timeout--;
-    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",timeout] forState:UIControlStateDisabled];
+    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",(long)timeout] forState:UIControlStateDisabled];
     [getVerifyCode setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     getVerifyCode.layer.borderColor = [UIColor grayColor].CGColor;
     if (timeout == 0) {
@@ -244,6 +244,7 @@
                 
                 //注册后返回登录界面
                 [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"mobile"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"username"];
                 [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
                 
                 [self showAlertViewTitle:nil message:@"注册成功"];

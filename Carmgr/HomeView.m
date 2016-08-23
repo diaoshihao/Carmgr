@@ -432,13 +432,33 @@
     if (collectionView == usedCarCollectionView) {
         UsedCarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[UsedCarCollectionCell getReuseID] forIndexPath:indexPath];
         UsedCarModel *model = self.usedCarDataArr[indexPath.item];
-        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path]]];
+        //异步加载图片
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *image = nil;
+            NSError *error;
+            NSData *responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path] options:NSDataReadingMappedIfSafe error:&error];
+            image = [UIImage imageWithData:responseData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.imageView.image = image;
+            });
+        });
         return cell;
     } else {
         ServiceCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[ServiceCollectionCell getCellID] forIndexPath:indexPath];
         
         ServiceModel *model = self.serviceDataArr[indexPath.item];
-        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:model.icon_path]]];
+        //异步加载图片
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *image = nil;
+            NSError *error;
+            NSData *responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.icon_path] options:NSDataReadingMappedIfSafe error:&error];
+            image = [UIImage imageWithData:responseData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.imageView.image = image;
+            });
+        });
         cell.titleLabel.text = model.service_name;
         return cell;
     }
@@ -447,7 +467,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == serviceCollectionView) {
         ServiceModel *model = self.serviceDataArr[indexPath.item];
-        NSString *click_area_id = [NSString stringWithFormat:@"1000_%ld",indexPath.item+10];
+        NSString *click_area_id = [NSString stringWithFormat:@"1000_%zd",indexPath.item+10];
         [YWPublic userOperationInClickAreaID:click_area_id detial:model.service_name];
         ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
         serviceVC.service_filter = model.service_name;

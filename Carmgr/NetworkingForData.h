@@ -21,7 +21,6 @@
 @property (nonatomic) BOOL outDate;//token过期
 @property (nonatomic) BOOL outLine;//网络中断
 
-
 - (void)getSource:(dispatch_group_t)group;
 
 - (void)getService:(dispatch_group_t)group;

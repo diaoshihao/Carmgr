@@ -48,8 +48,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"mobile"];
-    self.passwdField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    [super viewWillAppear:YES];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"mobile"] != nil) {
+        self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"mobile"];
+        self.passwdField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    }
 }
 
 #pragma mark - 创建视图
@@ -67,9 +70,9 @@
 
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     //v1.0不设置取消按钮
-    /*
+    
     self.navigationItem.leftBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"取消" target:self action:@selector(CancelLogin)];
-    */
+    
     self.navigationItem.rightBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"注册" target:self action:@selector(pushToRegist)];
     
 }
@@ -94,7 +97,7 @@
     [self.loginView createButtonAtSuperView:self.view Constraints:self.loginBtn target:self action:@selector(loginByPhone) forPasswd:NO];
     
     //第三方登录
-    [self.loginView createThirdLoginAtSuperView:self.view target:self action:@selector(thirdLogin:)];
+//    [self.loginView createThirdLoginAtSuperView:self.view target:self action:@selector(thirdLogin:)];
     
 }
 
@@ -146,8 +149,6 @@
                 //登录成功保存数据
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
                 
-                [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"mobile"];//手机号
-                [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];//密码
                 [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
                 
                 [self showAlertViewTitle:nil message:@"登录成功"];

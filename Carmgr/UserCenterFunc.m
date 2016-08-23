@@ -56,6 +56,7 @@
 - (UITableView *)createTableView:(UIView *)superView {
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    tableView.showsVerticalScrollIndicator = NO;
     [superView addSubview:tableView];
     
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,7 +158,12 @@
     [self.backView addSubview:self.userImageView];
     
     //用户名
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *username = nil;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == NO) {
+        username = @"登录/注册";
+    } else {
+        username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    }
     self.userName = [YWPublic createButtonWithFrame:CGRectZero title:username imageName:nil];
     self.userName.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.userName addTarget:target action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];

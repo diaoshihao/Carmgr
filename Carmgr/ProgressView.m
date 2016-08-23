@@ -10,7 +10,6 @@
 #import <Masonry.h>
 #import "ProgressTableViewCell.h"
 #import "ProgressModel.h"
-#import <UIImageView+AFNetworking.h>
 
 @interface ProgressView()
 
@@ -192,12 +191,22 @@
     
     ProgressModel *model = self.dataArr[indexPath.section];
     
-    [cell.headImageView setImageWithURL:[NSURL URLWithString:model.img_path]];
+    //异步加载图片
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *image = nil;
+        NSError *error;
+        NSData *responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path] options:NSDataReadingMappedIfSafe error:&error];
+        image = [UIImage imageWithData:responseData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.headImageView.image = image;
+        });
+    });
     cell.storeName.text = model.merchant_name;
     cell.serviceLabel.text = model.service_name;
     cell.numberLabel.text = model.order_id;
     cell.timeLabel.text = model.order_time;
-    cell.stateLabel.text = [NSString stringWithFormat:@"  %@  ",@"待使用"];
+    cell.stateLabel.text = [NSString stringWithFormat:@"  %@  ",@"进行中"];
     [cell.button1 setTitle:@"取消订单" forState:UIControlStateNormal];
     [cell.button2 setTitle:@"催进度" forState:UIControlStateNormal];
     return cell;

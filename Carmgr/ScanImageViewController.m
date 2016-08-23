@@ -37,6 +37,26 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 
 @implementation ScanImageViewController
 
+- (void)showAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"未获得摄像头使用授权" message:@"请在iPhone“设置”-“隐私”-“相机”中打开" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertVC addAction:sure];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    AVAuthorizationStatus authorStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authorStatus == AVAuthorizationStatusDenied) {
+        [self showAlertView];
+        for (UIView *subview in [self.view subviews]) {
+            [subview removeFromSuperview];
+        }
+    } 
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -47,7 +67,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor whiteColor];
+    
     //初始化扫描界面
     [self setScanView];
     

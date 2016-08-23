@@ -203,6 +203,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     [self.cityChoose setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"city"] forState:UIControlStateNormal];
     self.navigationController.navigationBarHidden = YES;
 }

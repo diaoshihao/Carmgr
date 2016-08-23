@@ -153,7 +153,7 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
-    NSString *urlStr = [[NSString stringWithFormat:kADDCAR,userName,self.numberType.selectedSegmentIndex,self.cityLabel.text,self.vehicle_number.text,self.engine_number.text,self.frame_number.text,self.buy_insu_time.text,self.first_insu_time.text,self.travel_mileage.text,self.comments.text,token]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlStr = [[NSString stringWithFormat:kADDCAR,userName,(long)self.numberType.selectedSegmentIndex,self.cityLabel.text,self.vehicle_number.text,self.engine_number.text,self.frame_number.text,self.buy_insu_time.text,self.first_insu_time.text,self.travel_mileage.text,self.comments.text,token]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -232,6 +232,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     //滑动返回
     self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;

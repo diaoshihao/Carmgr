@@ -1179,7 +1179,7 @@
 				TargetAttributes = {
 					847776251D124BF100DE8213 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 78KF7V58AA;
+						DevelopmentTeam = JP3LJ67987;
 					};
 					8477763E1D124BF100DE8213 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1473,6 +1473,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1510,6 +1511,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1525,9 +1527,9 @@
 				INFOPLIST_FILE = Carmgr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.Carmgr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwuchebao.carmgr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ad4c83b7-b1a4-49fb-9757-f18662f443a0";
 			};
 			name = Debug;
 		};
@@ -1541,9 +1543,9 @@
 				INFOPLIST_FILE = Carmgr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yiwucheguanjia.Carmgr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiwuchebao.carmgr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ad4c83b7-b1a4-49fb-9757-f18662f443a0";
 			};
 			name = Release;
 		};

@@ -200,14 +200,14 @@
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.addressBtn.mas_bottom).with.offset(10);
         make.left.and.right.mas_equalTo(self.contentView);
-        make.height.mas_equalTo(45);
+        make.height.mas_equalTo(44);
     }];
     
     //商家详情
     
     UIView *topView = [self whiteViewForLabel];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(titleLabel.mas_bottom).with.offset(1);
+        make.top.mas_equalTo(titleLabel.mas_bottom).with.offset(1/[[UIScreen mainScreen] scale]);
         make.left.and.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(16);
     }];
@@ -228,7 +228,7 @@
     //查看更多
     self.moreButton = [self lookMoreButton:100];
     [self.moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(bottomView.mas_bottom).with.offset(1);
+        make.top.mas_equalTo(bottomView.mas_bottom).with.offset(0);
         make.left.and.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(44);
     }];
@@ -242,6 +242,7 @@
 }
 
 - (void)dataDidLoad {
+    
     //可办业务
     UILabel *titleLabel = [self titleLabel:@"可办业务"];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -249,10 +250,10 @@
         make.left.and.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(44);
     }];
+    
     self.tableView = [self.detailView createTableView];
-    self.tableView.tableHeaderView = [self titleLabel:@"可办业务"];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(titleLabel.mas_bottom).with.offset(1);
+        make.top.mas_equalTo(titleLabel.mas_bottom).with.offset(1/[[UIScreen mainScreen] scale]);
         make.left.and.right.mas_equalTo(self.contentView);
         if (self.detailModel.services_list.count > 3) {
             make.height.mas_equalTo(3 * 105 - 1);
@@ -264,7 +265,7 @@
     //查看更多
     UIButton *moreService = [self lookMoreButton:200];
     [moreService mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.tableView.mas_bottom).with.offset(1);
+        make.top.mas_equalTo(self.tableView.mas_bottom).with.offset(0);
         make.left.and.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(44);
     }];
@@ -276,9 +277,6 @@
     UIButton *moreRate = [self lookMoreButton:300];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     moreRate.frame = CGRectMake(0, 0, width, 44);
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 1)];
-    separator.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [moreRate addSubview:separator];
     
     self.rateTableView.tableFooterView = moreRate;
     [self.rateTableView reloadData];
@@ -372,6 +370,11 @@
     label.textColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     label.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:label];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 44, width, 1/[[UIScreen mainScreen] scale])];
+    separator.backgroundColor = [UIColor colorWithRed:200.0/256.0 green:199.0/256.0 blue:204.0/256.0 alpha:1.0];
+    [label addSubview:separator];
     return label;
 }
 
@@ -380,6 +383,11 @@
     moreButton.tag = tag;
     [moreButton addTarget:self action:@selector(lookForMore:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:moreButton];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 1/[[UIScreen mainScreen] scale])];
+    separator.backgroundColor = [UIColor colorWithRed:200.0/256.0 green:199.0/256.0 blue:204.0/256.0 alpha:1.0];
+    [moreButton addSubview:separator];
     return moreButton;
 }
 

@@ -25,25 +25,25 @@
         if (![_database open]) {
             NSLog(@"打开数据库失败");
             return nil;
+        } else {
+            //如果数据库打开成功 创建表
+            //创建商家数据表
+            NSString *storeSql = @"create table if not exists tb_store(tb_id integer primary key autoincrement,img_path text,merchant_name text,stars text,service_item text,mobile text,merchant_introduce text,province text,city text,area text,road text,distance text)";
+            NSString *processSql = @"create table if not exists tb_process(tb_id integer primary key autoincrement,img_path text,merchant_account text,merchant_name text,order_id text,order_state text,order_time text,order_type text,service_name text)";
+            
+            NSString *privateSql = @"create table if not exists tb_private(tb_id  integer primary key autoincrement,username text,avatar text,score text,sex text,city text,money text,order_total_size text,order_topay_size text,order_touse_size text,order_process_size text,order_completed_size text)";
+            
+            BOOL isStore = [_database executeUpdate:storeSql];
+            BOOL isProcess = [_database executeUpdate:processSql];
+            BOOL isPrivate = [_database executeUpdate:privateSql];
+            
+            if (isStore && isProcess && isPrivate) {
+                
+            } else {
+                NSLog(@"创建表失败！");
+            }
         }
     }
-    //如果数据库打开成功 创建表
-    //创建商家数据表
-    NSString *storeSql = @"create table if not exists tb_store(tb_id integer primary key autoincrement,img_path text,merchant_name text,stars text,service_item text,mobile text,merchant_introduce text,province text,city text,area text,road text,distance text)";
-    NSString *processSql = @"create table if not exists tb_process(tb_id integer primary key autoincrement,img_path text,merchant_account text,merchant_name text,order_id text,order_state text,order_time text,order_type text,service_name text)";
-    
-    NSString *privateSql = @"create table if not exists tb_private(tb_id  integer primary key autoincrement,username text,avatar text,score text,sex text,city text,money text,order_total_size text,order_topay_size text,order_touse_size text,order_process_size text,order_completed_size text)";
-    
-    BOOL isStore = [_database executeUpdate:storeSql];
-    BOOL isProcess = [_database executeUpdate:processSql];
-    BOOL isPrivate = [_database executeUpdate:privateSql];
-    
-    if (isStore && isProcess && isPrivate) {
-        
-    } else {
-        NSLog(@"创建表失败！");
-    }
-    
     return self;
 }
 //获取数据库管理对象单例的方法

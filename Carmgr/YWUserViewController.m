@@ -22,9 +22,18 @@
 
 @property (nonatomic, strong) NSArray           *dataArray;
 
+@property (nonatomic, strong) PrivateModel      *privateModel;
+
 @end
 
 @implementation YWUserViewController
+
+- (PrivateModel *)privateModel {
+    if (_privateModel == nil) {
+        _privateModel = [[[YWDataBase sharedDataBase] getAllDataFromPrivate] firstObject];
+    }
+    return _privateModel;
+}
 
 #pragma mark 跳转到登录界面
 - (void)pushToLoginVC {
@@ -41,9 +50,16 @@
 }
 
 - (void)pushToAddCarInfo {
-    CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
-    CarVerifyVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:CarVerifyVC animated:YES];
+    //如果没有登录
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        UIViewController *loginVC = [[YWLoginViewController alloc] init];
+        UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:navigaVC animated:YES completion:nil];
+    } else {
+        CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
+        CarVerifyVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:CarVerifyVC animated:YES];
+    }
 }
 
 - (void)pushToSettingPage {
@@ -84,6 +100,12 @@
     //滑动返回
     self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
+        [self.createView.userName setTitle:self.privateModel.username forState:UIControlStateNormal];
+    } else {
+        [self.createView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
+    }
     
 }
 

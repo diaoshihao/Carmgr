@@ -111,7 +111,7 @@
 
 - (void)changeButtonState {
     timeout--;
-    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",timeout] forState:UIControlStateDisabled];
+    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",(long)timeout] forState:UIControlStateDisabled];
     [getVerifyCode setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     getVerifyCode.layer.borderColor = [UIColor grayColor].CGColor;
     if (timeout == 0) {

@@ -105,6 +105,7 @@
                 ServiceModel *model = [[ServiceModel alloc] initWithDict:dict];
                 [self.serviceDataArr addObject:model];
             }
+            
         } else {//token过期
             self.outDate = YES;
         }
@@ -133,6 +134,7 @@
                 UsedCarModel *model = [[UsedCarModel alloc] initWithDict:dict];
                 [self.usedCarDataArr addObject:model];
             }
+             
         } else {//token过期
             self.outDate = YES;
         }

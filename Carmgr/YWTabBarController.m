@@ -8,7 +8,6 @@
 
 #import "YWTabBarController.h"
 #import "ScanImageViewController.h"
-#import "YWPublic.h"
 
 @interface YWTabBarController () 
 
@@ -28,7 +27,7 @@
 
 //改变tabbar高度
 - (void)viewWillLayoutSubviews{
-    CGRect tabFrame = self.tabBar.frame; //self.TabBar is IBOutlet of your TabBar
+    CGRect tabFrame = self.tabBar.frame;
     tabFrame.size.height = 49;
     tabFrame.origin.y = self.view.frame.size.height - 49;
     self.tabBar.frame = tabFrame;
@@ -55,14 +54,15 @@
         
         //设置标签栏
         navigationVC.tabBarItem.title = arrayTitle[i];
+        [navigationVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:178/256.0 green:178/256.0 blue:178/256.0 alpha:1]} forState:UIControlStateNormal];
         [navigationVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0]} forState:UIControlStateSelected];
         [navigationVC.tabBarItem setImage:[YWPublic imageNameWithOriginalRender:arrayImage[i]]];
         navigationVC.tabBarItem.selectedImage = [YWPublic imageNameWithOriginalRender:arraySelectImage[i]];
         
         //修改item文字大小和位置
-        [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, -3)];
+        [navigationVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];
+        
         [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} forState:UIControlStateNormal];
-        [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:178/256.0 green:178/256.0 blue:178/256.0 alpha:1]} forState:UIControlStateNormal];
         [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} forState:UIControlStateSelected];
         
         [controllers addObject:navigationVC];

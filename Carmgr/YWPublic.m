@@ -97,7 +97,7 @@
 }
 
 + (UIAlertController *)showReLoginAlertViewAt:(UIViewController *)VC {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"用户不存在或已过期，请注册或登录后刷新页面" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"请注册或登录后刷新页面" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [cancel setValue:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forKey:@"titleTextColor"];

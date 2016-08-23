@@ -48,6 +48,14 @@
 
 #pragma mark 加载网络数据
 - (void)loadData {
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == NO) {
+        [self.tableView.mj_header endRefreshing];
+        UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
+        [self presentViewController:alertVC animated:YES completion:nil];
+        return;
+    }
+    
     //参数
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
@@ -85,11 +93,10 @@
             }
             
         } else {
-            [YWPublic pushToLogin:self];
-            /*
+            
             UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
             [self presentViewController:alertVC animated:YES completion:nil];
-            */
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

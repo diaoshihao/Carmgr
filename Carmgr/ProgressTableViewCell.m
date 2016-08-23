@@ -30,7 +30,6 @@
         
         //头像
         self.headImageView = [[UIImageView alloc] init];
-        self.headImageView.backgroundColor = [UIColor orangeColor];
         [self.contentView addSubview:self.headImageView];
         
         //订单号

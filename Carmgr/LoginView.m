@@ -12,9 +12,6 @@
 
 @interface LoginView()
 
-@property (nonatomic, strong) UITextField *userField;
-@property (nonatomic, strong) UITextField *secureField;
-
 @end
 
 @implementation LoginView

@@ -113,7 +113,7 @@
 
 - (void)changeButtonState {
     timeout--;
-    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",timeout] forState:UIControlStateDisabled];
+    [getVerifyCode setTitle:[NSString stringWithFormat:@"  %ld秒后可重新发送  ",(long)timeout] forState:UIControlStateDisabled];
     [getVerifyCode setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     getVerifyCode.layer.borderColor = [UIColor grayColor].CGColor;
     if (timeout == 0) {
@@ -234,7 +234,7 @@
     UILabel *tipsLabel = [[UILabel alloc] init];
     tipsLabel.numberOfLines = 0;
     tipsLabel.font = [UIFont systemFontOfSize:14];
-    tipsLabel.text = @"温馨提示：未注册易车易宝账号的手机号，登录时将自动注册易车易宝，代表您已同意《易车易宝用户协议》";
+    tipsLabel.text = @"温馨提示：未注册易务车宝账号的手机号，登录时将自动注册易务车宝，代表您已同意《易务车宝用户协议》";
     tipsLabel.textColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
     [self.view addSubview:tipsLabel];
     

@@ -12,7 +12,6 @@
 #import "DetailModel.h"
 #import "StoreTableViewCell.h"
 #import "StoreDetailViewController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface StoreView() <UITableViewDelegate,UITableViewDataSource>
 
@@ -36,7 +35,7 @@
 }
 
 - (NSArray *)allSortArr {//不进行空值判断，因为数据可能发生变化需要及时得到
-    NSMutableArray *areaList = [[NSMutableArray alloc] init];
+    NSMutableArray *areaList = nil;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isChangeCity"] == YES) {
         areaList = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"areaList"]];
         [areaList insertObject:@"全城市" atIndex:0];
@@ -285,7 +284,17 @@
         
         StoreModel *model = self.dataArr[indexPath.row];
         
-        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.img_path]];
+        //异步加载图片
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *image = nil;
+            NSError *error;
+            NSData *responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path] options:NSDataReadingMappedIfSafe error:&error];
+            image = [UIImage imageWithData:responseData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.headImageView.image = image;
+            });
+        });
         
         cell.storeName.text = model.merchant_name;
         cell.introduce.text = model.merchant_introduce;

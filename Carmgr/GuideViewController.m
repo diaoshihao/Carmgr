@@ -8,7 +8,6 @@
 
 #import "GuideViewController.h"
 #import "YWTabBarController.h"
-#import "YWLoginViewController.h"
 #import <Masonry.h>
 
 @interface GuideViewController () <UIScrollViewDelegate>
@@ -32,15 +31,12 @@
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;
     
-//    NSArray *title = @[@"全国覆盖精确定位",@"功能齐全服务周到",@"易务车宝震撼上线"];
-//    NSArray *detail = @[@"全国多个省市覆盖 精确定位客户位置",@"上牌、违章、二手车、驾考、车险、维修、车贷、保养等  只有你想不到，没有我们做不了的车务",@"立即体验"];
-    
     guidePage = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:guidePage];
     
     for (NSInteger i = 0; i < 3; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, height)];
-        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",i+1]];
+        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%zd",i+1]];
         
         if (i == 2) {
             imageView.userInteractionEnabled = YES;
@@ -95,10 +91,7 @@
     [guidePage removeFromSuperview];
     [pageControl removeFromSuperview];
     
-    YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
-    UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    navigaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:navigaVC animated:YES completion:nil];
+    [UIApplication sharedApplication].delegate.window.rootViewController = [[YWTabBarController alloc] init];
     
 }
 

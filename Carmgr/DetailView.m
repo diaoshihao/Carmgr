@@ -95,7 +95,8 @@
     self.button = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.button setTitle:@"费用支付" forState:UIControlStateNormal];
     [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.button setBackgroundColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0]];
+    self.button.enabled = NO;
+//    [self.button setBackgroundColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0]];
     [self.headView addSubview:self.button];
     
     [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,7 +109,7 @@
 
 - (UIView *)separatorView {
     UIView *separator = [[UIView alloc] init];
-    separator.backgroundColor = [UIColor colorWithRed:240.0/256.0 green:240.0/256.0 blue:240.0/256.0 alpha:1.0];
+    separator.backgroundColor = [UIColor colorWithRed:200.0/256.0 green:199.0/256.0 blue:204.0/256.0 alpha:1.0];
     return separator;
 }
 
@@ -206,20 +207,26 @@
     }
 }
 
+- (void)showAlertView {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"该功能暂时无法使用" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alertVC addAction:sure];
+    [self.target presentViewController:alertVC animated:YES completion:nil];
+}
+
 - (void)wechatContact {
-    NSString *kCode = @"1HWhrmvERIU5h3rNnyDw";
-    NSString *urlStr = [NSString stringWithFormat:@"weixin://qr/%@",kCode];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    [self showAlertView];
 }
 
 - (void)QQContact {
-    NSString *QQNumber = @"1945293625";
-    NSString *urlStr = [NSString stringWithFormat:@"mqq://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web",QQNumber];
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
-    [self.contentView addSubview:webView];
+    [self showAlertView];
+//    NSString *QQNumber = @"1945293625";
+//    NSString *urlStr = [NSString stringWithFormat:@"mqq://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web",QQNumber];
+//    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+//    NSURL *url = [NSURL URLWithString:urlStr];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [webView loadRequest:request];
+//    [self.contentView addSubview:webView];
 }
 
 //拨打电话
@@ -282,12 +289,17 @@
     [addressBtn setImage:[UIImage imageNamed:@"定位-1"] forState:UIControlStateNormal];
     [self.headView addSubview:addressBtn];
     
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 1/[[UIScreen mainScreen] scale])];
+    separator.backgroundColor = [UIColor colorWithRed:200.0/256.0 green:199.0/256.0 blue:204.0/256.0 alpha:1.0];
+    [addressBtn addSubview:separator];
+    
     [addressBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [addressBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
     [addressBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, addressBtn.imageView.frame.size.width + 8, 0, 0)];
     
     [addressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headView.mas_bottom).with.offset(1);
+        make.top.mas_equalTo(self.headView.mas_bottom).with.offset(0);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
         make.height.mas_equalTo(48);
@@ -390,15 +402,6 @@
         RateModel *model = self.rate_list[indexPath.row];
         
         self.contentHeight = [cell loadCellDataWithModel:model];
-        
-//        cell.headImageView.image = [UIImage imageNamed:@"评论头像"];
-//        
-//        cell.user.text = model.rate_user;
-//        cell.time.text = [model.rate_time componentsSeparatedByString:@" "].firstObject;
-//        cell.text.text = @"更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格更多更好哦啊嘎嘎哦豁咯哦啊合格";
-//        //model.rate_text;
-//        
-//        [cell starViewWithStars:model.rate_stars];
         
         return cell;
     }

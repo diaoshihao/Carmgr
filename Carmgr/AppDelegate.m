@@ -12,6 +12,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic) BOOL finishLogin;
+
 @end
 
 @implementation AppDelegate
@@ -19,11 +21,35 @@
     UITextView *textView;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (void)developAccountLogin {
+    self.finishLogin = NO;
+    NSString *username = nil;
+    NSString *password = nil;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"15014150833" forKey:@"username"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"12345678" forKey:@"password"];
+        username = @"15014150833";
+        password = @"12345678";
+    } else {
+        username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    }
     
-    textView = [[UITextView alloc] init];//先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
     
+    NSString *urlStr = [NSString stringWithFormat:kLOGIN,username,password,0,nil,nil];
+    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //登录成功保存数据
+        [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
+        
+        self.finishLogin = YES;
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)firstLaunchOrNot {
     NSString *key = (NSString *)kCFBundleVersionKey;
     
     // 1.从Info.plist中取出版本号
@@ -54,9 +80,25 @@
         self.window.rootViewController = guideVC;
         
     }
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
     
+    textView = [[UITextView alloc] init];//先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
+    
+    [self developAccountLogin];
+    
+    while (!self.finishLogin)
+    {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate distantFuture]];
+    }
+    
+    [self firstLaunchOrNot];
     
     return YES;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -82,7 +124,7 @@
     
     //添加退出登录方法
     
-//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
 }
 
 @end

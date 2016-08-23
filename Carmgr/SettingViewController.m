@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) NSArray *dataArr;
 
+@property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation SettingViewController
@@ -59,14 +61,14 @@
 }
 
 - (void)createTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    tableView.scrollEnabled = NO;
-    [self.view addSubview:tableView];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.scrollEnabled = NO;
+    [self.view addSubview:self.tableView];
     
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"settingcell"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"settingcell"];
     
 }
 
@@ -114,6 +116,10 @@
     if (indexPath.section == 3) {//退出登录cell
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == NO) {
+            cell.userInteractionEnabled = NO;
+            cell.backgroundColor = [UIColor colorWithRed:204/256.0 green:204/256.0 blue:204/256.0 alpha:1];
+        }
     }
     return cell;
 }
@@ -145,31 +151,34 @@
         }
     }
     
+    if (indexPath.section == 1 && indexPath.row == 2) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1144300873"]];
+    }
+    
     if (indexPath.section == 2 && indexPath.row == 1) {
         ServiceDelegateController *delegateVC = [[ServiceDelegateController alloc] init];
         [self.navigationController pushViewController:delegateVC animated:YES];
     }
     
     if (indexPath.section == 3) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
         [self logout];
     }
 }
 
 - (void)logout {
-    //退出登录删除token，取消登录状态
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"token"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+    //退出登录，取消登录状态
     
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
     UIViewController *loginVC = [[YWLoginViewController alloc] init];
     UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:navigaVC animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

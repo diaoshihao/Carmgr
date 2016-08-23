@@ -182,7 +182,7 @@
         make.centerY.mas_equalTo(imageView);
     }];
     
-    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"《易车易宝平台用户协定》" imageName:nil];
+    UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"《易务车宝平台用户协定》" imageName:nil];
     [button setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
     button.titleLabel.font = font;
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];

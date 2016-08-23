@@ -38,7 +38,7 @@
     NSArray *address = [NSDictionary dictionaryWithContentsOfFile:plistPath][@"address"];
     NSInteger i = 0;
     for (NSDictionary *province in address) {
-        NSLog(@"%ld%@",i++,province[@"name"]);
+        NSLog(@"%ld%@",(long)i++,province[@"name"]);
     }
     
 }
@@ -176,10 +176,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
     self.navigationController.navigationBarHidden = YES;
 }
 
