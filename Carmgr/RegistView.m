@@ -66,10 +66,8 @@
     label.text = title;
     label.font = font;
     [view addSubview:label];
-    CGSize labelSize = [label.text sizeWithAttributes:@{NSFontAttributeName:label.font}];
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(labelSize);
         make.center.mas_equalTo(view);
     }];
     

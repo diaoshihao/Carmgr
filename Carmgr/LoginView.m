@@ -89,9 +89,6 @@
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(broView.mas_bottom).with.offset(20);
             make.left.mas_equalTo(broView.mas_left).with.offset(0);
-            
-            CGSize size = [button.currentTitle sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
-            make.size.mas_equalTo(size);
         }];
     } else {
         UIButton *button = [YWPublic createButtonWithFrame:CGRectZero title:@"手机快捷登录" imageName:nil];
@@ -103,9 +100,6 @@
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(broView.mas_bottom).with.offset(20);
             make.right.mas_equalTo(broView.mas_right).with.offset(0);
-            
-            CGSize size = [button.currentTitle sizeWithAttributes:@{NSFontAttributeName:button.titleLabel.font}];
-            make.size.mas_equalTo(size);
         }];
     }
 }

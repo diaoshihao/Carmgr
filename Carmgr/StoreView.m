@@ -12,6 +12,7 @@
 #import "DetailModel.h"
 #import "StoreTableViewCell.h"
 #import "StoreDetailViewController.h"
+#import <UIImageView+WebCache.h>
 
 @interface StoreView() <UITableViewDelegate,UITableViewDataSource>
 
@@ -285,16 +286,7 @@
         StoreModel *model = self.dataArr[indexPath.row];
         
         //异步加载图片
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *image = nil;
-            NSError *error;
-            NSData *responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.img_path] options:NSDataReadingMappedIfSafe error:&error];
-            image = [UIImage imageWithData:responseData];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.headImageView.image = image;
-            });
-        });
+        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.img_path]];
         
         cell.storeName.text = model.merchant_name;
         cell.introduce.text = model.merchant_introduce;

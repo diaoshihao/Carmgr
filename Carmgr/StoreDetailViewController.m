@@ -57,7 +57,8 @@
     //网络数据请求
     [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+        
+        if ([dataDict[@"opt_state"] isEqualToString:@"success"] /*&& [dataDict[@"list_size"] integerValue] != 0*/) {
             self.detailModel = [[DetailModel alloc] initWithDict:dataDict];
             [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.img_path]];
             
@@ -79,11 +80,9 @@
             }
             
             [self dataDidLoad];
-        } else {
-            [self dataLoadFaile];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self dataLoadFaile];
+        
     }];
 }
 
@@ -257,7 +256,7 @@
         make.left.and.right.mas_equalTo(self.contentView);
         if (self.detailModel.services_list.count > 3) {
             make.height.mas_equalTo(3 * 105 - 1);
-        } else {
+        } else if (self.detailModel.services_list.count != 0) {
             make.height.mas_equalTo(self.detailModel.services_list.count * 105 - 1);
         }
     }];
@@ -270,8 +269,17 @@
         make.height.mas_equalTo(44);
     }];
     
+    
     //评论
     self.detailView.rate_list = self.closeArr;
+    if (self.closeArr.count == 0) {
+        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.scrollView);
+            make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width);
+            make.bottom.mas_equalTo(moreService.mas_bottom);
+        }];
+        return;
+    }
     self.rateTableView = [self.detailView createRateTableView];
     
     UIButton *moreRate = [self lookMoreButton:300];

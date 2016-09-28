@@ -54,7 +54,6 @@
     if (imageName != nil) {
         [button setImage:[YWPublic imageNameWithOriginalRender:imageName] forState:UIControlStateNormal];
     }
-    
     return button;
 }
 
@@ -67,6 +66,7 @@
 
 /**
  *  创建圆形图片
+ *  param placeholder
  */
 + (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)img_path placeholder:(nonnull NSString *)placeholder {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
@@ -87,7 +87,7 @@
     return textField;
 }
 
-//push登录
+
 + (void)pushToLogin:(UIViewController *)VC {
     YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
     loginVC.isFromHome = YES;

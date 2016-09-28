@@ -20,6 +20,8 @@
 #import "ServiceModel.h"
 #import "UsedCarModel.h"
 
+#import "UIWebViewController.h"
+
 @interface HomeView() <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 
 @property (nonatomic, assign) CGFloat width;
@@ -466,12 +468,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == serviceCollectionView) {
-        ServiceModel *model = self.serviceDataArr[indexPath.item];
-        NSString *click_area_id = [NSString stringWithFormat:@"1000_%zd",indexPath.item+10];
-        [YWPublic userOperationInClickAreaID:click_area_id detial:model.service_name];
-        ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
-        serviceVC.service_filter = model.service_name;
-        [self.VC.navigationController pushViewController:serviceVC animated:YES];
+        if (indexPath.item == 2) {
+            UIWebViewController *webVC = [[UIWebViewController alloc] init];
+            webVC.urlStr = @"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd6b47ea594b9f00c&redirect_uri=http%3A%2F%2Fwx.11185gz.com.cn%2Fgzyz%2Fstatic%2FsearchIllegal.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+            [self.VC.navigationController pushViewController:webVC animated:YES];
+        } else {
+            ServiceModel *model = self.serviceDataArr[indexPath.item];
+            NSString *click_area_id = [NSString stringWithFormat:@"1000_%zd",indexPath.item+10];
+            [YWPublic userOperationInClickAreaID:click_area_id detial:model.service_name];
+            ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+            serviceVC.service_filter = model.service_name;
+            [self.VC.navigationController pushViewController:serviceVC animated:YES];
+        }
     } else {
         [YWPublic userOperationInClickAreaID:@"1000_40" detial:@"二手车"];
         DevelopViewController *developVC = [[DevelopViewController alloc] init];

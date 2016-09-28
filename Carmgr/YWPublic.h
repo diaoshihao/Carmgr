@@ -60,6 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIAlertController *)showFaileAlertViewAt:(UIViewController *)VC;
 
+/**
+ * post请求
+ */
 + (void)afPOST:(NSString *)URLString
     parameters:(nullable id)parameters
        success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
