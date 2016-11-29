@@ -6,6 +6,6 @@ target 'Carmgr' do
     pod 'FMDB', '~> 2.6.2'
     pod 'Masonry', '~> 1.0.1'
     pod 'AFNetworking', '~> 3.1.0'
+    pod 'PPNetworkHelper', '~> 0.2.5'
     pod 'SDCycleScrollView', '~> 1.65'
-    pod 'WebViewJavascriptBridge', '~> 5.0.5'
 end

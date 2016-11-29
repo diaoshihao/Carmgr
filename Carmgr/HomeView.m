@@ -17,8 +17,7 @@
 #import "UsedCarCollectionCell.h"
 #import "HotTableViewCell.h"
 
-#import "ServiceModel.h"
-#import "UsedCarModel.h"
+#import "HomeModel.h"
 
 #import "UIWebViewController.h"
 
@@ -268,13 +267,9 @@
 
 //活动优惠按钮点击跳转到相应界面
 - (void)buttonClick:(UIButton *)sender {
-//    DevelopViewController *developVC = [[DevelopViewController alloc] init];
-//    [self.VC presentViewController:developVC animated:YES completion:nil];
-    
     ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
     serviceVC.service_filter = self.service_filters[sender.tag/100-1];
     [self.VC.navigationController pushViewController:serviceVC animated:YES];
-    
 }
 
 #pragma mark - 业务板块

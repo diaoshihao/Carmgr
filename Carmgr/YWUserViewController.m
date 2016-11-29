@@ -6,15 +6,26 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import "YWUserViewController.h"
-#import "YWPublic.h"
+#import "PrivateModel.h"
 #import "UserCenterFunc.h"
+#import "YWUserViewController.h"
+#import <UIImageView+WebCache.h>
+
+#import <Masonry.h>
+#import "DefineValue.h"
+#import "GeneralControl.h"
+#import "UIViewController+ShowView.h"
+
 #import "YWLoginViewController.h"
-#import "CarVerifyViewController.h"
 #import "SettingViewController.h"
 #import "UserInfoViewController.h"
-#import "PrivateModel.h"
-#import <UIImageView+WebCache.h>
+#import "CarVerifyViewController.h"
+
+#import "MyCarView.h"
+#import "MyOrderView.h"
+#import "UserHeadView.h"
+#import "UserTableViewController.h"
+
 
 @interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
@@ -23,6 +34,14 @@
 @property (nonatomic, strong) NSArray           *dataArray;
 
 @property (nonatomic, strong) PrivateModel      *privateModel;
+
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
+
+@property (nonatomic, strong) UserHeadView *headView;
+@property (nonatomic, strong) MyCarView *carView;
+@property (nonatomic, strong) MyOrderView *orderView;
 
 @end
 
@@ -35,39 +54,186 @@
     return _privateModel;
 }
 
+#pragma mark - 生命周期
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    //实现滑动返回
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    
+    [self showPage];
+}
+
+- (void)showPage {
+    [self initContentView];
+    [self myHeadView];
+    [self myCarView];
+    [self myOrderView];
+    [self tableView];
+}
+
+- (void)initContentView {
+    self.scrollView = [[UIScrollView alloc] init];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    self.contentView = [[UIView alloc] init];
+    self.contentView.backgroundColor = [DefineValue separaColor];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+        make.width.mas_equalTo([DefineValue screenWidth]);
+    }];
+}
+
+- (void)myHeadView {
+    self.headView = [[UserHeadView alloc] initWithFrame:CGRectMake(0, 0, [DefineValue screenWidth], [DefineValue screenWidth] / 2.5)];
+    __weak typeof(self) weakSelf = self;
+    self.headView.buttonClick = ^(ClickAtButton buttonType) {
+        [weakSelf headViewDidClick:buttonType];
+    };
+    [self.contentView addSubview:self.headView];
+}
+
+- (void)myCarView {
+    self.carView = [[MyCarView alloc] init];
+    __weak typeof(self) weakSelf = self;
+    self.carView.addCarInfo = ^() {
+        [weakSelf pushToAddCarInfo];
+    };
+    [self.contentView addSubview:self.carView];
+    [self.carView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.headView.mas_bottom).offset(5);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo([DefineValue screenWidth] * 3 / 4.5);
+    }];
+}
+
+- (void)myOrderView {
+    self.orderView = [[MyOrderView alloc] init];
+    __weak typeof(self) weakSelf = self;
+    self.orderView.progress = ^(OrderProgress progress) {
+        [weakSelf progress];
+        NSLog(@"OrderPress%lu",progress);
+    };
+    [self.contentView addSubview:self.orderView];
+    [self.orderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.carView.mas_bottom).offset(5);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(108);
+    }];
+}
+
+- (void)tableView {
+    UserTableViewController *userTableVC = [[UserTableViewController alloc] init];
+    __weak typeof(self) weakSelf = self;
+    userTableVC.cellDidSelect = ^(NSIndexPath *indexPath) {
+        [weakSelf tableViewCellDidSelect:indexPath];
+    };
+    [self addChildViewController:userTableVC];
+    [self.contentView addSubview:userTableVC.tableView];
+    [userTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.orderView.mas_bottom).offset(0);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(44 * 5 + 16);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom);
+    }];
+}
+
+- (void)headViewDidClick:(ClickAtButton)buttonType {
+    switch (buttonType) {
+        case ButtonUserName:
+            if ([self isLogin]) {
+                [self pushToUserInfo];
+            } else {
+                [self pushToLoginVC];
+            }
+            break;
+        case ButtonMessage:
+            [self pushToMessagePage];
+            break;
+        case ButtonSetting:
+            [self pushToSettingPage];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)tableViewCellDidSelect:(NSIndexPath *)indexPath {
+    if ([self isLogin]) {
+        if (indexPath.section == 0) {
+            [self pushToMyBalance];
+        } else {
+            switch (indexPath.row) {
+                case 0:
+                    [self pushToMyCollection];
+                    break;
+                case 1:
+                    [self pushToUserInfo];
+                    break;
+                case 2:
+                    [self pushToMyHistory];
+                    break;
+                case 3:
+                    [self pushToMyAddress];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    } else {
+        [self showAlert];
+    }
+}
+
+- (void)showAlert {
+    UIAlertController *alert = [GeneralControl noActionAlertTitle:@"请登录" message:@"是否前往登录"];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self pushToLoginVC];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:alert completion:nil];
+    }];
+    [alert addAction:sure];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 跳转界面
 #pragma mark 跳转到登录界面
 - (void)pushToLoginVC {
-    
-    //如果没有登录
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
-        UIViewController *loginVC = [[YWLoginViewController alloc] init];
-        UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        [self presentViewController:navigaVC animated:YES completion:nil];
-    } else {
-        [self pushToUserInfo];
-    }
-    
+    UIViewController *loginVC = [[YWLoginViewController alloc] init];
+    UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:navigaVC animated:YES completion:nil];
 }
 
+#pragma mark 跳转到添加车辆界面
 - (void)pushToAddCarInfo {
-    //如果没有登录
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
-        UIViewController *loginVC = [[YWLoginViewController alloc] init];
-        UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        [self presentViewController:navigaVC animated:YES completion:nil];
-    } else {
-        CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
-        CarVerifyVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:CarVerifyVC animated:YES];
-    }
+    CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
+    CarVerifyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:CarVerifyVC animated:YES];
 }
 
+#pragma mark 跳转到消息界面
+- (void)pushToMessagePage {
+    
+}
+
+#pragma mark 跳转到设置界面
 - (void)pushToSettingPage {
     SettingViewController *settingVC = [[SettingViewController alloc] init];
     settingVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:settingVC animated:YES];
 }
 
+#pragma mark 跳转到个人资料界面
 - (void)pushToUserInfo {
     UserInfoViewController *userInfoVC = [[UserInfoViewController alloc] init];
     userInfoVC.headImage = self.createView.userImageView.image;
@@ -75,23 +241,32 @@
     [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
-#pragma mark - 生命周期
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
+#pragma mark 跳转到账号余额界面
+- (void)pushToMyBalance {
     
-    //实现滑动返回
-    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    
-    self.createView = [[UserCenterFunc alloc] init];
-    self.createView.actionTarget = self;
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.createView createTableView:self.view];
-        
 }
 
+#pragma mark 跳转到我的收藏界面
+- (void)pushToMyCollection {
+    
+}
+
+#pragma mark 跳转到历史业务界面
+- (void)pushToMyHistory {
+    
+}
+
+#pragma mark 跳转到邮寄地址界面
+- (void)pushToMyAddress {
+    
+}
+
+#pragma mark 进度
+- (void)progress {
+    
+}
+
+#pragma mark - 右滑返回上一页
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
@@ -109,7 +284,6 @@
     
 }
 
-#pragma mark - 右滑返回上一页
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         navigationController.interactivePopGestureRecognizer.enabled = YES;

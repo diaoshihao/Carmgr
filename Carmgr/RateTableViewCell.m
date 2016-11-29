@@ -32,6 +32,7 @@
         //内容
         self.text = [[UILabel alloc] init];
         self.text.numberOfLines = 5;
+        self.text.textColor = [UIColor blackColor];
         self.text.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:self.text];
         
@@ -45,17 +46,19 @@
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(16);
         make.left.mas_equalTo(20);
-        make.width.mas_equalTo(self.headImageView.mas_height);
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(30);
     }];
     
-    [self.user setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.user mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(16);
+        make.top.mas_equalTo(self.headImageView.mas_top);
         make.left.mas_equalTo(self.headImageView.mas_right).with.offset(18);
     }];
     
     [self.text mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(self.contentView);
+        make.top.mas_equalTo(self.headImageView.mas_bottom).with.offset(6);
+        make.left.mas_equalTo(self.mas_left);
+        make.right.mas_equalTo(self.mas_right);
     }];
     
 }
@@ -75,7 +78,7 @@
         [self.contentView addSubview:starImage];
         
         [starImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.user.mas_bottom).with.offset(8);
+            make.bottom.mas_equalTo(self.headImageView.mas_bottom);
             if (i == 0) {
                 make.left.mas_equalTo(self.user.mas_left);
             } else {
@@ -104,14 +107,6 @@
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(lastImage.mas_right).with.offset(10);
         make.centerY.mas_equalTo(lastImage);
-    }];
-    
-    [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(lastImage.mas_bottom).with.offset(6);
-    }];
-    
-    [self.text mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headImageView.mas_bottom).with.offset(16);
     }];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

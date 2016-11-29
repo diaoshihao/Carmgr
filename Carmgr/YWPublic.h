@@ -38,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 //MD5加密
 + (NSString *)encryptMD5String:(NSString *)string;
 
+//异步加载图片
++ (void)loadWebImage:(NSString *)imageUrl didLoad:(void(^)(UIImage *image))block;
+
 //用户点击次数收集
 + (void)userOperationInClickAreaID:(NSString *)click_area_id detial:(NSString * _Nullable)detail;
 
@@ -48,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)imageNameWithOriginalRender:(NSString *)imageName;
 
 //创建圆形图片
-+ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)img_path placeholder:(NSString *)placeholder;
++ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString * _Nullable)img_path placeholder:(NSString *)placeholder;
 
 //textfield
 + (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;

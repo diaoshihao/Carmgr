@@ -19,7 +19,6 @@
 /////////////////////////////////////////////////////////////
 
 #import "BaseViewController.h"
-@class SDCycleScrollView;
 
 @interface YWHomeViewController : BaseViewController
 

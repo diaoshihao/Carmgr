@@ -17,6 +17,19 @@
     return [string MD5Encryption];
 }
 
++ (void)loadWebImage:(NSString *)imageUrl didLoad:(nonnull void (^)(UIImage * _Nonnull))block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *image = nil;
+        NSError *error;
+        NSData *responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl] options:NSDataReadingMappedIfSafe error:&error];
+        image = [UIImage imageWithData:responseData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(image);
+        });
+    });
+}
+
 + (void)userOperationInClickAreaID:(NSString *)click_area_id detial:(NSString *)detail {
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
@@ -68,9 +81,13 @@
  *  创建圆形图片
  *  param placeholder
  */
-+ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)img_path placeholder:(nonnull NSString *)placeholder {
++ (UIImageView *)createCycleImageViewWithFrame:(CGRect)frame image:(NSString *)img_path placeholder:(NSString *)placeholder {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    [imageView setImageWithURL:[NSURL URLWithString:img_path] placeholderImage:[UIImage imageNamed:placeholder]];
+    if (img_path != nil) {
+        [imageView setImageWithURL:[NSURL URLWithString:img_path] placeholderImage:[UIImage imageNamed:placeholder]];
+    } else {
+        imageView.image = [UIImage imageNamed:placeholder];
+    }
     imageView.layer.cornerRadius = imageView.frame.size.height / 2;
     imageView.clipsToBounds = YES;
     return imageView;

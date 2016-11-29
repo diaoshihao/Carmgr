@@ -18,8 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"服务协议";
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height)];
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     textView.backgroundColor = [UIColor whiteColor];
     textView.editable = NO;
     [self.view addSubview:textView];

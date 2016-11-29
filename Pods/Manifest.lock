@@ -18,28 +18,32 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - Masonry (1.0.1)
+  - PPNetworkHelper (0.2.5):
+    - AFNetworking
+    - YYCache
   - SDCycleScrollView (1.65):
     - SDWebImage (~> 3.7)
   - SDWebImage (3.8.0):
     - SDWebImage/Core (= 3.8.0)
   - SDWebImage/Core (3.8.0)
-  - WebViewJavascriptBridge (5.0.5)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - FMDB (~> 2.6.2)
   - Masonry (~> 1.0.1)
+  - PPNetworkHelper (~> 0.2.5)
   - SDCycleScrollView (~> 1.65)
-  - WebViewJavascriptBridge (~> 5.0.5)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  PPNetworkHelper: baa8e6c4499db4a2287b5c97f1dc67cdcb61f704
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 7d9fe229266696de91eadf840c77ca15efd4bbd2
-  WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: abc8828dc9dfd93a8e51f31b6e7c3fdcd30eb210
+PODFILE CHECKSUM: 603413ee02d7061dbb3953a575fcfdf9d88631a7
 
 COCOAPODS: 1.0.1

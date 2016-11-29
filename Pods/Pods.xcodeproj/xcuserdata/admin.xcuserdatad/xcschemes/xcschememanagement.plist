@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PPNetworkHelper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Carmgr.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,7 +39,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>WebViewJavascriptBridge.xcscheme</key>
+		<key>YYCache.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,22 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4D3205774BCB5F17B2F1D22F894A5BF3</key>
+		<key>4502169060108DD3DF09BC1A07FDD9DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>87E713B2406F60D3183D73CD7F725FAF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8F4026D470D605A3687813AFD7BDB6DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D35BA4C864F6A4C12FF2D3A6B7E0AB5B</key>
+		<key>A12AAC76502D9FBF0BC44D8D420820E2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B45258E6704860D568244102F8E968BE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F19582AA066D14FD9FC9E05763ED37A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2DF0534A7A7812340B86FC016E33C48</key>
 		<dict>
 			<key>primary</key>
 			<true/>

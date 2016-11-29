@@ -10,6 +10,7 @@
 #import <Masonry.h>
 #import "ServiceDelegateController.h"
 #import "YWLoginViewController.h"
+#import "AboutViewController.h"
 
 @interface SettingViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -23,10 +24,12 @@
 
 - (void)customLeftItem {
     self.navigationItem.title = @"设置";
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.translucent = NO;
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"后退橙"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }
@@ -52,7 +55,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self customLeftItem];
+//    [self customLeftItem];
+    self.title = @"设置";
+    self.customNavBar.backgroundColor = [UIColor whiteColor];
     
     self.dataArr = @[@[@"移动网络下载图片",@"清理缓存"],@[@"关于我们",@"招商信息",@"给个好评"],@[@"使用帮助",@"用户协议"],@[@"退出登录"]];
     
@@ -61,7 +66,7 @@
 }
 
 - (void)createTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [DefineValue screenWidth], [DefineValue screenHeight] - 64) style:UITableViewStyleGrouped];
     self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
     
@@ -136,19 +141,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0 && indexPath.row == 1) {//清理缓存
-        NSArray *tableArr = @[@"tb_store",@"tb_process"];
-        BOOL result = NO;
-        for (NSString *tb_name in tableArr) {
-            result = [[YWDataBase sharedDataBase] deleteDatabaseFromTable:tb_name];
-            if (result == NO) {
-                break;
-            }
-        }
-        if (result == NO) {
-            [self showAlertViewTitle:nil messae:@"清理缓存失败"];
-        } else {
-            [self showAlertViewTitle:nil messae:@"清理缓存成功"];
-        }
+        [self clear];
+    }
+    
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        AboutViewController *aboutVC = [[AboutViewController alloc] init];
+        [self.navigationController pushViewController:aboutVC animated:YES];
     }
     
     if (indexPath.section == 1 && indexPath.row == 2) {
@@ -165,6 +163,22 @@
     }
 }
 
+- (void)clear {
+    NSArray *tableArr = @[@"tb_store",@"tb_process"];
+    BOOL result = NO;
+    for (NSString *tb_name in tableArr) {
+        result = [[YWDataBase sharedDataBase] deleteDatabaseFromTable:tb_name];
+        if (result == NO) {
+            break;
+        }
+    }
+    if (result == NO) {
+        [self showAlertViewTitle:nil messae:@"清理缓存失败"];
+    } else {
+        [self showAlertViewTitle:nil messae:@"清理缓存成功"];
+    }
+}
+
 - (void)logout {
     //退出登录，取消登录状态
     
@@ -172,13 +186,6 @@
     UIViewController *loginVC = [[YWLoginViewController alloc] init];
     UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:navigaVC animated:YES completion:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

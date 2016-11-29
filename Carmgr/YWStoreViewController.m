@@ -7,8 +7,6 @@
 //
 
 #import "YWStoreViewController.h"
-#import "YWUserViewController.h"
-#import "ScanImageViewController.h"
 #import "YWPublic.h"
 #import "StoreView.h"
 #import <Masonry.h>

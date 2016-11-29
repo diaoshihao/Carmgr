@@ -9,173 +9,220 @@
 #import "YWHomeViewController.h"
 #import "HomeView.h"
 #import "YWLoginViewController.h"
-#import "NetworkingForData.h"
+#import "ServiceViewController.h"
+#import <Masonry.h>
+#import "DefineValue.h"
+#import "HomeDataLoader.h"
+#import "HomeModel.h"
 
-@interface YWHomeViewController () <UITableViewDelegate, UITableViewDataSource>
+#import "CycleScrollView.h"
+#import "PromotionView.h"
+#import "ServiceCollectionView.h"
+#import "SecondHandCollectionView.h"
 
-@property (nonatomic, strong) HomeView          *home;
-@property (nonatomic, strong) UITableView       *tableView;
+@interface YWHomeViewController () <HomeDataSource>
 
-@property (nonatomic, strong) NSMutableArray    *viewsArr;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
 
-@property (nonatomic, strong) NSMutableArray    *cycleImageArr;//轮播图组
+@property (nonatomic, strong) HomeDataLoader *dataLoader;
+
+@property (nonatomic, strong) CycleScrollView *cycleScrollView;
+@property (nonatomic, strong) ServiceCollectionView *serviceCollection;
+@property (nonatomic, strong) PromotionView *promotionView;
+@property (nonatomic, strong) DiscountView *discountView;
+@property (nonatomic, strong) SecondHandCollectionView *secondHandCollection;
 
 @end
 
 @implementation YWHomeViewController
 
-#pragma mark - 懒加载
-- (NSMutableArray *)viewsArr {
-    if (_viewsArr == nil) {
-        _viewsArr = [[NSMutableArray alloc] init];
-    }
-    return _viewsArr;
-}
-
-- (NSMutableArray *)cycleImageArr {
-    if (_cycleImageArr == nil) {
-        _cycleImageArr = [[NSMutableArray alloc] init];
-    }
-    return _cycleImageArr;
-}
-
-- (void)loadCellViews {
-    
-    [self.viewsArr addObject:[self.home createServiceCollectionView]];
-    [self.viewsArr addObject:[self.home createActivetyView]];
-    [self.viewsArr addObject:[self.home createSecondView]];
-    [self.viewsArr addObject:[self.home createUsedCarCollectionView]];
-//    [self.viewsArr addObject:[self.home createTableViewAtSuperView:self.view]];
-}
-
-
-#pragma mark 获取图片
-- (void)loadImage {
-    NetworkingForData *network = [[NetworkingForData alloc] init];
-    
-    //数据源
-    network.propertys = @[self.cycleImageArr,self.home.actLeftArr,self.home.actTopArr,self.home.actBottomArr,self.home.discountArr];
-    network.serviceDataArr = self.home.serviceDataArr;
-    network.usedCarDataArr = self.home.usedCarDataArr;
-    
-    network.outDate = NO;
-    network.outLine = NO;
-    
-    dispatch_group_t group = dispatch_group_create();
-    
-    [network getSource:group];//资源
-    [network getService:group];//服务
-    [network getUsedCar:group];//二手车
-//    [network getHotSource:group];//热门推荐
-    
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [self.tableView.mj_header endRefreshing];
-        
-        if (network.outDate) {                  //token过期
-            [YWPublic pushToLogin:self];
-            
-            /*
-             UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
-             [self presentViewController:alertVC animated:YES completion:nil];
-             */
-            
-        } else if (network.outLine) {           //网络错误
-            UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
-            [self presentViewController:alertVC animated:YES completion:nil];
-            
-        } else {
-            [self.viewsArr removeAllObjects];
-            [self loadCellViews];
-            [self.tableView reloadData];
-        }
-    });
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
+    self.navigationController.automaticallyAdjustsScrollViewInsets = NO;
+
+    //实例化加载数据类
+    self.dataLoader = [[HomeDataLoader alloc] init];
+    self.dataLoader.dataSource = self;
     
-    self.home = [[HomeView alloc] init];
-    self.home.VC = self;
-    
-    [self createTableView];
+    [self showPage];
     
     //添加下拉刷新控件
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadImage];
+    self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //加载数据
+        [self.dataLoader loadData];
     }];
     [self refresh];
 }
 
+- (void)showPage {
+    [self initContentView];
+    [self addViewToContentView];
+}
+
 //实现父类的方法
 - (void)refresh {
-    [self.tableView.mj_header beginRefreshing];
+    [self.scrollView.mj_header beginRefreshing];
 }
 
-#pragma mark - tableView
-- (void)createTableView {
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-103) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.tableView];
-    self.tableView.allowsSelection = NO;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+#pragma mark homeDataSource
+- (void)requestAllDone {
+    [self.scrollView.mj_header endRefreshing];
+}
+
+- (void)loadSuccess {
     
 }
 
-#pragma mark - tableView delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.viewsArr.count;
+- (void)loadFailed {
+    
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return [self.home createCycleScrollView:self.cycleImageArr];
+- (void)loadConfig_key:(Config_Key)config_key data:(NSArray *)data {
+    [self loadImageWithKey:config_key data:data];
+}
+
+- (void)loadServices:(NSArray *)services {
+    NSMutableArray *servicesArr = [NSMutableArray new];
+    for (NSDictionary *dict in services) {
+        ServiceModel *model = [[ServiceModel alloc] initWithDict:dict];
+        [servicesArr addObject:model];
     }
-    return nil;
+    self.serviceCollection.dataArr = servicesArr;
+    [self.serviceCollection reloadData];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    view.layer.shadowOffset = CGSizeMake(50, 10);
+- (void)loadSecondHand:(NSArray *)secondHand {
+    NSMutableArray *secondHandArr = [NSMutableArray new];
+    for (NSDictionary *dict in secondHand) {
+        UsedCarModel *model = [[UsedCarModel alloc] initWithDict:dict];
+        [secondHandArr addObject:model];
+    }
+    self.secondHandCollection.dataArr = secondHandArr;
+    [self.secondHandCollection reloadData];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIView *view = self.viewsArr[indexPath.section];
-    return view.frame.size.height;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return [UIScreen mainScreen].bounds.size.width * 300 / 720;
+//loadImageByKey
+- (void)loadImageWithKey:(Config_Key)config_key data:(NSArray *)data {
+    NSMutableArray *images = [NSMutableArray new];
+    for (NSDictionary *dict in data) {
+        HomeModel *homeModel = [HomeModel modelWithDict:dict];
+        [images addObject:homeModel.config_value];
+    }
+    if (config_key == Config_ZY0001) {
+        self.cycleScrollView.images = images;
+    } else if (config_key == Config_ZY0002) {
+        [self.promotionView setImageFor:PositionLeft imageUrl:images.firstObject];
+    } else if (config_key == Config_ZY0003) {
+        [self.promotionView setImageFor:PositionRightTop imageUrl:images.firstObject];
+    } else if (config_key == Config_ZY0004) {
+        [self.promotionView setImageFor:PositionRightBottom imageUrl:images.firstObject];
+    }else if (config_key == Config_ZY0005) {
+        [self.discountView setDiscountImages:images];
     } else {
-        return 0.1;
+        
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 9.9;
+- (void)pushToServicePage:(ServiceModel *)model {
+    ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+    serviceVC.service_filter = model.service_name;
+    [self.navigationController pushViewController:serviceVC animated:YES];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    for (UIView *view in cell.subviews) {
-        [view removeFromSuperview];
-    }
-    [cell addSubview:self.viewsArr[indexPath.section]];
+- (void)cycleImageDidTap {
     
-    return cell;
 }
+
+- (void)promotionButtonDidTap:(ButtonPosition)position {
+    
+}
+
+- (void)discountButtonDidTap:(ButtonPosition)position {
+    
+}
+
+#pragma mark -
+- (void)initContentView {
+    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
+    }];
+    self.contentView = [[UIView alloc] init];
+    self.contentView.backgroundColor = [DefineValue separaColor];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+        make.width.mas_equalTo([DefineValue screenWidth]);
+    }];
+}
+
+- (void)addViewToContentView {
+    __weak typeof(self) weakSelf = self;
+    
+    self.cycleScrollView = [[CycleScrollView alloc] init];
+    [self.cycleScrollView imageViewDidTap:^(NSUInteger index) {
+        [weakSelf cycleImageDidTap];
+    }];
+    [self.contentView addSubview:self.cycleScrollView];
+    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo([DefineValue screenWidth] * 300 / 720);
+    }];
+    
+    CGFloat itemWidth = ([DefineValue screenWidth] - 27.5 * 4 - 20 * 2) / 5;
+    self.serviceCollection = [[ServiceCollectionView alloc] init];
+    self.serviceCollection.didSelectItem = ^(ServiceModel *model) {
+        [weakSelf pushToServicePage:model];
+    };
+    [self.contentView addSubview:self.serviceCollection];
+    [self.serviceCollection mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.cycleScrollView.mas_bottom).offset(8);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(2 * itemWidth + 100);
+    }];
+    
+    CGFloat promotionHeight = [DefineValue screenWidth] / 2 * 26 / 36;
+    self.promotionView = [[PromotionView alloc] init];
+    self.promotionView.click = ^(ButtonPosition position) {
+        [weakSelf promotionButtonDidTap:position];
+    };
+    [self.contentView addSubview:self.promotionView];
+    [self.promotionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.serviceCollection.mas_bottom).offset(8);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(promotionHeight);
+    }];
+    
+    CGFloat discountHeight = 3 * [DefineValue screenWidth] / 2 * 13 / 36;
+    self.discountView = [[DiscountView alloc] init];
+    self.discountView.click = ^(ButtonPosition position) {
+        [weakSelf discountButtonDidTap:position];
+    };
+    [self.contentView addSubview:self.discountView];
+    [self.discountView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.promotionView.mas_bottom).offset(8);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(discountHeight);
+    }];
+    
+    CGFloat secondwidth = [DefineValue screenWidth] / 4;
+    CGFloat height = secondwidth * 124 / 170 + 30;
+
+    self.secondHandCollection = [[SecondHandCollectionView alloc] init];
+    [self.contentView addSubview:self.secondHandCollection];
+    [self.secondHandCollection mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.discountView.mas_bottom).offset(8);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(height);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(0);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

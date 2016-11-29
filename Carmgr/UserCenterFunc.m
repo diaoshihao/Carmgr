@@ -208,11 +208,11 @@
 //        make.right.mas_equalTo(self.backView).with.offset(-imageHeight/4);
 //    }];
     
-    [self.settingButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.settingButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(31.5);
+        make.top.mas_equalTo(20);
         make.right.mas_equalTo(self.backView).with.offset(-20);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
 }
 

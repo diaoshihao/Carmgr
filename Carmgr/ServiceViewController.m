@@ -33,9 +33,9 @@
 - (UIBarButtonItem *)createBarButtonItem:(CGRect)frame {
     UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
     barButton.frame = frame;
-    [barButton setTitle:@"返回" forState:UIControlStateNormal];
+    [barButton setImage:[UIImage imageNamed:@"后退橙"] forState:UIControlStateNormal];
+    barButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [barButton addTarget:self action:@selector(turnBack) forControlEvents:UIControlEventTouchUpInside];
-    [barButton setTitleColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0] forState:UIControlStateNormal];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:barButton];
     barButton.titleLabel.font = [UIFont systemFontOfSize:15];
     return item;
