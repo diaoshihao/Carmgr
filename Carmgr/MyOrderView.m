@@ -9,7 +9,89 @@
 #import "MyOrderView.h"
 #import <Masonry.h>
 #import "DefineValue.h"
-#import "UpperImageButton.h"
+
+@interface MyProgressView()
+
+@property (nonatomic, strong) NSArray *buttons;
+
+@end
+
+@implementation MyProgressView
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        [self progressView];
+    }
+    return self;
+}
+
+- (NSArray *)titles {
+    if (_titles == nil) {
+        _titles = @[@"全部",@"待付款",@"待使用",@"进行中",@"已完成",@"待评价",@"售后"];
+    }
+    return _titles;
+}
+
+- (NSArray *)images {
+    if (_images == nil) {
+        _images = @[@"全部",@"待付款",@"待使用",@"进行中",@"已完成",@"待评价",@"售后"];
+    }
+    return _images;
+}
+
+- (NSArray *)selectedImages {
+    if (_selectedImages == nil) {
+        _selectedImages = @[@"全部橙",@"待付款橙",@"待使用橙",@"进行中橙",@"已完成橙",@"待评价橙",@"售后橙"];
+    }
+    return _selectedImages;
+}
+
+- (void)progressView {
+    
+    NSMutableArray *buttons = [NSMutableArray new];
+    for (NSInteger i = 0; i < self.titles.count; i++) {
+        UpperImageButton *button = [UpperImageButton buttonWithType:UIButtonTypeCustom];
+        button.tag = OrderProgressAll + i + 10;
+        [button setTitle:self.titles[i] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:self.images[i]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:self.selectedImages[i]] forState:UIControlStateSelected];
+        [button setTitleColor:[DefineValue buttonColor] forState:UIControlStateNormal];
+        [button setTitleColor:[DefineValue mainColor] forState:UIControlStateSelected];
+        button.titleLabel.font = [DefineValue font14];
+        [button addTarget:self action:@selector(progressAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        [buttons addObject:button];
+    }
+    self.buttons = buttons;
+    
+    [buttons mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:[DefineValue screenWidth] / 7 leadSpacing:0 tailSpacing:0];
+    [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+    }];
+}
+
+
+- (void)progressAction:(UIButton *)sender {
+    self.progress(sender.tag - 10);
+}
+
+- (void)currentOrderState:(OrderProgress)progress {
+    for (UpperImageButton *button in self.buttons) {
+        button.selected = NO;
+    }
+    self.currentSelected = [self viewWithTag:progress + 10];
+    self.currentSelected.selected = YES;
+}
+
+@end
+
+@interface MyOrderView()
+
+@end
 
 @implementation MyOrderView
 
@@ -59,30 +141,14 @@
         make.height.mas_equalTo([DefineValue pixHeight]);
     }];
     
-    NSArray *titles = @[@"全部",@"待付款",@"待使用",@"进行中",@"已完成",@"待评价",@"售后"];
-    NSArray *images = @[@"全部",@"待付款",@"待使用",@"进行中",@"已完成",@"待评价",@"售后"];
-    NSMutableArray *buttons = [NSMutableArray new];
-    for (NSInteger i = 0; i < titles.count; i++) {
-        UIButton *button = [UpperImageButton buttonWithType:UIButtonTypeCustom];
-        button.tag = OrderProgressAll + i;
-        [button setTitle:titles[i] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
-        [button setTitleColor:[DefineValue buttonColor] forState:UIControlStateNormal];
-        button.titleLabel.font = [DefineValue font14];
-        [button addTarget:self action:@selector(progressAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:button];
-        [buttons addObject:button];
-    }
-    [buttons mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:[DefineValue screenWidth] / 7 leadSpacing:0 tailSpacing:0];
-    [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.progressView = [[MyProgressView alloc] init];
+    [self addSubview:self.progressView];
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(separator.mas_bottom);
         make.height.mas_equalTo(64);
+        make.left.and.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
     }];
-}
-
-- (void)progressAction:(UIButton *)sender {
-    self.progress(sender.tag);
 }
 
 /*

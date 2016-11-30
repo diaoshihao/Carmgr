@@ -41,7 +41,7 @@
     NSArray *arrayClass = @[
                             @"YWHomeViewController",
                             @"YWStoreViewController",
-                            @"YWProgressViewController",
+                            @"NearByViewController",
                             @"YWUserViewController"];
     
     //存放视图控制器的数组

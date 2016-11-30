@@ -31,38 +31,26 @@
     self.titleArr = @[@"头像",@"昵称",@"性别",@"所在地"];
 }
 
-- (void)customLeftItem {
-    self.navigationItem.title = @"个人资料";
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-}
-
-- (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self customLeftItem];
+    self.title = @"个人资料";
+    self.view.backgroundColor = [DefineValue separaColor];
+    
     [self loadData];
     [self createTableView];
     
 }
 
 - (void)createTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, [DefineValue screenWidth], [DefineValue screenHeight] - 70) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
     
     tableView.tableFooterView = [UIView new];
+    tableView.backgroundColor = [DefineValue separaColor];
     tableView.scrollEnabled = NO;
     
     [tableView registerClass:[UserInfoCell class] forCellReuseIdentifier:[UserInfoCell getReuseID]];
@@ -74,10 +62,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 88;
-    }
     return 44;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+    view.tintColor = [DefineValue separaColor];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -110,12 +99,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = NO;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

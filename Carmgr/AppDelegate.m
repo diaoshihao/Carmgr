@@ -25,7 +25,7 @@
     self.finishLogin = NO;
     NSString *username = nil;
     NSString *password = nil;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"] == nil) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"] != nil) {
         [[NSUserDefaults standardUserDefaults] setObject:@"15014150833" forKey:@"username"];
         [[NSUserDefaults standardUserDefaults] setObject:@"12345678" forKey:@"password"];
         username = @"15014150833";

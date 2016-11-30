@@ -18,8 +18,13 @@
 //
 /////////////////////////////////////////////////////////////
 
-#import "BaseViewController.h"
+#import "SecondaryViewController.h"
+#import "MyOrderView.h"
 
-@interface YWProgressViewController : BaseViewController
+@interface YWProgressViewController : SecondaryViewController
+
+@property (nonatomic, strong) NSString *currentFilter;
+
+@property (nonatomic, assign) OrderProgress currentProgress;
 
 @end

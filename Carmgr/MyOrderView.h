@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UpperImageButton.h"
 
 typedef NS_ENUM(NSUInteger, OrderProgress) {
-    OrderProgressAll = 10,
+    OrderProgressAll,
     OrderProgressToPay,
     OrderProgressToUsed,
     OrderProgressDoing,
@@ -20,8 +21,22 @@ typedef NS_ENUM(NSUInteger, OrderProgress) {
 
 typedef void(^Progress)(OrderProgress progress);
 
-@interface MyOrderView : UIView
+@interface MyProgressView : UIView
+
+@property (nonatomic, strong) NSArray *titles;
+@property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) NSArray *selectedImages;
 
 @property (nonatomic, copy) Progress progress;
+
+@property (nonatomic, strong) UpperImageButton *currentSelected;
+
+- (void)currentOrderState:(OrderProgress)progress;
+
+@end
+
+@interface MyOrderView : UIView
+
+@property (nonatomic, strong) MyProgressView *progressView;
 
 @end

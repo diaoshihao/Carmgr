@@ -28,7 +28,6 @@
 		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
 		847D09D11D2A3E0B00EBFF37 /* StoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D01D2A3E0B00EBFF37 /* StoreTableViewCell.m */; };
 		847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D31D2B980E00EBFF37 /* NSString+MD5.m */; };
-		847D09DE1D2D1C7300EBFF37 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09DD1D2D1C7300EBFF37 /* ProgressView.m */; };
 		847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */; };
 		847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E71D2FA82B00EBFF37 /* ProgressModel.m */; };
 		847F8A491D59678400B0A23D /* StoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F8A481D59678400B0A23D /* StoreDetailViewController.m */; };
@@ -67,6 +66,16 @@
 		84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0191DEBD6BB00BB7CC5 /* BasicViewController.m */; };
 		84B9C01D1DEBD6BB00BB7CC5 /* SecondaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C01B1DEBD6BB00BB7CC5 /* SecondaryViewController.m */; };
 		84B9C0211DEC30FE00BB7CC5 /* UpperImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0201DEC30FE00BB7CC5 /* UpperImageButton.m */; };
+		84B9C0241DED2A7700BB7CC5 /* ProgressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0231DED2A7700BB7CC5 /* ProgressTableViewController.m */; };
+		84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */; };
+		84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C02B1DEEB76A00BB7CC5 /* BalanceViewController.m */; };
+		84B9C0301DEEB90800BB7CC5 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C02F1DEEB90800BB7CC5 /* BalanceView.m */; };
+		84B9C0331DEEC2AE00BB7CC5 /* RightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0321DEEC2AE00BB7CC5 /* RightImageButton.m */; };
+		84B9C03D1DEECBFF00BB7CC5 /* AddressPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0361DEECBFF00BB7CC5 /* AddressPickerController.m */; };
+		84B9C03E1DEECBFF00BB7CC5 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0381DEECBFF00BB7CC5 /* ChineseToPinyin.m */; };
+		84B9C03F1DEECBFF00BB7CC5 /* citydata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84B9C0391DEECBFF00BB7CC5 /* citydata.plist */; };
+		84B9C0401DEECBFF00BB7CC5 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84B9C03A1DEECBFF00BB7CC5 /* citydict.plist */; };
+		84B9C0411DEECBFF00BB7CC5 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */; };
 		84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEED31D34EB7400227A15 /* 服务协议.txt */; };
 		84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEDA1D36051C00227A15 /* RegularTools.m */; };
 		84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEEDC1D36053D00227A15 /* 方案1.png */; };
@@ -78,7 +87,6 @@
 		84BAEEEF1D3605DD00227A15 /* ServiceDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEEE1D3605DD00227A15 /* ServiceDelegateController.m */; };
 		84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEF11D36064B00227A15 /* YWLoginViewController.m */; };
 		84BAEEF51D36067300227A15 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEF41D36067300227A15 /* LoginView.m */; };
-		84BAEEF81D36069100227A15 /* UserCenterFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEF71D36069100227A15 /* UserCenterFunc.m */; };
 		84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */; };
 		84BAEF001D3606C000227A15 /* AddCarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEFD1D3606C000227A15 /* AddCarCell.m */; };
 		84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEFF1D3606C000227A15 /* AddCarInfoCell.m */; };
@@ -183,12 +191,10 @@
 		847D09D01D2A3E0B00EBFF37 /* StoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreTableViewCell.m; sourceTree = "<group>"; };
 		847D09D21D2B980E00EBFF37 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Carmgr/NSString+MD5.h"; sourceTree = "<group>"; };
 		847D09D31D2B980E00EBFF37 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Carmgr/NSString+MD5.m"; sourceTree = "<group>"; };
-		847D09DC1D2D1C7300EBFF37 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
-		847D09DD1D2D1C7300EBFF37 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		847D09E31D2F6F8C00EBFF37 /* ProgressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTableViewCell.h; sourceTree = "<group>"; };
 		847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTableViewCell.m; sourceTree = "<group>"; };
-		847D09E61D2FA82B00EBFF37 /* ProgressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressModel.h; sourceTree = "<group>"; };
-		847D09E71D2FA82B00EBFF37 /* ProgressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressModel.m; sourceTree = "<group>"; };
+		847D09E61D2FA82B00EBFF37 /* ProgressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressModel.h; path = Carmgr/ProgressModel.h; sourceTree = "<group>"; };
+		847D09E71D2FA82B00EBFF37 /* ProgressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressModel.m; path = Carmgr/ProgressModel.m; sourceTree = "<group>"; };
 		847F8A471D59678400B0A23D /* StoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailViewController.h; sourceTree = "<group>"; };
 		847F8A481D59678400B0A23D /* StoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailViewController.m; sourceTree = "<group>"; };
 		847F8A4B1D597F6300B0A23D /* DetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailView.h; sourceTree = "<group>"; };
@@ -258,6 +264,24 @@
 		84B9C01B1DEBD6BB00BB7CC5 /* SecondaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondaryViewController.m; sourceTree = "<group>"; };
 		84B9C01F1DEC30FE00BB7CC5 /* UpperImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpperImageButton.h; path = Carmgr/UpperImageButton.h; sourceTree = "<group>"; };
 		84B9C0201DEC30FE00BB7CC5 /* UpperImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpperImageButton.m; path = Carmgr/UpperImageButton.m; sourceTree = "<group>"; };
+		84B9C0221DED2A7700BB7CC5 /* ProgressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTableViewController.h; sourceTree = "<group>"; };
+		84B9C0231DED2A7700BB7CC5 /* ProgressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTableViewController.m; sourceTree = "<group>"; };
+		84B9C0261DEEB55800BB7CC5 /* NearByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearByViewController.h; sourceTree = "<group>"; };
+		84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearByViewController.m; sourceTree = "<group>"; };
+		84B9C02A1DEEB76A00BB7CC5 /* BalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceViewController.h; path = Carmgr/BalanceViewController.h; sourceTree = "<group>"; };
+		84B9C02B1DEEB76A00BB7CC5 /* BalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceViewController.m; path = Carmgr/BalanceViewController.m; sourceTree = "<group>"; };
+		84B9C02E1DEEB90800BB7CC5 /* BalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceView.h; path = Carmgr/BalanceView.h; sourceTree = "<group>"; };
+		84B9C02F1DEEB90800BB7CC5 /* BalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceView.m; path = Carmgr/BalanceView.m; sourceTree = "<group>"; };
+		84B9C0311DEEC2AE00BB7CC5 /* RightImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightImageButton.h; path = Carmgr/RightImageButton.h; sourceTree = "<group>"; };
+		84B9C0321DEEC2AE00BB7CC5 /* RightImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightImageButton.m; path = Carmgr/RightImageButton.m; sourceTree = "<group>"; };
+		84B9C0351DEECBFF00BB7CC5 /* AddressPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressPickerController.h; path = Carmgr/AddressPickerController.h; sourceTree = "<group>"; };
+		84B9C0361DEECBFF00BB7CC5 /* AddressPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressPickerController.m; path = Carmgr/AddressPickerController.m; sourceTree = "<group>"; };
+		84B9C0371DEECBFF00BB7CC5 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseToPinyin.h; path = Carmgr/ChineseToPinyin.h; sourceTree = "<group>"; };
+		84B9C0381DEECBFF00BB7CC5 /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseToPinyin.m; path = Carmgr/ChineseToPinyin.m; sourceTree = "<group>"; };
+		84B9C0391DEECBFF00BB7CC5 /* citydata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydata.plist; path = Carmgr/citydata.plist; sourceTree = "<group>"; };
+		84B9C03A1DEECBFF00BB7CC5 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydict.plist; path = Carmgr/citydict.plist; sourceTree = "<group>"; };
+		84B9C03B1DEECBFF00BB7CC5 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManager.h; path = Carmgr/LocationManager.h; sourceTree = "<group>"; };
+		84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = Carmgr/LocationManager.m; sourceTree = "<group>"; };
 		84BAEED31D34EB7400227A15 /* 服务协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "服务协议.txt"; sourceTree = "<group>"; };
 		84BAEED91D36051C00227A15 /* RegularTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularTools.h; path = Carmgr/RegularTools.h; sourceTree = "<group>"; };
 		84BAEEDA1D36051C00227A15 /* RegularTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularTools.m; path = Carmgr/RegularTools.m; sourceTree = "<group>"; };
@@ -278,8 +302,6 @@
 		84BAEEF11D36064B00227A15 /* YWLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWLoginViewController.m; path = Carmgr/YWLoginViewController.m; sourceTree = "<group>"; };
 		84BAEEF31D36067300227A15 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = Carmgr/LoginView.h; sourceTree = "<group>"; };
 		84BAEEF41D36067300227A15 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = Carmgr/LoginView.m; sourceTree = "<group>"; };
-		84BAEEF61D36069100227A15 /* UserCenterFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserCenterFunc.h; path = Carmgr/UserCenterFunc.h; sourceTree = "<group>"; };
-		84BAEEF71D36069100227A15 /* UserCenterFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserCenterFunc.m; path = Carmgr/UserCenterFunc.m; sourceTree = "<group>"; };
 		84BAEEF91D3606A800227A15 /* AddCarInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarInfoView.h; path = Carmgr/AddCarInfoView.h; sourceTree = "<group>"; };
 		84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCarInfoView.m; path = Carmgr/AddCarInfoView.m; sourceTree = "<group>"; };
 		84BAEEFC1D3606C000227A15 /* AddCarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarCell.h; path = Carmgr/AddCarCell.h; sourceTree = "<group>"; };
@@ -402,18 +424,19 @@
 		840A99641D1D1A6700C76E25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84BAEEF61D36069100227A15 /* UserCenterFunc.h */,
-				84BAEEF71D36069100227A15 /* UserCenterFunc.m */,
-				84BAEEF91D3606A800227A15 /* AddCarInfoView.h */,
-				84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */,
 				84D9B5C81D3E1813002AC63F /* 个人资料cell */,
 				840CF3A41D32460300CEFFDB /* AddCarCell */,
+				847D09E21D2F6F4D00EBFF37 /* ProgressCell */,
+				84BAEEF91D3606A800227A15 /* AddCarInfoView.h */,
+				84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */,
 				849886731DE54A0F000B5D4D /* UserHeadView.h */,
 				849886741DE54A0F000B5D4D /* UserHeadView.m */,
 				849886761DE58355000B5D4D /* MyCarView.h */,
 				849886771DE58355000B5D4D /* MyCarView.m */,
 				849886791DE586C1000B5D4D /* MyOrderView.h */,
 				8498867A1DE586C1000B5D4D /* MyOrderView.m */,
+				84B9C02E1DEEB90800BB7CC5 /* BalanceView.h */,
+				84B9C02F1DEEB90800BB7CC5 /* BalanceView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,13 +490,14 @@
 			name = "服务协议";
 			sourceTree = "<group>";
 		};
-		846690E91D44B53E004E1BF1 /* 视图控制器父类 */ = {
+		846690E91D44B53E004E1BF1 /* 根视图控制器父类 */ = {
 			isa = PBXGroup;
 			children = (
 				8477762F1D124BF100DE8213 /* BaseViewController.h */,
 				847776301D124BF100DE8213 /* BaseViewController.m */,
 			);
-			name = "视图控制器父类";
+			name = "根视图控制器父类";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		846690ED1D45C412004E1BF1 /* Model */ = {
@@ -481,6 +505,8 @@
 			children = (
 				846690EE1D45C43E004E1BF1 /* PrivateModel.h */,
 				846690EF1D45C43E004E1BF1 /* PrivateModel.m */,
+				847D09E61D2FA82B00EBFF37 /* ProgressModel.h */,
+				847D09E71D2FA82B00EBFF37 /* ProgressModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -619,11 +645,13 @@
 		847776631D12586C00DE8213 /* 进度 */ = {
 			isa = PBXGroup;
 			children = (
-				84F3C29A1D178F5300597BFD /* Model */,
-				84F3C2D61D1B940300597BFD /* Views */,
-				84F3C2A61D17D7DE00597BFD /* viewControllers */,
+				8477766E1D1258E500DE8213 /* YWProgressViewController.h */,
+				8477766F1D1258E500DE8213 /* YWProgressViewController.m */,
+				84B9C0221DED2A7700BB7CC5 /* ProgressTableViewController.h */,
+				84B9C0231DED2A7700BB7CC5 /* ProgressTableViewController.m */,
 			);
 			name = "进度";
+			path = Carmgr;
 			sourceTree = "<group>";
 		};
 		847776771D13C8C600DE8213 /* Images */ = {
@@ -656,6 +684,7 @@
 				847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */,
 			);
 			name = ProgressCell;
+			path = Carmgr;
 			sourceTree = "<group>";
 		};
 		847F8A461D59674700B0A23D /* 商家详情 */ = {
@@ -697,7 +726,7 @@
 				84F3C2D31D1B93B300597BFD /* 登陆注册 */,
 				84F3C2921D17795C00597BFD /* 用户中心 */,
 				847776621D12586300DE8213 /* 呼叫易宝 */,
-				847776631D12586C00DE8213 /* 进度 */,
+				84B9C0251DEEB4D600BB7CC5 /* 附近 */,
 				847776611D12585100DE8213 /* 商家 */,
 				847776601D12584700DE8213 /* 首页 */,
 			);
@@ -707,7 +736,6 @@
 		8498865C1DE2A040000B5D4D /* 其他页面 */ = {
 			isa = PBXGroup;
 			children = (
-				84B9C00A1DEBD5BE00BB7CC5 /* 系统消息 */,
 				84A929FB1D2618A0001DD20F /* 待开发 */,
 				846690F11D489A78004E1BF1 /* 数据收集 */,
 				84BF0B161D5318B1000EDCC5 /* 二维码网页 */,
@@ -804,6 +832,7 @@
 				84B9C0121DEBD5E600BB7CC5 /* MessageViewController.m */,
 			);
 			name = "系统消息";
+			path = Carmgr;
 			sourceTree = "<group>";
 		};
 		84B9C0171DEBD68F00BB7CC5 /* Basic */ = {
@@ -813,6 +842,7 @@
 				84B9C0191DEBD6BB00BB7CC5 /* BasicViewController.m */,
 				84B9C01A1DEBD6BB00BB7CC5 /* SecondaryViewController.h */,
 				84B9C01B1DEBD6BB00BB7CC5 /* SecondaryViewController.m */,
+				846690E91D44B53E004E1BF1 /* 根视图控制器父类 */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -822,8 +852,43 @@
 			children = (
 				84B9C01F1DEC30FE00BB7CC5 /* UpperImageButton.h */,
 				84B9C0201DEC30FE00BB7CC5 /* UpperImageButton.m */,
+				84B9C0311DEEC2AE00BB7CC5 /* RightImageButton.h */,
+				84B9C0321DEEC2AE00BB7CC5 /* RightImageButton.m */,
 			);
 			name = "自定义控件";
+			sourceTree = "<group>";
+		};
+		84B9C0251DEEB4D600BB7CC5 /* 附近 */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C0261DEEB55800BB7CC5 /* NearByViewController.h */,
+				84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */,
+			);
+			name = "附近";
+			sourceTree = "<group>";
+		};
+		84B9C0291DEEB6FD00BB7CC5 /* 账户余额 */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C02A1DEEB76A00BB7CC5 /* BalanceViewController.h */,
+				84B9C02B1DEEB76A00BB7CC5 /* BalanceViewController.m */,
+			);
+			name = "账户余额";
+			sourceTree = "<group>";
+		};
+		84B9C0341DEECBD500BB7CC5 /* 城市选择 */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C0351DEECBFF00BB7CC5 /* AddressPickerController.h */,
+				84B9C0361DEECBFF00BB7CC5 /* AddressPickerController.m */,
+				84B9C0371DEECBFF00BB7CC5 /* ChineseToPinyin.h */,
+				84B9C0381DEECBFF00BB7CC5 /* ChineseToPinyin.m */,
+				84B9C0391DEECBFF00BB7CC5 /* citydata.plist */,
+				84B9C03A1DEECBFF00BB7CC5 /* citydict.plist */,
+				84B9C03B1DEECBFF00BB7CC5 /* LocationManager.h */,
+				84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */,
+			);
+			name = "城市选择";
 			sourceTree = "<group>";
 		};
 		84BAEED51D35F4A900227A15 /* 设置 */ = {
@@ -1057,23 +1122,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		84F3C29A1D178F5300597BFD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				847D09E61D2FA82B00EBFF37 /* ProgressModel.h */,
-				847D09E71D2FA82B00EBFF37 /* ProgressModel.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		84F3C29B1D17CC8500597BFD /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				84B9C0341DEECBD500BB7CC5 /* 城市选择 */,
 				84B9C01E1DEC30BF00BB7CC5 /* 自定义控件 */,
 				8498867F1DE6C432000B5D4D /* 网络请求 */,
 				8498866C1DE53AEC000B5D4D /* 类别 */,
 				84D9B5781D3B51C7002AC63F /* 公用函数 */,
-				846690E91D44B53E004E1BF1 /* 视图控制器父类 */,
 				84D9B5791D3B51EF002AC63F /* 后台接口 */,
 				84D9B57C1D3B5248002AC63F /* 数据库 */,
 				846690FF1D4B5300004E1BF1 /* 引导页 */,
@@ -1087,6 +1143,9 @@
 		84F3C2A21D17D76600597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				84B9C00A1DEBD5BE00BB7CC5 /* 系统消息 */,
+				84B9C0291DEEB6FD00BB7CC5 /* 账户余额 */,
+				847776631D12586C00DE8213 /* 进度 */,
 				84D9B5C31D3E1663002AC63F /* 个人资料 */,
 				84BAEED51D35F4A900227A15 /* 设置 */,
 				840CF3A81D324C1800CEFFDB /* 添加车辆信息 */,
@@ -1119,15 +1178,6 @@
 			children = (
 				8477766B1D1258D800DE8213 /* YWCallViewController.h */,
 				846690F71D49A308004E1BF1 /* YWCallViewController.m */,
-			);
-			name = viewControllers;
-			sourceTree = "<group>";
-		};
-		84F3C2A61D17D7DE00597BFD /* viewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8477766E1D1258E500DE8213 /* YWProgressViewController.h */,
-				8477766F1D1258E500DE8213 /* YWProgressViewController.m */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -1198,16 +1248,6 @@
 				840EFB1B1D371D180070B69A /* 服务协议 */,
 			);
 			name = "注册";
-			sourceTree = "<group>";
-		};
-		84F3C2D61D1B940300597BFD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				847D09DC1D2D1C7300EBFF37 /* ProgressView.h */,
-				847D09DD1D2D1C7300EBFF37 /* ProgressView.m */,
-				847D09E21D2F6F4D00EBFF37 /* ProgressCell */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		84F3C2D71D1B941600597BFD /* Views */ = {
@@ -1362,7 +1402,7 @@
 		8477761E1D124BF100DE8213 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = YiWuCheBao;
 				TargetAttributes = {
 					847776251D124BF100DE8213 = {
@@ -1408,10 +1448,12 @@
 				847776391D124BF100DE8213 /* LaunchScreen.storyboard in Resources */,
 				84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */,
 				84BF0B251D56CDA3000EDCC5 /* address.plist in Resources */,
+				84B9C03F1DEECBFF00BB7CC5 /* citydata.plist in Resources */,
 				84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */,
 				84F3C2B51D193AB300597BFD /* city.plist in Resources */,
 				847776341D124BF100DE8213 /* Main.storyboard in Resources */,
 				848A4AA81D4DF3170009816F /* 3.png in Resources */,
+				84B9C0401DEECBFF00BB7CC5 /* citydict.plist in Resources */,
 				848A4AA51D4DF1EB0009816F /* 2.png in Resources */,
 				84D9B5BD1D3C8342002AC63F /* MJRefresh.bundle in Resources */,
 				84F3C2D21D1B719E00597BFD /* Assets.xcassets in Resources */,
@@ -1498,6 +1540,7 @@
 				849886971DE825CC000B5D4D /* UIButton+SetEdges.m in Sources */,
 				84D9B5B91D3C8342002AC63F /* MJRefreshBackStateFooter.m in Sources */,
 				84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */,
+				84B9C0241DED2A7700BB7CC5 /* ProgressTableViewController.m in Sources */,
 				84D9B5BB1D3C8342002AC63F /* MJRefreshNormalHeader.m in Sources */,
 				84D9B5C11D3C8342002AC63F /* UIScrollView+MJRefresh.m in Sources */,
 				849886631DE2A627000B5D4D /* DefineValue.m in Sources */,
@@ -1519,7 +1562,6 @@
 				840EFB2A1D377B0B0070B69A /* StoreModel.m in Sources */,
 				84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
-				847D09DE1D2D1C7300EBFF37 /* ProgressView.m in Sources */,
 				84D9B5B81D3C8342002AC63F /* MJRefreshBackNormalFooter.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				847F8A591D5B2F2E00B0A23D /* RateTableViewCell.m in Sources */,
@@ -1545,13 +1587,16 @@
 				849886601DE2A3E9000B5D4D /* AboutViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
+				84B9C0331DEEC2AE00BB7CC5 /* RightImageButton.m in Sources */,
 				84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */,
 				847F8A531D5B20EA00B0A23D /* DetailServiceModel.m in Sources */,
+				84B9C03D1DEECBFF00BB7CC5 /* AddressPickerController.m in Sources */,
 				849886671DE5344E000B5D4D /* UserTableViewController.m in Sources */,
 				847F8A501D5B049100B0A23D /* DetailModel.m in Sources */,
 				846691021D4B53A6004E1BF1 /* GuideViewController.m in Sources */,
 				84F2719B1D225F0800498441 /* CityChooseViewController.m in Sources */,
 				8498867E1DE6C418000B5D4D /* MyNetworker.m in Sources */,
+				84B9C03E1DEECBFF00BB7CC5 /* ChineseToPinyin.m in Sources */,
 				846690F81D49A308004E1BF1 /* YWCallViewController.m in Sources */,
 				847D09D11D2A3E0B00EBFF37 /* StoreTableViewCell.m in Sources */,
 				84F271981D22159E00498441 /* Interface.m in Sources */,
@@ -1561,20 +1606,23 @@
 				84BAEEE31D36057700227A15 /* FindPasswdViewController.m in Sources */,
 				849886881DE6E06F000B5D4D /* HomeModel.m in Sources */,
 				84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */,
+				84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */,
 				84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */,
-				84BAEEF81D36069100227A15 /* UserCenterFunc.m in Sources */,
 				84D9B5B51D3C8342002AC63F /* MJRefreshAutoNormalFooter.m in Sources */,
 				8498867B1DE586C1000B5D4D /* MyOrderView.m in Sources */,
 				84D9B5B21D3C8342002AC63F /* MJRefreshFooter.m in Sources */,
 				84BAEEEF1D3605DD00227A15 /* ServiceDelegateController.m in Sources */,
+				84B9C0301DEEB90800BB7CC5 /* BalanceView.m in Sources */,
 				849886781DE58355000B5D4D /* MyCarView.m in Sources */,
 				84B9C0211DEC30FE00BB7CC5 /* UpperImageButton.m in Sources */,
 				84B9C0141DEBD5E600BB7CC5 /* MessageTableViewCell.m in Sources */,
 				84D9B5BE1D3C8342002AC63F /* MJRefreshConst.m in Sources */,
 				84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */,
+				84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */,
 				84BAEEF51D36067300227A15 /* LoginView.m in Sources */,
 				848A4AAB1D4EF9060009816F /* CallView.m in Sources */,
 				84D9B5771D3B2401002AC63F /* YWDataBase.m in Sources */,
+				84B9C0411DEECBFF00BB7CC5 /* LocationManager.m in Sources */,
 				84D9B5BA1D3C8342002AC63F /* MJRefreshGifHeader.m in Sources */,
 				84D9B5C61D3E169E002AC63F /* UserInfoViewController.m in Sources */,
 				849886941DE7C8BC000B5D4D /* PromotionView.m in Sources */,
@@ -1656,8 +1704,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1701,8 +1751,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

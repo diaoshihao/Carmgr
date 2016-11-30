@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "YWPublic.h"
+@class RightImageButton;
 
 @interface BaseViewController : UIViewController
 
 @property (nonatomic, strong) UIView *customBar;
 
-@property (nonatomic, strong) UIButton *cityChoose;
+@property (nonatomic, strong) RightImageButton *cityChoose;
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 

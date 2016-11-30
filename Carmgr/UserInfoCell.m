@@ -34,6 +34,7 @@
         
         [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(30, 30));
             make.centerY.mas_equalTo(self.contentView);
         }];
     } else {

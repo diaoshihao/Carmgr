@@ -57,7 +57,6 @@
     
 //    [self customLeftItem];
     self.title = @"设置";
-    self.customNavBar.backgroundColor = [UIColor whiteColor];
     
     self.dataArr = @[@[@"移动网络下载图片",@"清理缓存"],@[@"关于我们",@"招商信息",@"给个好评"],@[@"使用帮助",@"用户协议"],@[@"退出登录"]];
     

@@ -11,6 +11,7 @@
 #import "YWUserViewController.h"
 #import "ScanImageViewController.h"
 #import "UIWebViewController.h"
+#import "RightImageButton.h"
 
 @interface BaseViewController () <ScanImageView>
 
@@ -18,7 +19,6 @@
 
 @implementation BaseViewController
 {
-    UIImageView *cityImage;
     UIButton *scanButton;
 }
 
@@ -87,7 +87,6 @@
     [userButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.customBar).with.offset(-20);
         make.centerY.mas_equalTo(self.customBar);
-//        make.bottom.mas_equalTo(-8);
         make.size.mas_equalTo(CGSizeMake(19, 21));
     }];
     
@@ -110,10 +109,11 @@
 - (void)chooseCityButtonWithTitle:(NSString *)title imageName:(NSString *)imageName {
 
     //城市按钮
-    self.cityChoose = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.cityChoose = [RightImageButton buttonWithType:UIButtonTypeSystem];
     [self.cityChoose setTitle:title forState:UIControlStateNormal];
     [self.cityChoose setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.cityChoose.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.cityChoose setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
     //添加事件
     [self.cityChoose addTarget:self action:@selector(chooseCityAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -122,20 +122,10 @@
     [self.cityChoose setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.cityChoose mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.customBar).with.offset(20);
+        make.height.mas_equalTo(self.customBar.mas_height);
         make.centerY.mas_equalTo(self.customBar);
     }];
     
-    
-    //箭头图标
-    cityImage = [[UIImageView alloc] initWithFrame:CGRectZero];
-    cityImage.image = [YWPublic imageNameWithOriginalRender:imageName];
-    cityImage.backgroundColor = [UIColor clearColor];
-    [self.customBar addSubview:cityImage];
-    
-    [cityImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.cityChoose.mas_right).with.offset(5);
-        make.centerY.mas_equalTo(self.customBar);
-    }];
 }
 
 #pragma mark 创建搜索栏
@@ -159,7 +149,7 @@
     [self.customBar addSubview:self.searchBar];
     
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(cityImage.mas_right).with.offset(5);
+        make.left.mas_equalTo(self.cityChoose.mas_right).with.offset(5);
         make.right.mas_equalTo(scanButton.mas_left).with.offset(-5);
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyOrderView.h"
 
 @interface ProgressTableViewCell : UITableViewCell
 
@@ -17,12 +18,16 @@
 @property (nonatomic, strong) UILabel       *numberLabel;
 @property (nonatomic, strong) UILabel       *timeLabel;
 @property (nonatomic, strong) UILabel       *stateLabel;
+@property (nonatomic, strong) UILabel       *costLabel;
 
 @property (nonatomic, strong) UIButton      *button1;
 @property (nonatomic, strong) UIButton      *button2;
 
-- (void)autoLayout;
+
+- (void)OrderState:(OrderProgress)progress;
 
 + (NSString *)getReuseID;
+
+
 
 @end

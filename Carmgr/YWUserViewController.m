@@ -6,30 +6,30 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import "PrivateModel.h"
-#import "UserCenterFunc.h"
 #import "YWUserViewController.h"
 #import <UIImageView+WebCache.h>
 
 #import <Masonry.h>
 #import "DefineValue.h"
+#import "PrivateModel.h"
 #import "GeneralControl.h"
 #import "UIViewController+ShowView.h"
 
 #import "YWLoginViewController.h"
 #import "SettingViewController.h"
+#import "BalanceViewController.h"
+#import "MessageViewController.h"
 #import "UserInfoViewController.h"
 #import "CarVerifyViewController.h"
+#import "UserTableViewController.h"
+#import "YWProgressViewController.h"
 
 #import "MyCarView.h"
 #import "MyOrderView.h"
 #import "UserHeadView.h"
-#import "UserTableViewController.h"
 
 
 @interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
-
-@property (nonatomic, strong) UserCenterFunc    *createView;
 
 @property (nonatomic, strong) NSArray           *dataArray;
 
@@ -116,9 +116,8 @@
 - (void)myOrderView {
     self.orderView = [[MyOrderView alloc] init];
     __weak typeof(self) weakSelf = self;
-    self.orderView.progress = ^(OrderProgress progress) {
-        [weakSelf progress];
-        NSLog(@"OrderPress%lu",progress);
+    self.orderView.progressView.progress = ^(OrderProgress progress) {
+        [weakSelf progress:progress];
     };
     [self.contentView addSubview:self.orderView];
     [self.orderView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -194,7 +193,7 @@
 }
 
 - (void)showAlert {
-    UIAlertController *alert = [GeneralControl noActionAlertTitle:@"请登录" message:@"是否前往登录"];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请登录" message:@"是否前往登录" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *sure = [UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self pushToLoginVC];
     }];
@@ -223,7 +222,9 @@
 
 #pragma mark 跳转到消息界面
 - (void)pushToMessagePage {
-    
+    MessageViewController *messageVC = [[MessageViewController alloc] init];
+    messageVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:messageVC animated:YES];
 }
 
 #pragma mark 跳转到设置界面
@@ -236,14 +237,16 @@
 #pragma mark 跳转到个人资料界面
 - (void)pushToUserInfo {
     UserInfoViewController *userInfoVC = [[UserInfoViewController alloc] init];
-    userInfoVC.headImage = self.createView.userImageView.image;
+    userInfoVC.headImage = self.headView.userImageView.image;
     userInfoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userInfoVC animated:YES];
 }
 
 #pragma mark 跳转到账号余额界面
 - (void)pushToMyBalance {
-    
+    BalanceViewController *balanceVC = [[BalanceViewController alloc] init];
+    balanceVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:balanceVC animated:YES];
 }
 
 #pragma mark 跳转到我的收藏界面
@@ -262,8 +265,12 @@
 }
 
 #pragma mark 进度
-- (void)progress {
-    
+- (void)progress:(OrderProgress)progress {
+    YWProgressViewController *progressVC = [[YWProgressViewController alloc] init];
+    progressVC.currentFilter = self.orderView.progressView.titles[progress];
+    progressVC.currentProgress = progress;
+    progressVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:progressVC animated:YES];
 }
 
 #pragma mark - 右滑返回上一页
@@ -277,9 +284,9 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
-        [self.createView.userName setTitle:self.privateModel.username forState:UIControlStateNormal];
+        [self.headView.userName setTitle:self.privateModel.username forState:UIControlStateNormal];
     } else {
-        [self.createView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
+        [self.headView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
     }
     
 }

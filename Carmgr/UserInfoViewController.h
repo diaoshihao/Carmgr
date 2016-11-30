@@ -6,9 +6,9 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SecondaryViewController.h"
 
-@interface UserInfoViewController : UIViewController
+@interface UserInfoViewController : SecondaryViewController
 
 @property (nonatomic, strong) UIImage *headImage;
 

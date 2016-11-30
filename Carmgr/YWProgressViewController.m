@@ -7,38 +7,83 @@
 //
 
 #import "YWProgressViewController.h"
-#import "YWUserViewController.h"
-#import "ScanImageViewController.h"
-#import "YWPublic.h"
-#import "ProgressView.h"
+#import "ProgressTableViewController.h"
 #import "ProgressModel.h"
+#import "Interface.h"
+#import "MJRefresh.h"
+#import <Masonry.h>
 
 @interface YWProgressViewController ()
 
-@property (nonatomic, strong) ProgressView *progressView;
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray *dataArr;
+
+@property (nonatomic, strong) MyProgressView *myProgressView;
 
 @end
 
 @implementation YWProgressViewController
+{
+    ProgressTableViewController *_progressTVC;
+}
+
+- (NSMutableArray *)dataArr {
+    if (_dataArr == nil) {
+        _dataArr = [NSMutableArray new];
+    }
+    return _dataArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBarHidden = YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor colorWithRed:239/256.0 green:239/256.0 blue:244/256.0 alpha:1];
     
-    self.progressView = [[ProgressView alloc] init];
-    self.progressView.actionTarget = self;
-    self.tableView = [self.progressView createTableView:self.view];
+    [self showPage];
+    [self refresh];
+}
+
+- (void)showPage {
+    [self config];
+    [self configView];
+}
+
+- (void)config {
+    self.title = @"订单";
+    
+    _progressTVC = [[ProgressTableViewController alloc] init];
+    _progressTVC.dataArr = self.dataArr;
+    [self addChildViewController:_progressTVC];
+    self.tableView = _progressTVC.tableView;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadData];
     }];
-    [self refresh];
+}
+
+- (void)configView {
+    self.myProgressView = [[MyProgressView alloc] init];
+    //设置当前状态
+    [self.myProgressView currentOrderState:self.currentProgress];
+    __weak typeof(self) weakSelf = self;
+    self.myProgressView.progress = ^(OrderProgress progress) {
+        [weakSelf progress:progress];
+    };
+    [self.view addSubview:self.myProgressView];
+    [self.myProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.customNavBar.mas_bottom).offset(5);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(64);
+    }];
     
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.myProgressView.mas_bottom).offset(5);
+        make.left.and.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+    }];
 }
 
 //实现父类的方法，为本类提供刷新数据方法
@@ -48,63 +93,20 @@
 
 #pragma mark 加载网络数据
 - (void)loadData {
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == NO) {
+    NSArray *progress = [Interface appgetprocess_filter:self.currentFilter];
+    [MyNetworker POST:progress[InterfaceUrl] parameters:progress[Parameters] success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
-        UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
-        [self presentViewController:alertVC animated:YES completion:nil];
-        return;
-    }
-    
-    //参数
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    NSString *filter = [@"全部" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    //从数据库取出缓存
-    if ([[YWDataBase sharedDataBase] isExistsDataInTable:@"tb_process"]) {
-        self.progressView.dataArr = [[YWDataBase sharedDataBase] getAllDataFromProcess];
-        [self.tableView reloadData];
-    }
-    
-    NSString *urlStr = [NSString stringWithFormat:kPROCESS,username,filter,token];
-    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        [self.tableView.mj_header endRefreshing];
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-            
-            //插入数据库前删除数据
-            [[YWDataBase sharedDataBase] deleteDatabaseFromTable:@"tb_process"];
-            [self.progressView.dataArr removeAllObjects];
-            
-            for (NSDictionary *dict in dataDict[@"orders_list"]) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            [self.dataArr removeAllObjects];
+            for (NSDictionary *dict in responseObject[@"orders_list"]) {
                 ProgressModel *model = [[ProgressModel alloc] initWithDict:dict];
-                [self.progressView.dataArr addObject:model];
-                
-                //插入数据库
-                [[YWDataBase sharedDataBase] insertProcessWithModel:model];
+                [self.dataArr addObject:model];
             }
-            [self.progressView.tableView reloadData];
-            if (self.progressView.dataArr.count == 0) {//订单数为0
-                [self showAlertView];
-            }
-            
-        } else {
-            
-            UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
-            [self presentViewController:alertVC animated:YES completion:nil];
-            
+            [self.tableView reloadData];
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
-        UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
-        [self presentViewController:alertVC animated:YES completion:nil];
     }];
-
 }
 
 - (void)showAlertView {
@@ -115,18 +117,19 @@
 }
 
 //进度点击action
-- (void)buttonClick:(UIButton *)sender {
+- (void)progress:(OrderProgress)progress {
     
-    if (sender.isSelected) {
-        NSLog(@"selected");
-    } else {
-        for (NSInteger i = 0; i <= 6; i++) {
-            UIButton *button = (UIButton *)[self.view viewWithTag:1000+i];
-            button.selected = NO;
-        }
-        sender.selected = YES;
+    //设置当前筛选条件
+    self.currentFilter = self.myProgressView.titles[progress];
+    
+    if (self.currentProgress != progress) {
+        //修改当前订单状态
+        [self.myProgressView currentOrderState:progress];
+        [self.tableView.mj_header beginRefreshing];
     }
+    self.currentProgress = progress;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

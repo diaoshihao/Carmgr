@@ -16,6 +16,8 @@ typedef NS_ENUM(NSUInteger, Request) {
 
 @interface Interface : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
 + (NSString *)username;
 
 + (NSString *)token;
@@ -23,7 +25,6 @@ typedef NS_ENUM(NSUInteger, Request) {
 + (NSString *)uuid;
 
 + (NSString *)url;
-
 
 //login
 + (NSArray *)applogin:(NSString *)username password:(NSString *)password type:(NSString *)type verf_code:(NSString *)verf_code uuid:(NSString *)uuid;
@@ -74,6 +75,8 @@ typedef NS_ENUM(NSUInteger, Request) {
 + (NSArray *)appadvise_text:(NSString *)advise_text;
 
 + (NSArray *)apploguseroperation_click_area:(NSString *)click_area detail:(NSString *)detail;
+
+NS_ASSUME_NONNULL_END
 
 //=====================================================================
 
