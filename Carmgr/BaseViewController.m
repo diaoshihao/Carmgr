@@ -8,10 +8,11 @@
 
 #import "BaseViewController.h"
 #import <Masonry.h>
-#import "YWUserViewController.h"
+#import "MessageViewController.h"
 #import "ScanImageViewController.h"
 #import "UIWebViewController.h"
-#import "RightImageButton.h"
+#import "CustomButton.h"
+#import "AddressPickerController.h"
 
 @interface BaseViewController () <ScanImageView>
 
@@ -19,7 +20,7 @@
 
 @implementation BaseViewController
 {
-    UIButton *scanButton;
+    CustomButton *scanButton;
 }
 
 - (void)refresh {
@@ -58,49 +59,45 @@
 }
 
 - (void)customNavigationBar {
-    
-    
     //左item
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"city"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"广州" forKey:@"city"];
-    }
-    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    NSString *city = [self currentCity];
     [self chooseCityButtonWithTitle:city imageName:@"下拉"];
     
     //右item
-    [self scanImageAndUserWithTitle:nil userImage:@"个人中心" scanImage:@"二维码"];
+    [self scanImageAndUserWithTitle:nil messageImage:@"消息" scanImage:@"二维码"];
     
     [self createSearchBarWithFrame:CGRectMake(0, 0, 255, 44) placeholder:@"输入商品或服务"];
 }
 
 #pragma mark - 自定义导航栏视图
-#pragma mark 扫一扫和个人中心
-- (void)scanImageAndUserWithTitle:(NSString *)title userImage:(NSString *)userImage scanImage:(NSString *)scanImage {
+#pragma mark 扫一扫和系统消息
+- (void)scanImageAndUserWithTitle:(NSString *)title messageImage:(NSString *)messageImage scanImage:(NSString *)scanImage {
     
-    //个人中心按钮
-    UIButton *userButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [userButton setBackgroundImage:[UIImage imageNamed:userImage] forState:UIControlStateNormal];
+    //系统消息按钮
+    CustomButton *messageButton = [CustomButton buttonWithType:UIButtonTypeCustom];
+    [messageButton setImage:[UIImage imageNamed:messageImage] forState:UIControlStateNormal];
     //添加事件
-    [userButton addTarget:self action:@selector(pushToUser:) forControlEvents:UIControlEventTouchUpInside];
-    [self.customBar addSubview:userButton];
+    [messageButton addTarget:self action:@selector(pushToUser:) forControlEvents:UIControlEventTouchUpInside];
+    [self.customBar addSubview:messageButton];
     
-    [userButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.customBar).with.offset(-20);
+    [messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.customBar).with.offset(-10);
         make.centerY.mas_equalTo(self.customBar);
-        make.size.mas_equalTo(CGSizeMake(19, 21));
+        make.size.mas_equalTo(CGSizeMake(35, 44));
     }];
     
     //扫一扫按钮
-    scanButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [scanButton setBackgroundImage:[UIImage imageNamed:scanImage] forState:UIControlStateNormal];
+    scanButton = [CustomButton buttonWithType:UIButtonTypeCustom];
+    [scanButton setImage:[UIImage imageNamed:scanImage] forState:UIControlStateNormal];
+//    scanButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     //添加事件
     [scanButton addTarget:self action:@selector(pushToScanImageVC) forControlEvents:UIControlEventTouchUpInside];
     [self.customBar addSubview:scanButton];
     
     [scanButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(userButton.mas_left).with.offset(-15);
+        make.right.mas_equalTo(messageButton.mas_left).with.offset(0);
         make.centerY.mas_equalTo(self.customBar);
-        make.size.mas_equalTo(CGSizeMake(21, 21));
+        make.size.mas_equalTo(CGSizeMake(35, 44));
     }];
     
 }
@@ -109,7 +106,7 @@
 - (void)chooseCityButtonWithTitle:(NSString *)title imageName:(NSString *)imageName {
 
     //城市按钮
-    self.cityChoose = [RightImageButton buttonWithType:UIButtonTypeSystem];
+    self.cityChoose = [CustomButton buttonWithType:UIButtonTypeSystem imagePosition:ImagePositionRight];
     [self.cityChoose setTitle:title forState:UIControlStateNormal];
     [self.cityChoose setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.cityChoose.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -119,7 +116,6 @@
     [self.cityChoose addTarget:self action:@selector(chooseCityAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.customBar addSubview:self.cityChoose];
     
-    [self.cityChoose setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.cityChoose mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.customBar).with.offset(20);
         make.height.mas_equalTo(self.customBar.mas_height);
@@ -150,30 +146,28 @@
     
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.cityChoose.mas_right).with.offset(5);
-        make.right.mas_equalTo(scanButton.mas_left).with.offset(-5);
+        make.right.mas_equalTo(scanButton.mas_left).with.offset(0);
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
-//        make.centerY.mas_equalTo(self.customBar);
     }];
     
 }
 
-#pragma mark 跳转到个人中心
+#pragma mark 跳转到系统消息
 - (void)pushToUser:(UIButton *)sender {
-    
-    [self.navigationController pushViewController:[[YWUserViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[MessageViewController alloc] init] animated:YES];
 }
 
 #pragma mark 选择城市
-- (void)chooseCityAction:(UIButton *)sender {
-    CityChooseViewController *cityChooseVC = [[CityChooseViewController alloc] init];
-    [cityChooseVC returnCityInfo:^(NSString *province, NSString *area, NSArray *areaList) {
-        
-        [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"city"];
-        [[NSUserDefaults standardUserDefaults] setObject:areaList forKey:@"areaList"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isChangeCity"];
+- (void)chooseCityAction:(CustomButton *)sender {
+    AddressPickerController *addressPicker = [[AddressPickerController alloc] init];
+    __weak typeof(self) weakSelf = self;
+    [addressPicker selectedAddress:^(NSArray *address) {
+        [weakSelf refresh];//选择城市后刷新数据
+        [[NSUserDefaults standardUserDefaults] setObject:address.firstObject forKey:@"currentcity"];
+        [[NSUserDefaults standardUserDefaults] setObject:address[1] forKey:@"currentarea"];
     }];
-    [self.navigationController pushViewController:cityChooseVC animated:YES];
+    [self.navigationController pushViewController:addressPicker animated:YES];
 }
 
 #pragma mark 跳转到扫描二维码
@@ -194,8 +188,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [self.cityChoose setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"city"] forState:UIControlStateNormal];
-    self.navigationController.navigationBarHidden = YES;
+    [self.cityChoose setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"currentcity"] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

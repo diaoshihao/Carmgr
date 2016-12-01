@@ -93,12 +93,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"选择城市";
-    [self initSearchBar];
+//    [self initSearchBar];
     [self initTableView];
-    [self settingRightItemButton];
+    [self configRightItemView];
 }
 
-- (void)settingRightItemButton {
+- (void)configRightItemView {
     self.rightItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.rightItemButton setTitle:@"确定" forState:UIControlStateNormal];
     [self.rightItemButton setTitleColor:[DefineValue mainColor] forState:UIControlStateNormal];
@@ -119,8 +119,8 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.sectionIndexColor = [DefineValue mainColor];
-    self.searchController.searchBar.frame = CGRectMake(0, 64, [DefineValue screenWidth] - 20, 60);
-    tableView.tableHeaderView = self.searchController.searchBar;
+//    self.searchController.searchBar.frame = CGRectMake(0, 64, [DefineValue screenWidth] - 20, 60);
+//    tableView.tableHeaderView = self.searchController.searchBar;
     [self.view addSubview:tableView];
 }
 
@@ -136,6 +136,10 @@
     NSArray *address = @[self.currentCity,self.selectAreaVC.selectedArea];
     self.block(address);
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)selectedAddress:(returnAddress)address {
+    self.block = address;
 }
 
 //获取地区列表

@@ -65,17 +65,20 @@
 		84B9C0161DEBD5E600BB7CC5 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0121DEBD5E600BB7CC5 /* MessageViewController.m */; };
 		84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0191DEBD6BB00BB7CC5 /* BasicViewController.m */; };
 		84B9C01D1DEBD6BB00BB7CC5 /* SecondaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C01B1DEBD6BB00BB7CC5 /* SecondaryViewController.m */; };
-		84B9C0211DEC30FE00BB7CC5 /* UpperImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0201DEC30FE00BB7CC5 /* UpperImageButton.m */; };
 		84B9C0241DED2A7700BB7CC5 /* ProgressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0231DED2A7700BB7CC5 /* ProgressTableViewController.m */; };
 		84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */; };
 		84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C02B1DEEB76A00BB7CC5 /* BalanceViewController.m */; };
 		84B9C0301DEEB90800BB7CC5 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C02F1DEEB90800BB7CC5 /* BalanceView.m */; };
-		84B9C0331DEEC2AE00BB7CC5 /* RightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0321DEEC2AE00BB7CC5 /* RightImageButton.m */; };
 		84B9C03D1DEECBFF00BB7CC5 /* AddressPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0361DEECBFF00BB7CC5 /* AddressPickerController.m */; };
 		84B9C03E1DEECBFF00BB7CC5 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0381DEECBFF00BB7CC5 /* ChineseToPinyin.m */; };
 		84B9C03F1DEECBFF00BB7CC5 /* citydata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84B9C0391DEECBFF00BB7CC5 /* citydata.plist */; };
 		84B9C0401DEECBFF00BB7CC5 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84B9C03A1DEECBFF00BB7CC5 /* citydict.plist */; };
 		84B9C0411DEECBFF00BB7CC5 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */; };
+		84B9C0441DEFB38E00BB7CC5 /* SelectAreaTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0431DEFB38E00BB7CC5 /* SelectAreaTableViewController.m */; };
+		84B9C0491DEFB40200BB7CC5 /* CurrentCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0461DEFB40200BB7CC5 /* CurrentCityTableViewCell.m */; };
+		84B9C04A1DEFB40200BB7CC5 /* HotCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0481DEFB40200BB7CC5 /* HotCityTableViewCell.m */; };
+		84B9C04D1DEFB44900BB7CC5 /* SearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C04C1DEFB44900BB7CC5 /* SearchResultTableViewController.m */; };
+		84B9C0501DEFCD1C00BB7CC5 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C04F1DEFCD1C00BB7CC5 /* CustomButton.m */; };
 		84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEED31D34EB7400227A15 /* 服务协议.txt */; };
 		84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEDA1D36051C00227A15 /* RegularTools.m */; };
 		84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEEDC1D36053D00227A15 /* 方案1.png */; };
@@ -262,8 +265,6 @@
 		84B9C0191DEBD6BB00BB7CC5 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicViewController.m; sourceTree = "<group>"; };
 		84B9C01A1DEBD6BB00BB7CC5 /* SecondaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondaryViewController.h; sourceTree = "<group>"; };
 		84B9C01B1DEBD6BB00BB7CC5 /* SecondaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondaryViewController.m; sourceTree = "<group>"; };
-		84B9C01F1DEC30FE00BB7CC5 /* UpperImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpperImageButton.h; path = Carmgr/UpperImageButton.h; sourceTree = "<group>"; };
-		84B9C0201DEC30FE00BB7CC5 /* UpperImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpperImageButton.m; path = Carmgr/UpperImageButton.m; sourceTree = "<group>"; };
 		84B9C0221DED2A7700BB7CC5 /* ProgressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTableViewController.h; sourceTree = "<group>"; };
 		84B9C0231DED2A7700BB7CC5 /* ProgressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTableViewController.m; sourceTree = "<group>"; };
 		84B9C0261DEEB55800BB7CC5 /* NearByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearByViewController.h; sourceTree = "<group>"; };
@@ -272,8 +273,6 @@
 		84B9C02B1DEEB76A00BB7CC5 /* BalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceViewController.m; path = Carmgr/BalanceViewController.m; sourceTree = "<group>"; };
 		84B9C02E1DEEB90800BB7CC5 /* BalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BalanceView.h; path = Carmgr/BalanceView.h; sourceTree = "<group>"; };
 		84B9C02F1DEEB90800BB7CC5 /* BalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BalanceView.m; path = Carmgr/BalanceView.m; sourceTree = "<group>"; };
-		84B9C0311DEEC2AE00BB7CC5 /* RightImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightImageButton.h; path = Carmgr/RightImageButton.h; sourceTree = "<group>"; };
-		84B9C0321DEEC2AE00BB7CC5 /* RightImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightImageButton.m; path = Carmgr/RightImageButton.m; sourceTree = "<group>"; };
 		84B9C0351DEECBFF00BB7CC5 /* AddressPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressPickerController.h; path = Carmgr/AddressPickerController.h; sourceTree = "<group>"; };
 		84B9C0361DEECBFF00BB7CC5 /* AddressPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressPickerController.m; path = Carmgr/AddressPickerController.m; sourceTree = "<group>"; };
 		84B9C0371DEECBFF00BB7CC5 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseToPinyin.h; path = Carmgr/ChineseToPinyin.h; sourceTree = "<group>"; };
@@ -282,6 +281,16 @@
 		84B9C03A1DEECBFF00BB7CC5 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = citydict.plist; path = Carmgr/citydict.plist; sourceTree = "<group>"; };
 		84B9C03B1DEECBFF00BB7CC5 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManager.h; path = Carmgr/LocationManager.h; sourceTree = "<group>"; };
 		84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = Carmgr/LocationManager.m; sourceTree = "<group>"; };
+		84B9C0421DEFB38E00BB7CC5 /* SelectAreaTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectAreaTableViewController.h; path = Carmgr/SelectAreaTableViewController.h; sourceTree = "<group>"; };
+		84B9C0431DEFB38E00BB7CC5 /* SelectAreaTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectAreaTableViewController.m; path = Carmgr/SelectAreaTableViewController.m; sourceTree = "<group>"; };
+		84B9C0451DEFB40200BB7CC5 /* CurrentCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentCityTableViewCell.h; path = Carmgr/CurrentCityTableViewCell.h; sourceTree = "<group>"; };
+		84B9C0461DEFB40200BB7CC5 /* CurrentCityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentCityTableViewCell.m; path = Carmgr/CurrentCityTableViewCell.m; sourceTree = "<group>"; };
+		84B9C0471DEFB40200BB7CC5 /* HotCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HotCityTableViewCell.h; path = Carmgr/HotCityTableViewCell.h; sourceTree = "<group>"; };
+		84B9C0481DEFB40200BB7CC5 /* HotCityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HotCityTableViewCell.m; path = Carmgr/HotCityTableViewCell.m; sourceTree = "<group>"; };
+		84B9C04B1DEFB44900BB7CC5 /* SearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultTableViewController.h; path = Carmgr/SearchResultTableViewController.h; sourceTree = "<group>"; };
+		84B9C04C1DEFB44900BB7CC5 /* SearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultTableViewController.m; path = Carmgr/SearchResultTableViewController.m; sourceTree = "<group>"; };
+		84B9C04E1DEFCD1C00BB7CC5 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomButton.h; path = Carmgr/CustomButton.h; sourceTree = "<group>"; };
+		84B9C04F1DEFCD1C00BB7CC5 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomButton.m; path = Carmgr/CustomButton.m; sourceTree = "<group>"; };
 		84BAEED31D34EB7400227A15 /* 服务协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "服务协议.txt"; sourceTree = "<group>"; };
 		84BAEED91D36051C00227A15 /* RegularTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularTools.h; path = Carmgr/RegularTools.h; sourceTree = "<group>"; };
 		84BAEEDA1D36051C00227A15 /* RegularTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularTools.m; path = Carmgr/RegularTools.m; sourceTree = "<group>"; };
@@ -850,10 +859,8 @@
 		84B9C01E1DEC30BF00BB7CC5 /* 自定义控件 */ = {
 			isa = PBXGroup;
 			children = (
-				84B9C01F1DEC30FE00BB7CC5 /* UpperImageButton.h */,
-				84B9C0201DEC30FE00BB7CC5 /* UpperImageButton.m */,
-				84B9C0311DEEC2AE00BB7CC5 /* RightImageButton.h */,
-				84B9C0321DEEC2AE00BB7CC5 /* RightImageButton.m */,
+				84B9C04E1DEFCD1C00BB7CC5 /* CustomButton.h */,
+				84B9C04F1DEFCD1C00BB7CC5 /* CustomButton.m */,
 			);
 			name = "自定义控件";
 			sourceTree = "<group>";
@@ -881,6 +888,14 @@
 			children = (
 				84B9C0351DEECBFF00BB7CC5 /* AddressPickerController.h */,
 				84B9C0361DEECBFF00BB7CC5 /* AddressPickerController.m */,
+				84B9C04B1DEFB44900BB7CC5 /* SearchResultTableViewController.h */,
+				84B9C04C1DEFB44900BB7CC5 /* SearchResultTableViewController.m */,
+				84B9C0451DEFB40200BB7CC5 /* CurrentCityTableViewCell.h */,
+				84B9C0461DEFB40200BB7CC5 /* CurrentCityTableViewCell.m */,
+				84B9C0471DEFB40200BB7CC5 /* HotCityTableViewCell.h */,
+				84B9C0481DEFB40200BB7CC5 /* HotCityTableViewCell.m */,
+				84B9C0421DEFB38E00BB7CC5 /* SelectAreaTableViewController.h */,
+				84B9C0431DEFB38E00BB7CC5 /* SelectAreaTableViewController.m */,
 				84B9C0371DEECBFF00BB7CC5 /* ChineseToPinyin.h */,
 				84B9C0381DEECBFF00BB7CC5 /* ChineseToPinyin.m */,
 				84B9C0391DEECBFF00BB7CC5 /* citydata.plist */,
@@ -1580,14 +1595,15 @@
 				84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */,
 				84B9C0131DEBD5E600BB7CC5 /* MessageModel.m in Sources */,
 				84BAEF041D3606DB00227A15 /* CarVerifyViewController.m in Sources */,
+				84B9C0441DEFB38E00BB7CC5 /* SelectAreaTableViewController.m in Sources */,
 				84D9B5D51D4076E1002AC63F /* HotModel.m in Sources */,
 				84BAEEEC1D3605C800227A15 /* RegistView.m in Sources */,
 				847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */,
+				84B9C04D1DEFB44900BB7CC5 /* SearchResultTableViewController.m in Sources */,
 				84BF0B191D531920000EDCC5 /* UIWebViewController.m in Sources */,
 				849886601DE2A3E9000B5D4D /* AboutViewController.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
-				84B9C0331DEEC2AE00BB7CC5 /* RightImageButton.m in Sources */,
 				84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */,
 				847F8A531D5B20EA00B0A23D /* DetailServiceModel.m in Sources */,
 				84B9C03D1DEECBFF00BB7CC5 /* AddressPickerController.m in Sources */,
@@ -1603,8 +1619,10 @@
 				84F3C2AC1D190AA600597BFD /* YWUserViewController.m in Sources */,
 				84F3C2A91D190A8600597BFD /* YWPublic.m in Sources */,
 				8477762B1D124BF100DE8213 /* main.m in Sources */,
+				84B9C0501DEFCD1C00BB7CC5 /* CustomButton.m in Sources */,
 				84BAEEE31D36057700227A15 /* FindPasswdViewController.m in Sources */,
 				849886881DE6E06F000B5D4D /* HomeModel.m in Sources */,
+				84B9C04A1DEFB40200BB7CC5 /* HotCityTableViewCell.m in Sources */,
 				84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */,
 				84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */,
 				84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */,
@@ -1613,8 +1631,8 @@
 				84D9B5B21D3C8342002AC63F /* MJRefreshFooter.m in Sources */,
 				84BAEEEF1D3605DD00227A15 /* ServiceDelegateController.m in Sources */,
 				84B9C0301DEEB90800BB7CC5 /* BalanceView.m in Sources */,
+				84B9C0491DEFB40200BB7CC5 /* CurrentCityTableViewCell.m in Sources */,
 				849886781DE58355000B5D4D /* MyCarView.m in Sources */,
-				84B9C0211DEC30FE00BB7CC5 /* UpperImageButton.m in Sources */,
 				84B9C0141DEBD5E600BB7CC5 /* MessageTableViewCell.m in Sources */,
 				84D9B5BE1D3C8342002AC63F /* MJRefreshConst.m in Sources */,
 				84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */,

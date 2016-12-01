@@ -10,11 +10,15 @@
 
 @interface UIViewController (ShowView)
 
+- (BOOL)isLogin;
+
+- (NSString *)currentCity;
+
+
 - (void)showAlertMessage:(NSString *)message;
 
 - (void)alertDismissAfter:(NSUInteger)timeout message:(NSString *)message;
 
-- (BOOL)isLogin;
 
 //无网络提示
 - (void)noConnect;

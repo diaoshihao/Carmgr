@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UpperImageButton.h"
+#import "CustomButton.h"
 
 typedef NS_ENUM(NSUInteger, OrderProgress) {
     OrderProgressAll,
@@ -29,7 +29,7 @@ typedef void(^Progress)(OrderProgress progress);
 
 @property (nonatomic, copy) Progress progress;
 
-@property (nonatomic, strong) UpperImageButton *currentSelected;
+@property (nonatomic, strong) CustomButton *currentSelected;
 
 - (void)currentOrderState:(OrderProgress)progress;
 

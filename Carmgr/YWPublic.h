@@ -25,11 +25,8 @@
 #import <AFNetworking.h>
 #import <UIImageView+AFNetworking.h>
 #import "Interface.h"
-#import "CityChooseViewController.h"
 #import "NSString+MD5.h"//MD5加密
 #import "RegularTools.h"//正则表达式
-#import "YWDataBase.h"//数据库
-#import "MJRefreshNormalHeader.h"
 
 @interface YWPublic : NSObject
 

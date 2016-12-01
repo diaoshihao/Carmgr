@@ -65,7 +65,7 @@
     [self addSubview:self.userName];
     
     //信息
-    self.messageButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"信封"];
+    self.messageButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"消息"];
     self.messageButton.tag = ButtonMessage;
     [self.messageButton addTarget:self action:@selector(pushToMessagePage:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.messageButton];

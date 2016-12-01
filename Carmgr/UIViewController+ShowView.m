@@ -25,6 +25,13 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
 }
 
+- (NSString *)currentCity {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"currentcity"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"广州" forKey:@"currentcity"];
+    }
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"currentcity"];
+}
+
 - (void)noConnect {
     
 }

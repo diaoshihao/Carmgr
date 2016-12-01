@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YWPublic.h"
-@class RightImageButton;
+#import "UIViewController+ShowView.h"
+#import "YWDataBase.h"//数据库
+#import "MJRefreshNormalHeader.h"
+
+@class CustomButton;
 
 @interface BaseViewController : UIViewController
 
 @property (nonatomic, strong) UIView *customBar;
 
-@property (nonatomic, strong) RightImageButton *cityChoose;
+@property (nonatomic, strong) CustomButton *cityChoose;
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 

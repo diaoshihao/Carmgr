@@ -10,23 +10,6 @@
 
 @interface GeneralControl : UIView
 
-
-/**
- 按钮的图文上下分布
- @param imageName   图片名
- @param title       标题
- @return            返回按钮
- */
-+ (UIButton *)buttonWithUpperImage:(NSString *)imageName lowerTitle:(NSString *)title;
-
-/**
- 按钮的图片在右边
- @param imageName   图片名
- @param title       标题
- @return            返回按钮
- */
-+ (UIButton *)buttonWithRightImage:(NSString *)imageName title:(NSString *)title;
-
 /**
  缩进两格的TextField
 

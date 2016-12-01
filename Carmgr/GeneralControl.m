@@ -11,26 +11,6 @@
 
 @implementation GeneralControl
 
-+ (UIButton *)buttonWithUpperImage:(NSString *)imageName lowerTitle:(NSString *)title {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor whiteColor];
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[DefineValue mainColor] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(-button.titleLabel.intrinsicContentSize.height + 10, (button.intrinsicContentSize.width - button.imageView.intrinsicContentSize.width)/2, button.titleLabel.intrinsicContentSize.height - 10, -(button.intrinsicContentSize.width - button.imageView.intrinsicContentSize.width)/2)];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(button.imageView.intrinsicContentSize.height - 10, -(button.intrinsicContentSize.width - button.titleLabel.intrinsicContentSize.width)/2, -button.imageView.intrinsicContentSize.height + 10, (button.intrinsicContentSize.width - button.titleLabel.intrinsicContentSize.width)/2)];
-    return button;
-}
-
-+ (UIButton *)buttonWithRightImage:(NSString *)imageName title:(NSString *)title {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -button.imageView.intrinsicContentSize.width, 0, button.imageView.intrinsicContentSize.width)];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, button.titleLabel.intrinsicContentSize.width, 0, -button.titleLabel.intrinsicContentSize.width)];
-    return button;
-}
-
 + (UITextField *)twoSpaceTextField:(NSString *)placeholder {
     UITextField *textField = [[UITextField alloc] init];
     textField.backgroundColor = [UIColor whiteColor];

@@ -5,6 +5,7 @@ platform :ios, '8.0'
 target 'Carmgr' do
     pod 'FMDB', '~> 2.6.2'
     pod 'Masonry', '~> 1.0.1'
+    pod 'AMapLocation' #高德定位 SDK
     pod 'AFNetworking', '~> 3.1.0'
     pod 'PPNetworkHelper', '~> 0.2.5'
     pod 'SDCycleScrollView', '~> 1.65'

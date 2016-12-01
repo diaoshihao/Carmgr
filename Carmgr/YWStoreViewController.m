@@ -24,6 +24,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self defaultConfig];
+    [self configView];
+    [self refresh];
+}
+
+- (void)defaultConfig {
+    
+}
+
+- (void)configView {
     self.storeView = [[StoreView alloc] init];
     self.storeView.VC = self;
     [self.storeView createHeadSortViewAtSuperView:self.view];
@@ -31,7 +42,6 @@
     
     //添加下拉刷新
     self.storeView.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
-    [self refresh];
 }
 
 //实现父类的方法，为本类提供刷新数据方法
@@ -42,7 +52,7 @@
 - (void)loadData {
     //参数
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *city_filter = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    NSString *city_filter = [self currentCity];
     if (self.storeView.service_filter == nil) {
         self.storeView.service_filter = @"全部";
     }

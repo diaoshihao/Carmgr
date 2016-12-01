@@ -10,6 +10,7 @@
 #import "StoreTableViewCell.h"
 #import "StoreModel.h"
 #import <UIImageView+WebCache.h>
+#import "MJRefreshNormalHeader.h"
 #import "YWPublic.h"
 #import "StoreDetailViewController.h"
 

@@ -53,7 +53,7 @@
     
     NSMutableArray *buttons = [NSMutableArray new];
     for (NSInteger i = 0; i < self.titles.count; i++) {
-        UpperImageButton *button = [UpperImageButton buttonWithType:UIButtonTypeCustom];
+        CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionUpper];
         button.tag = OrderProgressAll + i + 10;
         [button setTitle:self.titles[i] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:self.images[i]] forState:UIControlStateNormal];
@@ -80,7 +80,7 @@
 }
 
 - (void)currentOrderState:(OrderProgress)progress {
-    for (UpperImageButton *button in self.buttons) {
+    for (CustomButton *button in self.buttons) {
         button.selected = NO;
     }
     self.currentSelected = [self viewWithTag:progress + 10];

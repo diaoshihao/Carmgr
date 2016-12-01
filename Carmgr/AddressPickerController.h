@@ -6,12 +6,14 @@
 //  Copyright © 2016年 yiwuchebao. All rights reserved.
 //
 
-#import "CustomBarViewController.h"
+#import "SecondaryViewController.h"
 
 typedef void(^returnAddress)(NSArray *address);
 
-@interface AddressPickerController : CustomBarViewController
+@interface AddressPickerController : SecondaryViewController
 
 @property (nonatomic, copy) returnAddress block;
+
+- (void)selectedAddress:(returnAddress)address;
 
 @end

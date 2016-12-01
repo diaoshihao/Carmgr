@@ -35,7 +35,7 @@
 
 - (void)createViews {
     
-    NSArray *arrayTitle = @[@"首页",@"商家",@"进度",@"我的"];
+    NSArray *arrayTitle = @[@"首页",@"商家",@"附近",@"我的"];
     NSArray *arrayImage = @[@"首页",@"商家",@"进度",@"我的"];
     NSArray *arraySelectImage = @[@"首页橙",@"商家橙",@"进度橙",@"我的橙"];
     NSArray *arrayClass = @[
