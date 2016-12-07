@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)username;
 
++ (NSString *)password;
+
 + (NSString *)token;
 
 + (NSString *)uuid;

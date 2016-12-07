@@ -7,12 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "YWTabBarController.h"
+#import "ViewController.h"
 #import "GuideViewController.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 @interface AppDelegate ()
-
-@property (nonatomic) BOOL finishLogin;
 
 @end
 
@@ -21,35 +20,12 @@
     UITextView *textView;
 }
 
-- (void)developAccountLogin {
-    self.finishLogin = NO;
-    NSString *username = nil;
-    NSString *password = nil;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"] != nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"15014150833" forKey:@"username"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"12345678" forKey:@"password"];
-        username = @"15014150833";
-        password = @"12345678";
-    } else {
-        username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-    }
-    
-    
-    NSString *urlStr = [NSString stringWithFormat:kLOGIN,username,password,0,nil,nil];
-    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        //登录成功保存数据
-        [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
-        
-        self.finishLogin = YES;
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+//高德地图配置key
+- (void)configForAMap {
+    [AMapServices sharedServices].apiKey = @"e69025b7664fa7cb60f866e6f0117be7";
 }
 
-- (void)firstLaunchOrNot {
+- (BOOL)firstLaunchOrNot {
     NSString *key = (NSString *)kCFBundleVersionKey;
     
     // 1.从Info.plist中取出版本号
@@ -59,15 +35,12 @@
     NSString *saveVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     
     if ([version isEqualToString:saveVersion]) { // 不是第一次使用这个版本
-        //是否第一次使用
+        
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
-        self.window.rootViewController = [[YWTabBarController alloc] init];
-        //进入程序,自动登录！！！！！
         
     } else { // 版本号不一样：第一次使用新版本
         // 将新版本号写入沙盒
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         
         //移动网络下载图片打开
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MONET"];
@@ -75,11 +48,14 @@
         //是否第一次使用
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFirstLaunch"];
         
-        // 显示版本新特性界面
-        GuideViewController *guideVC = [[GuideViewController alloc] init];
-        self.window.rootViewController = guideVC;
+        //自动登录关闭
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoLogin"];
         
     }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -87,15 +63,17 @@
     
     textView = [[UITextView alloc] init];//先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
     
-    [self developAccountLogin];
+    //高德地图配置
+    [self configForAMap];
     
-    while (!self.finishLogin)
-    {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                 beforeDate:[NSDate distantFuture]];
+    //如果是第一次启动App
+    if ([self firstLaunchOrNot]) {
+        // 显示版本新特性界面
+        GuideViewController *guideVC = [[GuideViewController alloc] init];
+        self.window.rootViewController = guideVC;
+    } else {
+        self.window.rootViewController = [[ViewController alloc] init];
     }
-    
-    [self firstLaunchOrNot];
     
     return YES;
     

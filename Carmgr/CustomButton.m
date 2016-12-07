@@ -22,6 +22,14 @@
     return button;
 }
 
++ (instancetype)cycleImageButton:(NSString *)imageName {
+    CustomButton *button = [super buttonWithType:UIButtonTypeCustom];
+    [button setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    button.layer.cornerRadius = button.frame.size.height / 2;
+    button.clipsToBounds = YES;
+    return button;
+}
+
 - (void)setImage:(UIImage *)image forState:(UIControlState)state {
     UIImage *originImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [super setImage:originImage forState:state];

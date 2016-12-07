@@ -19,7 +19,6 @@
 /////////////////////////////////////////////////////////////
 
 #import <UIKit/UIKit.h>
-#import "YWPublic.h"
 
 @interface YWTabBarController : UITabBarController
 

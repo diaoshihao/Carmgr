@@ -6,9 +6,9 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SecondaryViewController.h"
 
-@interface ServiceViewController : UIViewController
+@interface ServiceViewController : SecondaryViewController
 
 @property (nonatomic, strong) NSString *service_filter;
 

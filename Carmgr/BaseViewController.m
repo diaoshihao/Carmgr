@@ -163,11 +163,19 @@
     AddressPickerController *addressPicker = [[AddressPickerController alloc] init];
     __weak typeof(self) weakSelf = self;
     [addressPicker selectedAddress:^(NSArray *address) {
-        [weakSelf refresh];//选择城市后刷新数据
-        [[NSUserDefaults standardUserDefaults] setObject:address.firstObject forKey:@"currentcity"];
-        [[NSUserDefaults standardUserDefaults] setObject:address[1] forKey:@"currentarea"];
+        //选择城市后刷新数据
+        [weakSelf refresh];
+        //保存当前城市信息
+        [self saveCityInfo:address];
     }];
     [self.navigationController pushViewController:addressPicker animated:YES];
+}
+
+- (void)saveCityInfo:(NSArray *)address {
+    // 如果城市名后带有 市 字，删除之
+    NSString *currentCity = [[NSMutableString stringWithString:address.firstObject] stringByReplacingOccurrencesOfString:@"市" withString:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:currentCity forKey:@"currentcity"];
+    [[NSUserDefaults standardUserDefaults] setObject:address[1] forKey:@"currentarea"];
 }
 
 #pragma mark 跳转到扫描二维码
@@ -188,7 +196,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [self.cityChoose setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"currentcity"] forState:UIControlStateNormal];
+    [self.cityChoose setTitle:[self currentCity] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

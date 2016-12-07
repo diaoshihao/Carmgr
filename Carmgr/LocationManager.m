@@ -45,7 +45,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    [self.locationManager stopUpdatingLocation];
+    [manager stopUpdatingLocation];
     [self geocoder:locations.lastObject];
 }
 

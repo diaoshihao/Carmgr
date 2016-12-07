@@ -7,7 +7,7 @@
 //
 
 #import "GuideViewController.h"
-#import "YWTabBarController.h"
+#import "ViewController.h"
 #import <Masonry.h>
 
 @interface GuideViewController () <UIScrollViewDelegate>
@@ -91,7 +91,7 @@
     [guidePage removeFromSuperview];
     [pageControl removeFromSuperview];
     
-    [UIApplication sharedApplication].delegate.window.rootViewController = [[YWTabBarController alloc] init];
+    [UIApplication sharedApplication].delegate.window.rootViewController = [[ViewController alloc] init];
     
 }
 

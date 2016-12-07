@@ -15,16 +15,7 @@
     //不设置👇，参数无法传到服务器，为null(已在PPNetworkHelper的初始化中修改)
 //    [PPNetworkHelper setRequestSerializer:PPRequestSerializerHTTP];
     
-//    return [PPNetworkHelper POST:URL parameters:parameters success:success failure:failure];
-    
-    return [PPNetworkHelper POST:URL parameters:parameters success:^(id responseObject) {
-        if (![responseObject[@"opt_state"] isEqualToString:@"success"]) {
-            
-        }
-        success(responseObject);
-    } failure:^(NSError *error) {
-        
-    }];
+    return [PPNetworkHelper POST:URL parameters:parameters success:success failure:failure];
 }
 
 + (NSURLSessionTask *)POST:(NSString *)URL parameters:(NSDictionary *)parameters responseCache:(HttpRequestCache)responseCache success:(HttpRequestSuccess)success failure:(HttpRequestFailed)failure {

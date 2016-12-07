@@ -15,4 +15,6 @@
 
 @property (nonatomic, strong) BaseViewController *fromVC;
 
+@property (nonatomic, assign) BOOL cancelBtnHidden;
+
 @end

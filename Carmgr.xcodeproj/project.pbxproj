@@ -55,7 +55,6 @@
 		8498868E1DE6F350000B5D4D /* ServiceCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498868D1DE6F350000B5D4D /* ServiceCollectionView.m */; };
 		849886911DE6FBAA000B5D4D /* SecondHandCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886901DE6FBAA000B5D4D /* SecondHandCollectionView.m */; };
 		849886941DE7C8BC000B5D4D /* PromotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886931DE7C8BC000B5D4D /* PromotionView.m */; };
-		849886971DE825CC000B5D4D /* UIButton+SetEdges.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886961DE825CC000B5D4D /* UIButton+SetEdges.m */; };
 		84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A929FD1D2618E1001DD20F /* DevelopViewController.m */; };
 		84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A071D266C26001DD20F /* UsedCarCollectionCell.m */; };
 		84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A92A0B1D2681FF001DD20F /* HotTableViewCell.m */; };
@@ -79,6 +78,13 @@
 		84B9C04A1DEFB40200BB7CC5 /* HotCityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0481DEFB40200BB7CC5 /* HotCityTableViewCell.m */; };
 		84B9C04D1DEFB44900BB7CC5 /* SearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C04C1DEFB44900BB7CC5 /* SearchResultTableViewController.m */; };
 		84B9C0501DEFCD1C00BB7CC5 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C04F1DEFCD1C00BB7CC5 /* CustomButton.m */; };
+		84B9C0531DF0194600BB7CC5 /* CustomSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0521DF0194600BB7CC5 /* CustomSegmentedControl.m */; };
+		84B9C0591DF4F77800BB7CC5 /* ClassifyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0581DF4F77800BB7CC5 /* ClassifyScrollView.m */; };
+		84B9C05C1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C05B1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m */; };
+		84B9C05F1DF4FFE600BB7CC5 /* CurrentServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C05E1DF4FFE600BB7CC5 /* CurrentServiceView.m */; };
+		84B9C0621DF504DB00BB7CC5 /* CurrentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0611DF504DB00BB7CC5 /* CurrentServiceModel.m */; };
+		84B9C0651DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0641DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m */; };
+		84B9C0681DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0671DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m */; };
 		84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEED31D34EB7400227A15 /* 服务协议.txt */; };
 		84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEDA1D36051C00227A15 /* RegularTools.m */; };
 		84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEEDC1D36053D00227A15 /* 方案1.png */; };
@@ -245,8 +251,6 @@
 		849886901DE6FBAA000B5D4D /* SecondHandCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondHandCollectionView.m; sourceTree = "<group>"; };
 		849886921DE7C8BC000B5D4D /* PromotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionView.h; sourceTree = "<group>"; };
 		849886931DE7C8BC000B5D4D /* PromotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionView.m; sourceTree = "<group>"; };
-		849886951DE825CC000B5D4D /* UIButton+SetEdges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+SetEdges.h"; path = "Carmgr/UIButton+SetEdges.h"; sourceTree = "<group>"; };
-		849886961DE825CC000B5D4D /* UIButton+SetEdges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+SetEdges.m"; path = "Carmgr/UIButton+SetEdges.m"; sourceTree = "<group>"; };
 		84A929FC1D2618E1001DD20F /* DevelopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DevelopViewController.h; path = Carmgr/DevelopViewController.h; sourceTree = "<group>"; };
 		84A929FD1D2618E1001DD20F /* DevelopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DevelopViewController.m; path = Carmgr/DevelopViewController.m; sourceTree = "<group>"; };
 		84A92A061D266C26001DD20F /* UsedCarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedCarCollectionCell.h; sourceTree = "<group>"; };
@@ -291,6 +295,20 @@
 		84B9C04C1DEFB44900BB7CC5 /* SearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultTableViewController.m; path = Carmgr/SearchResultTableViewController.m; sourceTree = "<group>"; };
 		84B9C04E1DEFCD1C00BB7CC5 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomButton.h; path = Carmgr/CustomButton.h; sourceTree = "<group>"; };
 		84B9C04F1DEFCD1C00BB7CC5 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomButton.m; path = Carmgr/CustomButton.m; sourceTree = "<group>"; };
+		84B9C0511DF0194600BB7CC5 /* CustomSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomSegmentedControl.h; path = Carmgr/CustomSegmentedControl.h; sourceTree = "<group>"; };
+		84B9C0521DF0194600BB7CC5 /* CustomSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomSegmentedControl.m; path = Carmgr/CustomSegmentedControl.m; sourceTree = "<group>"; };
+		84B9C0571DF4F77800BB7CC5 /* ClassifyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyScrollView.h; sourceTree = "<group>"; };
+		84B9C0581DF4F77800BB7CC5 /* ClassifyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyScrollView.m; sourceTree = "<group>"; };
+		84B9C05A1DF4FFC700BB7CC5 /* CurrentServiceScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentServiceScrollView.h; sourceTree = "<group>"; };
+		84B9C05B1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceScrollView.m; sourceTree = "<group>"; };
+		84B9C05D1DF4FFE600BB7CC5 /* CurrentServiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentServiceView.h; sourceTree = "<group>"; };
+		84B9C05E1DF4FFE600BB7CC5 /* CurrentServiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceView.m; sourceTree = "<group>"; };
+		84B9C0601DF504DB00BB7CC5 /* CurrentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentServiceModel.h; sourceTree = "<group>"; };
+		84B9C0611DF504DB00BB7CC5 /* CurrentServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceModel.m; sourceTree = "<group>"; };
+		84B9C0631DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentClassifyCollectionVC.h; sourceTree = "<group>"; };
+		84B9C0641DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentClassifyCollectionVC.m; sourceTree = "<group>"; };
+		84B9C0661DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentServiceCollectionViewCell.h; sourceTree = "<group>"; };
+		84B9C0671DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceCollectionViewCell.m; sourceTree = "<group>"; };
 		84BAEED31D34EB7400227A15 /* 服务协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "服务协议.txt"; sourceTree = "<group>"; };
 		84BAEED91D36051C00227A15 /* RegularTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularTools.h; path = Carmgr/RegularTools.h; sourceTree = "<group>"; };
 		84BAEEDA1D36051C00227A15 /* RegularTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularTools.m; path = Carmgr/RegularTools.m; sourceTree = "<group>"; };
@@ -785,8 +803,6 @@
 			children = (
 				8498866D1DE53B0A000B5D4D /* UIViewController+ShowView.h */,
 				8498866E1DE53B0A000B5D4D /* UIViewController+ShowView.m */,
-				849886951DE825CC000B5D4D /* UIButton+SetEdges.h */,
-				849886961DE825CC000B5D4D /* UIButton+SetEdges.m */,
 			);
 			name = "类别";
 			sourceTree = "<group>";
@@ -861,6 +877,8 @@
 			children = (
 				84B9C04E1DEFCD1C00BB7CC5 /* CustomButton.h */,
 				84B9C04F1DEFCD1C00BB7CC5 /* CustomButton.m */,
+				84B9C0511DF0194600BB7CC5 /* CustomSegmentedControl.h */,
+				84B9C0521DF0194600BB7CC5 /* CustomSegmentedControl.m */,
 			);
 			name = "自定义控件";
 			sourceTree = "<group>";
@@ -868,8 +886,9 @@
 		84B9C0251DEEB4D600BB7CC5 /* 附近 */ = {
 			isa = PBXGroup;
 			children = (
-				84B9C0261DEEB55800BB7CC5 /* NearByViewController.h */,
-				84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */,
+				84B9C0551DF4F6E900BB7CC5 /* Model */,
+				84B9C0541DF4F6DA00BB7CC5 /* Views */,
+				84B9C0561DF4F6F400BB7CC5 /* Controllers */,
 			);
 			name = "附近";
 			sourceTree = "<group>";
@@ -904,6 +923,49 @@
 				84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */,
 			);
 			name = "城市选择";
+			sourceTree = "<group>";
+		};
+		84B9C0541DF4F6DA00BB7CC5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C0691DF5457900BB7CC5 /* Cell */,
+				84B9C05D1DF4FFE600BB7CC5 /* CurrentServiceView.h */,
+				84B9C05E1DF4FFE600BB7CC5 /* CurrentServiceView.m */,
+				84B9C05A1DF4FFC700BB7CC5 /* CurrentServiceScrollView.h */,
+				84B9C05B1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m */,
+				84B9C0571DF4F77800BB7CC5 /* ClassifyScrollView.h */,
+				84B9C0581DF4F77800BB7CC5 /* ClassifyScrollView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84B9C0551DF4F6E900BB7CC5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C0601DF504DB00BB7CC5 /* CurrentServiceModel.h */,
+				84B9C0611DF504DB00BB7CC5 /* CurrentServiceModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		84B9C0561DF4F6F400BB7CC5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C0261DEEB55800BB7CC5 /* NearByViewController.h */,
+				84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */,
+				84B9C0631DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.h */,
+				84B9C0641DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		84B9C0691DF5457900BB7CC5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				84B9C0661DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.h */,
+				84B9C0671DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		84BAEED51D35F4A900227A15 /* 设置 */ = {
@@ -1172,9 +1234,9 @@
 		84F3C2A31D17D77A00597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				847F8A461D59674700B0A23D /* 商家详情 */,
 				847776671D1258B800DE8213 /* YWStoreViewController.h */,
 				847776681D1258B800DE8213 /* YWStoreViewController.m */,
+				847F8A461D59674700B0A23D /* 商家详情 */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -1552,12 +1614,12 @@
 				84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */,
 				84BAEF0A1D36071A00227A15 /* SettingViewController.m in Sources */,
 				8498866F1DE53B0A000B5D4D /* UIViewController+ShowView.m in Sources */,
-				849886971DE825CC000B5D4D /* UIButton+SetEdges.m in Sources */,
 				84D9B5B91D3C8342002AC63F /* MJRefreshBackStateFooter.m in Sources */,
 				84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */,
 				84B9C0241DED2A7700BB7CC5 /* ProgressTableViewController.m in Sources */,
 				84D9B5BB1D3C8342002AC63F /* MJRefreshNormalHeader.m in Sources */,
 				84D9B5C11D3C8342002AC63F /* UIScrollView+MJRefresh.m in Sources */,
+				84B9C05C1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m in Sources */,
 				849886631DE2A627000B5D4D /* DefineValue.m in Sources */,
 				84BEE12E1D24F34500D5FAD5 /* ServiceCollectionCell.m in Sources */,
 				846690F01D45C43E004E1BF1 /* PrivateModel.m in Sources */,
@@ -1568,11 +1630,14 @@
 				84D9B5B61D3C8342002AC63F /* MJRefreshAutoStateFooter.m in Sources */,
 				84BEE1241D24B86F00D5FAD5 /* HomeView.m in Sources */,
 				849886821DE6C616000B5D4D /* HomeDataLoader.m in Sources */,
+				84B9C0621DF504DB00BB7CC5 /* CurrentServiceModel.m in Sources */,
 				847F8A4D1D597F6300B0A23D /* DetailView.m in Sources */,
 				849886721DE53BE9000B5D4D /* GeneralControl.m in Sources */,
 				847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */,
+				84B9C0591DF4F77800BB7CC5 /* ClassifyScrollView.m in Sources */,
 				84BAEEE91D3605B700227A15 /* YWRegistViewController.m in Sources */,
 				84D9B5B11D3C8342002AC63F /* MJRefreshComponent.m in Sources */,
+				84B9C0651DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m in Sources */,
 				847776311D124BF100DE8213 /* BaseViewController.m in Sources */,
 				840EFB2A1D377B0B0070B69A /* StoreModel.m in Sources */,
 				84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */,
@@ -1588,6 +1653,7 @@
 				84D9B5C01D3C8342002AC63F /* UIScrollView+MJExtension.m in Sources */,
 				8498868E1DE6F350000B5D4D /* ServiceCollectionView.m in Sources */,
 				849886751DE54A0F000B5D4D /* UserHeadView.m in Sources */,
+				84B9C0681DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
 				847F8A491D59678400B0A23D /* StoreDetailViewController.m in Sources */,
 				84D9B5C21D3C8342002AC63F /* UIView+MJExtension.m in Sources */,
@@ -1634,6 +1700,7 @@
 				84B9C0491DEFB40200BB7CC5 /* CurrentCityTableViewCell.m in Sources */,
 				849886781DE58355000B5D4D /* MyCarView.m in Sources */,
 				84B9C0141DEBD5E600BB7CC5 /* MessageTableViewCell.m in Sources */,
+				84B9C0531DF0194600BB7CC5 /* CustomSegmentedControl.m in Sources */,
 				84D9B5BE1D3C8342002AC63F /* MJRefreshConst.m in Sources */,
 				84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */,
 				84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */,
@@ -1653,6 +1720,7 @@
 				84BF0B1D1D533F48000EDCC5 /* ServiceViewController.m in Sources */,
 				846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */,
 				84D9B5AF1D3C8342002AC63F /* MJRefreshAutoFooter.m in Sources */,
+				84B9C05F1DF4FFE600BB7CC5 /* CurrentServiceView.m in Sources */,
 				847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,6 @@
 //
 
 #import "YWTabBarController.h"
-#import "ScanImageViewController.h"
 
 @interface YWTabBarController () 
 
@@ -20,8 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self createViews];
     self.tabBar.translucent = NO;
+    [self createViews];
     
 }
 
@@ -56,8 +55,8 @@
         navigationVC.tabBarItem.title = arrayTitle[i];
         [navigationVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:178/256.0 green:178/256.0 blue:178/256.0 alpha:1]} forState:UIControlStateNormal];
         [navigationVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0]} forState:UIControlStateSelected];
-        [navigationVC.tabBarItem setImage:[YWPublic imageNameWithOriginalRender:arrayImage[i]]];
-        navigationVC.tabBarItem.selectedImage = [YWPublic imageNameWithOriginalRender:arraySelectImage[i]];
+        [navigationVC.tabBarItem setImage:[[UIImage imageNamed:arrayImage[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        navigationVC.tabBarItem.selectedImage = [[UIImage imageNamed:arraySelectImage[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         //修改item文字大小和位置
         [navigationVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];

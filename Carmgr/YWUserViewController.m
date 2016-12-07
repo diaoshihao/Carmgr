@@ -237,7 +237,7 @@
 #pragma mark 跳转到个人资料界面
 - (void)pushToUserInfo {
     UserInfoViewController *userInfoVC = [[UserInfoViewController alloc] init];
-    userInfoVC.headImage = self.headView.userImageView.image;
+    userInfoVC.headImage = self.headView.userImageView.currentImage;
     userInfoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userInfoVC animated:YES];
 }
@@ -283,8 +283,9 @@
     self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
-        [self.headView.userName setTitle:self.privateModel.username forState:UIControlStateNormal];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        [self.headView.userName setTitle:username forState:UIControlStateNormal];
     } else {
         [self.headView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
     }

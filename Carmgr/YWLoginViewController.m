@@ -13,8 +13,9 @@
 #import "LoginView.h"
 #import "FindPasswdViewController.h"
 #import "FastLoginViewController.h"
-#import "YWTabBarController.h"
+#import "ViewController.h"
 #import "PrivateModel.h"
+#import "Interface.h"
 
 @interface YWLoginViewController () <UITextFieldDelegate>
 
@@ -49,8 +50,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"mobile"] != nil) {
-        self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"mobile"];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"] != nil) {
+        self.userField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
         self.passwdField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     }
 }
@@ -69,9 +70,11 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18]}];
 
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
-    //v1.0不设置取消按钮
     
-    self.navigationItem.leftBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"取消" target:self action:@selector(CancelLogin)];
+    //设置取消按钮
+//    if (!self.cancelBtnHidden) {
+//        self.navigationItem.leftBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"取消" target:self action:@selector(CancelLogin)];
+//    }
     
     self.navigationItem.rightBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"注册" target:self action:@selector(pushToRegist)];
     
@@ -133,59 +136,49 @@
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
         [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
-    } else {
-        
-        //username=%@&password=%@&type=%@&verf_code=%@&uuid=%@&version=1.0
-        NSString *urlStr = [NSString stringWithFormat:kLOGIN,self.userField.text,self.passwdField.text,0,nil,nil];
-        //密码加密
-        /*[YWPublic encryptMD5String:self.passwdField.text]*/
-
-        [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                        
-            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                
-                //登录成功保存数据
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
-                
-                [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];//token
-                
-                [self showAlertViewTitle:nil message:@"登录成功"];
-            } else {
-                [self showAlertViewTitle:@"提示" message:@"用户名或密码错误"];
-            }
-            
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self showAlertViewTitle:@"提示" message:@"网络错误"];
-        }];
+        self.loginBtn.enabled = YES;
+        return;
     }
+    
+    NSString *username = self.userField.text;
+    NSString *password = self.passwdField.text;
+    NSString *uuid = [Interface uuid];
+    
+    if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
+        self.loginBtn.enabled = YES;
+        [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
+        return;
+    }
+    
+    NSArray *login = [Interface applogin:username password:password type:@"0" verf_code:@"" uuid:uuid];
+    [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
+        self.loginBtn.enabled = YES;
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            //登录成功保存数据
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
+            
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"token"] forKey:@"token"];//token
+            
+            //自动登录打开
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [self showAlertViewTitle:nil message:@"登录成功"];
+        } else {
+            [self showAlertViewTitle:@"提示" message:@"用户名或密码错误"];
+        }
+    } failure:^(NSError *error) {
+        self.loginBtn.enabled = YES;
+        [self showAlertViewTitle:@"提示" message:@"网络错误"];
+    }];
 }
 
 #pragma mark 个人资料
 - (void)getPrivate {
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    NSString *urlStr = [NSString stringWithFormat:kPRIVATE,self.userField.text,token];
     
-    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-            
-            PrivateModel *privateModel = [[PrivateModel alloc] initWithDict:dataDict];
-            [[NSUserDefaults standardUserDefaults] setObject:privateModel.username forKey:@"username"];
-            
-            //插入数据库前删除数据
-            [[YWDataBase sharedDataBase] deleteDatabaseFromTable:@"tb_private"];
-            
-            //插入数据库
-            [[YWDataBase sharedDataBase] insertPrivateWithModel:privateModel];
-        }
-    
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-    }];
 }
 
 - (void)thirdLogin:(UIButton *)sender {
@@ -207,25 +200,30 @@
 #pragma mark 定时器
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
-    [alertVC dismissViewControllerAnimated:YES completion:nil];
-    if (alertVC.title == nil) {//登录成功
-        if (self.isFromHome) { //token失效,登录后返回首页并自动刷新
-            self.isFromHome = NO;//重置状态
-            [self dismissViewControllerAnimated:YES completion:^{
-                [self getPrivate];
-                [self.fromVC refresh];
-            }];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:^{
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"] == YES) {
-                    YWTabBarController *tabBarVC = [[YWTabBarController alloc] init];
-                    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarVC;
-                }
-                [self getPrivate];
-            }];
+    [alertVC dismissViewControllerAnimated:YES completion:^{
+        if (alertVC.title == nil) {
+            [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
+//            [self getPrivate];
         }
-    }
-    self.loginBtn.enabled = YES;
+    }];
+    
+    
+//    if (alertVC.title == nil) {//登录成功
+//        if (self.isFromHome) { //token失效,登录后返回首页并自动刷新
+//            self.isFromHome = NO;//重置状态
+//            [self dismissViewControllerAnimated:YES completion:^{
+//                [self getPrivate];
+//                [self.fromVC refresh];
+//            }];
+//        } else {
+//            [self dismissViewControllerAnimated:YES completion:^{
+//                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"] == YES) {
+//                }
+//                [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
+//                [self getPrivate];
+//            }];
+//        }
+//    }
 }
 
 #pragma mark 找回密码

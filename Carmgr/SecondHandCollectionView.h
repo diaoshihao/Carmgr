@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^LookMore)(void);
+
 @interface SecondHandCollectionView : UIView
 
 @property (nonatomic, strong) NSArray *dataArr;
+
+@property (nonatomic, copy) LookMore lookMore;
 
 - (void)reloadData;
 

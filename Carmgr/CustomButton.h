@@ -20,4 +20,6 @@ typedef NS_ENUM(NSUInteger, ImagePosition) {
 
 + (instancetype)buttonWithType:(UIButtonType)buttonType imagePosition:(ImagePosition)position;
 
++ (instancetype)cycleImageButton:(NSString *)imageName;
+
 @end

@@ -16,10 +16,11 @@ typedef NS_ENUM(NSUInteger, ClickAtButton) {
 
 typedef void(^ButtonClick)(ClickAtButton buttonType);
 
+@class CustomButton;
 @interface UserHeadView : UIView
 
-@property (nonatomic, strong) UIImageView   *userImageView;
-@property (nonatomic, strong) UIButton      *userName;
+@property (nonatomic, strong) CustomButton       *userImageView;
+@property (nonatomic, strong) CustomButton      *userName;
 
 @property (nonatomic, copy) ButtonClick buttonClick;
 

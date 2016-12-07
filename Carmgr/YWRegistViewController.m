@@ -10,6 +10,7 @@
 #import "RegistView.h"
 #import "YWPublic.h"
 #import "ServiceDelegateController.h"
+#import "ViewController.h"
 #import <Masonry.h>
 
 @interface YWRegistViewController () <UITextFieldDelegate>
@@ -86,10 +87,13 @@
 #pragma mark 定时器
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
-    [alertVC dismissViewControllerAnimated:YES completion:nil];
-    if (alertVC.title == nil) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+    [alertVC dismissViewControllerAnimated:YES completion:^{
+        if (alertVC.title == nil) {
+            //自动登录打开
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
+            [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
+        }
+    }];
 }
 
 
@@ -106,6 +110,12 @@
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:self.phoneNum.text forKey:@"username"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
+                
+                //自动登录打开
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
+                
                 self.mobile = self.phoneNum.text;
                 [self removeAllSubviews];
                 [self createInputVerifyCodeView];

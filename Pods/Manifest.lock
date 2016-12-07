@@ -14,6 +14,11 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AMap2DMap (4.3.0):
+    - AMapFoundation (~> 1.2)
+  - AMapFoundation (1.3.0)
+  - AMapLocation (2.1.1):
+    - AMapFoundation (~> 1.2)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -30,6 +35,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - AMap2DMap
+  - AMapLocation
   - FMDB (~> 2.6.2)
   - Masonry (~> 1.0.1)
   - PPNetworkHelper (~> 0.2.5)
@@ -37,6 +44,9 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AMap2DMap: f3f0fc5cdbf0242ff22da0c8605f24f8d7187b35
+  AMapFoundation: 95799945466ccabfe1d3d5d9c1d524501c327b90
+  AMapLocation: dd203f76b034ef5cb546600f4e1ffad2a3a14072
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   PPNetworkHelper: baa8e6c4499db4a2287b5c97f1dc67cdcb61f704
@@ -44,6 +54,6 @@ SPEC CHECKSUMS:
   SDWebImage: 7d9fe229266696de91eadf840c77ca15efd4bbd2
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 603413ee02d7061dbb3953a575fcfdf9d88631a7
+PODFILE CHECKSUM: 0471c55e55b7a742cb64fc1e25d26edd8784c859
 
 COCOAPODS: 1.0.1

@@ -10,7 +10,7 @@
 #import "UsedCarCollectionCell.h"
 #import "HomeModel.h"
 #import <Masonry.h>
-#import "UIButton+SetEdges.h"
+#import "CustomButton.h"
 
 @interface SecondHandCollectionView() <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -47,22 +47,25 @@
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(20);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(40);
     }];
     
-    UIButton *button = [[UIButton alloc] init];
+    CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionRight];
     [button setTitle:@"查看更多" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithRed:102/256.0 green:102/256.0 blue:102/256.0 alpha:1] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
     [button setImage:[UIImage imageNamed:@"前进黑"] forState:UIControlStateNormal];
-    //把按钮图标设置在标题右边
-    [button setRightImage];
+    [button addTarget:self action:@selector(lookMoreSecondHand:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.right.mas_equalTo(-20);
         make.height.mas_equalTo(_titleLabel.mas_height);
     }];
+}
+
+- (void)lookMoreSecondHand:(CustomButton *)sender {
+    self.lookMore();
 }
 
 - (void)createServiceCollectionView {

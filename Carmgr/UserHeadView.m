@@ -8,13 +8,13 @@
 
 #import "UserHeadView.h"
 #import "DefineValue.h"
-#import "YWPublic.h"
+#import "CustomButton.h"
 #import <Masonry.h>
 
 @interface UserHeadView()
 
-@property (nonatomic, strong) UIButton *settingButton;
-@property (nonatomic, strong) UIButton *messageButton;
+@property (nonatomic, strong) CustomButton *settingButton;
+@property (nonatomic, strong) CustomButton *messageButton;
 
 @end
 
@@ -48,30 +48,32 @@
 
 - (void)createHeadView {
     //头像
-    self.userImageView = [YWPublic createCycleImageViewWithFrame:CGRectZero image:nil placeholder:@"头像"];
+    self.userImageView = [CustomButton cycleImageButton:@"头像"];
     [self addSubview:self.userImageView];
     
     //用户名
-    NSString *username = nil;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == NO) {
-        username = @"登录/注册";
-    } else {
+    NSString *username = @"登录/注册";
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
         username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     }
-    self.userName = [YWPublic createButtonWithFrame:CGRectZero title:username imageName:nil];
+    self.userName = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionDefault];
+    [self.userName setTitle:username forState:UIControlStateNormal];
+    [self.userName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.userName.tag = ButtonUserName;
     [self.userName addTarget:self action:@selector(pushToMessagePage:) forControlEvents:UIControlEventTouchUpInside];
     self.userName.titleLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:self.userName];
     
     //信息
-    self.messageButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"消息"];
+    self.messageButton = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionDefault];
+    [self.messageButton setImage:[UIImage imageNamed:@"消息"] forState:UIControlStateNormal];
     self.messageButton.tag = ButtonMessage;
     [self.messageButton addTarget:self action:@selector(pushToMessagePage:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.messageButton];
     
     //设置
-    self.settingButton = [YWPublic createButtonWithFrame:CGRectZero title:nil imageName:@"设置"];
+    self.settingButton = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionDefault];
+    [self.settingButton setImage:[UIImage imageNamed:@"设置"] forState:UIControlStateNormal];
     self.settingButton.tag = ButtonSetting;
     [self.settingButton addTarget:self action:@selector(pushToSettingPage:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.settingButton];
@@ -79,15 +81,15 @@
     [self autoLayout];//自动布局
 }
 
-- (void)pushToSettingPage:(UIButton *)sender {
+- (void)pushToSettingPage:(CustomButton *)sender {
     self.buttonClick(sender.tag);
 }
 
-- (void)pushToMessagePage:(UIButton *)sender {
+- (void)pushToMessagePage:(CustomButton *)sender {
     self.buttonClick(sender.tag);
 }
 
-- (void)pushToUserInfo:(UIButton *)sender {
+- (void)pushToUserInfo:(CustomButton *)sender {
     self.buttonClick(sender.tag);
 }
 
@@ -117,6 +119,8 @@
         make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

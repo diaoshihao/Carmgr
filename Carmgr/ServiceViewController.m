@@ -31,41 +31,40 @@
     return _dataArray;
 }
 
-- (UIBarButtonItem *)createBarButtonItem:(CGRect)frame {
-    UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    barButton.frame = frame;
-    [barButton setImage:[UIImage imageNamed:@"后退橙"] forState:UIControlStateNormal];
-    barButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [barButton addTarget:self action:@selector(turnBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:barButton];
-    barButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    return item;
-}
+//- (UIBarButtonItem *)createBarButtonItem:(CGRect)frame {
+//    UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    barButton.frame = frame;
+//    [barButton setImage:[UIImage imageNamed:@"后退橙"] forState:UIControlStateNormal];
+//    barButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [barButton addTarget:self action:@selector(turnBack) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:barButton];
+//    barButton.titleLabel.font = [UIFont systemFontOfSize:15];
+//    return item;
+//}
 
-- (void)turnBack {
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void)turnBack {
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBarHidden = NO;
     
-    self.navigationItem.title = self.service_filter;
+    self.title = self.service_filter;
     
-    self.navigationItem.leftBarButtonItem = [self createBarButtonItem:CGRectMake(0, 0, 60, 40)];
+//    self.navigationItem.leftBarButtonItem = [self createBarButtonItem:CGRectMake(0, 0, 60, 40)];
     
     [self createTableView];
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = NO;
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:YES];
+//    self.navigationController.navigationBarHidden = NO;
+//}
 
 - (void)createTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-49) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

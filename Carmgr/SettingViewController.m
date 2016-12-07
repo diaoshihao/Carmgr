@@ -9,7 +9,8 @@
 #import "SettingViewController.h"
 #import <Masonry.h>
 #import "ServiceDelegateController.h"
-#import "YWLoginViewController.h"
+#import "ViewController.h"
+#import "YWDataBase.h"
 #import "AboutViewController.h"
 
 @interface SettingViewController () <UITableViewDelegate,UITableViewDataSource>
@@ -178,13 +179,15 @@
     }
 }
 
+//退出登录，取消登录状态
 - (void)logout {
-    //退出登录，取消登录状态
+    
+    //自动登录关闭
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoLogin"];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-    UIViewController *loginVC = [[YWLoginViewController alloc] init];
-    UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    [self presentViewController:navigaVC animated:YES completion:nil];
+    
+    [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showLoginPage];
 }
 
 - (void)didReceiveMemoryWarning {

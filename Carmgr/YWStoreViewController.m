@@ -51,14 +51,12 @@
 
 - (void)loadData {
     //参数
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString *city_filter = [self currentCity];
+    
     if (self.storeView.service_filter == nil) {
         self.storeView.service_filter = @"全部";
     }
     NSString *service_filter = self.storeView.service_filter;
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    
     
     //先从数据库中取出缓存数据
     if ([[YWDataBase sharedDataBase] isExistsDataInTable:@"tb_store"]) {
@@ -66,45 +64,41 @@
         [self.storeView.tableView reloadData];//刷新数据
     }
     
-    NSString *urlStr = [[NSString stringWithFormat:kSTORE,username,city_filter,service_filter,token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSArray *merchants = [Interface appgetmerchantslist_city_filter:city_filter service_filter:service_filter];
+    [MyNetworker POST:merchants[InterfaceUrl] parameters:merchants[Parameters] success:^(id responseObject) {
         //停止刷新
         [self.storeView.tableView.mj_header endRefreshing];
         
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-            
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             //插入数据库前删除数据
             [[YWDataBase sharedDataBase] deleteDatabaseFromTable:@"tb_store"];
             [self.storeView.dataArr removeAllObjects];
             
-            for (NSDictionary *dict in dataDict[@"merchants_list"]) {
+            for (NSDictionary *dict in responseObject[@"merchants_list"]) {
                 
                 StoreModel *model = [[StoreModel alloc] initWithDict:dict];
                 [self.storeView.dataArr addObject:model];
-                
                 
                 //插入数据库
                 [[YWDataBase sharedDataBase] insertStoreWithModel:model];
             }
             [self.storeView.tableView reloadData];//刷新数据
-            
         } else {
             [YWPublic pushToLogin:self];
             /*
-            UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
-            [self presentViewController:alertVC animated:YES completion:nil];
+             UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
+             [self presentViewController:alertVC animated:YES completion:nil];
              */
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         //请求数据失败
         [self.storeView.tableView.mj_header endRefreshing];
         
         UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
         [self presentViewController:alertVC animated:YES completion:nil];
     }];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
