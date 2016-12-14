@@ -18,6 +18,10 @@ typedef NS_ENUM(NSUInteger, Request) {
 
 NS_ASSUME_NONNULL_BEGIN
 
++ (NSString *)defaultUsername;
++ (NSString *)defaultPassword;
++ (NSString *)defaultToken;
+
 + (NSString *)username;
 
 + (NSString *)password;

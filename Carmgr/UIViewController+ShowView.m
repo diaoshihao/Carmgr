@@ -11,10 +11,11 @@
 
 @implementation UIViewController (ShowView)
 
-- (void)showAlertMessage:(NSString *)message {
+- (void)showAlertOnlyMessage:(NSString *)message {
     UIAlertController *alertVC = [GeneralControl alertWithTitle:@"提示" message:message];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
+
 
 - (void)alertDismissAfter:(NSUInteger)timeout message:(NSString *)message {
     UIAlertController *alertVC = [GeneralControl alertWithTitle:nil message:message];
@@ -78,7 +79,7 @@
     [[UIApplication sharedApplication].keyWindow addSubview:progressHUD];
     
     // if over time, dismiss HUD automatic
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [HUDIndicatorView stopAnimating];
         [progressHUD removeFromSuperview];
     });
@@ -116,5 +117,26 @@
     return progressHUD;
 }
 
+- (void)clickEnable {
+    self.view.userInteractionEnabled = NO;
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            button.enabled = NO;
+        }
+        NSLog(@"==%@==",view);
+    }
+}
+
+- (void)clickAble {
+    self.view.userInteractionEnabled = YES;
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            button.enabled = YES;
+        }
+        NSLog(@"==%@==",view);
+    }
+}
 
 @end

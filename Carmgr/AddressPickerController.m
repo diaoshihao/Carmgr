@@ -99,8 +99,7 @@
 }
 
 - (void)configRightItemView {
-    self.rightItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.rightItemButton setTitle:@"确定" forState:UIControlStateNormal];
+    self.rightItemButton = [CustomButton buttonWithTitle:@"确定"];
     [self.rightItemButton setTitleColor:[DefineValue mainColor] forState:UIControlStateNormal];
     self.rightItemButton.titleLabel.font = [DefineValue font14];
     self.rightItemButton.hidden = YES;

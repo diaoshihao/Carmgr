@@ -43,7 +43,7 @@
         make.top.mas_equalTo(10);
         make.left.mas_equalTo(20);
         make.bottom.mas_equalTo(-10);
-        make.width.mas_equalTo(self.headImageView.mas_height).multipliedBy(93.0/85);
+        make.width.mas_equalTo(self.headImageView.mas_height).multipliedBy(1.382);
     }];
     
     //服务名

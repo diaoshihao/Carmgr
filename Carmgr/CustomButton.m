@@ -22,6 +22,20 @@
     return button;
 }
 
++ (instancetype)buttonWithTitle:(NSString *)title {
+    CustomButton *button = [super buttonWithType:UIButtonTypeCustom];
+    button.imagePosition = ImagePositionDefault;
+    [button setTitle:title forState:UIControlStateNormal];
+    return button;
+}
+
++ (instancetype)buttonWithImage:(NSString *)imageName {
+    CustomButton *button = [super buttonWithType:UIButtonTypeCustom];
+    button.imagePosition = ImagePositionDefault;
+    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    return button;
+}
+
 + (instancetype)cycleImageButton:(NSString *)imageName {
     CustomButton *button = [super buttonWithType:UIButtonTypeCustom];
     [button setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
@@ -33,6 +47,14 @@
 - (void)setImage:(UIImage *)image forState:(UIControlState)state {
     UIImage *originImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [super setImage:originImage forState:state];
+}
+
+- (void)setNormalColor:(UIColor *)normalColor {
+    [self setTitleColor:normalColor forState:UIControlStateNormal];
+}
+
+- (void)setSeletedColor:(UIColor *)seletedColor {
+    [self setTitleColor:seletedColor forState:UIControlStateSelected];
 }
 
 - (void)imageUpper {

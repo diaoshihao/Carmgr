@@ -9,8 +9,9 @@
 #import "ServiceViewController.h"
 #import "StoreTableViewCell.h"
 #import "StoreModel.h"
-#import <UIImageView+WebCache.h>
+#import "UIViewController+ShowView.h"
 #import "MJRefreshNormalHeader.h"
+#import "Interface.h"
 #import "YWPublic.h"
 #import "StoreDetailViewController.h"
 
@@ -31,37 +32,16 @@
     return _dataArray;
 }
 
-//- (UIBarButtonItem *)createBarButtonItem:(CGRect)frame {
-//    UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    barButton.frame = frame;
-//    [barButton setImage:[UIImage imageNamed:@"后退橙"] forState:UIControlStateNormal];
-//    barButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [barButton addTarget:self action:@selector(turnBack) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:barButton];
-//    barButton.titleLabel.font = [UIFont systemFontOfSize:15];
-//    return item;
-//}
-
-//- (void)turnBack {
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.title = self.service_filter;
-    
-//    self.navigationItem.leftBarButtonItem = [self createBarButtonItem:CGRectMake(0, 0, 60, 40)];
+    self.showShadow = YES;
     
     [self createTableView];
     
 }
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:YES];
-//    self.navigationController.navigationBarHidden = NO;
-//}
 
 - (void)createTableView {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-49) style:UITableViewStylePlain];
@@ -90,7 +70,9 @@
     
     StoreModel *model = self.dataArray[indexPath.row];
     
-    [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.img_path]];
+    [YWPublic loadWebImage:model.img_path didLoad:^(UIImage * _Nonnull image) {
+        cell.headImageView.image = image;
+    }];
     
     cell.storeName.text = model.merchant_name;
     cell.introduce.text = model.merchant_introduce;
@@ -119,23 +101,18 @@
 
 - (void)loadData {
     //参数
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *city_filter = [[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
+    NSString *city_filter = [self currentCity];
     NSString *service_filter = self.service_filter;
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
-    NSString *urlStr = [[NSString stringWithFormat:kSTORE,username,city_filter,service_filter,token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSArray *merchants = [Interface appgetmerchantslist_city_filter:city_filter service_filter:service_filter];
+    [MyNetworker POST:merchants[InterfaceUrl] parameters:merchants[Parameters] success:^(id responseObject) {
         //停止刷新
         [self.tableView.mj_header endRefreshing];
         
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-            
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             [self.dataArray removeAllObjects];
             
-            for (NSDictionary *dict in dataDict[@"merchants_list"]) {
+            for (NSDictionary *dict in responseObject[@"merchants_list"]) {
                 
                 StoreModel *model = [[StoreModel alloc] initWithDict:dict];
                 [self.dataArray addObject:model];
@@ -144,22 +121,16 @@
             if (self.dataArray.count == 0) {
                 [self showAlertView];
             }
-            
         } else {
-            [YWPublic pushToLogin:self];
-            /*
-             UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
-             [self presentViewController:alertVC animated:YES completion:nil];
-             */
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         //请求数据失败
         [self.tableView.mj_header endRefreshing];
         
         UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
         [self presentViewController:alertVC animated:YES completion:nil];
     }];
+    
 }
 
 - (void)showAlertView {

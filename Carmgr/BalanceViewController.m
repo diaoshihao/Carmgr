@@ -25,12 +25,11 @@
 }
 
 - (void)showPage {
-    [self initRightButton];
     [self initView];
 }
 
-- (void)initRightButton {
-    self.rightItemButton = [self buttonWithTitle:@"收入明细"];
+- (void)configRightItemView {
+    self.rightItemButton = [CustomButton buttonWithTitle:@"收入明细"];
     [self.rightItemButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.customNavBar addSubview:self.rightItemButton];
     [self.rightItemButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,7 +41,7 @@
 
 - (void)initView {
     self.balanceView = [[BalanceView alloc] init];
-    self.balanceView.balance = 1000;
+    self.balanceView.balance = 0;
     __weak typeof(self) weakSelf = self;
     self.balanceView.buttonClick = ^(Balance balance) {
         [weakSelf pushToPage:balance];

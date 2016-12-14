@@ -38,13 +38,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self loadData];
     //地图
     [self configMapView];
     //分类
     [self configClassifyView];
     //简介
     [self configCurrentServiceView];
+    
+    [self showNoMerchantAlertView];
 }
 
 - (void)loadData {
@@ -54,11 +55,8 @@
     }
 }
 
-- (CurrentServiceScrollView *)currentServiceView {
-    if (_currentServiceView == nil) {
-        
-    }
-    return _currentServiceView;
+- (void)showNoMerchantAlertView {
+    [self showAlertOnlyMessage:@"您的附近暂未找到相关服务点"];
 }
 
 - (void)configCurrentServiceView {
@@ -100,14 +98,10 @@
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
-- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
-    
-}
-
 #pragma mark - classifyViewDelegate
 //选择分类类型
 - (void)didSelectedCurrentService:(NSString *)currentService {
-    NSLog(@"%@",currentService);
+    [self showNoMerchantAlertView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

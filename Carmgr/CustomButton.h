@@ -18,8 +18,16 @@ typedef NS_ENUM(NSUInteger, ImagePosition) {
 
 @property (nonatomic, assign) ImagePosition imagePosition;
 
+@property (nonatomic, strong) UIColor *normalColor;
+
+@property (nonatomic, strong) UIColor *seletedColor;
+
 + (instancetype)buttonWithType:(UIButtonType)buttonType imagePosition:(ImagePosition)position;
 
 + (instancetype)cycleImageButton:(NSString *)imageName;
+
++ (instancetype)buttonWithTitle:(NSString *)title;
+
++ (instancetype)buttonWithImage:(NSString *)imageName;
 
 @end

@@ -12,6 +12,7 @@
 #import "ServiceDelegateController.h"
 #import "ViewController.h"
 #import <Masonry.h>
+#import "UIViewController+ShowView.h"
 
 @interface YWRegistViewController () <UITextFieldDelegate>
 
@@ -45,7 +46,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.navigationItem.title = @"注册";
+    self.title = @"注册";
+    self.showShadow = YES;
+    [self setShadowColor:[UIColor lightGrayColor]];
         
     [self createInputPhoneNumView];
     
@@ -89,8 +92,6 @@
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:^{
         if (alertVC.title == nil) {
-            //自动登录打开
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
             [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
         }
     }];
@@ -110,11 +111,6 @@
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                [[NSUserDefaults standardUserDefaults] setObject:self.phoneNum.text forKey:@"username"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
-                
-                //自动登录打开
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
                 
                 self.mobile = self.phoneNum.text;
                 [self removeAllSubviews];
@@ -221,9 +217,7 @@
 }
 
 #pragma mark 设置密码
-- (void)createSetSecureView {
-    self.navigationItem.rightBarButtonItem = nil;
-    
+- (void)createSetSecureView {    
     UIView *view = [self.registView createSelectViewAtSuperView:self.view registStep:RegistStepSetSecure];
     self.passwdField = [self.registView createTextFieldAtSuperView:self.view broView:view placeholder:@"请输入密码（长度在6-32个字符之间）"];
     self.repeatPasswd = [self.registView createTextFieldAtSuperView:self.view broView:self.passwdField placeholder:@"请再次输入密码"];
@@ -252,10 +246,15 @@
             
             if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
                 
-                //注册后返回登录界面
                 [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"mobile"];
                 [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"username"];
                 [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
+                //登录成功保存数据
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
+                //自动登录打开
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
+                
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 [self showAlertViewTitle:nil message:@"注册成功"];
                 

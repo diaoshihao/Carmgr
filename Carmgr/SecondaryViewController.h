@@ -14,8 +14,4 @@
 
 @interface SecondaryViewController : BasicViewController
 
-@property (nonatomic, assign) BOOL showShadow;
-
-- (void)configRightItemView;
-
 @end

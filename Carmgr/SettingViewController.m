@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "YWDataBase.h"
 #import "AboutViewController.h"
+#import "YWLoginViewController.h"
 
 @interface SettingViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -187,7 +188,15 @@
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
     
-    [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showLoginPage];
+    [self presentToLogin];
+}
+
+- (void)presentToLogin {
+    YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
+    UINavigationController *loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:loginNVC animated:YES completion:^{
+        [self.tableView reloadData];//刷新状态
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

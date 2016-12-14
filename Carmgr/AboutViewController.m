@@ -26,32 +26,13 @@ typedef NS_ENUM(NSUInteger, LabelType) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self showPage];
-}
-
-- (void)showPage {
-    [self customLeftItem];
-    [self deleteBlackLineFromNaviagtionBar];
+    self.title = @"关于我们";
+    self.showShadow = YES;
     [self layoutViews];
 }
 
-- (void)customLeftItem {
-    self.navigationItem.title = @"关于易务车宝";
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退橙"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-}
-
-- (void)deleteBlackLineFromNaviagtionBar {
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage  alloc] init] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-}
-
-- (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)showPage {
+    [self layoutViews];
 }
 
 - (void)layoutViews {

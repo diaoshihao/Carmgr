@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6F61C1379FDB08E5BE112202 /* libPods-Carmgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F25A80A03943501A53A01A /* libPods-Carmgr.a */; };
 		840EFB2A1D377B0B0070B69A /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840EFB291D377B0B0070B69A /* StoreModel.m */; };
+		8422C5811DFE7BE700934DD2 /* MyFavouriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5801DFE7BE700934DD2 /* MyFavouriteTableViewCell.m */; };
+		8422C5871DFE839900934DD2 /* MyFavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5861DFE839900934DD2 /* MyFavouriteViewController.m */; };
+		8422C58A1DFE851200934DD2 /* MyFavouriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5891DFE851200934DD2 /* MyFavouriteModel.m */; };
 		846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EB1D459DD3004E1BF1 /* ViewController.m */; };
 		846690F01D45C43E004E1BF1 /* PrivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EF1D45C43E004E1BF1 /* PrivateModel.m */; };
 		846690F41D489ABC004E1BF1 /* ClickCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690F31D489ABC004E1BF1 /* ClickCount.m */; };
@@ -161,6 +164,12 @@
 		66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.debug.xcconfig"; sourceTree = "<group>"; };
 		840EFB281D377B0B0070B69A /* StoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreModel.h; sourceTree = "<group>"; };
 		840EFB291D377B0B0070B69A /* StoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
+		8422C57F1DFE7BE700934DD2 /* MyFavouriteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavouriteTableViewCell.h; sourceTree = "<group>"; };
+		8422C5801DFE7BE700934DD2 /* MyFavouriteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavouriteTableViewCell.m; sourceTree = "<group>"; };
+		8422C5851DFE839900934DD2 /* MyFavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyFavouriteViewController.h; path = Carmgr/MyFavouriteViewController.h; sourceTree = "<group>"; };
+		8422C5861DFE839900934DD2 /* MyFavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFavouriteViewController.m; path = Carmgr/MyFavouriteViewController.m; sourceTree = "<group>"; };
+		8422C5881DFE851200934DD2 /* MyFavouriteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyFavouriteModel.h; path = Carmgr/MyFavouriteModel.h; sourceTree = "<group>"; };
+		8422C5891DFE851200934DD2 /* MyFavouriteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFavouriteModel.m; path = Carmgr/MyFavouriteModel.m; sourceTree = "<group>"; };
 		846690EA1D459DD3004E1BF1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		846690EB1D459DD3004E1BF1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		846690EE1D45C43E004E1BF1 /* PrivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateModel.h; path = Carmgr/PrivateModel.h; sourceTree = "<group>"; };
@@ -454,6 +463,7 @@
 				84D9B5C81D3E1813002AC63F /* 个人资料cell */,
 				840CF3A41D32460300CEFFDB /* AddCarCell */,
 				847D09E21D2F6F4D00EBFF37 /* ProgressCell */,
+				8422C57E1DFE7BA100934DD2 /* 我的收藏Cell */,
 				84BAEEF91D3606A800227A15 /* AddCarInfoView.h */,
 				84BAEEFA1D3606A800227A15 /* AddCarInfoView.m */,
 				849886731DE54A0F000B5D4D /* UserHeadView.h */,
@@ -517,6 +527,25 @@
 			name = "服务协议";
 			sourceTree = "<group>";
 		};
+		8422C57D1DFE7B8300934DD2 /* 我的收藏 */ = {
+			isa = PBXGroup;
+			children = (
+				8422C5851DFE839900934DD2 /* MyFavouriteViewController.h */,
+				8422C5861DFE839900934DD2 /* MyFavouriteViewController.m */,
+			);
+			name = "我的收藏";
+			sourceTree = "<group>";
+		};
+		8422C57E1DFE7BA100934DD2 /* 我的收藏Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8422C57F1DFE7BE700934DD2 /* MyFavouriteTableViewCell.h */,
+				8422C5801DFE7BE700934DD2 /* MyFavouriteTableViewCell.m */,
+			);
+			name = "我的收藏Cell";
+			path = Carmgr;
+			sourceTree = "<group>";
+		};
 		846690E91D44B53E004E1BF1 /* 根视图控制器父类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +563,8 @@
 				846690EF1D45C43E004E1BF1 /* PrivateModel.m */,
 				847D09E61D2FA82B00EBFF37 /* ProgressModel.h */,
 				847D09E71D2FA82B00EBFF37 /* ProgressModel.m */,
+				8422C5881DFE851200934DD2 /* MyFavouriteModel.h */,
+				8422C5891DFE851200934DD2 /* MyFavouriteModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1220,6 +1251,7 @@
 		84F3C2A21D17D76600597BFD /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8422C57D1DFE7B8300934DD2 /* 我的收藏 */,
 				84B9C00A1DEBD5BE00BB7CC5 /* 系统消息 */,
 				84B9C0291DEEB6FD00BB7CC5 /* 账户余额 */,
 				847776631D12586C00DE8213 /* 进度 */,
@@ -1642,6 +1674,7 @@
 				840EFB2A1D377B0B0070B69A /* StoreModel.m in Sources */,
 				84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */,
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
+				8422C5811DFE7BE700934DD2 /* MyFavouriteTableViewCell.m in Sources */,
 				84D9B5B81D3C8342002AC63F /* MJRefreshBackNormalFooter.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				847F8A591D5B2F2E00B0A23D /* RateTableViewCell.m in Sources */,
@@ -1657,6 +1690,7 @@
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
 				847F8A491D59678400B0A23D /* StoreDetailViewController.m in Sources */,
 				84D9B5C21D3C8342002AC63F /* UIView+MJExtension.m in Sources */,
+				8422C5871DFE839900934DD2 /* MyFavouriteViewController.m in Sources */,
 				84D9B5B01D3C8342002AC63F /* MJRefreshBackFooter.m in Sources */,
 				84A92A081D266C26001DD20F /* UsedCarCollectionCell.m in Sources */,
 				84B9C0131DEBD5E600BB7CC5 /* MessageModel.m in Sources */,
@@ -1702,6 +1736,7 @@
 				84B9C0141DEBD5E600BB7CC5 /* MessageTableViewCell.m in Sources */,
 				84B9C0531DF0194600BB7CC5 /* CustomSegmentedControl.m in Sources */,
 				84D9B5BE1D3C8342002AC63F /* MJRefreshConst.m in Sources */,
+				8422C58A1DFE851200934DD2 /* MyFavouriteModel.m in Sources */,
 				84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */,
 				84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */,
 				84BAEEF51D36067300227A15 /* LoginView.m in Sources */,

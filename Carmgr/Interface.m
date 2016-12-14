@@ -10,6 +10,16 @@
 
 @implementation Interface
 
++ (NSString *)defaultUsername {
+    return @"15014150833";
+}
++ (NSString *)defaultPassword {
+    return @"12345678";
+}
++ (NSString *)defaultToken {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"defaultToken"];
+}
+
 + (NSString *)appVersion {
     NSString *key = (NSString *)kCFBundleVersionKey;
     // 从Info.plist中取出版本号
@@ -19,14 +29,25 @@
 }
 
 + (NSString *)username {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    if (username != nil) {
+        return username;
+    }
+    return [Interface defaultUsername];
 }
 
 + (NSString *)password {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    if (password != nil) {
+        return password;
+    }
+    return [Interface defaultPassword];
 }
 
 + (NSString *)token {
+    if ([[Interface username] isEqualToString:@"15014150833"]) {
+        return [Interface defaultToken];
+    }
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
 }
 

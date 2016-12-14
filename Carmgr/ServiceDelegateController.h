@@ -6,8 +6,8 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SecondaryViewController.h"
 
-@interface ServiceDelegateController : UIViewController
+@interface ServiceDelegateController : SecondaryViewController
 
 @end

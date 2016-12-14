@@ -12,6 +12,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DefineValue.h"
+#import "CustomButton.h"
 #import <Masonry.h>
 
 @interface BasicViewController : UIViewController
@@ -20,12 +21,20 @@
 
 @property (nonatomic, strong) UILabel *barTitleLabel;
 
-@property (nonatomic, strong) UIButton *leftItemButton;
+@property (nonatomic, strong) CustomButton *leftItemButton;
 
-@property (nonatomic, strong) UIButton *rightItemButton;
+@property (nonatomic, strong) CustomButton *rightItemButton;
 
 @property (nonatomic, strong) UIColor *backColor;
 
 @property (nonatomic, assign) BOOL allowGesture;
+
+@property (nonatomic, assign) BOOL showShadow;
+
+- (void)setShadowColor:(UIColor *)color;
+
+- (void)configRightItemView;
+
+- (void)configLeftItemView;
 
 @end

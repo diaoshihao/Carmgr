@@ -25,8 +25,9 @@
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self customLeftItem];
-    
+    self.title = @"设置密码";
+    self.showShadow = YES;
+    [self setShadowColor:[UIColor lightGrayColor]];
     [self createView];
 }
 
@@ -83,21 +84,6 @@
     if (alertVC.title == nil) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-//导航条
-- (void)customLeftItem {
-    self.navigationItem.title = @"设置密码";
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentMode = UIViewContentModeLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-}
-
-- (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createView {

@@ -62,7 +62,7 @@
         make.left.mas_equalTo(20);
         make.top.mas_equalTo(10);
         make.bottom.mas_equalTo(-10);
-        make.width.mas_equalTo(93);
+        make.width.mas_equalTo(self.headImageView.mas_height).multipliedBy(1.382);
     }];
     
     [self.storeName setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];

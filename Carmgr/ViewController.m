@@ -33,7 +33,7 @@
         //自动登录
         [self autoLogin];
     } else {
-        [self showLoginPage];
+        [self loginDefaultCount];
     }
 }
 
@@ -79,19 +79,51 @@
     NSString *uuid = [Interface uuid];
     
     if (username == nil || password == nil) {
-        [self showLoginPage];
+        [self loginDefaultCount];
         return;
     }
     
     NSArray *login = [Interface applogin:username password:password type:@"0" verf_code:@"" uuid:uuid];
     [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
         if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            //登录成功保存数据
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
+            //自动登录打开
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"token"] forKey:@"token"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+    
             [self showHomePage];
         } else {
-            [self showLoginPage];
+            [self loginDefaultCount];
         }
     } failure:^(NSError *error) {
-        [self showLoginPage];
+        [self loginDefaultCount];
+    }];
+}
+
+//登录默认账号以显示展示性页面（因为后台接口中需要用户名及token）
+- (void)loginDefaultCount {
+    NSString *username = [Interface defaultUsername];
+    NSString *password = [Interface defaultPassword];
+    NSString *uuid = [Interface uuid];
+    
+    NSArray *login = [Interface applogin:username password:password type:@"0" verf_code:@"" uuid:uuid];
+    [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            //默认账户，状态和未登录一致
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];//登录状态
+            //自动登录关闭
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"token"] forKey:@"defaultToken"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [self showHomePage];
+        } else {
+            
+        }
+    } failure:^(NSError *error) {
+        
     }];
 }
 

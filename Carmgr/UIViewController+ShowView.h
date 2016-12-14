@@ -15,7 +15,7 @@
 - (NSString *)currentCity;
 
 
-- (void)showAlertMessage:(NSString *)message;
+- (void)showAlertOnlyMessage:(NSString *)message;
 
 - (void)alertDismissAfter:(NSUInteger)timeout message:(NSString *)message;
 
@@ -34,6 +34,11 @@
 
 //成功提示
 - (UIView *)success:(NSString *)text dismiss:(NSUInteger)timeout;
+
+
+- (void)clickEnable;
+
+- (void)clickAble;
 
 
 @end

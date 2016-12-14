@@ -23,6 +23,7 @@
 #import "CarVerifyViewController.h"
 #import "UserTableViewController.h"
 #import "YWProgressViewController.h"
+#import "MyFavouriteViewController.h"
 
 #import "MyCarView.h"
 #import "MyOrderView.h"
@@ -77,6 +78,7 @@
 
 - (void)initContentView {
     self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
@@ -103,7 +105,11 @@
     self.carView = [[MyCarView alloc] init];
     __weak typeof(self) weakSelf = self;
     self.carView.addCarInfo = ^() {
-        [weakSelf pushToAddCarInfo];
+        if ([weakSelf isLogin]) {
+            [weakSelf pushToAddCarInfo];
+        } else {
+            [weakSelf showAlert];
+        }
     };
     [self.contentView addSubview:self.carView];
     [self.carView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,7 +123,11 @@
     self.orderView = [[MyOrderView alloc] init];
     __weak typeof(self) weakSelf = self;
     self.orderView.progressView.progress = ^(OrderProgress progress) {
-        [weakSelf progress:progress];
+        if ([weakSelf isLogin]) {
+            [weakSelf progress:progress];
+        } else {
+            [weakSelf showAlert];
+        }
     };
     [self.contentView addSubview:self.orderView];
     [self.orderView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -171,7 +181,7 @@
         } else {
             switch (indexPath.row) {
                 case 0:
-                    [self pushToMyCollection];
+                    [self pushToMyFavourite];
                     break;
                 case 1:
                     [self pushToUserInfo];
@@ -197,9 +207,7 @@
     UIAlertAction *sure = [UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self pushToLoginVC];
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:alert completion:nil];
-    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:sure];
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
@@ -250,8 +258,10 @@
 }
 
 #pragma mark 跳转到我的收藏界面
-- (void)pushToMyCollection {
-    
+- (void)pushToMyFavourite {
+    MyFavouriteViewController *myFavourite = [[MyFavouriteViewController alloc] init];
+    myFavourite.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:myFavourite animated:YES];
 }
 
 #pragma mark 跳转到历史业务界面

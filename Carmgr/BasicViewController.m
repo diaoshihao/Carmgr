@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIView *stateView;
 
+@property (nonatomic, strong) UIView *shadow;
+
 @end
 
 @implementation BasicViewController
@@ -36,8 +38,8 @@
     self.view.backgroundColor = [DefineValue separaColor];
     self.navigationController.navigationBarHidden = YES;
     [self customNavigationBar];
-//    [self addGestureForRetrun];
-//    self.allowGesture = YES;
+    [self configLeftItemView];
+    [self configRightItemView];
 }
 
 - (void)customNavigationBar {
@@ -49,10 +51,43 @@
     [self.view addSubview:self.customNavBar];
     
     self.barTitleLabel = [[UILabel alloc] init];
+    self.barTitleLabel.font = [UIFont systemFontOfSize:18];
     [self.customNavBar addSubview:self.barTitleLabel];
     [self.barTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.customNavBar);
     }];
+}
+
+- (void)configLeftItemView {
+    
+}
+- (void)configRightItemView {
+    
+}
+
+- (void)showShadowLine:(BOOL)showShadow {
+    if (!showShadow) {
+        return;
+    }
+    self.shadow = [[UIView alloc] init];
+    self.shadow.backgroundColor = [DefineValue mainColor];
+    [self.customNavBar addSubview:self.shadow];
+    [self.shadow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.and.bottom.mas_equalTo(0);
+        make.height.mas_equalTo([DefineValue pixHeight]);
+    }];
+}
+
+- (void)setShowShadow:(BOOL)showShadow {
+    _showShadow = showShadow;
+    [self showShadowLine:showShadow];
+}
+
+- (void)setShadowColor:(UIColor *)color {
+    if (_showShadow == NO) {
+        self.showShadow = YES;
+    }
+    self.shadow.backgroundColor = color;
 }
 
 - (void)addGestureForRetrun {

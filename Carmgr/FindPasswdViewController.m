@@ -31,7 +31,9 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self customLeftItem];
+    self.title = @"找回密码";
+    self.showShadow = YES;
+    [self setShadowColor:[UIColor lightGrayColor]];
     
     [self createView];
     
@@ -134,20 +136,6 @@
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)customLeftItem {
-    self.navigationItem.title = @"找回密码";
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-}
-
-- (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createView {

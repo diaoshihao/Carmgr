@@ -10,6 +10,9 @@
 #import <Masonry.h>
 #import "YWPublic.h"
 #import "YWTabBarController.h"
+#import "ServiceDelegateController.h"
+#import "UIViewController+ShowView.h"
+#import "DefineValue.h"
 
 @class YWLoginViewController;
 @class YWRegistViewController;
@@ -31,27 +34,14 @@
     UIButton *getVerifyCode;
 }
 
-- (void)customLeftItem {
-    self.navigationItem.title = @"手机号快捷登录";
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-}
-
-- (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self customLeftItem];
-    
+    self.title = @"手机号快捷登录";
+    self.showShadow = YES;
+    [self setShadowColor:[UIColor lightGrayColor]];
     [self createView];
     
 }
@@ -155,16 +145,19 @@
 - (void)login {
     [self.view endEditing:YES];
     
-    self.loginBtn.enabled = NO;//防止用户多次点击
+//    self.loginBtn.enabled = NO;//防止用户多次点击
+    [self clickEnable];
     
     //username=%@&password=%@&type=%d&verf_code=%@&uuid=%@&version=1.0
     
     NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.textField.text,nil,1,self.verifyCodeField.text,uuid];
     
     if (self.textField.text.length == 0 || self.verifyCodeField.text.length == 0) {
+        [self clickAble];
         [self showAlertViewTitle:@"提示" message:@"手机号和验证码不能为空"];
     } else {
         [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [self clickAble];
             
             NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
@@ -182,6 +175,7 @@
             
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self clickAble];
             [self showAlertViewTitle:@"提示" message:@"网络错误"];
         }];
     }
@@ -231,11 +225,13 @@
         make.height.mas_equalTo(44);
     }];
     
-    UILabel *tipsLabel = [[UILabel alloc] init];
-    tipsLabel.numberOfLines = 0;
-    tipsLabel.font = [UIFont systemFontOfSize:14];
-    tipsLabel.text = @"温馨提示：未注册易务车宝账号的手机号，登录时将自动注册易务车宝，代表您已同意《易务车宝用户协议》";
-    tipsLabel.textColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
+    UIButton *tipsLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+    tipsLabel.titleLabel.font = [UIFont systemFontOfSize:14];
+    tipsLabel.titleLabel.numberOfLines = 0;
+    [tipsLabel setTitle:@"温馨提示：未注册易务车宝账号的手机号，登录时将自动注册易务车宝，代表您已同意《易务车宝用户协议》" forState:UIControlStateNormal ];
+    [tipsLabel setTitleColor:[DefineValue mainColor] forState:UIControlStateNormal];
+    [tipsLabel addTarget:self action:@selector(showUserAgreements) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:tipsLabel];
     
     [tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -263,6 +259,11 @@
         make.centerY.mas_equalTo(self.textField);
     }];
     
+}
+
+- (void)showUserAgreements {
+    ServiceDelegateController *serviceVC = [[ServiceDelegateController alloc] init];
+    [self.navigationController pushViewController:serviceVC animated:YES];
 }
 
 #pragma mark - textFieldDelegate

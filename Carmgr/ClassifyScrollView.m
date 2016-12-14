@@ -40,6 +40,7 @@
     self = [super init];
     if (self) {
         self.bounces = NO;
+        self.classifyDelegate = delegate;
         [self configClassifyView];
     }
     return self;

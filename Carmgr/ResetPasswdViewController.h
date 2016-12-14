@@ -6,9 +6,9 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SecondaryViewController.h"
 
-@interface ResetPasswdViewController : UIViewController
+@interface ResetPasswdViewController : SecondaryViewController
 
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *mobile;

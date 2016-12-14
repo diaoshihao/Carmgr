@@ -6,10 +6,10 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 #import "BaseViewController.h"
 
-@interface YWLoginViewController : UIViewController
+@interface YWLoginViewController : BasicViewController
 
 @property (nonatomic) BOOL isFromHome;
 

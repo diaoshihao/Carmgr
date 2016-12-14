@@ -7,7 +7,7 @@
 //
 
 #import "SecondaryViewController.h"
-#import "GeneralControl.h"
+#import "CustomButton.h"
 
 @interface SecondaryViewController ()
 
@@ -19,32 +19,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.backColor = [UIColor whiteColor];
-    [self addLeftItemButton];
-    [self showShadowLine:self.showShadow];
 }
 
-- (void)addLeftItemButton {
-    self.leftItemButton = [GeneralControl imageButton:@"后退橙"];
+- (void)configLeftItemView {
+    self.leftItemButton = [CustomButton buttonWithImage:@"后退橙"];
     [self.leftItemButton addTarget:self action:@selector(popViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.leftItemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.leftItemButton.titleLabel.font = [DefineValue font16];
     [self.customNavBar addSubview:self.leftItemButton];
     [self.leftItemButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(20);
         make.width.mas_equalTo(60);
         make.height.mas_equalTo(44);
-    }];
-}
-
-- (void)showShadowLine:(BOOL)showShadow {
-    if (!showShadow) {
-        return;
-    }
-    UIView *shadow = [[UIView alloc] init];
-    shadow.backgroundColor = [DefineValue mainColor];
-    [self.customNavBar addSubview:shadow];
-    [shadow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.and.bottom.mas_equalTo(0);
-        make.height.mas_equalTo([DefineValue pixHeight]);
     }];
 }
 

@@ -23,7 +23,7 @@
 #import <AMapLocation/AMapLocationKit/AMapLocationManager.h>
 #import "LocationManager.h"
 
-@interface YWHomeViewController () <HomeDataSource>
+@interface YWHomeViewController () <HomeDataSource, AMapLocationManagerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -43,10 +43,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    //默认配置
     [self config];
+    [self userLocal];
+    //实例化加载数据类
     [self instanceDataLoader];
+    //展示页面
     [self showPage];
+    //刷新（获取数据）
     [self refresh];
 }
 
@@ -76,8 +80,10 @@
 //定位
 - (void)userLocal {
     AMapLocationManager *manager = [[AMapLocationManager alloc] init];
+    manager.delegate = self;
     [manager setDesiredAccuracy:kCLLocationAccuracyKilometer];
     [manager setLocationTimeout:2];
+    
     [manager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         if (error)
         {
@@ -97,14 +103,6 @@
         }
 //        [[NSUserDefaults standardUserDefaults] setObject:@"广州" forKey:@"currentcity"];
     }];
-
-    LocationManager *locationManager = [[LocationManager alloc] init];
-    [locationManager starLocation];
-    [locationManager locationCompletion:^(NSString *location) {
-        NSLog(@"location:%@", location);
-    } faile:^(NSError *error) {
-        
-    }];
 }
 
 //实现父类的刷新方法
@@ -112,7 +110,14 @@
     [self.scrollView.mj_header beginRefreshing];
 }
 
-#pragma mark homeDataSource
+#pragma mark - AMapLocationManagerDelegate
+- (void)amapLocationManager:(AMapLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusDenied) {
+        
+    }
+}
+
+#pragma mark - homeDataSource
 //所有请求已完成代理方法
 - (void)requestAllDone {
     [self.scrollView.mj_header endRefreshing];
@@ -181,8 +186,7 @@
 - (void)pushToServicePage:(ServiceModel *)model {
     ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
     serviceVC.service_filter = model.service_name;
-    //显示导航栏阴影线
-    serviceVC.showShadow = YES;
+
     [self.navigationController pushViewController:serviceVC animated:YES];
 }
 
@@ -268,7 +272,7 @@
     }];
 }
 
-//    活动
+//活动
 - (void)configPromotionView {
     __weak typeof(self) weakSelf = self;
     CGFloat promotionHeight = [DefineValue screenWidth] / 2 * 26 / 36;
@@ -300,11 +304,11 @@
     }];
 }
 
-//    二手车
+//二手车
 - (void)configSecondHandCollection {
     __weak typeof(self) weakSelf = self;
     CGFloat secondwidth = [DefineValue screenWidth] / 4;
-    CGFloat height = secondwidth * 124 / 170 + 50;
+    CGFloat height = secondwidth * 124 / 170 + 60;
     self.secondHandCollection = [[SecondHandCollectionView alloc] init];
     self.secondHandCollection.lookMore = ^() {
         [weakSelf lookForMoreSecondHandInfo];

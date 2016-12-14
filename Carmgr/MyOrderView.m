@@ -145,7 +145,6 @@
     [self addSubview:self.progressView];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(separator.mas_bottom);
-        make.height.mas_equalTo(64);
         make.left.and.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
     }];

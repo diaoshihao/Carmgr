@@ -43,7 +43,10 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
+    self.title = @"登录";
+    self.backColor = [UIColor whiteColor];
+    self.showShadow = YES;
+    [self setShadowColor:[UIColor lightGrayColor]];
     [self createView];
     
 }
@@ -59,25 +62,37 @@
 #pragma mark - 创建视图
 
 - (void)createView {
-    [self createBarView];
     [self createTextField];
 }
 
-#pragma mark 导航栏
-- (void)createBarView {
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationItem.title = @"登录";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18]}];
+- (void)configLeftItemView {
+    self.rightItemButton = [CustomButton buttonWithTitle:@"取消"];
+    self.rightItemButton.normalColor = [DefineValue mainColor];
+    self.rightItemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.rightItemButton.titleLabel.font = [DefineValue font16];
+    [self.rightItemButton addTarget:self action:@selector(CancelLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self.customNavBar addSubview:self.rightItemButton];
+    [self.rightItemButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(20);
+        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(44);
+    }];
+}
 
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0];
-    
-    //设置取消按钮
-//    if (!self.cancelBtnHidden) {
-//        self.navigationItem.leftBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"取消" target:self action:@selector(CancelLogin)];
-//    }
-    
-    self.navigationItem.rightBarButtonItem = [self.loginView createBarButtonItem:CGRectMake(0, 0, 60, 40) title:@"注册" target:self action:@selector(pushToRegist)];
-    
+- (void)configRightItemView {
+    self.rightItemButton = [CustomButton buttonWithTitle:@"注册"];
+    self.rightItemButton.normalColor = [DefineValue mainColor];
+    self.rightItemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    self.rightItemButton.titleLabel.font = [DefineValue font16];
+    [self.rightItemButton addTarget:self action:@selector(pushToRegist) forControlEvents:UIControlEventTouchUpInside];
+    [self.customNavBar addSubview:self.rightItemButton];
+    [self.rightItemButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.right.mas_equalTo(-20);
+        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(44);
+    }];
 }
 
 #pragma mark 主要视图
@@ -119,7 +134,9 @@
 #pragma mark - 响应事件
 #pragma mark 取消登录
 - (void)CancelLogin {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark 跳转到注册
@@ -132,7 +149,8 @@
 - (void)login {
     [self.view endEditing:YES];
     
-    self.loginBtn.enabled = NO;//防止用户多次点击
+//    self.loginBtn.enabled = NO;//防止用户多次点击
+    [self clickEnable];
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
         [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
@@ -145,14 +163,16 @@
     NSString *uuid = [Interface uuid];
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
-        self.loginBtn.enabled = YES;
+//        self.loginBtn.enabled = YES;
+        [self clickAble];
         [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
         return;
     }
     
     NSArray *login = [Interface applogin:username password:password type:@"0" verf_code:@"" uuid:uuid];
     [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
-        self.loginBtn.enabled = YES;
+//        self.loginBtn.enabled = YES;
+        [self clickAble];
         if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             //登录成功保存数据
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
@@ -171,7 +191,8 @@
             [self showAlertViewTitle:@"提示" message:@"用户名或密码错误"];
         }
     } failure:^(NSError *error) {
-        self.loginBtn.enabled = YES;
+//        self.loginBtn.enabled = YES;
+        [self clickAble];
         [self showAlertViewTitle:@"提示" message:@"网络错误"];
     }];
 }
@@ -202,8 +223,9 @@
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:^{
         if (alertVC.title == nil) {
-            [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
-//            [self getPrivate];
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
         }
     }];
     
