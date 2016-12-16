@@ -12,6 +12,10 @@
 		8422C5811DFE7BE700934DD2 /* MyFavouriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5801DFE7BE700934DD2 /* MyFavouriteTableViewCell.m */; };
 		8422C5871DFE839900934DD2 /* MyFavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5861DFE839900934DD2 /* MyFavouriteViewController.m */; };
 		8422C58A1DFE851200934DD2 /* MyFavouriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5891DFE851200934DD2 /* MyFavouriteModel.m */; };
+		8422C59B1E02312500934DD2 /* SingleLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C59A1E02312400934DD2 /* SingleLocation.m */; };
+		8422C59E1E027C1800934DD2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C59D1E027C1800934DD2 /* MapViewController.m */; };
+		8422C5A21E027CC800934DD2 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */; };
+		8422C5A51E03E01F00934DD2 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A41E03E01F00934DD2 /* POIAnnotation.m */; };
 		846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EB1D459DD3004E1BF1 /* ViewController.m */; };
 		846690F01D45C43E004E1BF1 /* PrivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EF1D45C43E004E1BF1 /* PrivateModel.m */; };
 		846690F41D489ABC004E1BF1 /* ClickCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690F31D489ABC004E1BF1 /* ClickCount.m */; };
@@ -170,6 +174,14 @@
 		8422C5861DFE839900934DD2 /* MyFavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFavouriteViewController.m; path = Carmgr/MyFavouriteViewController.m; sourceTree = "<group>"; };
 		8422C5881DFE851200934DD2 /* MyFavouriteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyFavouriteModel.h; path = Carmgr/MyFavouriteModel.h; sourceTree = "<group>"; };
 		8422C5891DFE851200934DD2 /* MyFavouriteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFavouriteModel.m; path = Carmgr/MyFavouriteModel.m; sourceTree = "<group>"; };
+		8422C5991E02312400934DD2 /* SingleLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingleLocation.h; path = Carmgr/SingleLocation.h; sourceTree = "<group>"; };
+		8422C59A1E02312400934DD2 /* SingleLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingleLocation.m; path = Carmgr/SingleLocation.m; sourceTree = "<group>"; };
+		8422C59C1E027C1800934DD2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		8422C59D1E027C1800934DD2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		8422C5A01E027CC800934DD2 /* LocationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotationView.h; sourceTree = "<group>"; };
+		8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
+		8422C5A31E03E01E00934DD2 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
+		8422C5A41E03E01F00934DD2 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
 		846690EA1D459DD3004E1BF1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		846690EB1D459DD3004E1BF1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		846690EE1D45C43E004E1BF1 /* PrivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateModel.h; path = Carmgr/PrivateModel.h; sourceTree = "<group>"; };
@@ -546,6 +558,19 @@
 			path = Carmgr;
 			sourceTree = "<group>";
 		};
+		8422C59F1E027C8200934DD2 /* 地图 */ = {
+			isa = PBXGroup;
+			children = (
+				8422C59C1E027C1800934DD2 /* MapViewController.h */,
+				8422C59D1E027C1800934DD2 /* MapViewController.m */,
+				8422C5A01E027CC800934DD2 /* LocationAnnotationView.h */,
+				8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */,
+				8422C5A31E03E01E00934DD2 /* POIAnnotation.h */,
+				8422C5A41E03E01F00934DD2 /* POIAnnotation.m */,
+			);
+			name = "地图";
+			sourceTree = "<group>";
+		};
 		846690E91D44B53E004E1BF1 /* 根视图控制器父类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +942,7 @@
 		84B9C0251DEEB4D600BB7CC5 /* 附近 */ = {
 			isa = PBXGroup;
 			children = (
+				8422C59F1E027C8200934DD2 /* 地图 */,
 				84B9C0551DF4F6E900BB7CC5 /* Model */,
 				84B9C0541DF4F6DA00BB7CC5 /* Views */,
 				84B9C0561DF4F6F400BB7CC5 /* Controllers */,
@@ -1243,6 +1269,8 @@
 				846690FF1D4B5300004E1BF1 /* 引导页 */,
 				84D9B57B1D3B5216002AC63F /* 正则表达式 */,
 				84D9B57A1D3B5203002AC63F /* MD5加密 */,
+				8422C5991E02312400934DD2 /* SingleLocation.h */,
+				8422C59A1E02312400934DD2 /* SingleLocation.m */,
 			);
 			name = Public;
 			path = ..;
@@ -1665,7 +1693,9 @@
 				84B9C0621DF504DB00BB7CC5 /* CurrentServiceModel.m in Sources */,
 				847F8A4D1D597F6300B0A23D /* DetailView.m in Sources */,
 				849886721DE53BE9000B5D4D /* GeneralControl.m in Sources */,
+				8422C5A21E027CC800934DD2 /* LocationAnnotationView.m in Sources */,
 				847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */,
+				8422C59E1E027C1800934DD2 /* MapViewController.m in Sources */,
 				84B9C0591DF4F77800BB7CC5 /* ClassifyScrollView.m in Sources */,
 				84BAEEE91D3605B700227A15 /* YWRegistViewController.m in Sources */,
 				84D9B5B11D3C8342002AC63F /* MJRefreshComponent.m in Sources */,
@@ -1676,6 +1706,7 @@
 				847776691D1258B800DE8213 /* YWStoreViewController.m in Sources */,
 				8422C5811DFE7BE700934DD2 /* MyFavouriteTableViewCell.m in Sources */,
 				84D9B5B81D3C8342002AC63F /* MJRefreshBackNormalFooter.m in Sources */,
+				8422C59B1E02312500934DD2 /* SingleLocation.m in Sources */,
 				84F3C2AF1D1920C400597BFD /* ScanImageViewController.m in Sources */,
 				847F8A591D5B2F2E00B0A23D /* RateTableViewCell.m in Sources */,
 				84D9B5CB1D3E184A002AC63F /* UserInfoCell.m in Sources */,
@@ -1723,6 +1754,7 @@
 				84BAEEE31D36057700227A15 /* FindPasswdViewController.m in Sources */,
 				849886881DE6E06F000B5D4D /* HomeModel.m in Sources */,
 				84B9C04A1DEFB40200BB7CC5 /* HotCityTableViewCell.m in Sources */,
+				8422C5A51E03E01F00934DD2 /* POIAnnotation.m in Sources */,
 				84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */,
 				84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */,
 				84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */,

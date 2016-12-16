@@ -10,6 +10,52 @@
 
 @implementation Interface
 
++ (NSString *)amapApiKey {
+    return @"e69025b7664fa7cb60f866e6f0117be7";
+}
+
++ (NSString *)tableid {
+    return @"5851feb0afdf520ea8f630b7";
+}
+
++ (NSString *)webApiKey {
+    return @"22f36167e71062f0c9fb395241be52ff";
+}
+
++ (NSArray *)nearbyArround:(NSString *)center {
+    NSString *url = @"http://yuntuapi.amap.com/nearby/around";
+    NSDictionary *param = @{@"key":[Interface webApiKey],
+                            @"center":center};
+    return @[url, param];
+}
+
++ (NSArray *)getmerchantaddress:(NSString *)keywords city:(NSString *)city {
+    NSString *url = @"http://yuntuapi.amap.com/datasearch/local";
+    NSDictionary *param = @{@"key":[Interface webApiKey],
+                           @"tableid":[Interface tableid],
+                           @"keywords":keywords,
+                           @"city":city};
+    return @[url, param];
+}
+
++ (NSArray *)maddress:(NSString *)name address:(NSString *)address type:(NSString *)type service_name:(NSString *)service_name price:(NSString *)price {
+    NSString *url = @"http://yuntuapi.amap.com/datamanage/data/create";
+    NSDictionary *data = @{@"_name":name,
+                           @"_address":address,
+                           @"service_type":type,
+                           @"service_name":service_name,
+                           @"price":price};
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&parseError];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSDictionary *param = @{@"key":[Interface webApiKey],
+                            @"tableid":[Interface tableid],
+                            @"loctype":@"2",
+                            @"data":jsonString
+                            };
+    return @[url, param];
+}
+
 + (NSString *)defaultUsername {
     return @"15014150833";
 }
@@ -62,6 +108,10 @@
 
 + (NSString *)action {
     return @".action";
+}
+
++ (NSString *)utf8String:(NSString *)string {
+    return [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 + (NSString *)unicode2ISO88591:(NSString *)string {

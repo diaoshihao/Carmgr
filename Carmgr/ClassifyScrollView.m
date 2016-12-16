@@ -68,9 +68,9 @@
     //delegate
     [self.classifyDelegate didSelectedCurrentService:self.services[segmented.selectedSegmentIndex]];
     //block
-//    if ([self respondsToSelector:@selector(didSelectedCurrentService:)]) {
-//        self.selectService(self.services[segmented.selectedSegmentIndex]);
-//    }
+    if (self.selectService) {
+        self.selectService(self.services[segmented.selectedSegmentIndex]);
+    }
 }
 
 - (void)didSelectedCurrentService:(SelectService)seleted {

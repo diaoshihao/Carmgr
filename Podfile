@@ -5,8 +5,9 @@ platform :ios, '8.0'
 target 'Carmgr' do
     pod 'FMDB', '~> 2.6.2'
     pod 'Masonry', '~> 1.0.1'
-    pod 'AMap2DMap' #高德2D地图 SDK
-    pod 'AMapLocation' #高德定位 SDK
+    pod 'AMap2DMap' #2D地图 SDK
+    pod 'AMapSearch' #搜索服务SDK
+    pod 'AMapLocation' #定位 SDK
     pod 'AFNetworking', '~> 3.1.0'
     pod 'PPNetworkHelper', '~> 0.2.5'
     pod 'SDCycleScrollView', '~> 1.65'

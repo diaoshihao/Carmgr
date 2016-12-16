@@ -19,11 +19,9 @@
 #import "PromotionView.h"
 #import "ServiceCollectionView.h"
 #import "SecondHandCollectionView.h"
+#import "SingleLocation.h"
 
-#import <AMapLocation/AMapLocationKit/AMapLocationManager.h>
-#import "LocationManager.h"
-
-@interface YWHomeViewController () <HomeDataSource, AMapLocationManagerDelegate>
+@interface YWHomeViewController () <HomeDataSource>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -45,13 +43,21 @@
     // Do any additional setup after loading the view.
     //默认配置
     [self config];
-    [self userLocal];
+    
     //实例化加载数据类
     [self instanceDataLoader];
+    
     //展示页面
     [self showPage];
+    
     //刷新（获取数据）
     [self refresh];
+    
+    SingleLocation *singleLocation = [[SingleLocation alloc] init];
+    [singleLocation locationComplete:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        
+    }];
+    
 }
 
 //默认配置
@@ -77,44 +83,9 @@
     self.dataLoader.dataSource = self;
 }
 
-//定位
-- (void)userLocal {
-    AMapLocationManager *manager = [[AMapLocationManager alloc] init];
-    manager.delegate = self;
-    [manager setDesiredAccuracy:kCLLocationAccuracyKilometer];
-    [manager setLocationTimeout:2];
-    
-    [manager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
-        if (error)
-        {
-            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
-            
-            if (error.code == AMapLocationErrorLocateFailed)
-            {
-                return;
-            }
-        }
-        
-        NSLog(@"location:%@", location);
-        
-        if (regeocode)
-        {
-            NSLog(@"reGeocode:%@", regeocode);
-        }
-//        [[NSUserDefaults standardUserDefaults] setObject:@"广州" forKey:@"currentcity"];
-    }];
-}
-
 //实现父类的刷新方法
 - (void)refresh {
     [self.scrollView.mj_header beginRefreshing];
-}
-
-#pragma mark - AMapLocationManagerDelegate
-- (void)amapLocationManager:(AMapLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == kCLAuthorizationStatusDenied) {
-        
-    }
 }
 
 #pragma mark - homeDataSource

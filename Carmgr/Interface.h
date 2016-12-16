@@ -18,9 +18,19 @@ typedef NS_ENUM(NSUInteger, Request) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+//======================地图相关==============================
++ (NSString *)tableid;
++ (NSString *)amapApiKey;
++ (NSArray *)nearbyArround:(NSString *)center;
++ (NSArray *)getmerchantaddress:(NSString *)keywords city:(NSString *)city;
++ (NSArray *)maddress:(NSString *)name address:(NSString *)address type:(NSString *)type service_name:(NSString *)service_name price:(NSString *)price;
+//=============================================================
+
+//======================默认账户，用于显示展示性页面=================
 + (NSString *)defaultUsername;
 + (NSString *)defaultPassword;
 + (NSString *)defaultToken;
+//==============================================================
 
 + (NSString *)username;
 

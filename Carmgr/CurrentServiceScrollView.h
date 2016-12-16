@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *nearbyServices;
 
+- (void)reloadData;
+
 @end

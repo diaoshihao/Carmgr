@@ -45,8 +45,10 @@
     return self;
 }
 
-- (void)setNearbyServices:(NSArray *)nearbyServices {
-    _nearbyServices = nearbyServices;
+- (void)reloadData {
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
     [self configCurrentServiceView];
 }
 
