@@ -5,10 +5,6 @@
 	<key>address</key>
 	<array>
 		<dict>
-			<key>state</key>
-			<string>北京</string>
-			<key>name</key>
-			<string>京</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -40,12 +36,12 @@
 					<string>100000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>京</string>
+			<key>state</key>
+			<string>北京</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>天津</string>
-			<key>name</key>
-			<string>津</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -77,12 +73,12 @@
 					<string>100000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>津</string>
+			<key>state</key>
+			<string>天津</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>河北</string>
-			<key>name</key>
-			<string>冀</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -368,12 +364,12 @@
 					<string>053000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>冀</string>
+			<key>state</key>
+			<string>河北</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>山西</string>
-			<key>name</key>
-			<string>晋</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -606,12 +602,12 @@
 					<string>030500</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>晋</string>
+			<key>state</key>
+			<string>山西</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>内蒙古</string>
-			<key>name</key>
-			<string>蒙</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -836,12 +832,12 @@
 					<string>016000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>蒙</string>
+			<key>state</key>
+			<string>内蒙古</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>辽宁</string>
-			<key>name</key>
-			<string>辽</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1085,12 +1081,12 @@
 					<string>125000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>辽</string>
+			<key>state</key>
+			<string>辽宁</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>吉林</string>
-			<key>name</key>
-			<string>吉</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1244,12 +1240,12 @@
 					<string>133000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>吉</string>
+			<key>state</key>
+			<string>吉林</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>黑龙江</string>
-			<key>name</key>
-			<string>黑</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1513,12 +1509,12 @@
 					<string>165000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>黑</string>
+			<key>state</key>
+			<string>黑龙江</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>上海</string>
-			<key>name</key>
-			<string>沪</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1551,12 +1547,12 @@
 					<string>200000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>沪</string>
+			<key>state</key>
+			<string>上海</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>江苏</string>
-			<key>name</key>
-			<string>苏</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -1796,12 +1792,12 @@
 					<string>223800</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>苏</string>
+			<key>state</key>
+			<string>江苏</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>浙江</string>
-			<key>name</key>
-			<string>浙</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2005,12 +2001,12 @@
 					<string>323000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>浙</string>
+			<key>state</key>
+			<string>浙江</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>安徽</string>
-			<key>name</key>
-			<string>皖</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2289,12 +2285,12 @@
 					<string>366000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>皖</string>
+			<key>state</key>
+			<string>安徽</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>福建</string>
-			<key>name</key>
-			<string>闽</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2473,12 +2469,12 @@
 					<string>352100</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>闽</string>
+			<key>state</key>
+			<string>福建</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>江西</string>
-			<key>name</key>
-			<string>赣</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -2691,12 +2687,12 @@
 					<string>334000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>赣</string>
+			<key>state</key>
+			<string>江西</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>山东</string>
-			<key>name</key>
-			<string>鲁</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3010,12 +3006,12 @@
 					<string>255000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>鲁</string>
+			<key>state</key>
+			<string>山东</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>河南</string>
-			<key>name</key>
-			<string>豫</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3349,12 +3345,12 @@
 					<string>463000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>豫</string>
+			<key>state</key>
+			<string>河南</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>湖北</string>
-			<key>name</key>
-			<string>鄂</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3600,12 +3596,12 @@
 					<string>442400</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>鄂</string>
+			<key>state</key>
+			<string>湖北</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>湖南</string>
-			<key>name</key>
-			<string>湘</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -3871,12 +3867,12 @@
 					<string>416000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>湘</string>
+			<key>state</key>
+			<string>湖南</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>广东</string>
-			<key>name</key>
-			<string>粤</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4211,12 +4207,12 @@
 					<string>527300</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>粤</string>
+			<key>state</key>
+			<string>广东</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>广西</string>
-			<key>name</key>
-			<string>桂</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4469,12 +4465,12 @@
 					<string>532200</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>桂</string>
+			<key>state</key>
+			<string>广西</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>海南</string>
-			<key>name</key>
-			<string>琼</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4521,12 +4517,12 @@
 					<string>572000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>琼</string>
+			<key>state</key>
+			<string>海南</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>重庆</string>
-			<key>name</key>
-			<string>渝</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4580,12 +4576,12 @@
 					<string>400000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>渝</string>
+			<key>state</key>
+			<string>重庆</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>四川</string>
-			<key>name</key>
-			<string>川</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -4980,12 +4976,12 @@
 					<string>615000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>川</string>
+			<key>state</key>
+			<string>四川</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>贵州</string>
-			<key>name</key>
-			<string>黔</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5167,12 +5163,12 @@
 					<string>550100</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>黔</string>
+			<key>state</key>
+			<string>贵州</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>云南</string>
-			<key>name</key>
-			<string>滇</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5465,12 +5461,12 @@
 					<string>674400</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>滇</string>
+			<key>state</key>
+			<string>云南</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>西藏</string>
-			<key>name</key>
-			<string>藏</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5617,12 +5613,12 @@
 					<string>860100</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>藏</string>
+			<key>state</key>
+			<string>西藏</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>陕西</string>
-			<key>name</key>
-			<string>陕</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -5833,12 +5829,12 @@
 					<string>711500</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>陕</string>
+			<key>state</key>
+			<string>陕西</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>甘肃</string>
-			<key>name</key>
-			<string>甘</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6068,12 +6064,12 @@
 					<string>747000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>甘</string>
+			<key>state</key>
+			<string>甘肃</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>青海</string>
-			<key>name</key>
-			<string>青</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6200,12 +6196,12 @@
 					<string>817000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>青</string>
+			<key>state</key>
+			<string>青海</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>宁夏</string>
-			<key>name</key>
-			<string>宁</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6280,12 +6276,12 @@
 					<string>751700</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>宁</string>
+			<key>state</key>
+			<string>宁夏</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>新疆</string>
-			<key>name</key>
-			<string>新</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6564,12 +6560,12 @@
 					<string>831300</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>新</string>
+			<key>state</key>
+			<string>新疆</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>香港</string>
-			<key>name</key>
-			<string>港</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6583,12 +6579,12 @@
 					<string>000000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>港</string>
+			<key>state</key>
+			<string>香港</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>澳门</string>
-			<key>name</key>
-			<string>澳</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6602,12 +6598,12 @@
 					<string>000000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>澳</string>
+			<key>state</key>
+			<string>澳门</string>
 		</dict>
 		<dict>
-			<key>state</key>
-			<string>台湾</string>
-			<key>name</key>
-			<string>台</string>
 			<key>citys</key>
 			<array>
 				<dict>
@@ -6621,6 +6617,10 @@
 					<string>000000</string>
 				</dict>
 			</array>
+			<key>name</key>
+			<string>台</string>
+			<key>state</key>
+			<string>台湾</string>
 		</dict>
 	</array>
 </dict>

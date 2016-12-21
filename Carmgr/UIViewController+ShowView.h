@@ -36,9 +36,9 @@
 - (UIView *)success:(NSString *)text dismiss:(NSUInteger)timeout;
 
 
-- (void)clickEnable;
+- (void)clickDisable;
 
-- (void)clickAble;
+- (void)clickEnable;
 
 
 @end

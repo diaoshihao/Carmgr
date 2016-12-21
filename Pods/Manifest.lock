@@ -33,6 +33,7 @@ PODS:
   - SDWebImage (3.8.0):
     - SDWebImage/Core (= 3.8.0)
   - SDWebImage/Core (3.8.0)
+  - TZImagePickerController (1.7.7)
   - YYCache (1.0.4)
 
 DEPENDENCIES:
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - Masonry (~> 1.0.1)
   - PPNetworkHelper (~> 0.2.5)
   - SDCycleScrollView (~> 1.65)
+  - TZImagePickerController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -56,8 +58,9 @@ SPEC CHECKSUMS:
   PPNetworkHelper: baa8e6c4499db4a2287b5c97f1dc67cdcb61f704
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 7d9fe229266696de91eadf840c77ca15efd4bbd2
+  TZImagePickerController: 3e337576e388dd9fbf342220ab8ee258d0659370
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: ca4934d051fda0063c49130d848a3fe01fbb27c5
+PODFILE CHECKSUM: 462d94764ad835b7bd7c61aaf840fad5f39f6a4a
 
 COCOAPODS: 1.0.1

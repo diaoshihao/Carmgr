@@ -7,10 +7,13 @@
 //
 
 #import "SecondaryViewController.h"
+#import "AddressManager.h"
 
 typedef void(^returnAddress)(NSArray *address);
 
 @interface AddressPickerController : SecondaryViewController
+
+@property (nonatomic, assign) BOOL hideArea;
 
 @property (nonatomic, copy) returnAddress block;
 

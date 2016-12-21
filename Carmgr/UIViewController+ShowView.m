@@ -117,7 +117,7 @@
     return progressHUD;
 }
 
-- (void)clickEnable {
+- (void)clickDisable {
     self.view.userInteractionEnabled = NO;
     for (UIView *view in self.view.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
@@ -128,7 +128,7 @@
     }
 }
 
-- (void)clickAble {
+- (void)clickEnable {
     self.view.userInteractionEnabled = YES;
     for (UIView *view in self.view.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {

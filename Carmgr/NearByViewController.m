@@ -105,7 +105,7 @@
     [self showAlertOnlyMessage:@"请求失败，请检查网络"];
 }
 
-
+//CurrentServiceView    简介
 - (void)configCurrentServiceView {
     self.currentServiceView = [[CurrentServiceScrollView alloc] init];
     self.currentServiceView.nearbyServices = self.services;
@@ -129,12 +129,12 @@
     }];
 }
 
-//instance mapView
+//instance mapView    地图
 - (void)configMapView {
     self.mapView = [[MapViewController alloc] init];
     self.mapView.tableID = [Interface tableid];//周边检索必须赋值
     
-    //周边搜索block
+    //周边搜索block（初次进入地图界面）
     [self.mapView updatingLocation:^(CLLocationCoordinate2D record) {
         //执行一次周边搜索
         static dispatch_once_t onceToken;
@@ -150,11 +150,13 @@
     [self.mapView dataDidLoad:^(NSArray *data) {
         [self loadData:data];
     }];
+    
     [self addChildViewController:self.mapView];
     self.mapView.view.frame = CGRectMake(0, 64, [DefineValue screenWidth], [DefineValue screenHeight] - 64);
     [self.view addSubview:self.mapView.view];
 }
 
+//加载数据
 - (void)loadData:(NSArray *)datas {
     [self.services removeAllObjects];
     
@@ -167,13 +169,13 @@
         }
     }
     
+    //重新加载服务介绍页面
     [self.currentServiceView reloadData];
 }
 
 #pragma mark - classifyViewDelegate
 //选择分类类型
 - (void)didSelectedCurrentService:(NSString *)currentService {
-//    [self loadData:currentService];
     //发起周边检索
     [self.mapView startAroundSearch:currentService center:_recode];
 }

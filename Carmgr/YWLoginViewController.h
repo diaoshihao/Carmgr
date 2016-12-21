@@ -11,9 +11,7 @@
 
 @interface YWLoginViewController : BasicViewController
 
-@property (nonatomic) BOOL isFromHome;
-
-@property (nonatomic, strong) BaseViewController *fromVC;
+@property (nonatomic) BOOL showHomePageWhileDone;
 
 @property (nonatomic, assign) BOOL cancelBtnHidden;
 

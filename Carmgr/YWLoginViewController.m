@@ -149,8 +149,7 @@
 - (void)login {
     [self.view endEditing:YES];
     
-//    self.loginBtn.enabled = NO;//防止用户多次点击
-    [self clickEnable];
+    [self clickDisable];
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
         [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
@@ -163,16 +162,14 @@
     NSString *uuid = [Interface uuid];
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
-//        self.loginBtn.enabled = YES;
-        [self clickAble];
+        [self clickEnable];
         [self showAlertViewTitle:@"提示" message:@"用户名和密码不能为空"];
         return;
     }
     
     NSArray *login = [Interface applogin:username password:password type:@"0" verf_code:@"" uuid:uuid];
     [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
-//        self.loginBtn.enabled = YES;
-        [self clickAble];
+        [self clickEnable];
         if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             //登录成功保存数据
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
@@ -191,8 +188,7 @@
             [self showAlertViewTitle:@"提示" message:@"用户名或密码错误"];
         }
     } failure:^(NSError *error) {
-//        self.loginBtn.enabled = YES;
-        [self clickAble];
+        [self clickEnable];
         [self showAlertViewTitle:@"提示" message:@"网络错误"];
     }];
 }
@@ -222,30 +218,14 @@
 - (void)timerFireMethod:(NSTimer *)timer {
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:^{
-        if (alertVC.title == nil) {
+        if (alertVC.title == nil) {//login success
             [self dismissViewControllerAnimated:YES completion:^{
-                
+                if (self.showHomePageWhileDone) {
+                    [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
+                }
             }];
         }
     }];
-    
-    
-//    if (alertVC.title == nil) {//登录成功
-//        if (self.isFromHome) { //token失效,登录后返回首页并自动刷新
-//            self.isFromHome = NO;//重置状态
-//            [self dismissViewControllerAnimated:YES completion:^{
-//                [self getPrivate];
-//                [self.fromVC refresh];
-//            }];
-//        } else {
-//            [self dismissViewControllerAnimated:YES completion:^{
-//                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"] == YES) {
-//                }
-//                [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
-//                [self getPrivate];
-//            }];
-//        }
-//    }
 }
 
 #pragma mark 找回密码

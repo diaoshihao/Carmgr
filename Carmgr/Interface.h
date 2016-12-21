@@ -49,11 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)appregister:(NSString *)username password:(NSString *)password mobile:(NSString *)mobile;
 
 //send verf_code
-//type = 0：表示车主用户；1：表示商户
-+ (NSArray *)appsendverfcode:(NSString *)username uuid:(NSString *)uuid;
+//type == 0：注册；1：登录；2:找回密码
++ (NSArray *)appsendverfcode:(NSString *)username type:(NSString *)type uuid:(NSString *)uuid;
 
 //check verf_code
-//type == 0：注册；1：登录；2:找回密码
 + (NSArray *)appcheckverfcode:(NSString *)username mobile:(NSString *)mobile verf_code:(NSString *)verf_code type:(NSString *)type uuid:(NSString *)uuid;
 
 //appresetpassword

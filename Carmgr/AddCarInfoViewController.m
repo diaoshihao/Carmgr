@@ -10,7 +10,10 @@
 #import "AddCarInfoCell.h"
 #import "AddCarInfoView.h"
 #import <Masonry.h>
-#import "YWPublic.h"
+#import "Interface.h"
+#import "UIViewController+ShowView.h"
+#import "AddressPickerController.h"
+#import "AddressManager.h"
 
 @interface AddCarInfoViewController () <UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
@@ -82,9 +85,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self customLeftItem];
+    self.title = @"添加车辆";
     
     self.infoView = [[AddCarInfoView alloc] init];
     self.infoView.target = self;
@@ -98,6 +100,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     // 监听键盘即将消失的事件. UIKeyboardWillHideNotification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    AddressManager *manager = [AddressManager manager];
+    
+//    NSLog(@"%@",[manager allAddressDict]);
+    
+//    NSLog(@"%@",[manager provinceDictFromProvince:@"广东"]);
+//    
+//    NSLog(@"%@",[manager abbreviationFromProvince:@"广东"]);
+//    
+//    NSLog(@"%@",[manager cityDictsFromProvince:@"广东"]);
+//    
+//    NSLog(@"%@",[manager cityListFromProvince:@"广东"]);
+//    
+//    NSLog(@"%@",[manager areaDictsFromCity:@"广州" province:@"广东"]);
+//    
+//    NSLog(@"%@",[manager areaListFromCity:@"广州" province:@"广东"]);
     
 }
 
@@ -150,22 +169,14 @@
 - (void)checkCarInfo {
     [self.view endEditing:YES];
     
-    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    
-    NSString *urlStr = [[NSString stringWithFormat:kADDCAR,userName,(long)self.numberType.selectedSegmentIndex,self.cityLabel.text,self.vehicle_number.text,self.engine_number.text,self.frame_number.text,self.buy_insu_time.text,self.first_insu_time.text,self.travel_mileage.text,self.comments.text,token]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+    NSArray *addCarInfo = [Interface appaddcarinfo_car_type:[NSString stringWithFormat:@"%ld",self.numberType.selectedSegmentIndex] city:self.cityLabel.text vehicle_number:self.vehicle_number.text engine_number:self.engine_number.text frame_number:self.frame_number.text buy_insu_time:self.buy_insu_time.text first_mantain_time:self.first_insu_time.text travel_mileage:self.travel_mileage.text comments:self.comments.text];
+    [MyNetworker POST:addCarInfo[InterfaceUrl] parameters:addCarInfo[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             [self showAlertViewTitle:nil messae:@"添加车辆成功"];
         } else {
             [self showAlertViewTitle:@"提示" messae:@"添加车辆失败"];
         }
-        NSLog(@"%@",dataDict);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self showAlertViewTitle:@"提示" messae:@"网络错误"];
     }];
 
@@ -220,6 +231,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1) {
+        AddressPickerController *addressPicker = [[AddressPickerController alloc] init];
+        addressPicker.hideArea = YES;
+        [addressPicker selectedAddress:^(NSArray *address) {
+            self.cityLabel.text = address.firstObject;
+        }];
+        [self.navigationController pushViewController:addressPicker animated:YES];
+    }
 }
 
 #pragma mark - 右滑返回上一页

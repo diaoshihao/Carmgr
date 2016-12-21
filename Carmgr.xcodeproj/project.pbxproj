@@ -16,6 +16,10 @@
 		8422C59E1E027C1800934DD2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C59D1E027C1800934DD2 /* MapViewController.m */; };
 		8422C5A21E027CC800934DD2 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */; };
 		8422C5A51E03E01F00934DD2 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A41E03E01F00934DD2 /* POIAnnotation.m */; };
+		8422C5A81E07C11500934DD2 /* MyProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A71E07C11300934DD2 /* MyProgressView.m */; };
+		8422C5AC1E07EA9600934DD2 /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5AB1E07EA9600934DD2 /* PreviewCollectionViewCell.m */; };
+		8422C5AF1E07EB2D00934DD2 /* PhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5AE1E07EB2D00934DD2 /* PhotoPreviewController.m */; };
+		8422C5B21E0A208700934DD2 /* AddressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5B11E0A208700934DD2 /* AddressManager.m */; };
 		846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EB1D459DD3004E1BF1 /* ViewController.m */; };
 		846690F01D45C43E004E1BF1 /* PrivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690EF1D45C43E004E1BF1 /* PrivateModel.m */; };
 		846690F41D489ABC004E1BF1 /* ClickCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 846690F31D489ABC004E1BF1 /* ClickCount.m */; };
@@ -182,6 +186,14 @@
 		8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
 		8422C5A31E03E01E00934DD2 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		8422C5A41E03E01F00934DD2 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		8422C5A61E07C11300934DD2 /* MyProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyProgressView.h; path = Carmgr/MyProgressView.h; sourceTree = "<group>"; };
+		8422C5A71E07C11300934DD2 /* MyProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyProgressView.m; path = Carmgr/MyProgressView.m; sourceTree = "<group>"; };
+		8422C5AA1E07EA9600934DD2 /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewCollectionViewCell.h; path = Carmgr/PreviewCollectionViewCell.h; sourceTree = "<group>"; };
+		8422C5AB1E07EA9600934DD2 /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewCollectionViewCell.m; path = Carmgr/PreviewCollectionViewCell.m; sourceTree = "<group>"; };
+		8422C5AD1E07EB2D00934DD2 /* PhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoPreviewController.h; path = Carmgr/PhotoPreviewController.h; sourceTree = "<group>"; };
+		8422C5AE1E07EB2D00934DD2 /* PhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPreviewController.m; path = Carmgr/PhotoPreviewController.m; sourceTree = "<group>"; };
+		8422C5B01E0A208700934DD2 /* AddressManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressManager.h; path = Carmgr/AddressManager.h; sourceTree = "<group>"; };
+		8422C5B11E0A208700934DD2 /* AddressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressManager.m; path = Carmgr/AddressManager.m; sourceTree = "<group>"; };
 		846690EA1D459DD3004E1BF1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		846690EB1D459DD3004E1BF1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		846690EE1D45C43E004E1BF1 /* PrivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateModel.h; path = Carmgr/PrivateModel.h; sourceTree = "<group>"; };
@@ -486,6 +498,8 @@
 				8498867A1DE586C1000B5D4D /* MyOrderView.m */,
 				84B9C02E1DEEB90800BB7CC5 /* BalanceView.h */,
 				84B9C02F1DEEB90800BB7CC5 /* BalanceView.m */,
+				8422C5A61E07C11300934DD2 /* MyProgressView.h */,
+				8422C5A71E07C11300934DD2 /* MyProgressView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -569,6 +583,17 @@
 				8422C5A41E03E01F00934DD2 /* POIAnnotation.m */,
 			);
 			name = "地图";
+			sourceTree = "<group>";
+		};
+		8422C5A91E07EA5600934DD2 /* 图片选择 */ = {
+			isa = PBXGroup;
+			children = (
+				8422C5AD1E07EB2D00934DD2 /* PhotoPreviewController.h */,
+				8422C5AE1E07EB2D00934DD2 /* PhotoPreviewController.m */,
+				8422C5AA1E07EA9600934DD2 /* PreviewCollectionViewCell.h */,
+				8422C5AB1E07EA9600934DD2 /* PreviewCollectionViewCell.m */,
+			);
+			name = "图片选择";
 			sourceTree = "<group>";
 		};
 		846690E91D44B53E004E1BF1 /* 根视图控制器父类 */ = {
@@ -978,6 +1003,8 @@
 				84B9C03A1DEECBFF00BB7CC5 /* citydict.plist */,
 				84B9C03B1DEECBFF00BB7CC5 /* LocationManager.h */,
 				84B9C03C1DEECBFF00BB7CC5 /* LocationManager.m */,
+				8422C5B01E0A208700934DD2 /* AddressManager.h */,
+				8422C5B11E0A208700934DD2 /* AddressManager.m */,
 			);
 			name = "城市选择";
 			sourceTree = "<group>";
@@ -1259,6 +1286,7 @@
 		84F3C29B1D17CC8500597BFD /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				8422C5A91E07EA5600934DD2 /* 图片选择 */,
 				84B9C0341DEECBD500BB7CC5 /* 城市选择 */,
 				84B9C01E1DEC30BF00BB7CC5 /* 自定义控件 */,
 				8498867F1DE6C432000B5D4D /* 网络请求 */,
@@ -1673,6 +1701,7 @@
 				846690F41D489ABC004E1BF1 /* ClickCount.m in Sources */,
 				84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */,
 				84BAEF0A1D36071A00227A15 /* SettingViewController.m in Sources */,
+				8422C5A81E07C11500934DD2 /* MyProgressView.m in Sources */,
 				8498866F1DE53B0A000B5D4D /* UIViewController+ShowView.m in Sources */,
 				84D9B5B91D3C8342002AC63F /* MJRefreshBackStateFooter.m in Sources */,
 				84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */,
@@ -1733,6 +1762,7 @@
 				84B9C04D1DEFB44900BB7CC5 /* SearchResultTableViewController.m in Sources */,
 				84BF0B191D531920000EDCC5 /* UIWebViewController.m in Sources */,
 				849886601DE2A3E9000B5D4D /* AboutViewController.m in Sources */,
+				8422C5AC1E07EA9600934DD2 /* PreviewCollectionViewCell.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
 				84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */,
@@ -1757,6 +1787,7 @@
 				8422C5A51E03E01F00934DD2 /* POIAnnotation.m in Sources */,
 				84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */,
 				84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */,
+				8422C5AF1E07EB2D00934DD2 /* PhotoPreviewController.m in Sources */,
 				84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */,
 				84D9B5B51D3C8342002AC63F /* MJRefreshAutoNormalFooter.m in Sources */,
 				8498867B1DE586C1000B5D4D /* MyOrderView.m in Sources */,
@@ -1788,6 +1819,7 @@
 				846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */,
 				84D9B5AF1D3C8342002AC63F /* MJRefreshAutoFooter.m in Sources */,
 				84B9C05F1DF4FFE600BB7CC5 /* CurrentServiceView.m in Sources */,
+				8422C5B21E0A208700934DD2 /* AddressManager.m in Sources */,
 				847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

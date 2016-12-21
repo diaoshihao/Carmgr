@@ -193,6 +193,7 @@
 
 - (void)presentToLogin {
     YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
+    loginVC.showHomePageWhileDone = YES;
     UINavigationController *loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:loginNVC animated:YES completion:^{
         [self.tableView reloadData];//刷新状态

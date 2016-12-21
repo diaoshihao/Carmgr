@@ -43,7 +43,6 @@
     self.showShadow = YES;
     [self setShadowColor:[UIColor lightGrayColor]];
     [self createView];
-    
 }
 
 - (void)showAlertViewTitle:(NSString *)title message:(NSString *)message {
@@ -72,27 +71,30 @@
 - (void)getVerifyCode {
     [self.textField resignFirstResponder];
     
-    uuid = [[NSUUID UUID] UUIDString];
-    
     if (![RegularTools validateMobile:self.textField.text]) {//手机号验证
+        
         [self showAlertViewTitle:@"提示" message:@"请输入正确的手机号"];
-    } else {
-        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.textField.text,1,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                [self showAlertViewTitle:@"提示" message:@"验证码已发送，请注意查收"];
-                [self startTimer];
-                
-            } else {
-                [self showAlertViewTitle:@"提示" message:@"发送验证码失败，请检查手机号"];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self showAlertViewTitle:@"提示" message:@"网络错误"];
-        }];
+        
+        return;
     }
+    
+    uuid = [Interface uuid];
+    
+    //type == 0：注册；1：登录；2:找回密码
+    NSArray *sendverify = [Interface appsendverfcode:self.textField.text type:@"1" uuid:uuid];
+    [MyNetworker POST:sendverify[InterfaceUrl] parameters:sendverify[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            [self showAlertViewTitle:@"提示" message:@"验证码已发送，请注意查收"];
+            [self startTimer];
+            
+        } else {
+            [self showAlertViewTitle:@"提示" message:@"发送验证码失败，请检查手机号"];
+        }
+        
+    } failure:^(NSError *error) {
+        [self showAlertViewTitle:@"提示" message:@"网络错误"];
+    }];
+    
 }
 
 - (void)startTimer {
@@ -121,22 +123,36 @@
         [self showAlertViewTitle:@"提示" message:@"请输入正确的4位验证码"];
         return;
     }
-    //type == 0：注册；1：登录；2:找回密码
-    [YWPublic afPOST:[NSString stringWithFormat:kCHECKVERFCODE,self.textField.text,self.textField.text,self.verifyCodeField.text,1,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+    
+    //    //type == 0：注册；1：登录；2:找回密码
+    NSArray *checkcode = [Interface appcheckverfcode:self.textField.text mobile:self.textField.text verf_code:self.verifyCodeField.text type:@"1" uuid:uuid];
+    [MyNetworker POST:checkcode[InterfaceUrl] parameters:checkcode[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             [self login];
             
         } else {
             [self showAlertViewTitle:@"提示" message:@"验证码错误，请重新输入"];
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self showAlertViewTitle:@"提示" message:@"网络错误"];
-        NSLog(@"%@",error);
     }];
+    
+//    //type == 0：注册；1：登录；2:找回密码
+//    [YWPublic afPOST:[NSString stringWithFormat:kCHECKVERFCODE,self.textField.text,self.textField.text,self.verifyCodeField.text,1,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        
+//        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+//            [self login];
+//            
+//        } else {
+//            [self showAlertViewTitle:@"提示" message:@"验证码错误，请重新输入"];
+//        }
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        [self showAlertViewTitle:@"提示" message:@"网络错误"];
+//        NSLog(@"%@",error);
+//    }];
     
 }
 
@@ -145,40 +161,34 @@
 - (void)login {
     [self.view endEditing:YES];
     
-//    self.loginBtn.enabled = NO;//防止用户多次点击
-    [self clickEnable];
-    
-    //username=%@&password=%@&type=%d&verf_code=%@&uuid=%@&version=1.0
-    
-    NSString *loginURL = [NSString stringWithFormat:kLOGIN,self.textField.text,nil,1,self.verifyCodeField.text,uuid];
-    
+    [self clickDisable];
+        
     if (self.textField.text.length == 0 || self.verifyCodeField.text.length == 0) {
-        [self clickAble];
+        [self clickEnable];
         [self showAlertViewTitle:@"提示" message:@"手机号和验证码不能为空"];
-    } else {
-        [YWPublic afPOST:loginURL parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self clickAble];
-            
-            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                
-                //登录成功后,保存数据,返回个人中心
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.textField.text forKey:@"username"];
-                [[NSUserDefaults standardUserDefaults] setObject:dataDict[@"token"] forKey:@"token"];
-                
-                [self showAlertViewTitle:nil message:@"登录成功"];
-            } else {
-                [self showAlertViewTitle:@"提示" message:@"登录失败，请检查验证码"];
-            }
-            
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self clickAble];
-            [self showAlertViewTitle:@"提示" message:@"网络错误"];
-        }];
+        return;
     }
+    
+    NSArray *login = [Interface applogin:self.textField.text password:@"" type:@"1" verf_code:self.verifyCodeField.text uuid:uuid];
+    [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
+        [self clickEnable];
+        
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            
+            //登录成功后,保存数据,返回个人中心
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.textField.text forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"token"] forKey:@"token"];
+            
+            [self showAlertViewTitle:nil message:@"登录成功"];
+        } else {
+            [self showAlertViewTitle:@"提示" message:@"登录失败，请检查验证码"];
+        }
+    } failure:^(NSError *error) {
+        [self clickEnable];
+        [self showAlertViewTitle:@"提示" message:@"网络错误"];
+    }];
+    
 }
 
 - (void)createView {
@@ -186,6 +196,7 @@
     
     self.textField = [YWPublic createTextFieldWithFrame:CGRectZero placeholder:@"请输入手机号码" isSecure:NO];
     self.textField.clearButtonMode = UITextFieldViewModeNever;
+    self.textField.keyboardType = UIKeyboardTypePhonePad;
     self.textField.returnKeyType = UIReturnKeySend;
     self.textField.font = font;
     self.textField.delegate = self;
@@ -215,7 +226,7 @@
     self.loginBtn = [YWPublic createButtonWithFrame:CGRectZero title:@"验证并登录" imageName:nil];
     self.loginBtn.titleLabel.font = font;
     [self.loginBtn setBackgroundImage:[UIImage imageNamed:@"圆角矩形-1"] forState:UIControlStateNormal];
-    [self.loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginBtn addTarget:self action:@selector(commitVerifyCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.loginBtn];
         
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {

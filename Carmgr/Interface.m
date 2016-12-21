@@ -75,26 +75,24 @@
 }
 
 + (NSString *)username {
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    if (username != nil) {
-        return username;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     }
     return [Interface defaultUsername];
 }
 
 + (NSString *)password {
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-    if (password != nil) {
-        return password;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     }
     return [Interface defaultPassword];
 }
 
 + (NSString *)token {
-    if ([[Interface username] isEqualToString:@"15014150833"]) {
-        return [Interface defaultToken];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     }
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    return [Interface defaultToken];
 }
 
 + (NSString *)uuid {
@@ -106,24 +104,24 @@
     return @"http://112.74.13.51:8080/carmgr/";
 }
 
-+ (NSString *)action {
-    return @".action";
-}
-
 + (NSString *)utf8String:(NSString *)string {
     return [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 + (NSString *)unicode2ISO88591:(NSString *)string {
+    if (string == nil) {
+        return nil;
+    }
     NSStringEncoding enc =      CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingISOLatin1);
     return [NSString stringWithCString:[string UTF8String] encoding:enc];
 }
 
 + (NSArray *)appsendverfcode:(NSString *)username
+                        type:(NSString *)type
                         uuid:(NSString *)uuid {
     NSString *url = [NSString stringWithFormat:@"%@appsendverfcode.action",[Interface url]];
     NSDictionary *param = @{@"username":username,
-                            @"type":@"0",
+                            @"type":type,
                             @"uuid":uuid,
                             @"version":[Interface appVersion]};
     return @[url,param];

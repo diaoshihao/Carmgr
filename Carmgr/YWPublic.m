@@ -107,8 +107,6 @@
 
 + (void)pushToLogin:(UIViewController *)VC {
     YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
-    loginVC.isFromHome = YES;
-    loginVC.fromVC = (BaseViewController *)VC;
     UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     [VC presentViewController:navigaVC animated:YES completion:nil];
 }
@@ -121,8 +119,6 @@
     
     UIAlertAction *login = [UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         YWLoginViewController *loginVC = [[YWLoginViewController alloc] init];
-        loginVC.isFromHome = YES;
-        loginVC.fromVC = (BaseViewController *)VC;
         UINavigationController *navigaVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
         [VC presentViewController:navigaVC animated:YES completion:nil];
     }];

@@ -19,12 +19,9 @@
 /////////////////////////////////////////////////////////////
 
 #import "SecondaryViewController.h"
-#import "MyOrderView.h"
 
 @interface YWProgressViewController : SecondaryViewController
 
 @property (nonatomic, strong) NSString *currentFilter;
-
-@property (nonatomic, assign) OrderProgress currentProgress;
 
 @end

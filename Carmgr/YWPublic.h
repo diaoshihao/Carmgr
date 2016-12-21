@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UITextField *)createTextFieldWithFrame:(CGRect)frame placeholder:(NSString *)placeholder isSecure:(BOOL)isSecure;
 
 //push登录
-+ (void)pushToLogin:(UIViewController *)VC;
+//+ (void)pushToLogin:(UIViewController *)VC;
 
 + (UIAlertController *)showReLoginAlertViewAt:(UIViewController *)VC;
 

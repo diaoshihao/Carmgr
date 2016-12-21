@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyOrderView.h"
+#import "MyProgressView.h"
 
 @interface ProgressTableViewCell : UITableViewCell
 

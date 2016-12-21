@@ -11,4 +11,5 @@ target 'Carmgr' do
     pod 'AFNetworking', '~> 3.1.0'
     pod 'PPNetworkHelper', '~> 0.2.5'
     pod 'SDCycleScrollView', '~> 1.65'
+    pod 'TZImagePickerController'
 end

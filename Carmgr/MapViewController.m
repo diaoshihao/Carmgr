@@ -80,8 +80,8 @@
 }
 
 //获取数据回调
-- (void)dataDidLoad:(DataDidLoad)data {
-    self.dataDidLoad = data;
+- (void)dataDidLoad:(AroundSearch)aroundData {
+    self.aroundSearch = aroundData;
 }
 
 //位置更新回调
@@ -144,6 +144,7 @@
     if (_record.latitude != userLocation.coordinate.latitude || _record.longitude != userLocation.coordinate.longitude) {
         _record = userLocation.coordinate;
         
+        //返回当前经纬度回调
         if (self.locationBlock) {
             self.locationBlock(_record);
         }
@@ -162,7 +163,7 @@
     }
     
     NSMutableArray *poiAnnotations = [NSMutableArray arrayWithCapacity:response.count];
-    NSMutableArray *data = [[NSMutableArray alloc] init];
+    NSMutableArray *aroundData = [[NSMutableArray alloc] init];
     
     [response.POIs enumerateObjectsUsingBlock:^(AMapCloudPOI *poi, NSUInteger idx, BOOL *stop) {
         
@@ -174,13 +175,13 @@
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:poi.customFields];
         [dict setObject:poi.name forKey:@"name"];
         
-        [data addObject:dict];
+        [aroundData addObject:dict];
         
     }];
     
-    //调用block
-    if (self.dataDidLoad) {
-        self.dataDidLoad(data);
+    //返回周边搜索结果数据block
+    if (self.aroundSearch) {
+        self.aroundSearch(aroundData);
     }
     
     /* 将结果以annotation的形式加载到地图上. */

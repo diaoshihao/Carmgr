@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CLLocation.h>
 
-typedef void(^DataDidLoad)(NSArray *data);
+//周边搜索结果
+typedef void(^AroundSearch)(NSArray *aroundData);
 
+//当前定位经纬度（持续定位）
 typedef void(^UpdatingLocation)(CLLocationCoordinate2D record);
 
 @interface MapViewController : UIViewController
 
 @property (nonatomic, copy) UpdatingLocation locationBlock;
 
-@property (nonatomic, copy) DataDidLoad dataDidLoad;
+@property (nonatomic, copy) AroundSearch aroundSearch;
 
 @property (nonatomic, strong) NSString *tableID;
 
@@ -25,6 +27,6 @@ typedef void(^UpdatingLocation)(CLLocationCoordinate2D record);
 
 - (void)startAroundSearch:(NSString *)keywords center:(CLLocationCoordinate2D)record;
 
-- (void)dataDidLoad:(DataDidLoad)data;
+- (void)dataDidLoad:(AroundSearch)aroundData;
 
 @end

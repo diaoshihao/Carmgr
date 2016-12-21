@@ -84,7 +84,6 @@
             }
             [self.storeView.tableView reloadData];//刷新数据
         } else {
-            [YWPublic pushToLogin:self];
             /*
              UIAlertController *alertVC = [YWPublic showReLoginAlertViewAt:self];
              [self presentViewController:alertVC animated:YES completion:nil];

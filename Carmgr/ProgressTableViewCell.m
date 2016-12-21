@@ -12,7 +12,7 @@
 
 @implementation ProgressTableViewCell
 {
-    MyOrderView *_orderView;
+    MyProgressView *_progressView;
 }
 
 + (NSString *)getReuseID {
@@ -21,7 +21,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _orderView = [[MyOrderView alloc] init];
+        _progressView = [[MyProgressView alloc] init];
         
         [self configViews];
     }
@@ -29,7 +29,7 @@
 }
 
 - (void)OrderState:(OrderProgress)progress {
-    self.stateLabel.text = _orderView.progressView.titles[progress];
+    self.stateLabel.text = _progressView.titles[progress];
 }
 
 - (UIView *)serviceDetailView {

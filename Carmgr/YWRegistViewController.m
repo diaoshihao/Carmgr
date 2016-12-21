@@ -65,6 +65,7 @@
 - (void)createInputPhoneNumView {
     UIView *view = [self.registView createSelectViewAtSuperView:self.view registStep:RegistStepInputPhoneNum];
     self.phoneNum = [self.registView createTextFieldAtSuperView:self.view broView:view placeholder:@"请输入您的手机号"];
+    self.phoneNum.keyboardType = UIKeyboardTypePhonePad;
     self.phoneNum.returnKeyType = UIReturnKeyNext;
     UIButton *button = [self.registView createButtonAtSuperView:self.view Constraints:self.phoneNum title:@"获取验证码" target:self action:@selector(getVerifyCode)];
     
@@ -102,15 +103,13 @@
 - (void)getVerifyCode {
     BOOL correct = [RegularTools validateMobile:self.phoneNum.text];
     if (correct) {
+        uuid = [Interface uuid];
         
         //网络请求获取验证码   参数：username=%@&type=%@&uuid=%@&version=1.0
         //type == 0：注册；1：登录；2:找回密码
-        uuid = [[NSUUID UUID] UUIDString];
-        [YWPublic afPOST:[NSString stringWithFormat:kVERIFYCODE,self.phoneNum.text,0,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+        NSArray *getverify = [Interface appsendverfcode:self.phoneNum.text type:@"0" uuid:uuid];
+        [MyNetworker POST:getverify[InterfaceUrl] parameters:getverify[Parameters] success:^(id responseObject) {
+            if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
                 
                 self.mobile = self.phoneNum.text;
                 [self removeAllSubviews];
@@ -118,13 +117,12 @@
                 if (getVerifyCode != nil) {
                     [self startTimer];
                 }
-            } else if ([dataDict[@"opt_info"] isEqualToString:@"user account is already exist"]) {
+            } else if ([responseObject[@"opt_info"] isEqualToString:@"user account is already exist"]) {
                 [self showAlertViewTitle:@"提示" message:@"用户已存在，请返回登录"];
             }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+        } failure:^(NSError *error) {
             [self showAlertViewTitle:@"提示" message:@"网络错误"];
-            NSLog(@"%@",error);
         }];
         
     } else {
@@ -196,11 +194,9 @@
     }
     //username=%@&mobile=%@&verf_code=%@&type=%d&uuid=%@&version=1.0
     //type == 0：注册；1：登录；2:找回密码
-    [YWPublic afPOST:[[NSString stringWithFormat:kCHECKVERFCODE,self.phoneNum.text,self.phoneNum.text,self.verifyCode.text,0,uuid] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
+    NSArray *checkcode = [Interface appcheckverfcode:self.phoneNum.text mobile:self.phoneNum.text verf_code:self.verifyCode.text type:@"0" uuid:uuid];
+    [MyNetworker POST:checkcode[InterfaceUrl] parameters:checkcode[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             self.mobile = self.phoneNum.text;
             [self removeAllSubviews];
             [self createSetSecureView];
@@ -208,10 +204,8 @@
         } else {
             [self showAlertViewTitle:@"提示" message:@"验证码错误，请重新输入"];
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self showAlertViewTitle:@"提示" message:@"网络错误"];
-        NSLog(@"%@",error);
     }];
     
 }

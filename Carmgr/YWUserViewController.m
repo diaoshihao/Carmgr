@@ -71,8 +71,8 @@
 - (void)showPage {
     [self initContentView];
     [self myHeadView];
-    [self myCarView];
     [self myOrderView];
+    [self myCarView];
     [self tableView];
 }
 
@@ -101,6 +101,28 @@
     [self.contentView addSubview:self.headView];
 }
 
+
+- (void)myOrderView {
+    self.orderView = [[MyOrderView alloc] init];
+    [self.orderView didClickOrder:^(MyOrderOption option) {
+        if ([self isLogin]) {
+            if (option == MyOrderOptionService) {
+                [self pushToProgress];
+            } else {
+                [self pushToHelpOrder];
+            }
+        } else {
+            [self showAlert];
+        }
+    }];
+    [self.contentView addSubview:self.orderView];
+    [self.orderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.headView.mas_bottom).offset(5);
+        make.left.and.right.mas_equalTo(0);
+        make.height.mas_equalTo(108);
+    }];
+}
+
 - (void)myCarView {
     self.carView = [[MyCarView alloc] init];
     __weak typeof(self) weakSelf = self;
@@ -113,29 +135,12 @@
     };
     [self.contentView addSubview:self.carView];
     [self.carView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headView.mas_bottom).offset(5);
+        make.top.mas_equalTo(self.orderView.mas_bottom).offset(5);
         make.left.and.right.mas_equalTo(0);
         make.height.mas_equalTo([DefineValue screenWidth] * 3 / 4.5);
     }];
 }
 
-- (void)myOrderView {
-    self.orderView = [[MyOrderView alloc] init];
-    __weak typeof(self) weakSelf = self;
-    self.orderView.progressView.progress = ^(OrderProgress progress) {
-        if ([weakSelf isLogin]) {
-            [weakSelf progress:progress];
-        } else {
-            [weakSelf showAlert];
-        }
-    };
-    [self.contentView addSubview:self.orderView];
-    [self.orderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.carView.mas_bottom).offset(5);
-        make.left.and.right.mas_equalTo(0);
-        make.height.mas_equalTo(108);
-    }];
-}
 
 - (void)tableView {
     UserTableViewController *userTableVC = [[UserTableViewController alloc] init];
@@ -146,7 +151,7 @@
     [self addChildViewController:userTableVC];
     [self.contentView addSubview:userTableVC.tableView];
     [userTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.orderView.mas_bottom).offset(0);
+        make.top.mas_equalTo(self.carView.mas_bottom).offset(0);
         make.left.and.right.mas_equalTo(0);
         make.height.mas_equalTo(44 * 5 + 16);
         make.bottom.mas_equalTo(self.contentView.mas_bottom);
@@ -274,13 +279,15 @@
     
 }
 
-#pragma mark 进度
-- (void)progress:(OrderProgress)progress {
+#pragma mark 跳转到进度界面
+- (void)pushToProgress {
     YWProgressViewController *progressVC = [[YWProgressViewController alloc] init];
-    progressVC.currentFilter = self.orderView.progressView.titles[progress];
-    progressVC.currentProgress = progress;
     progressVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:progressVC animated:YES];
+}
+
+- (void)pushToHelpOrder {
+    
 }
 
 #pragma mark - 右滑返回上一页

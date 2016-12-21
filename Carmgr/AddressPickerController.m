@@ -14,6 +14,9 @@
 #import "ChineseToPinyin.h"
 
 @interface AddressPickerController () <UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource>
+{
+    AddressManager *_manager;
+}
 
 @property (nonatomic, strong) UISearchController *searchController;
 
@@ -133,7 +136,9 @@
 
 - (void)chooseAddress {
     NSArray *address = @[self.currentCity,self.selectAreaVC.selectedArea];
-    self.block(address);
+    if (self.block) {
+        self.block(address);
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -157,6 +162,7 @@
                 return areaList;
             }
         }
+        
     }
     return areaList;
 }
@@ -246,7 +252,11 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.clickBlock = ^(UIButton *button) {
-            [self showAreaTableView:button.currentTitle];
+            if (self.hideArea) {
+                [self onlySelectCurrentCity:button.currentTitle];
+            } else {
+                [self showAreaTableView:button.currentTitle];
+            }
         };
         cell.hideBlcok = ^(void) {
             self.rightItemButton.hidden = YES;
@@ -265,9 +275,18 @@
             NSArray *arr = @[@"北京",@"上海",@"天津",@"重庆"];
             if (![arr containsObject:button.currentTitle]) {
                 NSString *cityStr = [NSString stringWithFormat:@"%@市",button.currentTitle];
-                [self showAreaTableView:cityStr];
+                
+                if (self.hideArea) {
+                    [self onlySelectCurrentCity:cityStr];
+                } else {
+                    [self showAreaTableView:cityStr];
+                }
             } else {
-                [self showAreaTableView:button.currentTitle];
+                if (self.hideArea) {
+                    [self onlySelectCurrentCity:button.currentTitle];
+                } else {
+                    [self showAreaTableView:button.currentTitle];
+                }
             }
         };
         cell.hideBlcok = ^(void) {
@@ -304,16 +323,21 @@
     NSString *city = citys[indexPath.row];
     
     //县级市
-    if ([[city substringFromIndex:city.length - 1] isEqualToString:@"县"]) {
-        self.rightItemButton.hidden = NO;
-        self.currentCity = city;
-        self.selectAreaVC.selectedArea = @"";
-        if (self.selectAreaVC.tableView) {
-            [self.selectAreaVC.tableView removeFromSuperview];
-        }
+    if ([[city substringFromIndex:city.length - 1] isEqualToString:@"县"] || self.hideArea) {
+        [self onlySelectCurrentCity:city];
     } else {
         self.rightItemButton.hidden = YES;
         [self showAreaTableView:city];
+    }
+}
+
+//不展示地区列表
+- (void)onlySelectCurrentCity:(NSString *)city {
+    self.rightItemButton.hidden = NO;
+    self.currentCity = city;
+    self.selectAreaVC.selectedArea = @"";
+    if (self.selectAreaVC.tableView) {
+        [self.selectAreaVC.tableView removeFromSuperview];
     }
 }
 

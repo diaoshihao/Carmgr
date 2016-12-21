@@ -9,6 +9,7 @@
 #import "YWProgressViewController.h"
 #import "ProgressTableViewController.h"
 #import "ProgressModel.h"
+#import "MyProgressView.h"
 #import "Interface.h"
 #import "MJRefresh.h"
 #import <Masonry.h>
@@ -65,12 +66,12 @@
 
 - (void)configView {
     self.myProgressView = [[MyProgressView alloc] init];
-    //设置当前状态
-    [self.myProgressView currentOrderState:self.currentProgress];
-    __weak typeof(self) weakSelf = self;
-    self.myProgressView.progress = ^(OrderProgress progress) {
-        [weakSelf progress:progress];
-    };
+    self.currentFilter = self.myProgressView.currentSelected.currentTitle;
+    [self.myProgressView selectedCurrentState:^(OrderProgress progress) {
+        //设置当前筛选条件
+        self.currentFilter = self.myProgressView.titles[progress];
+        [self.tableView.mj_header beginRefreshing];
+    }];
     [self.view addSubview:self.myProgressView];
     [self.myProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.customNavBar.mas_bottom).offset(5);
@@ -115,21 +116,6 @@
     [alertVC addAction:sure];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
-
-//进度点击action
-- (void)progress:(OrderProgress)progress {
-    
-    //设置当前筛选条件
-    self.currentFilter = self.myProgressView.titles[progress];
-    
-    if (self.currentProgress != progress) {
-        //修改当前订单状态
-        [self.myProgressView currentOrderState:progress];
-        [self.tableView.mj_header beginRefreshing];
-    }
-    self.currentProgress = progress;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

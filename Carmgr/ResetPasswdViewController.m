@@ -52,22 +52,21 @@
 - (void)resetPassword {
     if (self.setNewPasswd.text.length < 6) {
         [self showAlertViewTitle:@"提示" messae:@"密码不能少于6位数"];
-    } else {
-        [YWPublic afPOST:[[NSString stringWithFormat:kRESETPASSWD,self.username,self.setNewPasswd.text,self.uuid,self.verifycode,2] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-                [self showAlertViewTitle:nil messae:@"修改密码成功"];
-                
-            } else {
-                [self showAlertViewTitle:@"提示" messae:@"修改密码失败"];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self showAlertViewTitle:@"提示" messae:@"网络错误"];
-        }];
+        return;
     }
+    
+    NSArray *reset = [Interface appresetpassword:self.username new_password:self.setNewPasswd.text uuid:self.uuid verf_code:self.verifycode type:@"2"];
+    [MyNetworker POST:reset[InterfaceUrl] parameters:reset[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+            [self showAlertViewTitle:nil messae:@"修改密码成功"];
+            
+        } else {
+            [self showAlertViewTitle:@"提示" messae:@"修改密码失败"];
+        }
+    } failure:^(NSError *error) {
+        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
+    }];
+
 }
 
 - (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
