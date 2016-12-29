@@ -136,24 +136,7 @@
     } failure:^(NSError *error) {
         [self showAlertViewTitle:@"提示" message:@"网络错误"];
     }];
-    
-//    //type == 0：注册；1：登录；2:找回密码
-//    [YWPublic afPOST:[NSString stringWithFormat:kCHECKVERFCODE,self.textField.text,self.textField.text,self.verifyCodeField.text,1,uuid] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        
-//        NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        
-//        if ([dataDict[@"opt_state"] isEqualToString:@"success"]) {
-//            [self login];
-//            
-//        } else {
-//            [self showAlertViewTitle:@"提示" message:@"验证码错误，请重新输入"];
-//        }
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [self showAlertViewTitle:@"提示" message:@"网络错误"];
-//        NSLog(@"%@",error);
-//    }];
-    
+      
 }
 
 

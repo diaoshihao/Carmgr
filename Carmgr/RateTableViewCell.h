@@ -8,18 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "RateModel.h"
+#import "StarsView.h"
+#import "CustomLabel.h"
 
 @interface RateTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView   *headImageView;
-@property (nonatomic, strong) UILabel       *user;
-@property (nonatomic, strong) UILabel       *time;
-@property (nonatomic, strong) UILabel       *text;
+@property (nonatomic, strong) UILabel       *userNameLab;
+@property (nonatomic, strong) UILabel       *timeLab;
+@property (nonatomic, strong) CustomLabel   *rateLab;
+@property (nonatomic, strong) StarsView     *starsView;
 
-- (void)starViewWithStars:(NSString *)stars;
+@property (nonatomic, strong) NSString      *stars;
+
 
 + (NSString *)getReuseID;
-
-- (CGFloat)loadCellDataWithModel:(RateModel *)model;
 
 @end

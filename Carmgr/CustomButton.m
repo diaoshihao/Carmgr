@@ -63,14 +63,14 @@
     [self setTitle:selectedTitle forState:UIControlStateSelected];
 }
 
-//正常颜色
+//正常图片
 - (void)setNormalImageName:(NSString *)normalImageName {
     [self setImage:[UIImage imageNamed:normalImageName] forState:UIControlStateNormal];
 }
 
 //选中图片
 - (void)setSelectedImageName:(NSString *)selectedImageName {
-    [self setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateNormal];
+    [self setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
 }
 
 //正常颜色
@@ -84,39 +84,45 @@
 }
 
 - (void)imageUpper {
-    self.imageView.contentMode = UIControlContentVerticalAlignmentCenter;
+//    self.imageView.contentMode = UIControlContentVerticalAlignmentCenter;
+//    
+//    CGRect newFrame = self.imageView.frame;
+//    // Center image
+//    newFrame.origin.x = self.frame.size.width / 2 - self.imageView.frame.size.width / 2;
+//    newFrame.origin.y = (self.frame.size.height - (self.imageView.frame.size.height + self.titleLabel.frame.size.height + 6)) / 2;
+//    
+//    self.imageView.frame = newFrame;
+//    
+//    newFrame = self.titleLabel.frame;
+//    //Center text
+//    newFrame.origin.x = 0;
+//    newFrame.origin.y = self.imageView.frame.origin.y + self.imageView.frame.size.height + 3;
+//    newFrame.size.width = self.frame.size.width;
+//    
+//    self.titleLabel.frame = newFrame;
     
-    CGRect newFrame = self.imageView.frame;
-    // Center image
-    newFrame.origin.x = self.frame.size.width / 2 - self.imageView.frame.size.width / 2;
-    newFrame.origin.y = (self.frame.size.height - (self.imageView.frame.size.height + self.titleLabel.frame.size.height + 6)) / 2;
+    CGRect frame = self.imageView.frame;
+    frame.origin.x = (self.frame.size.width - self.imageView.frame.size.width) / 2;
+    frame.origin.y = (self.frame.size.height - self.imageView.frame.size.height - self.titleLabel.frame.size.height - 6) / 2;
+    self.imageView.frame = frame;
     
-    self.imageView.frame = newFrame;
-    
-    newFrame = self.titleLabel.frame;
-    //Center text
+    CGRect newFrame = self.titleLabel.frame;
     newFrame.origin.x = 0;
-    newFrame.origin.y = self.imageView.frame.origin.y + self.imageView.frame.size.height + 3;
+    newFrame.origin.y = self.imageView.frame.origin.y + self.imageView.frame.size.height + 6;
     newFrame.size.width = self.frame.size.width;
-    
     self.titleLabel.frame = newFrame;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     
 }
 
 - (void)imageRight {
-    self.imageView.contentMode = UIControlContentVerticalAlignmentCenter;
+    CGRect frame = self.titleLabel.frame;
+    frame.origin.x = (self.frame.size.width - self.titleLabel.frame.size.width - self.imageView.frame.size.width - 5) / 2;
+    self.titleLabel.frame = frame;
     
-    //right image
-    CGRect frame = self.imageView.frame;
-    frame.origin.x = self.frame.size.width - self.imageView.frame.size.width + 5;
-    self.imageView.frame = frame;
-    
-    //left text
-    CGRect newFrame = [self titleLabel].frame;
-    newFrame.origin.x = 0;
-    
-    self.titleLabel.frame = newFrame;
+    CGRect newFrame = self.imageView.frame;
+    newFrame.origin.x = frame.origin.x + self.titleLabel.frame.size.width + 5;
+    self.imageView.frame = newFrame;
 }
 
 -(void)layoutSubviews {

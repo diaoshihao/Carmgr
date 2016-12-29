@@ -39,7 +39,7 @@
     NSArray *arraySelectImage = @[@"首页橙",@"商家橙",@"进度橙",@"我的橙"];
     NSArray *arrayClass = @[
                             @"YWHomeViewController",
-                            @"YWStoreViewController",
+                            @"MerchantViewController",
                             @"NearByViewController",
                             @"YWUserViewController"];
     

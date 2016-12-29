@@ -14,6 +14,8 @@
 
 - (NSString *)currentCity;
 
+- (NSString *)currentProvince;
+
 
 - (void)showAlertOnlyMessage:(NSString *)message;
 

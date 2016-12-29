@@ -6,10 +6,11 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BasicModel.h"
 
-@interface DetailServiceModel : NSObject
+@interface DetailServiceModel : BasicModel
 
+@property (nonatomic, strong) NSString *service_id;
 @property (nonatomic, strong) NSString *service_img;
 @property (nonatomic, strong) NSString *service_name;
 @property (nonatomic, strong) NSString *service_introduce;
@@ -17,7 +18,5 @@
 @property (nonatomic, strong) NSString *service_address;
 @property (nonatomic, strong) NSString *service_distance;
 @property (nonatomic, strong) NSString *service_price;
-
-- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

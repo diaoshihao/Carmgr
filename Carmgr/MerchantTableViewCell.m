@@ -1,28 +1,27 @@
 //
-//  StoreTableViewCell.m
+//  MerchantTableViewCell.m
 //  Carmgr
 //
-//  Created by admin on 16/7/4.
+//  Created by admin on 2016/12/27.
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import "StoreTableViewCell.h"
+#import "MerchantTableViewCell.h"
 #import <Masonry.h>
-#import "YWPublic.h"
 
-@implementation StoreTableViewCell
+@implementation MerchantTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         //头像
-        self.headImageView = [[UIImageView alloc] init];
-        [self.contentView addSubview:self.headImageView];
+        self.merchantImageView = [[UIImageView alloc] init];
+        [self.contentView addSubview:self.merchantImageView];
         
         //商店名
-        self.storeName = [[UILabel alloc] init];
-        self.storeName.font = [UIFont systemFontOfSize:14];
-        self.storeName.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
-        [self.contentView addSubview:self.storeName];
+        self.merchantName = [[UILabel alloc] init];
+        self.merchantName.font = [UIFont systemFontOfSize:14];
+        self.merchantName.textColor = [UIColor colorWithRed:51/256.0 green:51/256.0 blue:51/256.0 alpha:1];
+        [self.contentView addSubview:self.merchantName];
         
         //商家介绍
         self.introduce = [[UILabel alloc] init];
@@ -58,39 +57,34 @@
 }
 
 - (void)autoLayout {
-    [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.merchantImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
         make.top.mas_equalTo(10);
         make.bottom.mas_equalTo(-10);
-        make.width.mas_equalTo(self.headImageView.mas_height).multipliedBy(1.382);
+        make.width.mas_equalTo(self.merchantImageView.mas_height).multipliedBy(1.382);
     }];
     
-    [self.storeName setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.storeName setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-    [self.storeName mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.merchantName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
-        make.left.mas_equalTo(self.headImageView.mas_right).with.offset(10);
+        make.left.mas_equalTo(self.merchantImageView.mas_right).with.offset(10);
     }];
     
     [self.introduce mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.storeName.mas_left).with.offset(0);
+        make.left.mas_equalTo(self.merchantName.mas_left);
         make.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.storeName.mas_bottom).with.offset(8);
+        make.top.mas_equalTo(self.merchantName.mas_bottom).with.offset(8);
     }];
     
-    [self.area setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.area mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.storeName.mas_left);
+        make.left.mas_equalTo(self.merchantName.mas_left);
         make.bottom.mas_equalTo(-10);
     }];
     
-    [self.road setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.road mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.area.mas_right).with.offset(10);
         make.centerY.mas_equalTo(self.area);
     }];
     
-    [self.distance setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.distance mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-20);
         make.centerY.mas_equalTo(self.area);
@@ -114,11 +108,11 @@
         [starImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.introduce.mas_bottom).with.offset(8);
             if (i == 0) {
-                make.left.mas_equalTo(self.storeName.mas_left).with.offset(0);
+                make.left.mas_equalTo(self.merchantName.mas_left).with.offset(0);
             } else {
                 make.left.mas_equalTo(lastImage.mas_right).with.offset(6);
             }
-//            make.size.mas_equalTo(CGSizeMake(15, 15));
+            //            make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
         lastImage = starImage;
     }
@@ -139,7 +133,7 @@
 }
 
 + (NSString *)getReuseID {
-    return @"storetableviewcell";
+    return @"merchanttableviewcell";
 }
 
 - (void)awakeFromNib {

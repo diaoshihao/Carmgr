@@ -9,7 +9,7 @@
 #import "SecondaryViewController.h"
 #import "CustomButton.h"
 
-@interface SecondaryViewController ()
+@interface SecondaryViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @end
 
@@ -37,6 +37,28 @@
 
 - (void)configRightItemView {
     
+}
+
+#pragma mark - 右滑返回上一页
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+
+    //滑动返回
+    self.navigationController.delegate = self;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    //滑动返回
+    [super viewDidDisappear:YES];
+    self.navigationController.delegate = nil;
 }
 
 - (void)popViewController {

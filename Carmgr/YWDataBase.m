@@ -93,7 +93,7 @@
 
 #pragma mark -- 商家Store数据表
 //插入数据
-- (BOOL)insertStoreWithModel:(StoreModel *)model {
+- (BOOL)insertStoreWithModel:(MerchantModel *)model {
     NSString *insertStore = @"insert into tb_store(img_path,merchant_name,stars,service_item,mobile,merchant_introduce,province,city,area,road,distance) values(?,?,?,?,?,?,?,?,?,?,?)";
     
     BOOL storeInsert = [_database executeUpdate:insertStore,model.img_path,model.merchant_name,model.stars,model.service_item,model.mobile,model.merchant_introduce,model.province,model.city,model.area,model.road,model.distance];
@@ -111,7 +111,7 @@
     
     NSMutableArray *arrM = [[NSMutableArray alloc] init];
     while (resultSet.next) {
-        StoreModel *model = [[StoreModel alloc] init];
+        MerchantModel *model = [[MerchantModel alloc] init];
         
         model.img_path = [resultSet stringForColumn:@"img_path"];
         model.merchant_name = [resultSet stringForColumn:@"merchant_name"];

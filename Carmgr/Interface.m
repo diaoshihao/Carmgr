@@ -295,7 +295,7 @@
 + (NSArray *)appgetmerchants_name:(NSString *)merchant_name {
     NSString *url = [NSString stringWithFormat:@"%@appgetmerchants.action",[Interface url]];
     NSDictionary *param = @{@"username":[Interface username],
-                            @"merchant_name":merchant_name,
+                            @"merchant_name":[Interface unicode2ISO88591:merchant_name],
                             @"token":[Interface token],
                             @"version":[Interface appVersion]};
     return @[url,param];

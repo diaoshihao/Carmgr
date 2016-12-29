@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) NSString *currentCity;
 
+@property (nonatomic, strong) NSString *currentProvince;
+
 @end
 
 @implementation AddressPickerController
@@ -156,6 +158,11 @@
     for (NSDictionary *provinceDict in provinces) {
         for (NSDictionary *cityDict in provinceDict[@"citylist"]) {
             if ([cityDict[@"cityName"] isEqualToString:city]) {
+                //当前省份
+                self.currentProvince = provinceDict[@"provinceName"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.currentProvince forKey:@"currentprovince"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
                 for (NSDictionary *areaDict in cityDict[@"arealist"]) {
                     [areaList addObject:areaDict[@"areaName"]];
                 }

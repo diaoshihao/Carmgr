@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
-#import "StoreModel.h"
+#import "MerchantModel.h"
 #import "ProgressModel.h"
 #import "PrivateModel.h"
 
@@ -31,7 +31,7 @@
 
 
 //商家
-- (BOOL)insertStoreWithModel:(StoreModel *)model;
+- (BOOL)insertStoreWithModel:(MerchantModel *)model;
 
 - (NSMutableArray *)getAllDataFromStore;
 

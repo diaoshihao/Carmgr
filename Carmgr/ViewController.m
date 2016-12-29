@@ -10,6 +10,7 @@
 #import "Interface.h"
 #import "YWTabBarController.h"
 #import "YWLoginViewController.h"
+#import "GeneralControl.h"
 
 @interface ViewController ()
 
@@ -29,7 +30,7 @@
 //显示页面
 - (void)showPage {
     BOOL autoLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"AutoLogin"];
-    if (autoLogin == YES) {
+    if (autoLogin) {
         //自动登录
         [self autoLogin];
     } else {
@@ -95,10 +96,12 @@
     
             [self showHomePage];
         } else {
-            [self loginDefaultCount];
+            [self alertDismissAfter:2.5 message:@"登录失败，请检查网络"];
+            [self showLoginPage];
         }
     } failure:^(NSError *error) {
-        [self loginDefaultCount];
+        [self alertDismissAfter:2.5 message:@"登录失败，请检查网络"];
+        [self showLoginPage];
     }];
 }
 
@@ -120,11 +123,33 @@
             
             [self showHomePage];
         } else {
-            
+            [self showMessage:@"连接失败，请检查网络后重新启动"];
         }
     } failure:^(NSError *error) {
-        
+        [self showMessage:@"连接失败，请检查网络后重新启动"];
     }];
+}
+
+- (void)showMessage:(NSString *)message {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self exitApplication];
+    }];
+    [alertVC addAction:sure];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)exitApplication {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    [UIView animateWithDuration:0.618f animations:^{
+        window.alpha = 0;
+        window.bounds = CGRectMake(([UIScreen mainScreen].bounds.size.height - window.bounds.size.height) / 2, ([UIScreen mainScreen].bounds.size.width - window.bounds.size.width) / 2, 0, 0);
+    } completion:^(BOOL finished) {
+        exit(0);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

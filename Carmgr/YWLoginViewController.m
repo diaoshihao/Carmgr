@@ -219,11 +219,15 @@
     UIAlertController *alertVC = [timer userInfo];
     [alertVC dismissViewControllerAnimated:YES completion:^{
         if (alertVC.title == nil) {//login success
+            
             [self dismissViewControllerAnimated:YES completion:^{
                 if (self.showHomePageWhileDone) {
                     [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
+                    return;
                 }
             }];
+            
+            [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
         }
     }];
 }

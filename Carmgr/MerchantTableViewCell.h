@@ -1,17 +1,17 @@
 //
-//  StoreTableViewCell.h
+//  MerchantTableViewCell.h
 //  Carmgr
 //
-//  Created by admin on 16/7/4.
+//  Created by admin on 2016/12/27.
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface StoreTableViewCell : UITableViewCell
+@interface MerchantTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView   *headImageView;
-@property (nonatomic, strong) UILabel       *storeName;
+@property (nonatomic, strong) UIImageView   *merchantImageView;
+@property (nonatomic, strong) UILabel       *merchantName;
 @property (nonatomic, strong) UILabel       *introduce;
 @property (nonatomic, strong) UILabel       *area;
 @property (nonatomic, strong) UILabel       *road;

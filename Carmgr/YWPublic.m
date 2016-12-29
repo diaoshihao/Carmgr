@@ -18,6 +18,17 @@
 }
 
 + (void)loadWebImage:(NSString *)imageUrl didLoad:(nonnull void (^)(UIImage * _Nonnull))block {
+    if (![imageUrl hasPrefix:@"http"] || imageUrl == nil) {
+        return;
+    }
+    if ([imageUrl containsString:@" "]) {
+        imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@" " withString:@"%"];
+    }
+    if ([imageUrl containsString:@"^"]) {
+        NSArray *urls = [imageUrl componentsSeparatedByString:@"^"];
+        imageUrl = urls.firstObject;
+    }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage *image = nil;
         NSError *error;

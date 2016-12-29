@@ -33,6 +33,13 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"currentcity"];
 }
 
+- (NSString *)currentProvince {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"currentprovince"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"广东" forKey:@"currentprovince"];
+    }
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"currentprovince"];
+}
+
 - (void)noConnect {
     
 }

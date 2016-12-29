@@ -6,17 +6,14 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BasicModel.h"
 
-
-@interface RateModel : NSObject
+@interface RateModel : BasicModel
 
 @property (nonatomic, strong) NSString *rate_user;
 @property (nonatomic, strong) NSString *rate_stars;
 @property (nonatomic, strong) NSString *rate_time;
 @property (nonatomic, strong) NSString *rate_text;
-
-- (instancetype)initWithDict:(NSDictionary *)dict;
 
 
 @end

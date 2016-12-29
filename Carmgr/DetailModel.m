@@ -10,14 +10,4 @@
 
 @implementation DetailModel
 
-- (instancetype)initWithDict:(NSDictionary *)dict {
-    if (self = [super initWithDict:dict]) {
-        self.address = dict[@"address"];
-        self.total_rate = dict[@"total_rate"];
-        self.services_list = dict[@"services_list"];
-        self.rate_list = dict[@"rate_list"];
-    }
-    return self;
-}
-
 @end

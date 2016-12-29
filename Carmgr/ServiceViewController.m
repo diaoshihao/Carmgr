@@ -7,17 +7,17 @@
 //
 
 #import "ServiceViewController.h"
-#import "StoreTableViewCell.h"
-#import "StoreModel.h"
+#import "MerchantModel.h"
 #import "UIViewController+ShowView.h"
 #import "MJRefreshNormalHeader.h"
 #import "Interface.h"
 #import "YWPublic.h"
-#import "StoreDetailViewController.h"
+#import "DetailViewController.h"
+#import "MerchantTableViewController.h"
 
-@interface ServiceViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface ServiceViewController ()
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView *merchantTableView;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
@@ -39,64 +39,31 @@
     self.title = self.service_filter;
     self.showShadow = YES;
     
-    [self createTableView];
-    
+    [self configView];
+    [self refresh];
 }
 
-- (void)createTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-49) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+- (void)configView {
     
-    self.tableView.rowHeight = 105;
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    [self.tableView registerClass:[StoreTableViewCell class] forCellReuseIdentifier:[StoreTableViewCell getReuseID]];
+    MerchantTableViewController *merchantTVC = [[MerchantTableViewController alloc] init];
+    merchantTVC.dataArr = self.dataArray;
+    [self addChildViewController:merchantTVC];
+    self.merchantTableView = merchantTVC.tableView;
+    [self.view addSubview:self.merchantTableView];
     
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadData];
+    [self.merchantTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(64);
+        make.left.and.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
     }];
     
-    [self.view addSubview:self.tableView];
-    
-    [self.tableView.mj_header beginRefreshing];
+    //添加下拉刷新
+    self.merchantTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[StoreTableViewCell getReuseID] forIndexPath:indexPath];
-    
-    StoreModel *model = self.dataArray[indexPath.row];
-    
-    [YWPublic loadWebImage:model.img_path didLoad:^(UIImage * _Nonnull image) {
-        cell.headImageView.image = image;
-    }];
-    
-    cell.storeName.text = model.merchant_name;
-    cell.introduce.text = model.merchant_introduce;
-    cell.stars = model.stars;
-    cell.area.text = model.area;
-    cell.road.text = model.road;
-    cell.distance.text = model.distance;
-    
-    [cell starView];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    StoreDetailViewController *storeDetailVC = [[StoreDetailViewController alloc] init];
-    
-    StoreModel *model = self.dataArray[indexPath.row];
-    storeDetailVC.storeModel = model;
-    
-    //跳转到详情页
-    storeDetailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:storeDetailVC animated:YES];
-    
+//实现父类的方法，为本类提供刷新数据方法
+- (void)refresh {
+    [self.merchantTableView.mj_header beginRefreshing];
 }
 
 - (void)loadData {
@@ -107,17 +74,17 @@
     NSArray *merchants = [Interface appgetmerchantslist_city_filter:city_filter service_filter:service_filter];
     [MyNetworker POST:merchants[InterfaceUrl] parameters:merchants[Parameters] success:^(id responseObject) {
         //停止刷新
-        [self.tableView.mj_header endRefreshing];
+        [self.merchantTableView.mj_header endRefreshing];
         
         if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             [self.dataArray removeAllObjects];
             
             for (NSDictionary *dict in responseObject[@"merchants_list"]) {
                 
-                StoreModel *model = [[StoreModel alloc] initWithDict:dict];
+                MerchantModel *model = [[MerchantModel alloc] initWithDict:dict];
                 [self.dataArray addObject:model];
             }
-            [self.tableView reloadData];//刷新数据
+            [self.merchantTableView reloadData];//刷新数据
             if (self.dataArray.count == 0) {
                 [self showAlertView];
             }
@@ -125,7 +92,7 @@
         }
     } failure:^(NSError *error) {
         //请求数据失败
-        [self.tableView.mj_header endRefreshing];
+        [self.merchantTableView.mj_header endRefreshing];
         
         UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
         [self presentViewController:alertVC animated:YES completion:nil];
@@ -145,14 +112,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -99,10 +99,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    
-    //添加退出登录方法
-    
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
 }
 
 @end

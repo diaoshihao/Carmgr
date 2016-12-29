@@ -27,7 +27,7 @@
 
 - (NSDictionary *)provinceDictFromProvince:(NSString *)province {
     for (NSDictionary *provinceDict in [self allAddressDict]) {
-        if ([provinceDict[@"provinceName"] isEqualToString:province]) {
+        if ([provinceDict[@"provinceName"] hasPrefix:province]) {
             return provinceDict;
         }
     }

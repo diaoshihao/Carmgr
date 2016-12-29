@@ -21,6 +21,9 @@
 #import "SecondHandCollectionView.h"
 #import "SingleLocation.h"
 
+
+#import "MerchantViewController.h"
+
 @interface YWHomeViewController () <HomeDataSource>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -186,6 +189,7 @@
 - (void)initContentView {
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(64, 0, 0, 0));

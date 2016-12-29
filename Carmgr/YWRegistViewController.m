@@ -231,8 +231,30 @@
     } else if (self.passwdField.text.length > 32 || self.passwdField.text.length < 6) {
         [self showAlertViewTitle:@"提示" message:@"密码位数不正确"];
     } else {
-        
         //注册
+        NSArray *regist = [Interface appregister:self.phoneNum.text password:self.passwdField.text mobile:self.phoneNum.text];
+        [MyNetworker POST:regist[InterfaceUrl] parameters:regist[Parameters] success:^(id responseObject) {
+            if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
+                
+                [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"mobile"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.mobile forKey:@"username"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
+                //登录成功保存数据
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
+                //自动登录打开
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoLogin"];
+                
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [self showAlertViewTitle:nil message:@"注册成功"];
+                
+            } else {
+                [self showAlertViewTitle:@"提示" message:@"注册失败"];
+            }
+        } failure:^(NSError *error) {
+            [self showAlertViewTitle:@"提示" message:@"网络错误"];
+        }];
+        
         NSString *urlStr = [NSString stringWithFormat:kREGISTER,self.mobile,self.passwdField.text,self.mobile,0];
         [YWPublic afPOST:urlStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
