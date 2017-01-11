@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailServiceModel.h"
 
+//返回高度的回调
 typedef void(^ServiceContentHeightBlock)(CGFloat height);
+
+//返回service_id回调
+typedef void(^SubscribeServiceBlock)(DetailServiceModel *model);
 
 @interface DetailServiceTableViewController : UITableViewController
 
@@ -20,6 +25,11 @@ typedef void(^ServiceContentHeightBlock)(CGFloat height);
 
 @property (nonatomic, copy) ServiceContentHeightBlock contentBlock;
 
+@property (nonatomic, copy) SubscribeServiceBlock subscribe;
+
+
 - (void)contentHeightReturn:(ServiceContentHeightBlock)contentBlock;
+
+- (void)subscribeService_id:(SubscribeServiceBlock)subscribe;
 
 @end

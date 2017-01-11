@@ -51,13 +51,13 @@
 
 - (void)configView {
     _leftBtn = [self configButton];
-    _leftBtn.tag = PositionLeft + 10;
+    _leftBtn.tag = ButtonPositionLeft + 10;
     [self addSubview:_leftBtn];
     _rightTopBtn = [self configButton];
-    _rightTopBtn.tag = PositionRightTop + 10;;
+    _rightTopBtn.tag = ButtonPositionRightTop + 10;;
     [self addSubview:_rightTopBtn];
     _rightBottomBtn = [self configButton];
-    _rightBottomBtn.tag = PositionRightBottom + 10;;
+    _rightBottomBtn.tag = ButtonPositionRightBottom + 10;;
     [self addSubview:_rightBottomBtn];
     
     [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -120,23 +120,23 @@
 
 - (void)configView {
     UIButton *leftTop = [self configButton];
-    leftTop.tag = PositionLeftTop + 20;
+    leftTop.tag = ButtonPositionLeftTop + 20;
     [self addSubview:leftTop];
     UIButton *leftMiddle = [self configButton];
-    leftMiddle.tag = PositionLeftMiddle + 20;
+    leftMiddle.tag = ButtonPositionLeftMiddle + 20;
     [self addSubview:leftMiddle];
     UIButton *leftBottom = [self configButton];
-    leftBottom.tag = PositionLeftBottom + 20;
+    leftBottom.tag = ButtonPositionLeftBottom + 20;
     [self addSubview:leftBottom];
     
     UIButton *rightTop = [self configButton];
-    rightTop.tag = PositionRightTop + 20;
+    rightTop.tag = ButtonPositionRightTop + 20;
     [self addSubview:rightTop];
     UIButton *rightMiddle = [self configButton];
-    rightMiddle.tag = PositionRightMiddle + 20;
+    rightMiddle.tag = ButtonPositionRightMiddle + 20;
     [self addSubview:rightMiddle];
     UIButton *rightBottom = [self configButton];
-    rightBottom.tag = PositionRightBottom + 20;
+    rightBottom.tag = ButtonPositionRightBottom + 20;
     [self addSubview:rightBottom];
     
     NSArray *leftButtons = @[leftTop,leftMiddle,leftBottom];

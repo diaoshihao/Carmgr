@@ -8,9 +8,9 @@
 
 #import "DetailServiceTableViewController.h"
 #import "DetailServiceCell.h"
-#import "DetailServiceModel.h"
 #import <UIImageView+WebCache.h>
 #import "DefineValue.h"
+#import "SubscribeViewController.h"
 
 @interface DetailServiceTableViewController ()
 
@@ -87,25 +87,41 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    DetailServiceModel *model = self.dataArr[indexPath.row];
+    if (self.subscribe) {
+        self.subscribe(model);
+    }
+}
+
+- (void)subscribeService_id:(SubscribeServiceBlock)subscribe {
+    self.subscribe = subscribe;
 }
 
 //返回tableview的高度
 - (void)tableViewContentHeight:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     //lookmore open
+    //内容不超过十条显示所有内容大小，否则显示前十条内容大小，其他内容通过滑动查看
     if (self.lookMore) {
         if (indexPath.row <= 10) {
             self.contentHeight = tableView.contentSize.height;
         } else {
             self.contentHeight = 10 * 105 + 44;
+            
+            //查看更多时超过10条内容后允许滑动
             tableView.scrollEnabled = YES;
         }
-    } else {
         
+    //lookmore close
+    } else {
+        //内容不超过三条显示所有内容大小，否则显示前三条内容大小
         if (indexPath.row <= 3) {
             self.contentHeight = tableView.contentSize.height;
         } else {
             self.contentHeight = 3 * 105 + 44;
         }
+        
+        //关闭查看更多时不可滑动
         tableView.scrollEnabled = NO;
     }
     

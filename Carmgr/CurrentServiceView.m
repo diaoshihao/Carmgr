@@ -17,37 +17,35 @@
     self = [super init];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
+        [self configView];
     }
     return self;
 }
 
 - (void)configView {
-    UILabel *serviceLab = [[UILabel alloc] init];
-    serviceLab.text = self.serviceName;
-    [self addSubview:serviceLab];
-    [serviceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.serviceName = [[UILabel alloc] init];
+    [self addSubview:self.serviceName];
+    [self.serviceName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.mas_equalTo(10);
         make.right.mas_equalTo(-10);
     }];
     
-    UILabel *merchantLab = [[UILabel alloc] init];
-    merchantLab.text = self.merchantName;
-    merchantLab.font = [DefineValue font14];
-    merchantLab.textColor = [DefineValue fieldColor];
-    [self addSubview:merchantLab];
-    [merchantLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.merchantName = [[UILabel alloc] init];
+    self.merchantName.font = [DefineValue font14];
+    self.merchantName.textColor = [DefineValue fieldColor];
+    [self addSubview:self.merchantName];
+    [self.merchantName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
-        make.top.mas_equalTo(serviceLab.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.serviceName.mas_bottom).offset(10);
         make.right.mas_equalTo(-10);
     }];
     
-    UILabel *priceLab = [[UILabel alloc] init];
-    priceLab.text = [NSString stringWithFormat:@"%@ 元／单",self.price];
-    priceLab.textColor = [DefineValue mainColor];
-    [self addSubview:priceLab];
-    [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.price = [[UILabel alloc] init];
+    self.price.textColor = [DefineValue mainColor];
+    [self addSubview:self.price];
+    [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
-        make.top.mas_equalTo(merchantLab.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.merchantName.mas_bottom).offset(10);
         make.bottom.mas_equalTo(-20);
     }];
 }

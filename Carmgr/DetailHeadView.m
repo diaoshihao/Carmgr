@@ -117,6 +117,7 @@
     [self.payButton setTitle:@"费用支付" forState:UIControlStateNormal];
     [self.payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.payButton.enabled = NO;
+    self.payButton.hidden = YES;
     [self.payButton setBackgroundColor:[UIColor colorWithRed:255.0/256.0 green:167.0/256.0 blue:0.0 alpha:1.0]];
     [self addSubview:self.payButton];
 }

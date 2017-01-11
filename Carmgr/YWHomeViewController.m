@@ -65,6 +65,19 @@
 
 //默认配置
 - (void)config {
+//    NSString *name = @[][2];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"exception"] == YES) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"异常崩溃" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"exception"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }];
+        [alert addAction:cancel];
+        [alert addAction:sure];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
 }
 
@@ -144,11 +157,11 @@
     if (config_key == Config_ZY0001) {
         self.cycleScrollView.images = images;
     } else if (config_key == Config_ZY0002) {
-        [self.promotionView setImageFor:PositionLeft imageUrl:images.firstObject];
+        [self.promotionView setImageFor:ButtonPositionLeft imageUrl:images.firstObject];
     } else if (config_key == Config_ZY0003) {
-        [self.promotionView setImageFor:PositionRightTop imageUrl:images.firstObject];
+        [self.promotionView setImageFor:ButtonPositionRightTop imageUrl:images.firstObject];
     } else if (config_key == Config_ZY0004) {
-        [self.promotionView setImageFor:PositionRightBottom imageUrl:images.firstObject];
+        [self.promotionView setImageFor:ButtonPositionRightBottom imageUrl:images.firstObject];
     }else if (config_key == Config_ZY0005) {
         [self.discountView setDiscountImages:images];
     } else {
@@ -176,12 +189,42 @@
 
 //活动板块图片按钮点击事件
 - (void)promotionButtonDidTap:(ButtonPosition)position {
+    ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+    NSString *service_filter = @"";
+    NSArray *filters = @[@"保养",@"维修",@"加油"];
+    if (position == ButtonPositionLeft) {
+        service_filter = filters.firstObject;
+    } else if (position == ButtonPositionRightTop) {
+        service_filter = filters[1];
+    } else if (position == ButtonPositionRightBottom) {
+        service_filter = filters.lastObject;
+    }
+    serviceVC.service_filter = service_filter;
     
+    [self.navigationController pushViewController:serviceVC animated:YES];
 }
 
 //优惠板块图片按钮点击事件
 - (void)discountButtonDidTap:(ButtonPosition)position {
+    ServiceViewController *serviceVC = [[ServiceViewController alloc] init];
+    NSString *service_filter = @"";
+    NSArray *filters = @[@"二手车",@"代驾",@"养车",@"车险",@"保养",@"保养"];
+    if (position == ButtonPositionLeftTop) {
+        service_filter = filters[0];
+    } else if (position == ButtonPositionLeftMiddle) {
+        service_filter = filters[1];
+    } else if (position == ButtonPositionLeftBottom) {
+        service_filter = filters[2];
+    } else if (position == ButtonPositionRightTop) {
+        service_filter = filters[3];
+    } else if (position == ButtonPositionRightMiddle) {
+        service_filter = filters[4];
+    } else if (position == ButtonPositionRightBottom) {
+        service_filter = filters[5];
+    }
+    serviceVC.service_filter = service_filter;
     
+    [self.navigationController pushViewController:serviceVC animated:YES];
 }
 
 #pragma mark -

@@ -76,6 +76,7 @@
     }];
 }
 
+//根据选择的筛选条件加载排序数据源
 - (void)loadFilterData:(FilterType)filterType {
     if (filterType == FilterTypeService) {
         [self filterService];
@@ -88,6 +89,7 @@
     }
 }
 
+//设置当前筛选条件
 - (void)filterString:(NSString *)filter filterType:(FilterType)filterType {
     if (filterType == FilterTypeService) {
         self.serviceFilter = filter;
@@ -147,6 +149,7 @@
     [self.merchantTableView.mj_header beginRefreshing];
 }
 
+#pragma mark - 排序视图
 //展示排序视图
 - (void)configSortView:(FilterType)filterType {
     [self removeSortView];
@@ -162,9 +165,11 @@
     
     [self.sortTVC filterDidSelected:^(NSString *filter) {
         [self filterString:filter filterType:filterType];
+        [self removeSortView];
+        
         self.filterView.currentSelected.normalTitle = filter;
         self.filterView.currentSelected.selectedTitle = filter;
-        [self removeSortView];
+
         [self refresh];
     }];
     
@@ -182,6 +187,7 @@
     [self.sortTVC.tableView removeFromSuperview];
 }
 
+#pragma mark - 排序数据源
 - (void)filterService {
     self.sortArr = [NSMutableArray arrayWithArray:@[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"]];
 }

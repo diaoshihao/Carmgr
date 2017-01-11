@@ -17,7 +17,7 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [DefineValue separaColor];
         [self configVeiw];
     }
     return self;
@@ -53,7 +53,7 @@
         [buttons addObject:button];
     }
     
-    [buttons mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:0 tailSpacing:0];
+    [buttons mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:[DefineValue pixHeight] * 2 leadSpacing:0 tailSpacing:0];
     [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.bottom.mas_equalTo(0);

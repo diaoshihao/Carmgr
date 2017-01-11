@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import <MAMapKit/MAMapKit.h>
 #import "LocationAnnotationView.h"
+#import "CustomAnnotationView.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "POIAnnotation.h"
@@ -26,6 +27,10 @@
     AMapCloudPOIAroundSearchRequest *_placeAround;
 }
 
+@property (nonatomic, strong) NSArray *annotations;
+
+@property (nonatomic, strong) NSString *currentKeyword;
+
 @end
 
 @implementation MapViewController
@@ -39,30 +44,22 @@
     _mapView.showsCompass = NO;
     [_mapView setZoomLevel:16 animated:YES];
     _mapView.userTrackingMode = MAUserTrackingModeFollow;
-    
+        
     [self.view addSubview:_mapView];
 }
 
-- (void)configNearbySearch {
+- (void)configAroundSearch {
     _mapSearch = [[AMapSearchAPI alloc] init];
     _mapSearch.delegate = self;
     
     _placeAround = [[AMapCloudPOIAroundSearchRequest alloc] init];
     [_placeAround setTableID:self.tableID];
     
-    [_placeAround setRadius:1000];
+    [_placeAround setRadius:3000];
     
     [_placeAround setSortFields:@"_distance"];
     [_placeAround setSortType:AMapCloudSortTypeDESC];
-    
-//    [_placeAround setOffset:0];
-    //  [placeAround setPage:1];
 }
-
-//- (void)configNearbyManager {
-//    _nearbyManager = [AMapNearbySearchManager sharedInstance];
-//    _nearbyManager.delegate = self;
-//}
 
 #pragma mark - Methods
 
@@ -89,6 +86,23 @@
     self.locationBlock = location;
 }
 
+//选择当前的标注:根据滑动高亮显示对应的标注View
+- (void)selectAnnotation:(NSInteger)index {
+    for (POIAnnotation *poiAnnotation in self.annotations) {
+        if ([poiAnnotation isEqual:self.annotations[index]]) {
+            [_mapView selectAnnotation:poiAnnotation animated:NO];
+            
+            CustomAnnotationView *annotationView = [[CustomAnnotationView alloc] initWithAnnotation:poiAnnotation reuseIdentifier:@"poiAnnotation"];
+            annotationView.frame = CGRectMake(0, 0, 60, 60);
+        }
+    }
+}
+
+//当前选择的标注:点击标注view显示对应的服务简介的回调方法
+- (void)currentAnnotationView:(CurrentAnnotaion)currentBlock {
+    self.currentBlock = currentBlock;
+}
+
 #pragma mark - MAMapViewDelegate
 
 //定位图标指示方向
@@ -110,16 +124,21 @@
         _locationAnnotationView = (LocationAnnotationView *)annotationView;
         
         return annotationView;
+        
+    //地图标注view
     } else if ([annotation isKindOfClass:[POIAnnotation class]]) {
         
         static NSString *poiAnnotationStyle = @"poiAnnotation";
-        MAAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:poiAnnotationStyle];
+        CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:poiAnnotationStyle];
         
         if (annotationView == nil) {
-            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:poiAnnotationStyle];
+            annotationView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:poiAnnotationStyle];
         }
+        POIAnnotation *poi = (POIAnnotation *)annotation;
         
-        annotationView.image = [UIImage imageNamed:@"userPosition"];
+        annotationView.frame = CGRectMake(0, 0, 44, 44);
+        
+        annotationView.merchantImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:poi.poi.images.firstObject.preurl]]];
         
         return annotationView;
     }
@@ -130,6 +149,21 @@
 //单击地图收起键盘
 - (void)mapView:(MAMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
+    
+}
+
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
+    
+    if ([view isKindOfClass:[CustomAnnotationView class]]) {
+        NSInteger index = [self.annotations indexOfObject:view.annotation];
+        if (self.currentBlock) {
+            self.currentBlock(index);
+        }
+    }
+}
+
+- (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view {
+    
 }
 
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
@@ -137,7 +171,7 @@
     if (!updatingLocation && _locationAnnotationView != nil)
     {
         [UIView animateWithDuration:0.1 animations:^{
-            _locationAnnotationView.rotateDegree = userLocation.heading.trueHeading;
+            _locationAnnotationView.rotateDegree = userLocation.heading.magneticHeading;
         }];
     }
     
@@ -151,6 +185,14 @@
     }
 }
 
+- (void)mapView:(MAMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction {
+    //用户移动地图
+    if (wasUserAction) {
+        [self startAroundSearch:_placeAround.keywords center:mapView.centerCoordinate];
+        mapView.centerCoordinate = mapView.centerCoordinate;
+    }
+}
+
 #pragma mark - AMapSearchDelegate
 
 - (void)onCloudSearchDone:(AMapCloudSearchBaseRequest *)request response:(AMapCloudPOISearchResponse *)response
@@ -159,6 +201,9 @@
     
     if (response.count == 0)
     {
+        if (self.aroundSearch) {
+            self.aroundSearch(nil);
+        }
         return;
     }
     
@@ -167,17 +212,24 @@
     
     [response.POIs enumerateObjectsUsingBlock:^(AMapCloudPOI *poi, NSUInteger idx, BOOL *stop) {
         
+        //自定义地图标注内容
         POIAnnotation *poiAnnotation = [[POIAnnotation alloc] initWithPOI:poi];
         
         [poiAnnotations addObject:poiAnnotation];
         
-        //addData
+        //addData 在返回的数据字典中增加 name 字段
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:poi.customFields];
         [dict setObject:poi.name forKey:@"name"];
+        
+        
+        NSString *uid = [NSString stringWithFormat:@"%ld",poi.uid];
+        [dict setObject:uid forKey:@"uid"];
         
         [aroundData addObject:dict];
         
     }];
+    
+    self.annotations = poiAnnotations;
     
     //返回周边搜索结果数据block
     if (self.aroundSearch) {
@@ -187,9 +239,11 @@
     /* 将结果以annotation的形式加载到地图上. */
     [_mapView addAnnotations:poiAnnotations];
     
-    /* 如果只有一个结果，设置其为中心点. */
-    /* 如果有多个结果, 设置地图使所有的annotation都可见. */
-//    [_mapView showAnnotations:poiAnnotations animated:YES];
+    //默认第一条标注高亮显示
+    [self selectAnnotation:0];
+}
+
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error {
     
 }
 
@@ -207,6 +261,7 @@
 #pragma mark - Lift Cycle
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     
     //地图
     [self configMapView];
@@ -215,7 +270,7 @@
 //    [self configNearbyManager];
     
     //周边搜索
-    [self configNearbySearch];
+    [self configAroundSearch];
     
 }
 

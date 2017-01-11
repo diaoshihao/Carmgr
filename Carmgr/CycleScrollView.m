@@ -39,7 +39,8 @@
             imageView.image = [UIImage imageNamed:self.images[i]];
         }
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewDidTap:)];
+        imageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)];
         [imageView addGestureRecognizer:tap];
         [self addSubview:imageView];
     }
@@ -49,9 +50,16 @@
     self.bounces = NO;
 }
 
-- (void)imageViewDidTap:(ImageTap)imageTap {
+- (void)tapImage:(UITapGestureRecognizer *)tap {
+    
     NSUInteger index = self.contentOffset.x / [DefineValue screenWidth];
-    imageTap(index);
+    if (self.imageTap) {
+        self.imageTap(index);
+    }
+}
+
+- (void)imageViewDidTap:(ImageTap)imageTap {
+    self.imageTap = imageTap;
 }
 
 - (void)autoScrollView {

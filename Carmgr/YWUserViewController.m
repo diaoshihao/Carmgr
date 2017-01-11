@@ -20,8 +20,8 @@
 #import "BalanceViewController.h"
 #import "MessageViewController.h"
 #import "UserInfoViewController.h"
-#import "CarVerifyViewController.h"
 #import "UserTableViewController.h"
+#import "AddCarInfoViewController.h"
 #import "YWProgressViewController.h"
 #import "MyFavouriteViewController.h"
 
@@ -228,9 +228,9 @@
 
 #pragma mark 跳转到添加车辆界面
 - (void)pushToAddCarInfo {
-    CarVerifyViewController *CarVerifyVC = [[CarVerifyViewController alloc] init];
-    CarVerifyVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:CarVerifyVC animated:YES];
+    AddCarInfoViewController *addCarInfo = [[AddCarInfoViewController alloc] init];
+    addCarInfo.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:addCarInfo animated:YES];
 }
 
 #pragma mark 跳转到消息界面

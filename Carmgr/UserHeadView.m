@@ -53,7 +53,7 @@
     
     //用户名
     NSString *username = @"登录/注册";
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
         username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     }
     self.userName = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionDefault];

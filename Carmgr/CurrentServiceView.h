@@ -10,12 +10,10 @@
 
 @interface CurrentServiceView : UIView
 
-@property (nonatomic, strong) NSString *serviceName;
+@property (nonatomic, strong) UILabel *serviceName;
 
-@property (nonatomic, strong) NSString *merchantName;
+@property (nonatomic, strong) UILabel *merchantName;
 
-@property (nonatomic, strong) NSString *price;
-
-- (void)configView;
+@property (nonatomic, strong) UILabel *price;
 
 @end

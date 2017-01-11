@@ -34,6 +34,19 @@
     return nil;
 }
 
+- (NSString *)provinceFromCity:(NSString *)city {
+    for (NSDictionary *provinceDict in [self allAddressDict]) {
+        NSString *province = provinceDict[@"provinceName"];
+        NSArray *cityList = [self cityListFromProvince:province];
+        for (NSString *cityName in cityList) {
+            if ([cityName hasPrefix:city]) {
+                return province;
+            }
+        }
+    }
+    return @"";
+}
+
 - (NSString *)abbreviationFromProvince:(NSString *)province {
     NSDictionary *provinceDict = [self provinceDictFromProvince:province];
     return provinceDict[@"name"];

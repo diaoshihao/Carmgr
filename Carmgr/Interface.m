@@ -75,21 +75,21 @@
 }
 
 + (NSString *)username {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     }
     return [Interface defaultUsername];
 }
 
 + (NSString *)password {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     }
     return [Interface defaultPassword];
 }
 
 + (NSString *)token {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"] == YES) {
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     }
     return [Interface defaultToken];
@@ -239,7 +239,7 @@
     //city_filter 如果城市名后带有 市 字，删除之
     NSString *city_name = [[NSMutableString stringWithString:city_filter] stringByReplacingOccurrencesOfString:@"市" withString:@""];
     NSDictionary *param = @{@"username":[Interface username],
-                            //设置unicode utf-8
+                            //设置unicode ISO88591
                             @"city_filter":[Interface unicode2ISO88591:city_name],
                             @"service_filter":[Interface unicode2ISO88591:service_filter],
                             @"token":[Interface token],
@@ -281,10 +281,10 @@
                             @"vehicle_number":vehicle_number,
                             @"engine_number":engine_number,
                             @"frame_number":frame_number,
-                            @"buy_insu_time":buy_insu_time,
-                            @"first_mantain_time":first_mantain_time,
-                            @"travel_mileage":travel_mileage,
-                            @"comments":comments,
+                            @"buy_insu_time":@"buy_insu_time",
+                            @"first_mantain_time":@"first_mantain_time",
+                            @"travel_mileage":@"travel_mileage",
+                            @"comments":@"comments",
                             @"token":[Interface token],
                             @"version":[Interface appVersion]};
     return @[url,param];
@@ -297,6 +297,17 @@
     NSDictionary *param = @{@"username":[Interface username],
                             @"merchant_name":[Interface unicode2ISO88591:merchant_name],
                             @"token":[Interface token],
+                            @"version":[Interface appVersion]};
+    return @[url,param];
+}
+
++ (NSArray *)appsubscribeservice_id:(NSString *)service_id merchant_id:(NSString *)merchant_id opt_type:(NSString *)opt_type {
+    NSString *url = [NSString stringWithFormat:@"%@appsubscribeservice.action",[Interface url]];
+    NSDictionary *param = @{@"username":[Interface username],
+                            @"merchant_id":merchant_id,
+                            @"service_id":service_id,
+                            @"opt_type":opt_type,
+                            @"type":@"2",
                             @"version":[Interface appVersion]};
     return @[url,param];
 }

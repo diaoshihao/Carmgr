@@ -18,6 +18,8 @@
 //province
 - (NSDictionary *)provinceDictFromProvince:(NSString *)province;
 
+- (NSString *)provinceFromCity:(NSString *)city;
+
 //abbreviation
 - (NSString *)abbreviationFromProvince:(NSString *)province;
 

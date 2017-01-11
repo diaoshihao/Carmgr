@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+//block
 typedef void(^SelectService)(NSString *selectedService);
 
+//delegate
 @protocol ClassifyScrollViewDelegate <NSObject>
 
 - (void)didSelectedCurrentService:(NSString *)currentService;

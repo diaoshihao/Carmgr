@@ -13,6 +13,8 @@ typedef void(^returnAddress)(NSArray *address);
 
 @interface AddressPickerController : SecondaryViewController
 
+@property (nonatomic, strong) NSString *currentProvince;
+
 @property (nonatomic, assign) BOOL hideArea;
 
 @property (nonatomic, copy) returnAddress block;

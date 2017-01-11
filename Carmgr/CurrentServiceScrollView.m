@@ -11,23 +11,27 @@
 #import "CurrentServiceModel.h"
 #import <Masonry.h>
 
-@interface CurrentServiceScrollView()
+@interface CurrentServiceScrollView() <UIScrollViewDelegate>
 
 @property (nonatomic, strong) CurrentServiceView *serviceView;
 
 @end
 
 @implementation CurrentServiceScrollView
+{
+    CGFloat width;//scrollView content width
+}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.bounces = NO;
         self.pagingEnabled = YES;
+        self.clipsToBounds = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
         self.directionalLockEnabled = YES;
+        self.delegate = self;
         
         //设置superview透明度0，错误做法：self.alpha = 0;
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
@@ -39,8 +43,15 @@
 {
     self = [super init];
     if (self) {
-        self.bounces = NO;
-        self.alpha = 0;
+        self.pagingEnabled = YES;
+        self.clipsToBounds = NO;
+        self.showsHorizontalScrollIndicator = NO;
+        self.showsVerticalScrollIndicator = NO;
+        self.directionalLockEnabled = YES;
+        self.delegate = self;
+        
+        //设置superview透明度0，错误做法：self.alpha = 0;
+        self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
     }
     return self;
 }
@@ -53,9 +64,10 @@
 }
 
 - (void)configCurrentServiceView {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    width = [UIScreen mainScreen].bounds.size.width - 30;
     
-    self.contentSize = CGSizeMake(width * self.nearbyServices.count, 0);
+    self.contentSize = CGSizeMake((width + 10) * self.nearbyServices.count, 0);
+    
     
     for (NSInteger i = 0; i < self.nearbyServices.count; i++) {
         CurrentServiceModel *model = self.nearbyServices[i];
@@ -63,13 +75,9 @@
         [self addSubview:contentView];
         [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
-            make.left.mas_equalTo(i * width);
+            make.left.mas_equalTo(i * (width + 10) + 10);
             make.width.mas_equalTo(width);
-            make.bottom.mas_equalTo(0);
-            //设置右边距
-            if (i == self.nearbyServices.count - 1) {
-                make.right.mas_equalTo(0);
-            }
+            make.height.mas_equalTo(self);
         }];
     }
 }
@@ -79,66 +87,37 @@
     UIView *background = [[UIView alloc] init];
     background.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
     
-    UIView *leftView = [[UIView alloc] init];
-    if (model == self.nearbyServices.firstObject) {
-        leftView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
-    } else {
-        leftView.backgroundColor = [UIColor whiteColor];
-    }
-    [background addSubview:leftView];
-    [leftView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.left.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(20);
-    }];
-    
-    UIView *rightView = [[UIView alloc] init];
-    if (model == self.nearbyServices.lastObject) {
-        rightView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
-    } else {
-        rightView.backgroundColor = [UIColor whiteColor];
-    }
-    [background addSubview:rightView];
-    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.right.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(20);
-    }];
-    
     self.serviceView = [[CurrentServiceView alloc] init];
     [self configServiceView:model];
     [background addSubview:self.serviceView];
     [self.serviceView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.bottom.mas_equalTo(0);
-        make.left.mas_equalTo(leftView.mas_right).offset(20);
-        make.right.mas_equalTo(rightView.mas_left).offset(-20);
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
     return background;
 }
 
 - (void)configServiceView:(CurrentServiceModel *)model {
-    self.serviceView.serviceName = model.serviceName;
-    self.serviceView.merchantName = model.merchantName;
-    self.serviceView.price = model.price;
-    [self.serviceView configView];
+    self.serviceView.serviceName.text = model.serviceName;
+    self.serviceView.merchantName.text = model.merchantName;
+    self.serviceView.price.text = [NSString stringWithFormat:@"%@ 元／单",model.price];
 }
 
-//- (void)didSelectClassOfServices:(CustomSegmentedControl *)segmented {
-//    //delegate
-//    [self.classifyDelegate didSelectedCurrentService:self.services[segmented.selectedSegmentIndex]];
-//    //block
-//    self.selectService(self.services[segmented.selectedSegmentIndex]);
-//}
-//
-//- (void)didSelectedCurrentService:(SelectService)seleted {
-//    self.selectService = seleted;
-//}
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    self.currentPage = scrollView.contentOffset.x / (width + 10);
+    
+    if (self.currentPageBlock) {
+        self.currentPageBlock(self.currentPage);
+    }
 }
-*/
+
+- (void)currentServicePage:(CurrentPageBlock)currentPageBlock {
+    self.currentPageBlock = currentPageBlock;
+}
+
+- (void)scrollToCurrentPage:(NSInteger)index {
+    self.contentOffset = CGPointMake(index * (width + 10), 0);
+}
 
 @end

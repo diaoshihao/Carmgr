@@ -62,6 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 //appresetusername
 + (NSArray *)appresetusername:(NSString *)username new_username:(NSString *)new_username;
 
+//首页数据===========================================
 + (NSArray *)appgetconfig_key:(NSString *)config_key;
 
 + (NSArray *)appgetservices;
@@ -69,13 +70,18 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)appgetrecommend;
 
 + (NSArray *)appgetsecondhandcar;
+//首页数据===========================================
 
+//商家列表
 + (NSArray *)appgetmerchantslist_city_filter:(NSString *)city_filter service_filter:(NSString *)service_filter;
 
+//进度
 + (NSArray *)appgetprocess_filter:(NSString *)filter;
 
+//个人资料
 + (NSArray *)appgetprivate;
 
+//添加车辆
 + (NSArray *)appaddcarinfo_car_type:(NSString *)car_type
                                city:(NSString *)city
                      vehicle_number:(NSString *)vehicle_number
@@ -85,10 +91,16 @@ NS_ASSUME_NONNULL_BEGIN
                  first_mantain_time:(NSString *)first_mantain_time travel_mileage:(NSString *)travel_mileage
                            comments:(NSString *)comments;
 
+//商家详情
 + (NSArray *)appgetmerchants_name:(NSString *)merchant_name;
 
+//预约服务
++ (NSArray *)appsubscribeservice_id:(NSString *)service_id merchant_id:(NSString *)merchant_id opt_type:(NSString *)opt_type;
+
+//评价
 + (NSArray *)appadvise_text:(NSString *)advise_text;
 
+//用户操作行为统计
 + (NSArray *)apploguseroperation_click_area:(NSString *)click_area detail:(NSString *)detail;
 
 NS_ASSUME_NONNULL_END

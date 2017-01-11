@@ -161,6 +161,7 @@
 #pragma mark 选择城市
 - (void)chooseCityAction:(CustomButton *)sender {
     AddressPickerController *addressPicker = [[AddressPickerController alloc] init];
+    addressPicker.hidesBottomBarWhenPushed = YES;
     __weak typeof(self) weakSelf = self;
     [addressPicker selectedAddress:^(NSArray *address) {
         //选择城市后刷新数据

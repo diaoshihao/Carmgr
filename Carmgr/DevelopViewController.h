@@ -6,8 +6,8 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SecondaryViewController.h"
 
-@interface DevelopViewController : UIViewController
+@interface DevelopViewController : SecondaryViewController
 
 @end

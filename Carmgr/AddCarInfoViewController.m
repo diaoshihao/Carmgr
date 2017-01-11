@@ -12,6 +12,7 @@
 #import <Masonry.h>
 #import "Interface.h"
 #import "UIViewController+ShowView.h"
+#import "CarsPickerViewController.h"
 #import "AddressPickerController.h"
 #import "AddressManager.h"
 
@@ -49,8 +50,8 @@
                       @[@"号码类型",@"车        型"],
                       @[@"查询城市"],
                       @[@"车牌号码",@"发动机号",@"车架号码"],
-                      @[@"保险进保日期",@"首次保养日期",@"行驶公里数"],
-                      @[@"备        注"]
+                      //                      @[@"保险进保日期",@"首次保养日期",@"行驶公里数"],
+                      //                      @[@"备        注"]
                       ];
     
     self.numberType = [self.infoView numberType];
@@ -59,24 +60,24 @@
     self.cityLabel = [self.infoView labelWithTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"city"]];
     
     NSArray *arr2 = [self.infoView textFieldArray:2];//数字标示是
-    NSArray *arr3 = [self.infoView textFieldArray:3];//否添加“粤”
+    //    NSArray *arr3 = [self.infoView textFieldArray:3];//否添加“粤”
     
     self.vehicle_number = arr2[0];
     self.engine_number = arr2[1];
     self.frame_number = arr2[2];
     
-    self.buy_insu_time = arr3[0];
-    self.first_insu_time = arr3[1];
-    self.travel_mileage = arr3[2];
-    
-    self.comments = [self.infoView textFieldWithPlaceholder:@"请输入爱车(选填)"];
+    //    self.buy_insu_time = arr3[0];
+    //    self.first_insu_time = arr3[1];
+    //    self.travel_mileage = arr3[2];
+    //
+    //    self.comments = [self.infoView textFieldWithPlaceholder:@"请输入爱车(选填)"];
     
     self.viewsArr = @[
                       @[self.numberType,self.carType],
                       @[self.cityLabel],
                       arr2,
-                      arr3,
-                      @[self.comments]
+                      //                      arr3,
+                      //                      @[self.comments]
                       ];
     
     
@@ -101,39 +102,8 @@
     // 监听键盘即将消失的事件. UIKeyboardWillHideNotification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    
-    AddressManager *manager = [AddressManager manager];
-    
-//    NSLog(@"%@",[manager allAddressDict]);
-    
-//    NSLog(@"%@",[manager provinceDictFromProvince:@"广东"]);
-//    
-//    NSLog(@"%@",[manager abbreviationFromProvince:@"广东"]);
-//    
-//    NSLog(@"%@",[manager cityDictsFromProvince:@"广东"]);
-//    
-//    NSLog(@"%@",[manager cityListFromProvince:@"广东"]);
-//    
-//    NSLog(@"%@",[manager areaDictsFromCity:@"广州" province:@"广东"]);
-//    
-//    NSLog(@"%@",[manager areaListFromCity:@"广州" province:@"广东"]);
-    
 }
 
-//导航栏
-- (void)customLeftItem {
-    self.navigationItem.title = @"添加车辆";
-    
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [leftButton setImage:[UIImage imageNamed:@"后退"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backToLastPage) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-}
-
-- (void)backToLastPage {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)createTableView {
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -143,31 +113,48 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.scrollEnabled = NO;
     
     [self.tableView registerClass:[AddCarInfoCell class] forCellReuseIdentifier:[AddCarInfoCell getReuseID]];
     
-    //button
-    UIButton *button = [self.infoView createLabelAndButton:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(64);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(button.mas_top).with.offset(-20);
+        make.height.mas_equalTo(44 * 6 + 31);
     }];
     
-    //点击隐藏键盘(tableview满屏的情况下)
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSearchBar:)];
-    tap.cancelsTouchesInView = NO;  //重要
-    [self.view addGestureRecognizer:tap];
-    
+    //button
+    [self.infoView createLabelAndButton:self.tableView];
 }
-- (void)hideSearchBar:(UITapGestureRecognizer *)tap {
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+
+//检查数据完整性
+- (BOOL)isComplete {
+    if (self.cityLabel.text.length == 0) {
+        [self showAlertOnlyMessage:@"请选择城市"];
+        return NO;
+    }
+    if (self.vehicle_number.text.length == 0) {
+        [self showAlertOnlyMessage:@"请输入车牌号码"];
+        return NO;
+    }
+    if (self.engine_number.text.length == 0) {
+        [self showAlertOnlyMessage:@"请输入发动机号"];
+        return NO;
+    }
+    if (self.frame_number.text.length == 0) {
+        [self showAlertOnlyMessage:@"请输入车架号码"];
+        return NO;
+    }
+    return YES;
 }
 
 //添加车辆
 - (void)checkCarInfo {
     [self.view endEditing:YES];
+    if (![self isComplete]) {
+        return;
+    }
     
     NSArray *addCarInfo = [Interface appaddcarinfo_car_type:[NSString stringWithFormat:@"%ld",self.numberType.selectedSegmentIndex] city:self.cityLabel.text vehicle_number:self.vehicle_number.text engine_number:self.engine_number.text frame_number:self.frame_number.text buy_insu_time:self.buy_insu_time.text first_mantain_time:self.first_insu_time.text travel_mileage:self.travel_mileage.text comments:self.comments.text];
     [MyNetworker POST:addCarInfo[InterfaceUrl] parameters:addCarInfo[Parameters] success:^(id responseObject) {
@@ -179,7 +166,7 @@
     } failure:^(NSError *error) {
         [self showAlertViewTitle:@"提示" messae:@"网络错误"];
     }];
-
+    
 }
 
 - (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
@@ -212,7 +199,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    AddCarInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:[AddCarInfoCell getReuseID] forIndexPath:indexPath];
     AddCarInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell == nil) {
         cell = [[AddCarInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[AddCarInfoCell getReuseID]];
@@ -232,36 +218,52 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        [self showCarsPicker];
+    }
+    
     if (indexPath.section == 1) {
-        AddressPickerController *addressPicker = [[AddressPickerController alloc] init];
-        addressPicker.hideArea = YES;
-        [addressPicker selectedAddress:^(NSArray *address) {
-            self.cityLabel.text = address.firstObject;
-        }];
-        [self.navigationController pushViewController:addressPicker animated:YES];
+        [self showAddressPicker];
     }
 }
 
-#pragma mark - 右滑返回上一页
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        
-        navigationController.interactivePopGestureRecognizer.enabled = YES;
-        
+//cars
+- (void)showCarsPicker {
+    CarsPickerViewController *carsPicker = [[CarsPickerViewController alloc] init];
+    [carsPicker didPickCar:^(NSString *car) {
+        self.carType.text = car;
+    }];
+    [self.navigationController pushViewController:carsPicker animated:YES];
+}
+
+//address
+- (void)showAddressPicker {
+    AddressPickerController *addressPicker = [[AddressPickerController alloc] init];
+    addressPicker.hideArea = YES;
+    [addressPicker selectedAddress:^(NSArray *address) {
+        self.cityLabel.text = address.firstObject;
+        [self addLeftView:address.lastObject];
+    }];
+    [self.navigationController pushViewController:addressPicker animated:YES];
+}
+
+- (void)addLeftView:(NSString *)name {
+    if ([name isEqualToString:@""]) {
+        return;
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    //滑动返回
-    self.navigationController.delegate = self;
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    //滑动返回
-    [super viewDidDisappear:YES];
-    self.navigationController.delegate = nil;
+    
+    AddressManager *manager = [AddressManager manager];
+    NSString *abbreviation = [manager abbreviationFromProvince:name];
+    
+    UILabel *label = [self.infoView labelWithTitle:abbreviation];
+    label.textAlignment = NSTextAlignmentCenter;
+    CGSize size = label.intrinsicContentSize;
+    label.frame = CGRectMake(0, 0, size.width+10, size.height+10);
+    label.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    self.vehicle_number.leftView = label;
+    self.vehicle_number.leftViewMode = UITextFieldViewModeAlways;
+    
 }
 
 
@@ -304,13 +306,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

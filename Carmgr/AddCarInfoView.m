@@ -28,20 +28,6 @@
     NSMutableArray *arrM = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < 3; i++) {
         UITextField *textField = [self textFieldWithPlaceholder:placeholder[forSection-2][i]];
-        if (forSection == 2 && i == 0) {
-            NSString *province = @"粤";
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"province"] != nil) {
-                province = [[NSUserDefaults standardUserDefaults] objectForKey:@"province"];
-            }
-            UILabel *label = [self labelWithTitle:province];
-            label.textAlignment = NSTextAlignmentCenter;
-            CGSize size = label.intrinsicContentSize;
-            label.frame = CGRectMake(0, 0, size.width+10, size.height+10);
-            label.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            
-            textField.leftView = label;
-            textField.leftViewMode = UITextFieldViewModeAlways;
-        }
         [arrM addObject:textField];
     }
     return arrM;
@@ -76,19 +62,18 @@
     [button addTarget:self.target action:@selector(checkCarInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.superView addSubview:button];
     
-    
-    [tipsLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-20);
-        make.centerX.mas_equalTo(self.superView);
-    }];
-    
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(tipsLabel.mas_top).with.offset(-10);
+        make.top.mas_equalTo(broview.mas_bottom).with.offset(30);
         make.left.mas_equalTo(20);
         make.right.mas_equalTo(-20);
         make.height.mas_equalTo(44);
     }];
+    
+    [tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(button.mas_bottom).offset(10);
+        make.centerX.mas_equalTo(self.superView);
+    }];
+    
     return button;
 }
 

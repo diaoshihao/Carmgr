@@ -78,25 +78,6 @@
     return label;
 }
 
-- (UILabel *)multiLineLabel:(NSString *)text {
-    UILabel *textLabel = [[UILabel alloc] init];
-    textLabel.backgroundColor = [UIColor whiteColor];
-    textLabel.numberOfLines = 3;
-    textLabel.font = [DefineValue font12];
-    textLabel.textColor = [DefineValue rgbColor51];
-    
-    textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 10;
-    paragraphStyle.firstLineHeadIndent = 20;
-    paragraphStyle.headIndent = 20;
-    paragraphStyle.tailIndent = -20;
-    NSMutableAttributedString *attribueString = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSParagraphStyleAttributeName:paragraphStyle}];
-    
-    textLabel.attributedText = attribueString;
-    return textLabel;
-}
-
 - (CustomButton *)moreButton {
     CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom imagePosition:ImagePositionRight];
     button.backgroundColor = [UIColor whiteColor];

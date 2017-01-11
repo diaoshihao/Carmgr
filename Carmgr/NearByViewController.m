@@ -11,10 +11,10 @@
 #import "CurrentServiceScrollView.h"
 #import "CurrentServiceModel.h"
 #import "ClassifyScrollView.h"
+#import "MapViewController.h"
 #import "DefineValue.h"
 #import "Interface.h"
 #import <Masonry.h>
-#import "MapViewController.h"
 @interface NearByViewController () <MAMapViewDelegate, ClassifyScrollViewDelegate>
 {
     CLLocationCoordinate2D _recode;
@@ -27,6 +27,8 @@
 @property (nonatomic, strong) NSMutableArray *services;
 
 @property (nonatomic, strong) MapViewController *mapView;
+
+@property (nonatomic, strong) MASConstraint *heightLayout;
 
 @end
 
@@ -44,65 +46,16 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
     //地图
     [self configMapView];
+    
     //分类
     [self configClassifyView];
+    
     //简介
     [self configCurrentServiceView];
     
-//    [self loadData:@"上牌"];
-    
-}
-
-- (void)addAddress {
-//    NSArray *address = [Interface maddress:@"易务车宝" address:@"广东省广州市天河区车陂路" filter:@"上牌"];
-////    [PPNetworkHelper setRequestSerializer:PPRequestSerializerJSON];
-//    [PPNetworkHelper POST:address[InterfaceUrl] parameters:address[Parameters] success:^(id responseObject) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-    
-}
-
-//- (void)loadData:(NSString *)currentService {
-//    NSArray *getaddress = [Interface getmerchantaddress:currentService city:@"全国"];
-//    [PPNetworkHelper GET:getaddress[InterfaceUrl] parameters:getaddress[Parameters] success:^(id responseObject) {
-//        [self.services removeAllObjects];
-//
-//        if ([responseObject[@"status"] integerValue] == 0) {
-//            [self showUnknownError];
-//            
-//        } else if ([responseObject[@"count"] integerValue] == 0) {
-//            [self showNoMerchantAlertView];
-//            
-//        } else {
-//            NSArray *datas = responseObject[@"datas"];
-//            
-//            for (NSDictionary *dict in datas) {
-//                CurrentServiceModel *model = [[CurrentServiceModel alloc] initWithDict:@{@"serviceName":dict[@"service_name"],@"merchantName":dict[@"_name"],@"price":dict[@"price"]}];
-//                [self.services addObject:model];
-//            }
-//        }
-//        
-//        [self.currentServiceView reloadData];
-//        
-//    } failure:^(NSError *error) {
-//        [self showFailuer];
-//    }];
-//}
-
-- (void)showNoMerchantAlertView {
-    [self showAlertOnlyMessage:@"您的附近暂未找到相关服务点"];
-}
-
-- (void)showUnknownError {
-    [self showAlertOnlyMessage:@"未知错误"];
-}
-
-- (void)showFailuer {
-    [self showAlertOnlyMessage:@"请求失败，请检查网络"];
 }
 
 //CurrentServiceView    简介
@@ -111,8 +64,14 @@
     self.currentServiceView.nearbyServices = self.services;
     [self.view addSubview:self.currentServiceView];
     
+    //滑动后显示对应的标注
+    [self.currentServiceView currentServicePage:^(NSInteger index) {
+        [self.mapView selectAnnotation:index];
+    }];
+    
     [self.currentServiceView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(0);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(-20);
         make.height.mas_equalTo(100);
         make.top.mas_equalTo(self.customBar.mas_bottom).offset(10);
     }];
@@ -122,6 +81,7 @@
 - (void)configClassifyView {
     self.classifyView = [[ClassifyScrollView alloc] initWithDelegate:self];
     [self.view addSubview:self.classifyView];
+
     [self.classifyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(0);
         make.height.mas_equalTo(44);
@@ -146,9 +106,18 @@
         _recode = record;
     }];
     
-    //获取数据block
+    //获取周边搜索结果数据block
     [self.mapView dataDidLoad:^(NSArray *data) {
+        if (data == nil) {
+            self.currentServiceView.hidden = YES;
+            return;
+        }
         [self loadData:data];
+    }];
+    
+    //当前选择的标注
+    [self.mapView currentAnnotationView:^(NSInteger index) {
+        [self.currentServiceView scrollToCurrentPage:index];
     }];
     
     [self addChildViewController:self.mapView];
@@ -161,17 +130,22 @@
     [self.services removeAllObjects];
     
     if (datas.count == 0) {
-        [self showNoMerchantAlertView];
+        self.currentServiceView.hidden = YES;
     } else {
         for (NSDictionary *dict in datas) {
-            CurrentServiceModel *model = [[CurrentServiceModel alloc] initWithDict:@{@"serviceName":dict[@"service_name"],@"merchantName":dict[@"name"],@"price":dict[@"price"]}];
+            CurrentServiceModel *model = [[CurrentServiceModel alloc] initWithDict:@{@"serviceName":dict[@"service_name"],@"merchantName":dict[@"name"],@"price":dict[@"price"],@"uid":dict[@"uid"]}];
             [self.services addObject:model];
         }
+        
+        [self showCurrentService];
     }
-    
-    //重新加载服务介绍页面
-    [self.currentServiceView reloadData];
 }
+
+- (void)showCurrentService {
+    [self.currentServiceView reloadData];
+    self.currentServiceView.hidden = NO;
+}
+
 
 #pragma mark - classifyViewDelegate
 //选择分类类型
@@ -179,6 +153,8 @@
     //发起周边检索
     [self.mapView startAroundSearch:currentService center:_recode];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

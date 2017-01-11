@@ -157,8 +157,6 @@
         return;
     }
     
-    NSString *username = self.userField.text;
-    NSString *password = self.passwdField.text;
     NSString *uuid = [Interface uuid];
     
     if (self.userField.text.length == 0 || self.passwdField.text.length == 0) {
@@ -167,15 +165,15 @@
         return;
     }
     
-    NSArray *login = [Interface applogin:username password:password type:@"0" verf_code:@"" uuid:uuid];
+    NSArray *login = [Interface applogin:self.userField.text password:self.passwdField.text type:@"0" verf_code:@"" uuid:uuid];
     [MyNetworker POST:login[InterfaceUrl] parameters:login[Parameters] success:^(id responseObject) {
         [self clickEnable];
         if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
             //登录成功保存数据
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];//登录状态
             
-            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.userField.text forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.passwdField.text forKey:@"password"];
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"token"] forKey:@"token"];//token
             
             //自动登录打开
@@ -221,7 +219,7 @@
         if (alertVC.title == nil) {//login success
             
             [self dismissViewControllerAnimated:YES completion:^{
-                if (self.showHomePageWhileDone) {
+                if (self.loginOption == LoginOptionRelogin || self.loginOption == LoginOptionAuto) {
                     [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
                     return;
                 }

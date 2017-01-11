@@ -32,18 +32,15 @@
     NSString *version = [NSBundle mainBundle].infoDictionary[key];
     
     // 2.从沙盒中取出上次存储的版本号
-    NSString *saveVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    NSString *savedVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     
-    if ([version isEqualToString:saveVersion]) { // 不是第一次使用这个版本
+    if ([version isEqualToString:savedVersion]) { // 不是第一次使用这个版本
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
         
     } else { // 版本号不一样：第一次使用新版本
         // 将新版本号写入沙盒
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];
-        
-        //移动网络下载图片打开
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MONET"];
         
         //是否第一次使用
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFirstLaunch"];
@@ -58,8 +55,18 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"];
 }
 
+//void uncaughtExceptionHandler(NSException *exception) {
+//    NSArray *stacks = exception.callStackSymbols;
+//    NSString *reason = exception.reason;
+//    NSString *name = exception.name;
+//    NSLog(@"exception:name %@, reason %@, stacksInfo %@",name,reason,stacks);
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"exception"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //异常退出捕获
+//    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
     textView = [[UITextView alloc] init];//先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
     
@@ -74,6 +81,8 @@
     } else {
         self.window.rootViewController = [[ViewController alloc] init];
     }
+    
+    
     
     return YES;
     

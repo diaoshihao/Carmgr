@@ -12,6 +12,9 @@
 //周边搜索结果
 typedef void(^AroundSearch)(NSArray *aroundData);
 
+//当前选择的标注索引index
+typedef void(^CurrentAnnotaion)(NSInteger index);
+
 //当前定位经纬度（持续定位）
 typedef void(^UpdatingLocation)(CLLocationCoordinate2D record);
 
@@ -21,12 +24,23 @@ typedef void(^UpdatingLocation)(CLLocationCoordinate2D record);
 
 @property (nonatomic, copy) AroundSearch aroundSearch;
 
+@property (nonatomic, copy) CurrentAnnotaion currentBlock;
+
 @property (nonatomic, strong) NSString *tableID;
 
+//更新当前位置（持续定位）
 - (void)updatingLocation:(UpdatingLocation)location;
 
+//开始周边搜索
 - (void)startAroundSearch:(NSString *)keywords center:(CLLocationCoordinate2D)record;
 
+//返回周边搜索数据
 - (void)dataDidLoad:(AroundSearch)aroundData;
+
+//选择当前的标注:根据滑动高亮显示对应的标注View
+- (void)selectAnnotation:(NSInteger)index;
+
+//当前选择的标注:点击标注view显示对应的服务简介的回调方法
+- (void)currentAnnotationView:(CurrentAnnotaion)currentBlock;
 
 @end

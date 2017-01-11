@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, ButtonPosition) {
-    PositionLeft = 0,
+    ButtonPositionLeft = 0,
     
-    PositionLeftTop,
-    PositionLeftMiddle,
-    PositionLeftBottom,
+    ButtonPositionLeftTop,
+    ButtonPositionLeftMiddle,
+    ButtonPositionLeftBottom,
     
-    PositionRightTop,
-    PositionRightMiddle,
-    PositionRightBottom,
+    ButtonPositionRightTop,
+    ButtonPositionRightMiddle,
+    ButtonPositionRightBottom,
 };
 
 typedef void(^LoadImage)(ButtonPosition position);

@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSString *price;
 
+@property (nonatomic, strong) NSString *uid;
+
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

@@ -33,8 +33,6 @@
 
 @property (nonatomic, strong) NSString *currentCity;
 
-@property (nonatomic, strong) NSString *currentProvince;
-
 @end
 
 @implementation AddressPickerController
@@ -98,6 +96,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"选择城市";
+    _manager = [AddressManager manager];
 //    [self initSearchBar];
     [self initTableView];
     [self configRightItemView];
@@ -119,7 +118,7 @@
 }
 
 - (void)initTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [DefineValue screenWidth], [DefineValue screenHeight]) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [DefineValue screenWidth], [DefineValue screenHeight] - 64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.sectionIndexColor = [DefineValue mainColor];
@@ -137,7 +136,7 @@
 }
 
 - (void)chooseAddress {
-    NSArray *address = @[self.currentCity,self.selectAreaVC.selectedArea];
+    NSArray *address = @[self.currentCity,self.selectAreaVC.selectedArea,self.currentProvince];
     if (self.block) {
         self.block(address);
     }
@@ -158,10 +157,6 @@
     for (NSDictionary *provinceDict in provinces) {
         for (NSDictionary *cityDict in provinceDict[@"citylist"]) {
             if ([cityDict[@"cityName"] isEqualToString:city]) {
-                //当前省份
-                self.currentProvince = provinceDict[@"provinceName"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.currentProvince forKey:@"currentprovince"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 for (NSDictionary *areaDict in cityDict[@"arealist"]) {
                     [areaList addObject:areaDict[@"areaName"]];
@@ -259,6 +254,9 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.clickBlock = ^(UIButton *button) {
+            //当前省份
+            [self saveCurrentProvince:button.currentTitle];
+            
             if (self.hideArea) {
                 [self onlySelectCurrentCity:button.currentTitle];
             } else {
@@ -279,6 +277,9 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.clickBlock = ^(UIButton *button) {
+            //当前省份
+            [self saveCurrentProvince:button.currentTitle];
+            
             NSArray *arr = @[@"北京",@"上海",@"天津",@"重庆"];
             if (![arr containsObject:button.currentTitle]) {
                 NSString *cityStr = [NSString stringWithFormat:@"%@市",button.currentTitle];
@@ -329,6 +330,9 @@
     NSArray *citys = [self.cityDict objectForKey:self.titleArray[indexPath.section]];
     NSString *city = citys[indexPath.row];
     
+    //当前省份
+    [self saveCurrentProvince:city];
+    
     //县级市
     if ([[city substringFromIndex:city.length - 1] isEqualToString:@"县"] || self.hideArea) {
         [self onlySelectCurrentCity:city];
@@ -336,6 +340,13 @@
         self.rightItemButton.hidden = YES;
         [self showAreaTableView:city];
     }
+}
+
+- (void)saveCurrentProvince:(NSString *)city {
+    self.currentProvince = [_manager provinceFromCity:city];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.currentProvince forKey:@"currentprovince"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //不展示地区列表
