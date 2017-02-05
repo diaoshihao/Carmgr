@@ -20,6 +20,9 @@
 		8422C5AC1E07EA9600934DD2 /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5AB1E07EA9600934DD2 /* PreviewCollectionViewCell.m */; };
 		8422C5AF1E07EB2D00934DD2 /* PhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5AE1E07EB2D00934DD2 /* PhotoPreviewController.m */; };
 		8422C5B21E0A208700934DD2 /* AddressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5B11E0A208700934DD2 /* AddressManager.m */; };
+		8442C6131E2638F000430919 /* AddCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8442C6121E2638F000430919 /* AddCarView.m */; };
+		8442C6161E275B8D00430919 /* CarInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8442C6151E275B8D00430919 /* CarInfoView.m */; };
+		8442C6191E27827F00430919 /* CarInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8442C6181E27827F00430919 /* CarInfoModel.m */; };
 		844BE7751E136E4F00456ED4 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BE7741E136E4F00456ED4 /* DetailViewController.m */; };
 		844BE7781E139B0B00456ED4 /* DetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BE7771E139B0B00456ED4 /* DetailHeadView.m */; };
 		844BE77B1E13A4C900456ED4 /* StarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BE77A1E13A4C900456ED4 /* StarsView.m */; };
@@ -44,6 +47,7 @@
 		847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776651D1258AC00DE8213 /* YWHomeViewController.m */; };
 		847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766F1D1258E500DE8213 /* YWProgressViewController.m */; };
 		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
+		8477EEB31E2F18CD00FA534F /* CircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477EEB21E2F18CD00FA534F /* CircleImageView.m */; };
 		847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D31D2B980E00EBFF37 /* NSString+MD5.m */; };
 		847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */; };
 		847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E71D2FA82B00EBFF37 /* ProgressModel.m */; };
@@ -70,6 +74,7 @@
 		8498868E1DE6F350000B5D4D /* ServiceCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498868D1DE6F350000B5D4D /* ServiceCollectionView.m */; };
 		849886911DE6FBAA000B5D4D /* SecondHandCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886901DE6FBAA000B5D4D /* SecondHandCollectionView.m */; };
 		849886941DE7C8BC000B5D4D /* PromotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886931DE7C8BC000B5D4D /* PromotionView.m */; };
+		849D9AE01E46C6DA00E06301 /* AlertShowAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D9ADF1E46C6DA00E06301 /* AlertShowAssistant.m */; };
 		84A3F2111E1244BB0067FB80 /* MerchantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F2101E1244B90067FB80 /* MerchantViewController.m */; };
 		84A3F2151E12476A0067FB80 /* BasicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F2141E12476A0067FB80 /* BasicModel.m */; };
 		84A3F2181E1248C20067FB80 /* MerchantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F2171E1248C20067FB80 /* MerchantModel.m */; };
@@ -215,6 +220,12 @@
 		8422C5AE1E07EB2D00934DD2 /* PhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPreviewController.m; path = Carmgr/PhotoPreviewController.m; sourceTree = "<group>"; };
 		8422C5B01E0A208700934DD2 /* AddressManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressManager.h; path = Carmgr/AddressManager.h; sourceTree = "<group>"; };
 		8422C5B11E0A208700934DD2 /* AddressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressManager.m; path = Carmgr/AddressManager.m; sourceTree = "<group>"; };
+		8442C6111E2638F000430919 /* AddCarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCarView.h; path = Carmgr/AddCarView.h; sourceTree = "<group>"; };
+		8442C6121E2638F000430919 /* AddCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCarView.m; path = Carmgr/AddCarView.m; sourceTree = "<group>"; };
+		8442C6141E275B8D00430919 /* CarInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarInfoView.h; path = Carmgr/CarInfoView.h; sourceTree = "<group>"; };
+		8442C6151E275B8D00430919 /* CarInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarInfoView.m; path = Carmgr/CarInfoView.m; sourceTree = "<group>"; };
+		8442C6171E27827F00430919 /* CarInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarInfoModel.h; path = Carmgr/CarInfoModel.h; sourceTree = "<group>"; };
+		8442C6181E27827F00430919 /* CarInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarInfoModel.m; path = Carmgr/CarInfoModel.m; sourceTree = "<group>"; };
 		844BE7731E136E4F00456ED4 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		844BE7741E136E4F00456ED4 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		844BE7761E139B0B00456ED4 /* DetailHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailHeadView.h; sourceTree = "<group>"; };
@@ -264,6 +275,8 @@
 		8477766F1D1258E500DE8213 /* YWProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWProgressViewController.m; sourceTree = "<group>"; };
 		847776711D12591C00DE8213 /* YWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWTabBarController.h; sourceTree = "<group>"; };
 		847776721D12591C00DE8213 /* YWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTabBarController.m; sourceTree = "<group>"; };
+		8477EEB11E2F18CD00FA534F /* CircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleImageView.h; path = Carmgr/CircleImageView.h; sourceTree = "<group>"; };
+		8477EEB21E2F18CD00FA534F /* CircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleImageView.m; path = Carmgr/CircleImageView.m; sourceTree = "<group>"; };
 		847D09D21D2B980E00EBFF37 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Carmgr/NSString+MD5.h"; sourceTree = "<group>"; };
 		847D09D31D2B980E00EBFF37 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Carmgr/NSString+MD5.m"; sourceTree = "<group>"; };
 		847D09E31D2F6F8C00EBFF37 /* ProgressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTableViewCell.h; sourceTree = "<group>"; };
@@ -313,6 +326,8 @@
 		849886901DE6FBAA000B5D4D /* SecondHandCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondHandCollectionView.m; sourceTree = "<group>"; };
 		849886921DE7C8BC000B5D4D /* PromotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionView.h; sourceTree = "<group>"; };
 		849886931DE7C8BC000B5D4D /* PromotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionView.m; sourceTree = "<group>"; };
+		849D9ADE1E46C6DA00E06301 /* AlertShowAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertShowAssistant.h; path = Carmgr/AlertShowAssistant.h; sourceTree = "<group>"; };
+		849D9ADF1E46C6DA00E06301 /* AlertShowAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertShowAssistant.m; path = Carmgr/AlertShowAssistant.m; sourceTree = "<group>"; };
 		84A3F20F1E1244B90067FB80 /* MerchantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantViewController.h; sourceTree = "<group>"; };
 		84A3F2101E1244B90067FB80 /* MerchantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantViewController.m; sourceTree = "<group>"; };
 		84A3F2131E12476A0067FB80 /* BasicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicModel.h; sourceTree = "<group>"; };
@@ -557,6 +572,10 @@
 				849886741DE54A0F000B5D4D /* UserHeadView.m */,
 				849886761DE58355000B5D4D /* MyCarView.h */,
 				849886771DE58355000B5D4D /* MyCarView.m */,
+				8442C6111E2638F000430919 /* AddCarView.h */,
+				8442C6121E2638F000430919 /* AddCarView.m */,
+				8442C6141E275B8D00430919 /* CarInfoView.h */,
+				8442C6151E275B8D00430919 /* CarInfoView.m */,
 				849886791DE586C1000B5D4D /* MyOrderView.h */,
 				8498867A1DE586C1000B5D4D /* MyOrderView.m */,
 				84B9C02E1DEEB90800BB7CC5 /* BalanceView.h */,
@@ -769,6 +788,8 @@
 				847D09E71D2FA82B00EBFF37 /* ProgressModel.m */,
 				8422C5881DFE851200934DD2 /* MyFavouriteModel.h */,
 				8422C5891DFE851200934DD2 /* MyFavouriteModel.m */,
+				8442C6171E27827F00430919 /* CarInfoModel.h */,
+				8442C6181E27827F00430919 /* CarInfoModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1014,6 +1035,15 @@
 			name = "网络请求";
 			sourceTree = "<group>";
 		};
+		849D9ADD1E46C5E900E06301 /* 提醒框展示类 */ = {
+			isa = PBXGroup;
+			children = (
+				849D9ADE1E46C6DA00E06301 /* AlertShowAssistant.h */,
+				849D9ADF1E46C6DA00E06301 /* AlertShowAssistant.m */,
+			);
+			name = "提醒框展示类";
+			sourceTree = "<group>";
+		};
 		84A3F20E1E1240B50067FB80 /* TableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1161,6 +1191,8 @@
 				844BE78C1E14EADD00456ED4 /* CustomLabel.m */,
 				840A6F011E1B47C900876136 /* ScrollPagingView.h */,
 				840A6F021E1B47C900876136 /* ScrollPagingView.m */,
+				8477EEB11E2F18CD00FA534F /* CircleImageView.h */,
+				8477EEB21E2F18CD00FA534F /* CircleImageView.m */,
 			);
 			name = "自定义控件";
 			sourceTree = "<group>";
@@ -1489,6 +1521,7 @@
 		84F3C29B1D17CC8500597BFD /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				849D9ADD1E46C5E900E06301 /* 提醒框展示类 */,
 				8422C5A91E07EA5600934DD2 /* 图片选择 */,
 				84B9C0341DEECBD500BB7CC5 /* 城市选择 */,
 				84B9C01E1DEC30BF00BB7CC5 /* 自定义控件 */,
@@ -1867,6 +1900,7 @@
 				84D9B5BF1D3C8342002AC63F /* NSBundle+MJRefresh.m in Sources */,
 				846690F41D489ABC004E1BF1 /* ClickCount.m in Sources */,
 				84A929FE1D2618E1001DD20F /* DevelopViewController.m in Sources */,
+				8442C6131E2638F000430919 /* AddCarView.m in Sources */,
 				84A3F2111E1244BB0067FB80 /* MerchantViewController.m in Sources */,
 				844BE77B1E13A4C900456ED4 /* StarsView.m in Sources */,
 				84BAEF0A1D36071A00227A15 /* SettingViewController.m in Sources */,
@@ -1876,6 +1910,7 @@
 				84BAEEE01D36056200227A15 /* FastLoginViewController.m in Sources */,
 				84B9C0241DED2A7700BB7CC5 /* ProgressTableViewController.m in Sources */,
 				84B5EDC31E2488C700C06455 /* AppealModel.m in Sources */,
+				8442C6191E27827F00430919 /* CarInfoModel.m in Sources */,
 				84B5EDC01E24887C00C06455 /* AppealTableViewController.m in Sources */,
 				84D9B5BB1D3C8342002AC63F /* MJRefreshNormalHeader.m in Sources */,
 				84A3F2271E1271DF0067FB80 /* SortTableViewController.m in Sources */,
@@ -1963,6 +1998,7 @@
 				84BAEEE31D36057700227A15 /* FindPasswdViewController.m in Sources */,
 				844BE78D1E14EADD00456ED4 /* CustomLabel.m in Sources */,
 				849886881DE6E06F000B5D4D /* HomeModel.m in Sources */,
+				849D9AE01E46C6DA00E06301 /* AlertShowAssistant.m in Sources */,
 				84B9C04A1DEFB40200BB7CC5 /* HotCityTableViewCell.m in Sources */,
 				8422C5A51E03E01F00934DD2 /* POIAnnotation.m in Sources */,
 				844BE7801E13B63300456ED4 /* DetailServiceCell.m in Sources */,
@@ -1979,10 +2015,12 @@
 				84B9C0491DEFB40200BB7CC5 /* CurrentCityTableViewCell.m in Sources */,
 				849886781DE58355000B5D4D /* MyCarView.m in Sources */,
 				84B9C0141DEBD5E600BB7CC5 /* MessageTableViewCell.m in Sources */,
+				8442C6161E275B8D00430919 /* CarInfoView.m in Sources */,
 				84B9C0531DF0194600BB7CC5 /* CustomSegmentedControl.m in Sources */,
 				84D9B5BE1D3C8342002AC63F /* MJRefreshConst.m in Sources */,
 				8422C58A1DFE851200934DD2 /* MyFavouriteModel.m in Sources */,
 				84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */,
+				8477EEB31E2F18CD00FA534F /* CircleImageView.m in Sources */,
 				84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */,
 				84BAEEF51D36067300227A15 /* LoginView.m in Sources */,
 				844BE7751E136E4F00456ED4 /* DetailViewController.m in Sources */,

@@ -180,8 +180,16 @@
     }
 }
 
+- (void)userLogout:(LogoutBlock)logoutBlock {
+    self.logoutBlock = logoutBlock;
+}
+
 //退出登录，取消登录状态
 - (void)logout {
+    
+    if (self.logoutBlock) {
+        self.logoutBlock();
+    }
     
     //自动登录关闭
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoLogin"];

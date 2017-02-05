@@ -8,6 +8,12 @@
 
 #import "SecondaryViewController.h"
 
+typedef void(^LogoutBlock)(void);
+
 @interface SettingViewController :SecondaryViewController
+
+@property (nonatomic, copy) LogoutBlock logoutBlock;
+
+- (void)userLogout:(LogoutBlock)logoutBlock;
 
 @end

@@ -56,16 +56,10 @@
     //刷新（获取数据）
     [self refresh];
     
-    SingleLocation *singleLocation = [[SingleLocation alloc] init];
-    [singleLocation locationComplete:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
-        
-    }];
-    
 }
 
 //默认配置
 - (void)config {
-//    NSString *name = @[][2];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"exception"] == YES) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"异常崩溃" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {

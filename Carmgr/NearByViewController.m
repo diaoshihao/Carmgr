@@ -17,7 +17,7 @@
 #import <Masonry.h>
 @interface NearByViewController () <MAMapViewDelegate, ClassifyScrollViewDelegate>
 {
-    CLLocationCoordinate2D _recode;
+    CLLocationCoordinate2D _recode;//用户位置
 }
 
 @property (nonatomic, strong) ClassifyScrollView *classifyView;
@@ -56,6 +56,8 @@
     //简介
     [self configCurrentServiceView];
     
+    //显示用户位置按钮
+    [self addLocationButtonToMapView];
 }
 
 //CurrentServiceView    简介
@@ -101,6 +103,9 @@
         dispatch_once(&onceToken, ^{
             //发起周边检索
             [self.mapView startAroundSearch:@"上牌" center:record];
+            
+            //当前地图中心(第一次进入地图，设置地图中心为用户当前位置)
+            self.mapView.currentRecord = record;
         });
         
         _recode = record;
@@ -109,7 +114,7 @@
     //获取周边搜索结果数据block
     [self.mapView dataDidLoad:^(NSArray *data) {
         if (data == nil) {
-            self.currentServiceView.hidden = YES;
+            [self setServicePageHidden:YES];
             return;
         }
         [self loadData:data];
@@ -117,7 +122,12 @@
     
     //当前选择的标注
     [self.mapView currentAnnotationView:^(NSInteger index) {
-        [self.currentServiceView scrollToCurrentPage:index];
+        if (index == -1) {
+            [self setServicePageHidden:YES];
+        } else {
+            [self setServicePageHidden:NO];
+            [self.currentServiceView scrollToCurrentPage:index];
+        }
     }];
     
     [self addChildViewController:self.mapView];
@@ -125,12 +135,31 @@
     [self.view addSubview:self.mapView.view];
 }
 
+//添加显示用户位置的按钮
+- (void)addLocationButtonToMapView {
+    UIButton *location = [UIButton buttonWithType:UIButtonTypeCustom];
+    [location setImage:[UIImage imageNamed:@"用户位置"] forState:UIControlStateNormal];
+    location.backgroundColor = [UIColor whiteColor];
+    [location addTarget:self action:@selector(userLocation) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:location];
+    
+    [location mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(20);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.bottom.mas_equalTo(self.classifyView.mas_top).offset(-20);
+    }];
+}
+
+- (void)userLocation {
+    [self.mapView showUserLocation];
+}
+
 //加载数据
 - (void)loadData:(NSArray *)datas {
     [self.services removeAllObjects];
     
     if (datas.count == 0) {
-        self.currentServiceView.hidden = YES;
+        [self setServicePageHidden:YES];;
     } else {
         for (NSDictionary *dict in datas) {
             CurrentServiceModel *model = [[CurrentServiceModel alloc] initWithDict:@{@"serviceName":dict[@"service_name"],@"merchantName":dict[@"name"],@"price":dict[@"price"],@"uid":dict[@"uid"]}];
@@ -141,9 +170,19 @@
     }
 }
 
+- (void)setServicePageHidden:(BOOL)hidden {
+    [UIView animateWithDuration:0.618 animations:^{
+        if (hidden) {
+            self.currentServiceView.alpha = 0;
+        } else {
+            self.currentServiceView.alpha = 1;
+        }
+    }];
+}
+
 - (void)showCurrentService {
     [self.currentServiceView reloadData];
-    self.currentServiceView.hidden = NO;
+    [self setServicePageHidden:NO];
 }
 
 
@@ -151,7 +190,7 @@
 //选择分类类型
 - (void)didSelectedCurrentService:(NSString *)currentService {
     //发起周边检索
-    [self.mapView startAroundSearch:currentService center:_recode];
+    [self.mapView startAroundSearch:currentService center:self.mapView.currentRecord];
 }
 
 

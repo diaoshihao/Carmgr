@@ -44,7 +44,7 @@
     _mapView.showsCompass = NO;
     [_mapView setZoomLevel:16 animated:YES];
     _mapView.userTrackingMode = MAUserTrackingModeFollow;
-        
+    
     [self.view addSubview:_mapView];
 }
 
@@ -62,6 +62,15 @@
 }
 
 #pragma mark - Methods
+
+//显示用户位置
+- (void)showUserLocation {
+    [_mapView setCenterCoordinate:_record animated:YES];
+    [self startAroundSearch:_placeAround.keywords center:_record];
+    
+    //当前地图中心
+    self.currentRecord = _record;
+}
 
 //发起周边检索
 - (void)startAroundSearch:(NSString *)keywords center:(CLLocationCoordinate2D)record {
@@ -136,7 +145,8 @@
         }
         POIAnnotation *poi = (POIAnnotation *)annotation;
         
-        annotationView.frame = CGRectMake(0, 0, 44, 44);
+        annotationView.frame = CGRectMake(0, 0, 48, 48);
+//        [annotationView setCenterOffset:CGPointMake(0, annotationView.frame.size.height/2)];
         
         annotationView.merchantImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:poi.poi.images.firstObject.preurl]]];
         
@@ -149,7 +159,9 @@
 //单击地图收起键盘
 - (void)mapView:(MAMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
-    
+    if (self.currentBlock) {
+        self.currentBlock(-1);
+    }
 }
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
@@ -185,16 +197,20 @@
     }
 }
 
+//移动地图
 - (void)mapView:(MAMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction {
     //用户移动地图
     if (wasUserAction) {
         [self startAroundSearch:_placeAround.keywords center:mapView.centerCoordinate];
-        mapView.centerCoordinate = mapView.centerCoordinate;
+        
+        //当前地图中心
+        self.currentRecord = mapView.centerCoordinate;
     }
 }
 
 #pragma mark - AMapSearchDelegate
 
+//云图搜索结果
 - (void)onCloudSearchDone:(AMapCloudSearchBaseRequest *)request response:(AMapCloudPOISearchResponse *)response
 {
     [_mapView removeAnnotations:_mapView.annotations];

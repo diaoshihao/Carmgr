@@ -16,7 +16,7 @@
 #import "AddressPickerController.h"
 #import "AddressManager.h"
 
-@interface AddCarInfoViewController () <UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
+@interface AddCarInfoViewController () <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -26,19 +26,14 @@
 @property (nonatomic, strong) AddCarInfoView *infoView;
 
 @property (nonatomic, strong) UISegmentedControl *numberType;//号码类型
-@property (nonatomic, strong) UILabel *carType;//车型
+@property (nonatomic, strong) UILabel *vehicle_brand;//品牌
 
 @property (nonatomic, strong) UILabel *cityLabel;//城市
+@property (nonatomic, strong) NSString *abbreviation;//省份简称
 
 @property (nonatomic, strong) UITextField *vehicle_number;//车牌
 @property (nonatomic, strong) UITextField *engine_number;//发动机号
 @property (nonatomic, strong) UITextField *frame_number;//车架号
-
-@property (nonatomic, strong) UITextField *buy_insu_time;//保险日期
-@property (nonatomic, strong) UITextField *first_insu_time;//首次保养
-@property (nonatomic, strong) UITextField *travel_mileage;//行驶公里
-
-@property (nonatomic, strong) UITextField *comments;//备注
 
 @end
 
@@ -50,34 +45,28 @@
                       @[@"号码类型",@"车        型"],
                       @[@"查询城市"],
                       @[@"车牌号码",@"发动机号",@"车架号码"],
-                      //                      @[@"保险进保日期",@"首次保养日期",@"行驶公里数"],
-                      //                      @[@"备        注"]
                       ];
     
     self.numberType = [self.infoView numberType];
-    self.carType = [self.infoView labelWithTitle:@"请选择车辆(选填)"];
+    self.vehicle_brand = [self.infoView labelWithTitle:@"请选择车辆(选填)"];
     
     self.cityLabel = [self.infoView labelWithTitle:[[NSUserDefaults standardUserDefaults] objectForKey:@"city"]];
     
-    NSArray *arr2 = [self.infoView textFieldArray:2];//数字标示是
-    //    NSArray *arr3 = [self.infoView textFieldArray:3];//否添加“粤”
+    NSArray *arr2 = [self.infoView textFieldArray:2];
     
     self.vehicle_number = arr2[0];
-    self.engine_number = arr2[1];
-    self.frame_number = arr2[2];
+    self.vehicle_number.delegate = self;
     
-    //    self.buy_insu_time = arr3[0];
-    //    self.first_insu_time = arr3[1];
-    //    self.travel_mileage = arr3[2];
-    //
-    //    self.comments = [self.infoView textFieldWithPlaceholder:@"请输入爱车(选填)"];
+    self.engine_number = arr2[1];
+    self.engine_number.keyboardType = UIKeyboardTypeNumberPad;
+    
+    self.frame_number = arr2[2];
+    self.frame_number.keyboardType = UIKeyboardTypeNumberPad;
     
     self.viewsArr = @[
-                      @[self.numberType,self.carType],
+                      @[self.numberType,self.vehicle_brand],
                       @[self.cityLabel],
                       arr2,
-                      //                      arr3,
-                      //                      @[self.comments]
                       ];
     
     
@@ -103,7 +92,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
 }
-
 
 - (void)createTableView {
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -138,14 +126,49 @@
         [self showAlertOnlyMessage:@"请输入车牌号码"];
         return NO;
     }
-    if (self.engine_number.text.length == 0) {
-        [self showAlertOnlyMessage:@"请输入发动机号"];
+    if (self.engine_number.text.length != 4) {
+        [self showAlertOnlyMessage:@"发动机号只能输入4位数"];
         return NO;
     }
-    if (self.frame_number.text.length == 0) {
-        [self showAlertOnlyMessage:@"请输入车架号码"];
+    if (self.frame_number.text.length != 6) {
+        [self showAlertOnlyMessage:@"车架号码只能输入6位数"];
         return NO;
     }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *alpha = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    NSString *number = @"0123456789";
+    
+    if ([string isEqualToString:@""] || [string isEqualToString:@"\n"]) {
+        return YES;
+    }
+    if (string.length > 1) {
+        return NO;
+    }
+    
+    if (textField.text.length == 0) {
+        if (![alpha containsString:string]) {
+            [self showAlertOnlyMessage:@"第一位只能输入字母"];
+            return NO;
+        }
+    } else {
+        if (![alpha containsString:string] && ![number containsString:string]) {
+            [self showAlertOnlyMessage:@"只能输入字母或数字"];
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    textField.text = [textField.text uppercaseString];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField endEditing:YES];
     return YES;
 }
 
@@ -156,31 +179,50 @@
         return;
     }
     
-    NSArray *addCarInfo = [Interface appaddcarinfo_car_type:[NSString stringWithFormat:@"%ld",self.numberType.selectedSegmentIndex] city:self.cityLabel.text vehicle_number:self.vehicle_number.text engine_number:self.engine_number.text frame_number:self.frame_number.text buy_insu_time:self.buy_insu_time.text first_mantain_time:self.first_insu_time.text travel_mileage:self.travel_mileage.text comments:self.comments.text];
+    //车牌号：合成格式 粤A12345
+    NSString *vehicle_number = [NSString stringWithFormat:@"%@%@",self.abbreviation,self.vehicle_number.text];
+    
+    NSArray *addCarInfo = [Interface appaddcarinfo_car_type:[NSString stringWithFormat:@"%ld",self.numberType.selectedSegmentIndex] city:self.cityLabel.text vehicle_brand:self.vehicle_brand.text vehicle_number:vehicle_number engine_number:self.engine_number.text frame_number:self.frame_number.text];
     [MyNetworker POST:addCarInfo[InterfaceUrl] parameters:addCarInfo[Parameters] success:^(id responseObject) {
         if ([responseObject[@"opt_state"] isEqualToString:@"success"]) {
-            [self showAlertViewTitle:nil messae:@"添加车辆成功"];
+            [self showAlert:YES];
         } else {
-            [self showAlertViewTitle:@"提示" messae:@"添加车辆失败"];
+            [self showAlert:NO];
         }
     } failure:^(NSError *error) {
-        [self showAlertViewTitle:@"提示" messae:@"网络错误"];
+        [self showAlertOnlyMessage:@"网络错误"];
     }];
     
 }
 
-- (void)showAlertViewTitle:(NSString *)title messae:(NSString *)message {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertVC animated:YES completion:^{
-        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timerFireMethod:) userInfo:alertVC repeats:NO];
-    }];
+- (void)addCarInfoSuccessful:(AddCarSuccessBlock)successBlock {
+    self.successBlock = successBlock;
 }
 
-#pragma mark 定时器
-- (void)timerFireMethod:(NSTimer *)timer {
-    UIAlertController *alertVC = [timer userInfo];
-    [alertVC dismissViewControllerAnimated:YES completion:nil];
+- (void)showAlert:(BOOL)isSuccess {
+    NSString *message = @"添加车辆成功";
+    NSString *title = @"确定";
+    if (!isSuccess) {
+        message = @"添加车辆失败";
+        title = @"重试";
+    }
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.successBlock();
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    [alertVC addAction:sure];
+    
+    if (!isSuccess) {
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alertVC addAction:cancel];
+    }
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
+
 
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -231,7 +273,7 @@
 - (void)showCarsPicker {
     CarsPickerViewController *carsPicker = [[CarsPickerViewController alloc] init];
     [carsPicker didPickCar:^(NSString *car) {
-        self.carType.text = car;
+        self.vehicle_brand.text = car;
     }];
     [self.navigationController pushViewController:carsPicker animated:YES];
 }
@@ -253,9 +295,9 @@
     }
     
     AddressManager *manager = [AddressManager manager];
-    NSString *abbreviation = [manager abbreviationFromProvince:name];
+    self.abbreviation = [manager abbreviationFromProvince:name];
     
-    UILabel *label = [self.infoView labelWithTitle:abbreviation];
+    UILabel *label = [self.infoView labelWithTitle:self.abbreviation];
     label.textAlignment = NSTextAlignmentCenter;
     CGSize size = label.intrinsicContentSize;
     label.frame = CGRectMake(0, 0, size.width+10, size.height+10);

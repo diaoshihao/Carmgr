@@ -48,7 +48,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *city = self.resultArray[indexPath.row];
-    self.showBlock(self.view,city);
+    if (self.showBlock) {
+        self.showBlock(self.view,city);
+    }
 }
 
 

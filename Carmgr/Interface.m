@@ -266,25 +266,28 @@
     return @[url,param];
 }
 
++ (NSArray *)appgetcarinfo {
+    NSString *url = [NSString stringWithFormat:@"%@appgetcarinfo.action",[Interface url]];
+    NSDictionary *param = @{@"username":[Interface username],
+                            @"token":[Interface token],
+                            @"version":[Interface appVersion]};
+    return @[url,param];
+}
+
 + (NSArray *)appaddcarinfo_car_type:(NSString *)car_type
                                city:(NSString *)city
+                      vehicle_brand:(NSString *)vehicle_brand
                      vehicle_number:(NSString *)vehicle_number
                       engine_number:(NSString *)engine_number
-                       frame_number:(NSString *)frame_number
-                      buy_insu_time:(NSString *)buy_insu_time
-                 first_mantain_time:(NSString *)first_mantain_time travel_mileage:(NSString *)travel_mileage
-                           comments:(NSString *)comments {
+                       frame_number:(NSString *)frame_number {
     NSString *url = [NSString stringWithFormat:@"%@appaddcarinfo.action",[Interface url]];
     NSDictionary *param = @{@"username":[Interface username],
-                            @"car_type":car_type,
-                            @"city":city,
+                            @"car_type":[Interface unicode2ISO88591:car_type],
+                            @"city":[Interface unicode2ISO88591:city],
+                            @"vehicle_brand":[Interface unicode2ISO88591:vehicle_brand],
                             @"vehicle_number":vehicle_number,
                             @"engine_number":engine_number,
                             @"frame_number":frame_number,
-                            @"buy_insu_time":@"buy_insu_time",
-                            @"first_mantain_time":@"first_mantain_time",
-                            @"travel_mileage":@"travel_mileage",
-                            @"comments":@"comments",
                             @"token":[Interface token],
                             @"version":[Interface appVersion]};
     return @[url,param];

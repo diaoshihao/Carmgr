@@ -20,16 +20,22 @@ typedef void(^UpdatingLocation)(CLLocationCoordinate2D record);
 
 @interface MapViewController : UIViewController
 
-@property (nonatomic, copy) UpdatingLocation locationBlock;
-
 @property (nonatomic, copy) AroundSearch aroundSearch;
+
+@property (nonatomic, copy) UpdatingLocation locationBlock;
 
 @property (nonatomic, copy) CurrentAnnotaion currentBlock;
 
 @property (nonatomic, strong) NSString *tableID;
 
+//当前地图中心
+@property (nonatomic, assign) CLLocationCoordinate2D currentRecord;
+
 //更新当前位置（持续定位）
 - (void)updatingLocation:(UpdatingLocation)location;
+
+//显示用户位置
+- (void)showUserLocation;
 
 //开始周边搜索
 - (void)startAroundSearch:(NSString *)keywords center:(CLLocationCoordinate2D)record;

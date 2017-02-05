@@ -7,13 +7,6 @@
 //
 
 #import "YWUserViewController.h"
-#import <UIImageView+WebCache.h>
-
-#import <Masonry.h>
-#import "DefineValue.h"
-#import "PrivateModel.h"
-#import "GeneralControl.h"
-#import "UIViewController+ShowView.h"
 
 #import "YWLoginViewController.h"
 #import "SettingViewController.h"
@@ -29,13 +22,12 @@
 #import "MyOrderView.h"
 #import "UserHeadView.h"
 
+#import "Interface.h"
+#import "AlertShowAssistant.h"
 
 @interface YWUserViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) NSArray           *dataArray;
-
-@property (nonatomic, strong) PrivateModel      *privateModel;
-
+@property (nonatomic, strong) NSArray *dataArray;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -48,24 +40,47 @@
 
 @implementation YWUserViewController
 
-- (PrivateModel *)privateModel {
-    if (_privateModel == nil) {
-        _privateModel = [[[YWDataBase sharedDataBase] getAllDataFromPrivate] firstObject];
-    }
-    return _privateModel;
+//检查用户是否添加过车辆
+- (void)getCarInfo {
+    NSArray *getCarInfo = [Interface appgetcarinfo];
+    [MyNetworker POST:getCarInfo[InterfaceUrl] parameters:getCarInfo[Parameters] success:^(id responseObject) {
+        if ([responseObject[@"opt_state"] isEqualToString:@"success"] && [responseObject[@"list_size"] integerValue] != 0) {
+            
+            NSDictionary *dict = (NSDictionary *)responseObject;
+            self.carView.infoModel = [[CarInfoModel alloc] initWithDict:dict];
+            
+            self.carView.hasCar = YES;
+            
+        } else {
+            self.carView.hasCar = NO;
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)loadData {
+    NSArray *private = [Interface appgetprivate];
+    [MyNetworker POST:private[InterfaceUrl] parameters:private[Parameters] success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    //实现滑动返回
-    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    
     [self showPage];
+    
+    if ([self isLogin]) {
+        [self getCarInfo];
+    }
+    
+    [self loadData];
 }
 
 - (void)showPage {
@@ -125,24 +140,24 @@
 
 - (void)myCarView {
     self.carView = [[MyCarView alloc] init];
-    __weak typeof(self) weakSelf = self;
-    self.carView.addCarInfo = ^() {
-        if ([weakSelf isLogin]) {
-            [weakSelf pushToAddCarInfo];
+    [self.carView beginMyCarAction:^(MyCarAction action) {
+        if ([self isLogin]) {
+            [self pushToAddCarInfo];
         } else {
-            [weakSelf showAlert];
+            [self showAlert];
         }
-    };
+
+    }];
     [self.contentView addSubview:self.carView];
     [self.carView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.orderView.mas_bottom).offset(5);
         make.left.and.right.mas_equalTo(0);
-        make.height.mas_equalTo([DefineValue screenWidth] * 3 / 4.5);
     }];
 }
 
 
 - (void)tableView {
+    
     UserTableViewController *userTableVC = [[UserTableViewController alloc] init];
     __weak typeof(self) weakSelf = self;
     userTableVC.cellDidSelect = ^(NSIndexPath *indexPath) {
@@ -208,14 +223,11 @@
 }
 
 - (void)showAlert {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请登录" message:@"是否前往登录" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [AlertShowAssistant alertTip:@"请登录" message:@"是否前往登录" actionTitle:@"登录" defaultHandle:^{
         [self pushToLoginVC];
+    } cancelHandle:^{
+        
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:sure];
-    [alert addAction:cancel];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 跳转界面
@@ -229,6 +241,10 @@
 #pragma mark 跳转到添加车辆界面
 - (void)pushToAddCarInfo {
     AddCarInfoViewController *addCarInfo = [[AddCarInfoViewController alloc] init];
+    //用户添加车辆成功，显示车辆信息
+    [addCarInfo addCarInfoSuccessful:^{
+        [self getCarInfo];
+    }];
     addCarInfo.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addCarInfo animated:YES];
 }
@@ -243,6 +259,10 @@
 #pragma mark 跳转到设置界面
 - (void)pushToSettingPage {
     SettingViewController *settingVC = [[SettingViewController alloc] init];
+    //用户退出登录，不显示车辆信息
+    [settingVC userLogout:^{
+        self.carView.hasCar = NO;
+    }];
     settingVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:settingVC animated:YES];
 }
@@ -287,18 +307,15 @@
 }
 
 - (void)pushToHelpOrder {
-    
+    [AlertShowAssistant alertTip:@"提示" message:@"该功能尚未开通，请留意后续版本" actionTitle:@"确定" defaultHandle:^{
+        
+    } cancelHandle:nil];
 }
 
-#pragma mark - 右滑返回上一页
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
     self.navigationController.navigationBarHidden = YES;
-    
-    //滑动返回
-    self.navigationController.delegate = self;
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"]) {
@@ -307,18 +324,6 @@
         [self.headView.userName setTitle:@"登录/注册" forState:UIControlStateNormal];
     }
     
-}
-
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    //滑动返回
-    [super viewDidDisappear:YES];
-    self.navigationController.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {

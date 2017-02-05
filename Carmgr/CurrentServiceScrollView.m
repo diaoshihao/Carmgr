@@ -120,4 +120,6 @@
     self.contentOffset = CGPointMake(index * (width + 10), 0);
 }
 
+
+
 @end

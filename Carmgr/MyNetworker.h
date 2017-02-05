@@ -62,27 +62,10 @@
                                   parameters:(NSDictionary *)parameters
                                       images:(NSArray<UIImage *> *)images
                                         name:(NSString *)name
-                                    fileName:(NSString *)fileName
+                                    fileName:(NSArray<NSString *> *)fileName
                                     mimeType:(NSString *)mimeType
                                     progress:(HttpProgress)progress
                                      success:(HttpRequestSuccess)success
                                      failure:(HttpRequestFailed)failure;
-
-/**
- *  下载文件
- *
- *  @param URL      请求地址
- *  @param fileDir  文件存储目录(默认存储目录为Download)
- *  @param progress 文件下载的进度信息
- *  @param success  下载成功的回调(回调参数filePath:文件的路径)
- *  @param failure  下载失败的回调
- *
- *  @return 返回NSURLSessionDownloadTask实例，可用于暂停继续，暂停调用suspend方法，开始下载调用resume方法
- */
-+ (__kindof NSURLSessionTask *)downloadWithURL:(NSString *)URL
-                                       fileDir:(NSString *)fileDir
-                                      progress:(HttpProgress)progress
-                                       success:(void(^)(NSString *filePath))success
-                                       failure:(HttpRequestFailed)failure;
 
 @end

@@ -27,8 +27,8 @@
     
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self).with.offset(0);
-        make.left.mas_equalTo(self).with.offset(0);
-        make.size.mas_equalTo(CGSizeMake(width, width));
+        make.centerX.mas_equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(width-10, width-10));
     }];
     
     self.titleLabel = [[UILabel alloc] init];

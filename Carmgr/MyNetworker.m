@@ -22,13 +22,9 @@
     return [PPNetworkHelper POST:URL parameters:parameters responseCache:responseCache success:success failure:failure];
 }
 
-+ (NSURLSessionTask *)uploadWithURL:(NSString *)URL parameters:(NSDictionary *)parameters images:(NSArray<UIImage *> *)images name:(NSString *)name fileName:(NSString *)fileName mimeType:(NSString *)mimeType progress:(HttpProgress)progress success:(HttpRequestSuccess)success failure:(HttpRequestFailed)failure {
++ (NSURLSessionTask *)uploadWithURL:(NSString *)URL parameters:(NSDictionary *)parameters images:(NSArray<UIImage *> *)images name:(NSString *)name fileName:(NSArray<NSString *> *)fileName mimeType:(NSString *)mimeType progress:(HttpProgress)progress success:(HttpRequestSuccess)success failure:(HttpRequestFailed)failure {
     
     return [PPNetworkHelper uploadWithURL:URL parameters:parameters images:images name:name fileName:fileName mimeType:mimeType progress:progress success:success failure:failure];
-}
-
-+ (NSURLSessionTask *)downloadWithURL:(NSString *)URL fileDir:(NSString *)fileDir progress:(HttpProgress)progress success:(void (^)(NSString *))success failure:(HttpRequestFailed)failure {
-    return [PPNetworkHelper downloadWithURL:URL fileDir:fileDir progress:progress success:success failure:failure];
 }
 
 @end

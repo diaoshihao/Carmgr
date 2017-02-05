@@ -16,9 +16,6 @@
 @end
 
 @implementation AppDelegate
-{
-    UITextView *textView;
-}
 
 //高德地图配置key
 - (void)configForAMap {
@@ -38,21 +35,25 @@
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
         
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        return NO;
+        
     } else { // 版本号不一样：第一次使用新版本
         // 将新版本号写入沙盒
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];
         
-        //是否第一次使用
+        //第一次使用
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isFirstLaunch"];
         
         //自动登录关闭
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoLogin"];
         
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        return YES;
     }
     
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"];
 }
 
 //void uncaughtExceptionHandler(NSException *exception) {
@@ -68,7 +69,11 @@
     //异常退出捕获
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
-    textView = [[UITextView alloc] init];//先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
+    //先实例化一个textView，防止子视图有textview的界面初次进入时发生卡顿的现象
+    static UITextView *textView;
+    textView = [[UITextView alloc] init];
+    static UIWebView *webView;
+    webView = [[UIWebView alloc] init];
     
     //高德地图配置
     [self configForAMap];

@@ -97,7 +97,7 @@
     // Do any additional setup after loading the view.
     self.title = @"选择城市";
     _manager = [AddressManager manager];
-//    [self initSearchBar];
+    [self initSearchBar];
     [self initTableView];
     [self configRightItemView];
 }
@@ -118,12 +118,13 @@
 }
 
 - (void)initTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [DefineValue screenWidth], [DefineValue screenHeight] - 64) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 124, [DefineValue screenWidth], [DefineValue screenHeight] - 64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.sectionIndexColor = [DefineValue mainColor];
-//    self.searchController.searchBar.frame = CGRectMake(0, 64, [DefineValue screenWidth] - 20, 60);
-//    tableView.tableHeaderView = self.searchController.searchBar;
+    self.searchController.searchBar.frame = CGRectMake(0, 64, [DefineValue screenWidth] - 20, 60);
+    [self.view addSubview:self.searchController.searchBar];
+    tableView.tableHeaderView = self.searchController.searchBar;
     [self.view addSubview:tableView];
 }
 

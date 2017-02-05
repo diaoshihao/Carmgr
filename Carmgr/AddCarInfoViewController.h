@@ -8,6 +8,12 @@
 
 #import "SecondaryViewController.h"
 
+typedef void(^AddCarSuccessBlock)(void);
+
 @interface AddCarInfoViewController : SecondaryViewController
+
+@property (nonatomic, copy) AddCarSuccessBlock successBlock;
+
+- (void)addCarInfoSuccessful:(AddCarSuccessBlock)successBlock;
 
 @end

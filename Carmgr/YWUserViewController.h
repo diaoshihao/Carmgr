@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PrivateModel.h"
 
 @interface YWUserViewController : UIViewController
 

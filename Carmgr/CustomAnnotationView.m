@@ -8,34 +8,58 @@
 
 #import "CustomAnnotationView.h"
 #import "DefineValue.h"
+#import <Masonry.h>
+#import "CircleImageView.h"
+
+@interface CustomAnnotationView()
+
+@property (nonatomic, strong) UIImageView *background;
+
+@end
 
 @implementation CustomAnnotationView
 {
-    UIImageView *_imageView;
+    CircleImageView *_imageView;
     UIImage *_merchantImg;
-    CGRect _originFrame;
+}
+
+- (instancetype)initWithAnnotation:(id<MAAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self configView];
+    }
+    return self;
 }
 
 - (void)setMerchantImg:(UIImage *)merchantImg {
     if (_merchantImg != merchantImg) {
         _merchantImg = merchantImg;
     }
-    [self addImage];
+    _imageView.image = self.merchantImg == nil ? [UIImage imageNamed:@"icon"] : self.merchantImg;
 }
 
 - (UIImage *)merchantImg {
     return _merchantImg;
 }
 
-- (void)addImage {
-    _originFrame = self.frame;
-    _imageView = [[UIImageView alloc] initWithFrame:self.frame];
-    _imageView.image = self.merchantImg == nil ? [UIImage imageNamed:@"icon"] : self.merchantImg;
-    _imageView.layer.cornerRadius = _imageView.frame.size.width / 2;
-    _imageView.layer.masksToBounds = YES;
-    _imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    _imageView.layer.borderWidth = 2;
-    [self addSubview:_imageView];
+- (void)configView {
+    self.background = [[UIImageView alloc] init];
+    self.background.image = [UIImage imageNamed:@"标注白"];
+    self.background.layer.masksToBounds = YES;
+    [self addSubview:self.background];
+    [self.background mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    
+    _imageView = [[CircleImageView alloc] init];
+    [self.background addSubview:_imageView];
+    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(5);
+        make.centerX.mas_equalTo(self.background);
+        make.width.mas_equalTo(self.background.mas_width).multipliedBy(0.7);
+        make.height.mas_equalTo(self.background.mas_height).multipliedBy(0.7);
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -44,25 +68,23 @@
     }
     
     if (selected) {
+        self.background.image = [UIImage imageNamed:@"标注橙"];
         CGRect frame = self.frame;
-        frame.size = CGSizeMake(48, 48);
-        self.frame = frame;
-        
+        frame.size = CGSizeMake(60, 60);
         [UIView animateWithDuration:0.618 animations:^{
-            _imageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-            _imageView.layer.borderColor = [DefineValue mainColor].CGColor;
+            self.frame = frame;
         }];
         
     } else {
+        self.background.image = [UIImage imageNamed:@"标注白"];
         CGRect frame = self.frame;
-        frame.size = _originFrame.size;
-        self.frame = frame;
-        
+        frame.size = CGSizeMake(48, 48);
         [UIView animateWithDuration:0.618 animations:^{
-            _imageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-            _imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+            self.frame = frame;
         }];
     }
+    
+    
     
     [super setSelected:selected animated:animated];
     

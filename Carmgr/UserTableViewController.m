@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.scrollEnabled = NO;
+    
     self.titleArr = @[@[@"账号余额"],@[@"我的收藏",@"个人资料",@"历史业务",@"邮寄地址"]];
     self.imageArr = @[@[@"红色"],@[@"深蓝",@"紫色",@"深蓝",@"绿色"]];
     

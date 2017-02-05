@@ -218,10 +218,9 @@
     [alertVC dismissViewControllerAnimated:YES completion:^{
         if (alertVC.title == nil) {//login success
             
+            //使用present方式到登录页面的
             [self dismissViewControllerAnimated:YES completion:^{
                 if (self.loginOption == LoginOptionRelogin || self.loginOption == LoginOptionAuto) {
-                    [(ViewController *)[UIApplication sharedApplication].keyWindow.rootViewController showHomePage];
-                    return;
                 }
             }];
             

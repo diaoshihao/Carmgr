@@ -81,15 +81,16 @@ NS_ASSUME_NONNULL_BEGIN
 //个人资料
 + (NSArray *)appgetprivate;
 
+//获取车辆信息
++ (NSArray *)appgetcarinfo;
+
 //添加车辆
 + (NSArray *)appaddcarinfo_car_type:(NSString *)car_type
                                city:(NSString *)city
+                      vehicle_brand:(NSString *)vehicle_brand
                      vehicle_number:(NSString *)vehicle_number
                       engine_number:(NSString *)engine_number
-                       frame_number:(NSString *)frame_number
-                      buy_insu_time:(NSString *)buy_insu_time
-                 first_mantain_time:(NSString *)first_mantain_time travel_mileage:(NSString *)travel_mileage
-                           comments:(NSString *)comments;
+                       frame_number:(NSString *)frame_number;
 
 //商家详情
 + (NSArray *)appgetmerchants_name:(NSString *)merchant_name;
