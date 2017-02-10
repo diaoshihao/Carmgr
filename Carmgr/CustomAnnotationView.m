@@ -9,17 +9,19 @@
 #import "CustomAnnotationView.h"
 #import "DefineValue.h"
 #import <Masonry.h>
-#import "CircleImageView.h"
+#import "UIImage+CircleImage.h"
 
 @interface CustomAnnotationView()
 
 @property (nonatomic, strong) UIImageView *background;
 
+@property (nonatomic, assign) CGPoint origin;
+
 @end
 
 @implementation CustomAnnotationView
 {
-    CircleImageView *_imageView;
+    UIImageView *_imageView;
     UIImage *_merchantImg;
 }
 
@@ -36,7 +38,8 @@
     if (_merchantImg != merchantImg) {
         _merchantImg = merchantImg;
     }
-    _imageView.image = self.merchantImg == nil ? [UIImage imageNamed:@"icon"] : self.merchantImg;
+    UIImage *image = _merchantImg == nil ? [UIImage imageNamed:@"圆角矩形紫色"] : _merchantImg;
+    _imageView.image = [UIImage circleImage:image borderWidth:1 borderColor:[UIColor redColor]];
 }
 
 - (UIImage *)merchantImg {
@@ -52,13 +55,13 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
-    _imageView = [[CircleImageView alloc] init];
+    _imageView = [[UIImageView alloc] init];
     [self.background addSubview:_imageView];
     [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(5);
         make.centerX.mas_equalTo(self.background);
-        make.width.mas_equalTo(self.background.mas_width).multipliedBy(0.7);
-        make.height.mas_equalTo(self.background.mas_height).multipliedBy(0.7);
+        make.width.mas_equalTo(self.background.mas_width).multipliedBy(0.6);
+        make.height.mas_equalTo(self.background.mas_height).multipliedBy(0.6);
     }];
 }
 
@@ -70,23 +73,36 @@
     if (selected) {
         self.background.image = [UIImage imageNamed:@"标注橙"];
         CGRect frame = self.frame;
-        frame.size = CGSizeMake(60, 60);
+        frame.origin = CGPointMake(frame.origin.x - 10, frame.origin.y - 20);
+        frame.size = CGSizeMake(80, 80);
+        
         [UIView animateWithDuration:0.618 animations:^{
             self.frame = frame;
+            [_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(7);
+            }];
         }];
         
     } else {
         self.background.image = [UIImage imageNamed:@"标注白"];
         CGRect frame = self.frame;
-        frame.size = CGSizeMake(48, 48);
+        frame.origin = CGPointMake(frame.origin.x + 10, frame.origin.y + 20);
+        frame.size = CGSizeMake(60, 60);
         [UIView animateWithDuration:0.618 animations:^{
             self.frame = frame;
+            [_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(5);
+            }];
         }];
     }
     
     
     
     [super setSelected:selected animated:animated];
+    
+}
+
+- (void)layoutSubviews {
     
 }
 

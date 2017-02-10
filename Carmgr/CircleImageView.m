@@ -12,8 +12,27 @@
 
 - (void)layoutSubviews {
     self.layer.cornerRadius = self.frame.size.width / 2;
-    self.layer.masksToBounds = YES;
+    self.clipsToBounds = YES;
     [super layoutSubviews];
+}
+
+
+
+-(UIImage*) circleImage:(UIImage*) image withParam:(CGFloat) inset {
+    UIGraphicsBeginImageContext(image.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 2);
+    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGRect rect = CGRectMake(inset, inset, image.size.width - inset * 2.0f, image.size.height - inset * 2.0f);
+    CGContextAddEllipseInRect(context, rect);
+    CGContextClip(context);
+    
+    [image drawInRect:rect];
+    CGContextAddEllipseInRect(context, rect);
+    CGContextStrokePath(context);
+    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newimg;
 }
 
 /*

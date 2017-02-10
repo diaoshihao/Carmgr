@@ -101,6 +101,7 @@
     self.serviceView.serviceName.text = model.serviceName;
     self.serviceView.merchantName.text = model.merchantName;
     self.serviceView.price.text = [NSString stringWithFormat:@"%@ 元／单",model.price];
+    self.serviceView.stars = model.stars;
 }
 
 

@@ -6,8 +6,8 @@
 //  Copyright © 2016年 YiWuCheBao. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "SecondaryViewController.h"
 
-@interface MerchantViewController : BaseViewController
+@interface MerchantViewController : SecondaryViewController
 
 @end

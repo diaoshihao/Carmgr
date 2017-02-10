@@ -11,9 +11,10 @@
 #import "UIViewController+ShowView.h"
 #import "MJRefreshNormalHeader.h"
 #import "Interface.h"
-#import "YWPublic.h"
 #import "DetailViewController.h"
 #import "MerchantTableViewController.h"
+
+#import "AlertShowAssistant.h"
 
 @interface ServiceViewController ()
 
@@ -94,17 +95,17 @@
         //请求数据失败
         [self.merchantTableView.mj_header endRefreshing];
         
-        UIAlertController *alertVC = [YWPublic showFaileAlertViewAt:self];
-        [self presentViewController:alertVC animated:YES completion:nil];
+        [AlertShowAssistant alertTip:@"提示" message:@"获取数据失败，请检查网络" actionTitle:@"确定" defaultHandle:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        } cancelHandle:nil];
     }];
     
 }
 
 - (void)showAlertView {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"暂无相关数据" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-    [alertVC addAction:sure];
-    [self presentViewController:alertVC animated:YES completion:nil];
+    [AlertShowAssistant alertTip:@"提示" message:@"暂无相关数据" actionTitle:@"确定" defaultHandle:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    } cancelHandle:nil];
 }
 
 - (void)didReceiveMemoryWarning {

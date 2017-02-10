@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		6F61C1379FDB08E5BE112202 /* libPods-Carmgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F25A80A03943501A53A01A /* libPods-Carmgr.a */; };
+		840924C91E4C55D20094A6EC /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEC51E4C144900DEAE23 /* MapViewController.m */; };
+		840924CC1E4C74360094A6EC /* UIImage+CircleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 840924CB1E4C74360094A6EC /* UIImage+CircleImage.m */; };
 		840A6F031E1B47C900876136 /* ScrollPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 840A6F021E1B47C900876136 /* ScrollPagingView.m */; };
 		8422C5811DFE7BE700934DD2 /* MyFavouriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5801DFE7BE700934DD2 /* MyFavouriteTableViewCell.m */; };
 		8422C5871DFE839900934DD2 /* MyFavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5861DFE839900934DD2 /* MyFavouriteViewController.m */; };
 		8422C58A1DFE851200934DD2 /* MyFavouriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5891DFE851200934DD2 /* MyFavouriteModel.m */; };
 		8422C59B1E02312500934DD2 /* SingleLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C59A1E02312400934DD2 /* SingleLocation.m */; };
-		8422C59E1E027C1800934DD2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C59D1E027C1800934DD2 /* MapViewController.m */; };
 		8422C5A21E027CC800934DD2 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */; };
 		8422C5A51E03E01F00934DD2 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A41E03E01F00934DD2 /* POIAnnotation.m */; };
 		8422C5A81E07C11500934DD2 /* MyProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C5A71E07C11300934DD2 /* MyProgressView.m */; };
@@ -48,6 +49,13 @@
 		847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477766F1D1258E500DE8213 /* YWProgressViewController.m */; };
 		847776731D12591C00DE8213 /* YWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847776721D12591C00DE8213 /* YWTabBarController.m */; };
 		8477EEB31E2F18CD00FA534F /* CircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477EEB21E2F18CD00FA534F /* CircleImageView.m */; };
+		847AFEB21E4AFC7800DEAE23 /* TextViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEB11E4AFC7800DEAE23 /* TextViewTableViewCell.m */; };
+		847AFEB51E4AFE6A00DEAE23 /* CustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEB41E4AFE6A00DEAE23 /* CustomTextView.m */; };
+		847AFEB81E4B09F200DEAE23 /* TextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEB71E4B09F200DEAE23 /* TextFieldTableViewCell.m */; };
+		847AFEBB1E4B0AE000DEAE23 /* ForHelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEBA1E4B0AE000DEAE23 /* ForHelpTableViewController.m */; };
+		847AFEC01E4C0F6600DEAE23 /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEBF1E4C0F6600DEAE23 /* MapViewDelegate.m */; };
+		847AFEC31E4C135300DEAE23 /* MapSearchAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEC21E4C135300DEAE23 /* MapSearchAssistant.m */; };
+		847AFEC91E4C14C800DEAE23 /* MapInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFEC81E4C14C800DEAE23 /* MapInterface.m */; };
 		847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09D31D2B980E00EBFF37 /* NSString+MD5.m */; };
 		847D09E51D2F6F8C00EBFF37 /* ProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E41D2F6F8C00EBFF37 /* ProgressTableViewCell.m */; };
 		847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 847D09E71D2FA82B00EBFF37 /* ProgressModel.m */; };
@@ -75,6 +83,7 @@
 		849886911DE6FBAA000B5D4D /* SecondHandCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886901DE6FBAA000B5D4D /* SecondHandCollectionView.m */; };
 		849886941DE7C8BC000B5D4D /* PromotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849886931DE7C8BC000B5D4D /* PromotionView.m */; };
 		849D9AE01E46C6DA00E06301 /* AlertShowAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D9ADF1E46C6DA00E06301 /* AlertShowAssistant.m */; };
+		849D9AE31E470A6E00E06301 /* RateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D9AE21E470A6E00E06301 /* RateListViewController.m */; };
 		84A3F2111E1244BB0067FB80 /* MerchantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F2101E1244B90067FB80 /* MerchantViewController.m */; };
 		84A3F2151E12476A0067FB80 /* BasicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F2141E12476A0067FB80 /* BasicModel.m */; };
 		84A3F2181E1248C20067FB80 /* MerchantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3F2171E1248C20067FB80 /* MerchantModel.m */; };
@@ -119,8 +128,6 @@
 		84B9C05C1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C05B1DF4FFC700BB7CC5 /* CurrentServiceScrollView.m */; };
 		84B9C05F1DF4FFE600BB7CC5 /* CurrentServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C05E1DF4FFE600BB7CC5 /* CurrentServiceView.m */; };
 		84B9C0621DF504DB00BB7CC5 /* CurrentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0611DF504DB00BB7CC5 /* CurrentServiceModel.m */; };
-		84B9C0651DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0641DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m */; };
-		84B9C0681DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B9C0671DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m */; };
 		84BAEED41D34EB7400227A15 /* 服务协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEED31D34EB7400227A15 /* 服务协议.txt */; };
 		84BAEEDB1D36051C00227A15 /* RegularTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BAEEDA1D36051C00227A15 /* RegularTools.m */; };
 		84BAEEDD1D36053D00227A15 /* 方案1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BAEEDC1D36053D00227A15 /* 方案1.png */; };
@@ -143,6 +150,8 @@
 		84BF0B191D531920000EDCC5 /* UIWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BF0B181D531920000EDCC5 /* UIWebViewController.m */; };
 		84BF0B1D1D533F48000EDCC5 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BF0B1C1D533F48000EDCC5 /* ServiceViewController.m */; };
 		84BF0B251D56CDA3000EDCC5 /* address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84BF0B241D56CDA3000EDCC5 /* address.plist */; };
+		84C0FF251E49A1C8006690B0 /* ForHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C0FF241E49A1C8006690B0 /* ForHelpViewController.m */; };
+		84C0FF281E49A911006690B0 /* ForHelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C0FF271E49A911006690B0 /* ForHelpView.m */; };
 		84D950971E1F437C00C9993B /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D950961E1F437C00C9993B /* CustomAnnotationView.m */; };
 		84D9B5771D3B2401002AC63F /* YWDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5761D3B2401002AC63F /* YWDataBase.m */; };
 		84D9B5AF1D3C8342002AC63F /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D9B5831D3C8342002AC63F /* MJRefreshAutoFooter.m */; };
@@ -196,6 +205,8 @@
 
 /* Begin PBXFileReference section */
 		66918D807C086A51FB9C2BE0 /* Pods-Carmgr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carmgr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Carmgr/Pods-Carmgr.debug.xcconfig"; sourceTree = "<group>"; };
+		840924CA1E4C74360094A6EC /* UIImage+CircleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+CircleImage.h"; path = "Carmgr/UIImage+CircleImage.h"; sourceTree = "<group>"; };
+		840924CB1E4C74360094A6EC /* UIImage+CircleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CircleImage.m"; path = "Carmgr/UIImage+CircleImage.m"; sourceTree = "<group>"; };
 		840A6F011E1B47C900876136 /* ScrollPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollPagingView.h; path = Carmgr/ScrollPagingView.h; sourceTree = "<group>"; };
 		840A6F021E1B47C900876136 /* ScrollPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollPagingView.m; path = Carmgr/ScrollPagingView.m; sourceTree = "<group>"; };
 		8422C57F1DFE7BE700934DD2 /* MyFavouriteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavouriteTableViewCell.h; sourceTree = "<group>"; };
@@ -206,8 +217,6 @@
 		8422C5891DFE851200934DD2 /* MyFavouriteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFavouriteModel.m; path = Carmgr/MyFavouriteModel.m; sourceTree = "<group>"; };
 		8422C5991E02312400934DD2 /* SingleLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingleLocation.h; path = Carmgr/SingleLocation.h; sourceTree = "<group>"; };
 		8422C59A1E02312400934DD2 /* SingleLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingleLocation.m; path = Carmgr/SingleLocation.m; sourceTree = "<group>"; };
-		8422C59C1E027C1800934DD2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		8422C59D1E027C1800934DD2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		8422C5A01E027CC800934DD2 /* LocationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotationView.h; sourceTree = "<group>"; };
 		8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
 		8422C5A31E03E01E00934DD2 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
@@ -277,6 +286,22 @@
 		847776721D12591C00DE8213 /* YWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWTabBarController.m; sourceTree = "<group>"; };
 		8477EEB11E2F18CD00FA534F /* CircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleImageView.h; path = Carmgr/CircleImageView.h; sourceTree = "<group>"; };
 		8477EEB21E2F18CD00FA534F /* CircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleImageView.m; path = Carmgr/CircleImageView.m; sourceTree = "<group>"; };
+		847AFEB01E4AFC7800DEAE23 /* TextViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewTableViewCell.h; sourceTree = "<group>"; };
+		847AFEB11E4AFC7800DEAE23 /* TextViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewTableViewCell.m; sourceTree = "<group>"; };
+		847AFEB31E4AFE6A00DEAE23 /* CustomTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTextView.h; path = Carmgr/CustomTextView.h; sourceTree = "<group>"; };
+		847AFEB41E4AFE6A00DEAE23 /* CustomTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTextView.m; path = Carmgr/CustomTextView.m; sourceTree = "<group>"; };
+		847AFEB61E4B09F200DEAE23 /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
+		847AFEB71E4B09F200DEAE23 /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewCell.m; sourceTree = "<group>"; };
+		847AFEB91E4B0AE000DEAE23 /* ForHelpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForHelpTableViewController.h; sourceTree = "<group>"; };
+		847AFEBA1E4B0AE000DEAE23 /* ForHelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForHelpTableViewController.m; sourceTree = "<group>"; };
+		847AFEBE1E4C0F6600DEAE23 /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
+		847AFEBF1E4C0F6600DEAE23 /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
+		847AFEC11E4C135300DEAE23 /* MapSearchAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapSearchAssistant.h; sourceTree = "<group>"; };
+		847AFEC21E4C135300DEAE23 /* MapSearchAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSearchAssistant.m; sourceTree = "<group>"; };
+		847AFEC41E4C144900DEAE23 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		847AFEC51E4C144900DEAE23 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		847AFEC71E4C14C800DEAE23 /* MapInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapInterface.h; sourceTree = "<group>"; };
+		847AFEC81E4C14C800DEAE23 /* MapInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapInterface.m; sourceTree = "<group>"; };
 		847D09D21D2B980E00EBFF37 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Carmgr/NSString+MD5.h"; sourceTree = "<group>"; };
 		847D09D31D2B980E00EBFF37 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MD5.m"; path = "Carmgr/NSString+MD5.m"; sourceTree = "<group>"; };
 		847D09E31D2F6F8C00EBFF37 /* ProgressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTableViewCell.h; sourceTree = "<group>"; };
@@ -328,6 +353,8 @@
 		849886931DE7C8BC000B5D4D /* PromotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionView.m; sourceTree = "<group>"; };
 		849D9ADE1E46C6DA00E06301 /* AlertShowAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertShowAssistant.h; path = Carmgr/AlertShowAssistant.h; sourceTree = "<group>"; };
 		849D9ADF1E46C6DA00E06301 /* AlertShowAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertShowAssistant.m; path = Carmgr/AlertShowAssistant.m; sourceTree = "<group>"; };
+		849D9AE11E470A6E00E06301 /* RateListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateListViewController.h; sourceTree = "<group>"; };
+		849D9AE21E470A6E00E06301 /* RateListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateListViewController.m; sourceTree = "<group>"; };
 		84A3F20F1E1244B90067FB80 /* MerchantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantViewController.h; sourceTree = "<group>"; };
 		84A3F2101E1244B90067FB80 /* MerchantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantViewController.m; sourceTree = "<group>"; };
 		84A3F2131E12476A0067FB80 /* BasicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicModel.h; sourceTree = "<group>"; };
@@ -413,10 +440,6 @@
 		84B9C05E1DF4FFE600BB7CC5 /* CurrentServiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceView.m; sourceTree = "<group>"; };
 		84B9C0601DF504DB00BB7CC5 /* CurrentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentServiceModel.h; sourceTree = "<group>"; };
 		84B9C0611DF504DB00BB7CC5 /* CurrentServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceModel.m; sourceTree = "<group>"; };
-		84B9C0631DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentClassifyCollectionVC.h; sourceTree = "<group>"; };
-		84B9C0641DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentClassifyCollectionVC.m; sourceTree = "<group>"; };
-		84B9C0661DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentServiceCollectionViewCell.h; sourceTree = "<group>"; };
-		84B9C0671DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentServiceCollectionViewCell.m; sourceTree = "<group>"; };
 		84BAEED31D34EB7400227A15 /* 服务协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "服务协议.txt"; sourceTree = "<group>"; };
 		84BAEED91D36051C00227A15 /* RegularTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularTools.h; path = Carmgr/RegularTools.h; sourceTree = "<group>"; };
 		84BAEEDA1D36051C00227A15 /* RegularTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularTools.m; path = Carmgr/RegularTools.m; sourceTree = "<group>"; };
@@ -458,6 +481,10 @@
 		84BF0B1B1D533F48000EDCC5 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		84BF0B1C1D533F48000EDCC5 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		84BF0B241D56CDA3000EDCC5 /* address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = address.plist; sourceTree = "<group>"; };
+		84C0FF231E49A1C8006690B0 /* ForHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForHelpViewController.h; sourceTree = "<group>"; };
+		84C0FF241E49A1C8006690B0 /* ForHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForHelpViewController.m; sourceTree = "<group>"; };
+		84C0FF261E49A911006690B0 /* ForHelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForHelpView.h; sourceTree = "<group>"; };
+		84C0FF271E49A911006690B0 /* ForHelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForHelpView.m; sourceTree = "<group>"; };
 		84D950951E1F437C00C9993B /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
 		84D950961E1F437C00C9993B /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		84D9B5751D3B2401002AC63F /* YWDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWDataBase.h; path = Carmgr/YWDataBase.h; sourceTree = "<group>"; };
@@ -662,14 +689,14 @@
 		8422C59F1E027C8200934DD2 /* 地图 */ = {
 			isa = PBXGroup;
 			children = (
-				8422C59C1E027C1800934DD2 /* MapViewController.h */,
-				8422C59D1E027C1800934DD2 /* MapViewController.m */,
-				8422C5A01E027CC800934DD2 /* LocationAnnotationView.h */,
-				8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */,
-				84D950951E1F437C00C9993B /* CustomAnnotationView.h */,
-				84D950961E1F437C00C9993B /* CustomAnnotationView.m */,
-				8422C5A31E03E01E00934DD2 /* POIAnnotation.h */,
-				8422C5A41E03E01F00934DD2 /* POIAnnotation.m */,
+				847AFEC41E4C144900DEAE23 /* MapViewController.h */,
+				847AFEC51E4C144900DEAE23 /* MapViewController.m */,
+				847AFEBE1E4C0F6600DEAE23 /* MapViewDelegate.h */,
+				847AFEBF1E4C0F6600DEAE23 /* MapViewDelegate.m */,
+				847AFEC11E4C135300DEAE23 /* MapSearchAssistant.h */,
+				847AFEC21E4C135300DEAE23 /* MapSearchAssistant.m */,
+				847AFEBD1E4C0F3700DEAE23 /* View */,
+				847AFECA1E4C14CF00DEAE23 /* MapInterface */,
 			);
 			name = "地图";
 			sourceTree = "<group>";
@@ -742,6 +769,8 @@
 				844BE7831E13BB4F00456ED4 /* DetailServiceTableViewController.m */,
 				844BE7881E14BC6D00456ED4 /* RateTableViewController.h */,
 				844BE7891E14BC6D00456ED4 /* RateTableViewController.m */,
+				849D9AE11E470A6E00E06301 /* RateListViewController.h */,
+				849D9AE21E470A6E00E06301 /* RateListViewController.m */,
 			);
 			name = TableViewController;
 			sourceTree = "<group>";
@@ -950,6 +979,67 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		847AFEAD1E4AFBAF00DEAE23 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		847AFEAE1E4AFBC300DEAE23 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84C0FF261E49A911006690B0 /* ForHelpView.h */,
+				84C0FF271E49A911006690B0 /* ForHelpView.m */,
+				847AFEBC1E4C04B200DEAE23 /* Cell */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		847AFEAF1E4AFBD900DEAE23 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84C0FF231E49A1C8006690B0 /* ForHelpViewController.h */,
+				84C0FF241E49A1C8006690B0 /* ForHelpViewController.m */,
+				847AFEB91E4B0AE000DEAE23 /* ForHelpTableViewController.h */,
+				847AFEBA1E4B0AE000DEAE23 /* ForHelpTableViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		847AFEBC1E4C04B200DEAE23 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				847AFEB01E4AFC7800DEAE23 /* TextViewTableViewCell.h */,
+				847AFEB11E4AFC7800DEAE23 /* TextViewTableViewCell.m */,
+				847AFEB61E4B09F200DEAE23 /* TextFieldTableViewCell.h */,
+				847AFEB71E4B09F200DEAE23 /* TextFieldTableViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		847AFEBD1E4C0F3700DEAE23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8422C5A01E027CC800934DD2 /* LocationAnnotationView.h */,
+				8422C5A11E027CC800934DD2 /* LocationAnnotationView.m */,
+				84D950951E1F437C00C9993B /* CustomAnnotationView.h */,
+				84D950961E1F437C00C9993B /* CustomAnnotationView.m */,
+				8422C5A31E03E01E00934DD2 /* POIAnnotation.h */,
+				8422C5A41E03E01F00934DD2 /* POIAnnotation.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		847AFECA1E4C14CF00DEAE23 /* MapInterface */ = {
+			isa = PBXGroup;
+			children = (
+				847AFEC71E4C14C800DEAE23 /* MapInterface.h */,
+				847AFEC81E4C14C800DEAE23 /* MapInterface.m */,
+			);
+			name = MapInterface;
+			sourceTree = "<group>";
+		};
 		847D09E21D2F6F4D00EBFF37 /* ProgressCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1022,6 +1112,8 @@
 			children = (
 				8498866D1DE53B0A000B5D4D /* UIViewController+ShowView.h */,
 				8498866E1DE53B0A000B5D4D /* UIViewController+ShowView.m */,
+				840924CA1E4C74360094A6EC /* UIImage+CircleImage.h */,
+				840924CB1E4C74360094A6EC /* UIImage+CircleImage.m */,
 			);
 			name = "类别";
 			sourceTree = "<group>";
@@ -1189,6 +1281,8 @@
 				84B9C0521DF0194600BB7CC5 /* CustomSegmentedControl.m */,
 				844BE78B1E14EADD00456ED4 /* CustomLabel.h */,
 				844BE78C1E14EADD00456ED4 /* CustomLabel.m */,
+				847AFEB31E4AFE6A00DEAE23 /* CustomTextView.h */,
+				847AFEB41E4AFE6A00DEAE23 /* CustomTextView.m */,
 				840A6F011E1B47C900876136 /* ScrollPagingView.h */,
 				840A6F021E1B47C900876136 /* ScrollPagingView.m */,
 				8477EEB11E2F18CD00FA534F /* CircleImageView.h */,
@@ -1201,9 +1295,10 @@
 			isa = PBXGroup;
 			children = (
 				8422C59F1E027C8200934DD2 /* 地图 */,
+				84B9C0561DF4F6F400BB7CC5 /* Controllers */,
 				84B9C0551DF4F6E900BB7CC5 /* Model */,
 				84B9C0541DF4F6DA00BB7CC5 /* Views */,
-				84B9C0561DF4F6F400BB7CC5 /* Controllers */,
+				84C0FF221E49A149006690B0 /* 发布求助 */,
 			);
 			name = "附近";
 			sourceTree = "<group>";
@@ -1245,7 +1340,6 @@
 		84B9C0541DF4F6DA00BB7CC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84B9C0691DF5457900BB7CC5 /* Cell */,
 				84B9C05D1DF4FFE600BB7CC5 /* CurrentServiceView.h */,
 				84B9C05E1DF4FFE600BB7CC5 /* CurrentServiceView.m */,
 				84B9C05A1DF4FFC700BB7CC5 /* CurrentServiceScrollView.h */,
@@ -1270,19 +1364,8 @@
 			children = (
 				84B9C0261DEEB55800BB7CC5 /* NearByViewController.h */,
 				84B9C0271DEEB55800BB7CC5 /* NearByViewController.m */,
-				84B9C0631DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.h */,
-				84B9C0641DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		84B9C0691DF5457900BB7CC5 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				84B9C0661DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.h */,
-				84B9C0671DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m */,
-			);
-			name = Cell;
 			sourceTree = "<group>";
 		};
 		84BAEED51D35F4A900227A15 /* 设置 */ = {
@@ -1320,6 +1403,16 @@
 				84BF0B1C1D533F48000EDCC5 /* ServiceViewController.m */,
 			);
 			name = "业务";
+			sourceTree = "<group>";
+		};
+		84C0FF221E49A149006690B0 /* 发布求助 */ = {
+			isa = PBXGroup;
+			children = (
+				847AFEAF1E4AFBD900DEAE23 /* Controllers */,
+				847AFEAE1E4AFBC300DEAE23 /* Views */,
+				847AFEAD1E4AFBAF00DEAE23 /* Models */,
+			);
+			name = "发布求助";
 			sourceTree = "<group>";
 		};
 		84D9B5781D3B51C7002AC63F /* 公用函数 */ = {
@@ -1511,9 +1604,9 @@
 		84F3C2961D177E8200597BFD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				84BF0B1A1D533EF5000EDCC5 /* 业务 */,
 				847776641D1258AC00DE8213 /* YWHomeViewController.h */,
 				847776651D1258AC00DE8213 /* YWHomeViewController.m */,
+				84BF0B1A1D533EF5000EDCC5 /* 业务 */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1933,13 +2026,11 @@
 				849886721DE53BE9000B5D4D /* GeneralControl.m in Sources */,
 				8422C5A21E027CC800934DD2 /* LocationAnnotationView.m in Sources */,
 				847D09D41D2B980E00EBFF37 /* NSString+MD5.m in Sources */,
-				8422C59E1E027C1800934DD2 /* MapViewController.m in Sources */,
 				84B9C0591DF4F77800BB7CC5 /* ClassifyScrollView.m in Sources */,
 				84B5EDC71E24894F00C06455 /* AppealTableViewCell.m in Sources */,
 				84BAEEE91D3605B700227A15 /* YWRegistViewController.m in Sources */,
 				84D9B5B11D3C8342002AC63F /* MJRefreshComponent.m in Sources */,
 				844BE7901E1506FD00456ED4 /* ContactView.m in Sources */,
-				84B9C0651DF5433B00BB7CC5 /* CurrentClassifyCollectionVC.m in Sources */,
 				847776311D124BF100DE8213 /* BaseViewController.m in Sources */,
 				84BAEF071D36070A00227A15 /* AddCarInfoViewController.m in Sources */,
 				8422C5811DFE7BE700934DD2 /* MyFavouriteTableViewCell.m in Sources */,
@@ -1953,13 +2044,14 @@
 				849886851DE6DC04000B5D4D /* CycleScrollView.m in Sources */,
 				84A92A0C1D2681FF001DD20F /* HotTableViewCell.m in Sources */,
 				84B9C0161DEBD5E600BB7CC5 /* MessageViewController.m in Sources */,
+				847AFEC91E4C14C800DEAE23 /* MapInterface.m in Sources */,
 				84D9B5C01D3C8342002AC63F /* UIScrollView+MJExtension.m in Sources */,
 				8498868E1DE6F350000B5D4D /* ServiceCollectionView.m in Sources */,
 				849886751DE54A0F000B5D4D /* UserHeadView.m in Sources */,
 				84A3F2181E1248C20067FB80 /* MerchantModel.m in Sources */,
 				84D950971E1F437C00C9993B /* CustomAnnotationView.m in Sources */,
-				84B9C0681DF5457200BB7CC5 /* CurrentServiceCollectionViewCell.m in Sources */,
 				847776661D1258AC00DE8213 /* YWHomeViewController.m in Sources */,
+				847AFEB51E4AFE6A00DEAE23 /* CustomTextView.m in Sources */,
 				84D9B5C21D3C8342002AC63F /* UIView+MJExtension.m in Sources */,
 				8422C5871DFE839900934DD2 /* MyFavouriteViewController.m in Sources */,
 				84D9B5B01D3C8342002AC63F /* MJRefreshBackFooter.m in Sources */,
@@ -1975,8 +2067,10 @@
 				847D09E81D2FA82B00EBFF37 /* ProgressModel.m in Sources */,
 				84B9C04D1DEFB44900BB7CC5 /* SearchResultTableViewController.m in Sources */,
 				84BF0B191D531920000EDCC5 /* UIWebViewController.m in Sources */,
+				847AFEB21E4AFC7800DEAE23 /* TextViewTableViewCell.m in Sources */,
 				849886601DE2A3E9000B5D4D /* AboutViewController.m in Sources */,
 				8422C5AC1E07EA9600934DD2 /* PreviewCollectionViewCell.m in Sources */,
+				840924CC1E4C74360094A6EC /* UIImage+CircleImage.m in Sources */,
 				847776701D1258E500DE8213 /* YWProgressViewController.m in Sources */,
 				8477762E1D124BF100DE8213 /* AppDelegate.m in Sources */,
 				84BAEEF21D36064B00227A15 /* YWLoginViewController.m in Sources */,
@@ -2005,12 +2099,14 @@
 				84BAEF011D3606C000227A15 /* AddCarInfoCell.m in Sources */,
 				84B5EDCA1E24BF2200C06455 /* SubAppealViewController.m in Sources */,
 				84B9C0281DEEB55800BB7CC5 /* NearByViewController.m in Sources */,
+				847AFEC31E4C135300DEAE23 /* MapSearchAssistant.m in Sources */,
 				8422C5AF1E07EB2D00934DD2 /* PhotoPreviewController.m in Sources */,
 				84BAEEFB1D3606A800227A15 /* AddCarInfoView.m in Sources */,
 				84D9B5B51D3C8342002AC63F /* MJRefreshAutoNormalFooter.m in Sources */,
 				8498867B1DE586C1000B5D4D /* MyOrderView.m in Sources */,
 				84D9B5B21D3C8342002AC63F /* MJRefreshFooter.m in Sources */,
 				84BAEEEF1D3605DD00227A15 /* ServiceDelegateController.m in Sources */,
+				847AFEC01E4C0F6600DEAE23 /* MapViewDelegate.m in Sources */,
 				84B9C0301DEEB90800BB7CC5 /* BalanceView.m in Sources */,
 				84B9C0491DEFB40200BB7CC5 /* CurrentCityTableViewCell.m in Sources */,
 				849886781DE58355000B5D4D /* MyCarView.m in Sources */,
@@ -2020,17 +2116,22 @@
 				84D9B5BE1D3C8342002AC63F /* MJRefreshConst.m in Sources */,
 				8422C58A1DFE851200934DD2 /* MyFavouriteModel.m in Sources */,
 				84B9C01C1DEBD6BB00BB7CC5 /* BasicViewController.m in Sources */,
+				847AFEB81E4B09F200DEAE23 /* TextFieldTableViewCell.m in Sources */,
 				8477EEB31E2F18CD00FA534F /* CircleImageView.m in Sources */,
 				84B9C02C1DEEB76A00BB7CC5 /* BalanceViewController.m in Sources */,
 				84BAEEF51D36067300227A15 /* LoginView.m in Sources */,
 				844BE7751E136E4F00456ED4 /* DetailViewController.m in Sources */,
 				84A3F2241E124FBE0067FB80 /* FilterView.m in Sources */,
 				848A4AAB1D4EF9060009816F /* CallView.m in Sources */,
+				849D9AE31E470A6E00E06301 /* RateListViewController.m in Sources */,
 				84D9B5771D3B2401002AC63F /* YWDataBase.m in Sources */,
 				84B9C0411DEECBFF00BB7CC5 /* LocationManager.m in Sources */,
 				84D9B5BA1D3C8342002AC63F /* MJRefreshGifHeader.m in Sources */,
 				84D9B5C61D3E169E002AC63F /* UserInfoViewController.m in Sources */,
+				840924C91E4C55D20094A6EC /* MapViewController.m in Sources */,
+				84C0FF251E49A1C8006690B0 /* ForHelpViewController.m in Sources */,
 				849886941DE7C8BC000B5D4D /* PromotionView.m in Sources */,
+				847AFEBB1E4B0AE000DEAE23 /* ForHelpTableViewController.m in Sources */,
 				84BAEEE61D36058E00227A15 /* ResetPasswdViewController.m in Sources */,
 				847776731D12591C00DE8213 /* YWTabBarController.m in Sources */,
 				84D9B5B31D3C8342002AC63F /* MJRefreshHeader.m in Sources */,
@@ -2041,6 +2142,7 @@
 				84A3F2151E12476A0067FB80 /* BasicModel.m in Sources */,
 				846690EC1D459DD3004E1BF1 /* ViewController.m in Sources */,
 				84D9B5AF1D3C8342002AC63F /* MJRefreshAutoFooter.m in Sources */,
+				84C0FF281E49A911006690B0 /* ForHelpView.m in Sources */,
 				844BE7841E13BB4F00456ED4 /* DetailServiceTableViewController.m in Sources */,
 				84B9C05F1DF4FFE600BB7CC5 /* CurrentServiceView.m in Sources */,
 				8422C5B21E0A208700934DD2 /* AddressManager.m in Sources */,

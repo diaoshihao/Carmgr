@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RateModel.h"
 #import "StarsView.h"
 #import "CustomLabel.h"
 

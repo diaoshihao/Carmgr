@@ -11,6 +11,8 @@
 #import "Interface.h"
 #import <Masonry.h>
 
+#import "AlertShowAssistant.h"
+
 @interface SubscribeViewController ()
 
 @end
@@ -53,7 +55,7 @@
     [button addTarget:self action:@selector(willSubscribe) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-5);
+        make.bottom.mas_equalTo(0);
         make.height.mas_equalTo(50);
         make.left.and.right.mas_equalTo(0);
     }];
@@ -73,30 +75,24 @@
 }
 
 - (void)willSubscribe {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否预约该业务？" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [AlertShowAssistant alertTip:@"提示" message:@"是否预约该业务？" actionTitle:@"确定" defaultHandle:^{
         [self subscribe];
+    } cancelHandle:^{
+        
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    [alertVC addAction:sure];
-    [alertVC addAction:cancel];
-    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (void)showAlert:(BOOL)success {
-    NSString *message = @"发布成功！";
+    NSString *message = @"预约成功！";
     if (success) {
-        message = @"发布失败！";
+        message = @"预约失败！";
     }
     
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [AlertShowAssistant alertTip:@"提示" message:message actionTitle:@"确定" defaultHandle:^{
         if (success) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }];
-    [alertVC addAction:sure];
-    [self presentViewController:alertVC animated:YES completion:nil];
+    } cancelHandle:nil];
 }
 
 - (void)didReceiveMemoryWarning {

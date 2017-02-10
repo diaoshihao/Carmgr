@@ -11,15 +11,6 @@
 
 @implementation StarsView
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-    }
-    return self;
-}
-
 - (void)setStars:(NSString *)stars {
     _stars = stars;
     [self removeAllSubviews];
@@ -46,7 +37,6 @@
         } else {
             starImage.image = [UIImage imageNamed:@"星星"];
         }
-        starImage.contentMode = UIViewContentModeCenter;//自适应图片大小
         [self addSubview:starImage];
         
         [starImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,7 +59,6 @@
         } else {
             halfStarImage.image = [UIImage imageNamed:@"半星"];
         }
-        halfStarImage.contentMode = UIViewContentModeCenter;//自适应图片大小
         [self addSubview:halfStarImage];
         
         [halfStarImage mas_makeConstraints:^(MASConstraintMaker *make) {

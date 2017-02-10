@@ -16,4 +16,6 @@
 
 @property (nonatomic, strong) UILabel *price;
 
+@property (nonatomic, strong) NSString *stars;
+
 @end

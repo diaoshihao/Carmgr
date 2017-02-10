@@ -10,8 +10,10 @@
 #import "MerchantTableViewController.h"
 #import "UIViewController+ShowView.h"
 #import "SortTableViewController.h"
+#import "AlertShowAssistant.h"
 #import "AddressManager.h"
 #import "FilterView.h"
+#import "MJRefresh.h"
 #import "Interface.h"
 #import <Masonry.h>
 
@@ -73,6 +75,8 @@
         }
     } failure:^(NSError *error) {
         [self.merchantTableView.mj_header endRefreshing];
+        [AlertShowAssistant alertTip:@"提示" message:@"刷新数据失败，请重试" actionTitle:@"确定" defaultHandle:^{
+        } cancelHandle:nil];
     }];
 }
 
@@ -105,11 +109,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self baseConfig];
+    [self configView];
+    [self refresh];
+}
+
+- (void)baseConfig {
+    self.title = @"商家列表";
+    self.showShadow = YES;
     self.serviceFilter = @"全部";
     self.areaFitler = @"全城市";
     self.sortFilter = @"默认排序";
-    [self configView];
-    [self refresh];
 }
 
 - (void)configView {
@@ -120,7 +131,7 @@
     [self.view addSubview:self.filterView];
     
     [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.customBar.mas_bottom);
+        make.top.mas_equalTo(self.customNavBar.mas_bottom);
         make.left.and.right.mas_equalTo(0);
         make.height.mas_equalTo(44);
     }];
@@ -192,6 +203,7 @@
     self.sortArr = [NSMutableArray arrayWithArray:@[@"全部",@"上牌",@"驾考",@"车险",@"检车",@"维修",@"租车",@"保养",@"二手车",@"车贷",@"新车",@"急救",@"用品",@"停车"]];
 }
 
+//当前城市各区数据列表
 - (void)filterArea {
     NSString *currentCity = [self currentCity];
     NSString *currentProvince = [self currentProvince];

@@ -118,7 +118,7 @@
 }
 
 - (void)initTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 124, [DefineValue screenWidth], [DefineValue screenHeight] - 64) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [DefineValue screenWidth], [DefineValue screenHeight] - 64) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.sectionIndexColor = [DefineValue mainColor];
@@ -131,6 +131,7 @@
 - (void)initSearchBar {
     SearchResultTableViewController *searchResultVC = [[SearchResultTableViewController alloc] initWithStyle:UITableViewStylePlain];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultVC];
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
     self.searchController.searchBar.placeholder = @"输入城市名或拼音";
     self.searchController.searchResultsUpdater = self;

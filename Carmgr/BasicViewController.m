@@ -51,6 +51,9 @@
     [self.barTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.customNavBar);
     }];
+    
+    [self.view bringSubviewToFront:self.stateView];
+    [self.view bringSubviewToFront:self.customNavBar];
 }
 
 - (void)configLeftItemView {
